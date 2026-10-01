@@ -1,0 +1,71 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/integration-settings/status",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetches ITSM Integration status and also lists the bundles as needed, along with their configurations. Used mainly to check the status of the bundles. It is capable answering questions like What is the status of X bundle ? or Give me a list of all bundles and their statuses?",
+    "name": "api_getITSMIntegrationStatus",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of bundles with its integration status",
+          "items": {
+            "properties": {
+              "configurations": {
+                "description": "List of bundle configurations",
+                "items": {
+                  "properties": {
+                    "dypInstanceId": {
+                      "description": "DYP instance Id of the configuration",
+                      "type": "string"
+                    },
+                    "dypSchemaName": {
+                      "description": "DYP name of the configuration",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Bundle Id",
+                "type": "string"
+              },
+              "name": {
+                "description": "Bundle name",
+                "type": "string"
+              },
+              "status": {
+                "description": "Bundle Status",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

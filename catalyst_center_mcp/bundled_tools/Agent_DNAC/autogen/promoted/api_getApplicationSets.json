@@ -1,0 +1,79 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "name": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/application-policy-application-set",
+      "version": "2.3.7.9"
+    },
+    "description": "Get appllication-sets by offset/limit or by name",
+    "name": "api_getApplicationSets",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "identitySource": {
+                "description": "",
+                "properties": {
+                  "id": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

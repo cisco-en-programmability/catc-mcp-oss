@@ -1,0 +1,113 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "instanceId": "query",
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/subscription-details/syslog",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the list of subscription details for specified connectorType",
+    "name": "api_getSyslogSubscriptionDetails",
+    "parameters": {
+      "properties": {
+        "instanceId": {
+          "description": "Instance Id of the specific configuration",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the specific configuration",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "connectorType": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceId": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "syslogConfig": {
+            "description": "",
+            "properties": {
+              "configId": {
+                "description": "",
+                "type": "string"
+              },
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "host": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "port": {
+                "description": "",
+                "type": "string"
+              },
+              "protocol": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,182 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "productFamily": "query",
+        "smartAccountId": "query",
+        "virtualAccountId": "query"
+      },
+      "uri": "/dna/intent/api/v1/licenseUsage",
+      "version": "3.2.1"
+    },
+    "description": "MANDATORY - USE THIS API FOR DEVICE TYPE LICENSE QUERIES:\n\nMANDATORY - PURCHASED LICENSE QUERIES FOR DEVICE TYPES:\n  - \"How many purchased licenses are there for switch devices?\" -> api_getLicenseUsage with productFamily: SWITCH (NOT api_licenseTermDetails)\n  - \"How many purchased licenses for routers?\" -> api_getLicenseUsage with productFamily: ROUTER\n  - \"How many purchased licenses for WLCs?\" -> api_getLicenseUsage with productFamily: WIRELESS_CONTROLLER\n  - \"Purchased license count for switches\" -> api_getLicenseUsage with productFamily: SWITCH\n  - \"Show purchased licenses for access points\" -> api_getLicenseUsage with productFamily: UNIFIED_AP\n\nMANDATORY - USED/CONSUMED LICENSE QUERIES FOR DEVICE TYPES:\n  - \"How many used licenses do I have for routers?\" -> api_getLicenseUsage with productFamily: ROUTER (NOT api_retrievesSummaryOfNetworkDeviceLicenses)\n  - \"How many licenses are used by managed devices for WLCs?\" -> api_getLicenseUsage with productFamily: WIRELESS_CONTROLLER (NOT api_retrievesSummaryOfNetworkDeviceLicenses)\n  - \"Used license count for switches\" -> api_getLicenseUsage with productFamily: SWITCH (NOT api_retrievesSummaryOfNetworkDeviceLicenses)\n  - \"How many licenses consumed for ISE?\" -> api_getLicenseUsage with productFamily: ISE\n  - \"License consumption for routers\" -> api_getLicenseUsage with productFamily: ROUTER (NOT api_retrievesSummaryOfNetworkDeviceLicenses)\n\nMANDATORY - AVAILABLE LICENSE QUERIES FOR DEVICE TYPES:\n  - \"How many available licenses for switches?\" -> api_getLicenseUsage with productFamily: SWITCH\n  - \"Available license count for routers\" -> api_getLicenseUsage with productFamily: ROUTER\n\nCRITICAL: DO NOT USE FOR SYSTEM COMPLIANCE QUESTIONS\n\nDO NOT USE - \"Is my system out of compliance?\" -> api_systemLicensingStatus (NOT THIS API)\nDO NOT USE - \"Is my system compliant?\" -> api_systemLicensingStatus (NOT THIS API)\nDO NOT USE - \"Check compliance status of my CatC\" -> api_systemLicensingStatus (NOT THIS API)\nDO NOT USE - \"Is my CatC out-of-compliance?\" -> api_systemLicensingStatus (NOT THIS API)\nDO NOT USE - \"License usage of my system\" -> api_systemLicensingStatus (NOT THIS API)\nDO NOT USE - \"How many licenses are consumed by my system?\" -> api_systemLicensingStatus (NOT THIS API)\n\n**Tool Dependency: CRITICAL**\n\nDO NOT USE FOR SYSTEM-LEVEL QUERIES: If the question contains \"my system\", \"the system\", \"this system\", \"my CatC\", \"my Catalyst Center\", or asks about system registration/compliance/authorization, use api_systemLicensingStatus instead. This API is ONLY for device-type/product-family license breakdowns and account-level aggregations.\n\n**USE THIS API WHEN:**\n- Query asks about purchased/used/available/consumed licenses for a specific device type (switches, routers, WLC, wireless controllers, access points, ISE)\n- Query specifies a product family: SWITCH, ROUTER, WIRELESS_CONTROLLER, UNIFIED_AP, ISE\n- Query asks about license breakdown by product family\n- Query asks about smart account or virtual account license usage (but NOT \"my CatC's account\" or \"system's account\")\n\n**DO NOT USE THIS API WHEN:**\n- \"How many licenses are consumed by my system?\" -> api_systemLicensingStatus\n- \"License usage of my system\" -> api_systemLicensingStatus\n- \"License usage of my CatC\" -> api_systemLicensingStatus\n- \"How many licenses have I consumed?\" (no device type) -> api_systemLicensingStatus\n- \"Which account is my CatC registered to?\" -> api_systemLicensingStatus\n- \"Show license consumption details\" (no device type) -> api_systemLicensingStatus\n- \"Is my system compliant?\" -> api_systemLicensingStatus\n- \"Is my system out of compliance?\" -> api_systemLicensingStatus\n\n**ABSOLUTE PROHIBITIONS:**\nNEVER use api_retrievesSummaryOfNetworkDeviceLicenses when asking about license counts for device types - that API is for individual device details, NOT aggregate counts by product family\nNEVER use api_licenseTermDetails when asking about purchased license counts by device type - that API is for license terms, NOT usage aggregations\nNEVER use transfer_to_specialized_subagent for simple license count queries - use this API directly\nNEVER confuse device type license aggregations (this API) with individual device license details (api_retrievesSummaryOfNetworkDeviceLicenses)\n\nRetrieves license usage details including purchased, used, available, and consumed license counts for smart accounts, virtual accounts, and product families (device types). Use when showing, getting, or checking: license usage for device types/product families (SWITCH, ROUTER, UNIFIED_AP/Access Point, WIRELESS_CONTROLLER/WLC, ISE), license usage for smart account and/or virtual account, how many purchased/used/available licenses for switches/routers/APs/ISE/WLC, license consumption by managed devices, DNA/Network/CNS license counts.\n\n**REQUIRED PRE-REQUISITES:**\n\n1. If user provides a **smart account NAME** (not ID): You MUST call `api_smartAccountDetails` FIRST to resolve the name to smartAccountId\n2. If user provides a **virtual account NAME** (not ID): You MUST call `api_smartAccountDetails` FIRST, then `api_virtualAccountDetails` with the smartAccountId to resolve the virtual account name to virtualAccountId\n\n**Step-by-step process:**\n\n**For Smart Account Name Resolution:**\n1. First, invoke `api_smartAccountDetails` to retrieve all smart accounts\n2. Match the user-provided smart account name with the 'name' field in the response\n3. Extract the 'id' field from the matched entry\n4. Then, invoke `api_getLicenseUsage` with the `smartAccountId` parameter set to the resolved ID\n\n**For Virtual Account Name Resolution:**\n1. First, invoke `api_smartAccountDetails` to get the smartAccountId (if not already known)\n2. Then, invoke `api_virtualAccountDetails` with the smartAccountId parameter\n3. Match the user-provided virtual account name with the 'virtual_account_name' field in the 'virtual_account_details' array\n4. Extract the 'virtual_account_id' field from the matched entry\n5. Finally, invoke `api_getLicenseUsage` with the `virtualAccountId` parameter set to the resolved ID\n\n**Exception:**\nIf the user explicitly provides valid smartAccountId or virtualAccountId UUIDs in their request, you may skip the resolution steps and use the provided IDs directly in `api_getLicenseUsage`.\n\n**IMPORTANT FOR RESPONSE PRESENTATION:**\nAfter retrieving license usage data, DO NOT show smartAccountId or virtualAccountId directly to the user. Instead, use `api_smartAccountDetails` to get the smart account name from smartAccountId, and use `api_virtualAccountDetails` (with smartAccountId) to get the virtual account name from virtualAccountId. Display the account NAMES to the user, not the IDs.\n\n**Do NOT:**\n- Call `api_getLicenseUsage` with account names as parameters (must use IDs)\n- Assume or guess account IDs\n- Skip the prerequisite resolution steps unless valid IDs are already provided\n- Display smartAccountId or virtualAccountId to users (always show account names)\n- Use this API for \"my system\" or \"my CatC\" queries (use api_systemLicensingStatus)\n\n**Supported Filters:**\n- smartAccountId (ID of smart account)\n- virtualAccountId (ID of virtual account)\n- productFamily (SWITCH/ROUTER/UNIFIED_AP/ISE for device types)\n\n**Returns:**\nPer product family: purchased license count, used license count, available license count, licenses consumed by managed Catalyst Center devices. Use this for product family/device type license queries, NOT individual device license details.\n",
+    "name": "api_getLicenseUsage",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "productFamily": {
+          "description": "Family of the product. Use productFamily values only from this API schema: SWITCH, ROUTER, UNIFIED_AP, ISE.\n\nWLC/Wireless Mapping Rule (MANDATORY):\n- For any WLC or wireless device license usage question, use productFamily: UNIFIED_AP.\n- Treat WLC, wireless controller, wireless device, and AP license usage as the same license-usage routing path.\n- Rationale: WLC manages AP licensing context, while actual consumption is represented under AP family aggregation (UNIFIED_AP).",
+          "enum": [
+            "SWITCH",
+            "ROUTER",
+            "UNIFIED_AP",
+            "ISE"
+          ],
+          "example": "SWITCH",
+          "type": "string"
+        },
+        "smartAccountId": {
+          "description": "Id of the smart account. If the user provides a smart account name instead of an ID, use the `api_smartAccountDetails` function (GET /dna/intent/api/v1/licenses/smartAccounts) to retrieve all smart accounts and map the provided name to the corresponding smart account Id. The response contains a 'name' field that can be matched with the user-provided name, and an 'id' field that should be used as the smartAccountId parameter for this API.",
+          "example": "1034567",
+          "type": "string"
+        },
+        "virtualAccountId": {
+          "description": "Id of the virtual account. If the user provides a virtual account name instead of an ID, first obtain the smartAccountId (see smartAccountId parameter description), then use the `api_virtualAccountDetails` function (GET /dna/intent/api/v1/licenses/smartAccount/{smart_account_id}/virtualAccounts) with the smartAccountId. The response contains a 'virtual_account_details' array where each item has a 'virtual_account_name' field that can be matched with the user-provided name, and a 'virtual_account_id' field that should be used as the virtualAccountId parameter for this API.",
+          "example": "1267",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Response containing license usage details",
+      "properties": {
+        "response": {
+          "description": "Response containing license usage details",
+          "items": {
+            "description": "Summary of license usage details",
+            "properties": {
+              "licenseCountsSummary": {
+                "description": "List of license count details categorized by product family",
+                "items": {
+                  "allOf": [
+                    {
+                      "description": "License count details categorized by product family"
+                    },
+                    {
+                      "description": "Count of licenses based on product family",
+                      "properties": {
+                        "licenses": {
+                          "description": "List of licenses categorized by license type along with their counts.",
+                          "items": {
+                            "description": "License with its type and its corresponding counts.",
+                            "properties": {
+                              "counts": {
+                                "description": "Total number of licenses, including purchased, used, and available counts.",
+                                "properties": {
+                                  "available": {
+                                    "description": "Number of available licenses retrieved from CSSM.",
+                                    "example": 100,
+                                    "format": "int32",
+                                    "type": "integer"
+                                  },
+                                  "purchased": {
+                                    "description": "Number of purchased licenses retrieved from CSSM.",
+                                    "example": 100,
+                                    "format": "int32",
+                                    "type": "integer"
+                                  },
+                                  "used": {
+                                    "description": "Number of used licenses retrieved from CSSM.",
+                                    "example": 100,
+                                    "format": "int32",
+                                    "type": "integer"
+                                  },
+                                  "usedByManagedNetworkDevices": {
+                                    "description": "Number of licenses actively in use by network devices managed within Cisco Catalyst Center.",
+                                    "example": 100,
+                                    "format": "int32",
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "description": "Type of license available on the network device. Please contact Cisco support team to get more details on these license types.\n\n| License Type              | Description                                                                                                                      |\n|--------------------------|----------------------------------------------------------------------------------------------------------------------------------|\n| `NETWORK_ESSENTIALS`     | Network Essentials license.                                                                                                      |\n| `NETWORK_ADVANTAGE`      | Network Advantage license.                                                                                                       |\n| `DNA_ESSENTIALS`         | DNA Essentials license.                                                                                                          |\n| `DNA_ADVANTAGE`          | DNA Advantage license.                                                                                                           |\n| `CNS_ESSENTIALS`         | Cisco Networking Subscription Essentials license.                                                                                |\n| `CNS_ADVANTAGE`          | Cisco Networking Subscription Advantage license.                                                                                 |\n| `ISE_ESSENTIALS`         | Cisco Identity Services Engine (ISE) Essentials license. Applicable to ISE only. |\n| `ISE_ADVANTAGE`          | Cisco Identity Services Engine (ISE) Advantage license. Applicable to ISE only. |\n| `ISE_PREMIER`            | Cisco Identity Services Engine (ISE) Premier license. Applicable to ISE only.|\n| `ISE_VIRTUAL`            | Cisco Identity Services Engine (ISE) Virtual license. Applicable to ISE only. |\n",
+                                "enum": [
+                                  "NETWORK_ESSENTIALS",
+                                  "NETWORK_ADVANTAGE",
+                                  "DNA_ESSENTIALS",
+                                  "DNA_ADVANTAGE",
+                                  "CNS_ESSENTIALS",
+                                  "CNS_ADVANTAGE",
+                                  "ISE_ESSENTIALS",
+                                  "ISE_ADVANTAGE",
+                                  "ISE_PREMIER",
+                                  "ISE_VIRTUAL"
+                                ],
+                                "example": "DNA_ESSENTIALS",
+                                "readOnly": true,
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "productFamily": {
+                          "description": "Family of the product.",
+                          "enum": [
+                            "SWITCH",
+                            "ROUTER",
+                            "UNIFIED_AP",
+                            "ISE"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              "smartAccountId": {
+                "description": "Id of the smart account",
+                "example": "12345",
+                "type": "string"
+              },
+              "virtualAccountId": {
+                "description": "Id of the virtual account",
+                "example": "67890",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

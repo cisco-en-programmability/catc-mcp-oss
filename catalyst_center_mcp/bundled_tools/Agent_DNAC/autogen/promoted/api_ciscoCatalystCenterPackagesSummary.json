@@ -1,0 +1,50 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/dnac-packages",
+      "version": "2.3.7.9"
+    },
+    "description": "Provides information such as name, version of packages installed on the Cisco Catalyst Center.",
+    "name": "api_ciscoCatalystCenterPackagesSummary",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of Installed packages",
+          "items": {
+            "properties": {
+              "name": {
+                "description": "Name of installed package",
+                "type": "string"
+              },
+              "version": {
+                "description": "Version of installed package",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The MAGLEV-API version (this field is for internal development purpose)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

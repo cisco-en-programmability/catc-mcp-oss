@@ -1,0 +1,474 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "id": "path",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/assuranceEvents/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "API to fetch the details of an assurance event using event `id`. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AssuranceEvents-1.0.0-resolved.yaml",
+    "name": "api_getDetailsOfASingleAssuranceEvent",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "The list of attributes that needs to be included in the response. If this parameter is not provided, then basic attributes (`id`, `name`, `timestamp`, `details`, `messageType`, `siteHierarchyId`, `siteHierarchy`, `deviceFamily`, `networkDeviceId`, `networkDeviceName`, `managementIpAddress`) would be part of the response.\n Examples:\n\n`attribute=name` (single attribute requested)\n\n`attribute=name&attribute=networkDeviceName` (multiple attribute requested)\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier for the event",
+          "type": "string"
+        },
+        "view": {
+          "description": "The list of events views. Please refer to `EventViews` for the supported list\n Examples:\n\n`view=network` (single view requested)\n\n`view=network&view=ap` (multiple view requested)\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "affectedClients": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "apMac": {
+              "description": "",
+              "type": "string"
+            },
+            "apRadioOperationState": {
+              "description": "",
+              "type": "string"
+            },
+            "apRole": {
+              "description": "",
+              "type": "string"
+            },
+            "apSwitchId": {
+              "description": "",
+              "type": "string"
+            },
+            "apSwitchName": {
+              "description": "",
+              "type": "string"
+            },
+            "assocRssi": {
+              "description": "",
+              "type": "integer"
+            },
+            "assocSnr": {
+              "description": "",
+              "type": "integer"
+            },
+            "auditSessionId": {
+              "description": "",
+              "type": "string"
+            },
+            "authServerIp": {
+              "description": "",
+              "type": "string"
+            },
+            "candidateAPs": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "apId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apMac": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "bssid": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "rssi": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "childEvents": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "details": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "failureCategory": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "reasonCode": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "reasonDescription": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resultStatus": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subReasonCode": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subReasonDescription": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "wirelessEventType": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "clientMac": {
+              "description": "",
+              "type": "string"
+            },
+            "connectedInterfaceName": {
+              "description": "",
+              "type": "string"
+            },
+            "currentRadioPowerLevel": {
+              "description": "",
+              "type": "integer"
+            },
+            "details": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceFamily": {
+              "description": "",
+              "type": "string"
+            },
+            "dhcpServerIp": {
+              "description": "",
+              "type": "string"
+            },
+            "duid": {
+              "description": "",
+              "type": "string"
+            },
+            "eventStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "facility": {
+              "description": "",
+              "type": "string"
+            },
+            "failureCategory": {
+              "description": "",
+              "type": "string"
+            },
+            "failureIpAddress": {
+              "description": "",
+              "type": "string"
+            },
+            "frequency": {
+              "description": "",
+              "type": "string"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "identifier": {
+              "description": "",
+              "type": "string"
+            },
+            "invalidIeAPs": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "apId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apMac": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "bssid": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "frameType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ies": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "ipv4": {
+              "description": "",
+              "type": "string"
+            },
+            "ipv6": {
+              "description": "",
+              "type": "string"
+            },
+            "isPrivateMac": {
+              "description": "",
+              "type": "boolean"
+            },
+            "lastApDisconnectReason": {
+              "description": "",
+              "type": "string"
+            },
+            "lastApResetType": {
+              "description": "",
+              "type": "string"
+            },
+            "managementIpAddress": {
+              "description": "",
+              "type": "string"
+            },
+            "messageType": {
+              "description": "",
+              "type": "string"
+            },
+            "missingResponseAPs": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "apId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apMac": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "bssid": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "frameType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mnemonic": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "networkDeviceId": {
+              "description": "",
+              "type": "string"
+            },
+            "networkDeviceName": {
+              "description": "",
+              "type": "string"
+            },
+            "newRadioChannelList": {
+              "description": "",
+              "type": "string"
+            },
+            "newRadioChannelWidth": {
+              "description": "",
+              "type": "string"
+            },
+            "oldRadioChannelList": {
+              "description": "",
+              "type": "string"
+            },
+            "oldRadioChannelWidth": {
+              "description": "",
+              "type": "string"
+            },
+            "previousRadioPowerLevel": {
+              "description": "",
+              "type": "integer"
+            },
+            "radioChannelSlot": {
+              "description": "",
+              "type": "integer"
+            },
+            "radioChannelUtilization": {
+              "description": "",
+              "type": "string"
+            },
+            "radioInterference": {
+              "description": "",
+              "type": "string"
+            },
+            "radioNoise": {
+              "description": "",
+              "type": "string"
+            },
+            "reasonDescription": {
+              "description": "",
+              "type": "string"
+            },
+            "replacedDeviceSerialNumber": {
+              "description": "",
+              "type": "string"
+            },
+            "replacingDeviceSerialNumber": {
+              "description": "",
+              "type": "string"
+            },
+            "resultStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "roamType": {
+              "description": "",
+              "type": "string"
+            },
+            "severity": {
+              "description": "",
+              "type": "integer"
+            },
+            "siteHierarchy": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchyId": {
+              "description": "",
+              "type": "string"
+            },
+            "ssid": {
+              "description": "",
+              "type": "string"
+            },
+            "subReasonDescription": {
+              "description": "",
+              "type": "string"
+            },
+            "switchNumber": {
+              "description": "",
+              "type": "string"
+            },
+            "timestamp": {
+              "description": "",
+              "type": "integer"
+            },
+            "udnId": {
+              "description": "",
+              "type": "string"
+            },
+            "udnName": {
+              "description": "",
+              "type": "string"
+            },
+            "username": {
+              "description": "",
+              "type": "string"
+            },
+            "vlanId": {
+              "description": "",
+              "type": "string"
+            },
+            "wirelessClientEventEndTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "wirelessClientEventStartTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "wlcId": {
+              "description": "",
+              "type": "string"
+            },
+            "wlcName": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

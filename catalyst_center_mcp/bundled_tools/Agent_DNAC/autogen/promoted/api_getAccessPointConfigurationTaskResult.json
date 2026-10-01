@@ -1,0 +1,164 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "task_id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wireless/accesspoint-configuration/details/{task_id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Users can query the access point configuration result using this intent API",
+    "name": "api_getAccessPointConfigurationTaskResult",
+    "parameters": {
+      "properties": {
+        "task_id": {
+          "description": "task id information of ap config",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "_creationOrderIndex": {
+            "description": "",
+            "type": "number"
+          },
+          "_isBeingChanged": {
+            "description": "",
+            "type": "boolean"
+          },
+          "_orderedListOEAssocName": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "_orderedListOEIndex": {
+            "description": "",
+            "type": "number"
+          },
+          "apName": {
+            "description": "",
+            "type": "string"
+          },
+          "authEntityClass": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "authEntityId": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "changeLogList": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "controllerName": {
+            "description": "",
+            "type": "string"
+          },
+          "deployPending": {
+            "description": "",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceCreatedOn": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "instanceId": {
+            "description": "",
+            "type": "number"
+          },
+          "instanceOrigin": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "instanceTenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceUpdatedOn": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "instanceUuid": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "instanceVersion": {
+            "description": "",
+            "type": "number"
+          },
+          "internalKey": {
+            "description": "",
+            "properties": {
+              "id": {
+                "description": "",
+                "type": "number"
+              },
+              "longType": {
+                "description": "",
+                "type": "string"
+              },
+              "type": {
+                "description": "",
+                "type": "string"
+              },
+              "url": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "lazyLoadedEntities": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "locationHeirarchy": {
+            "description": "",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "",
+            "type": "string"
+          },
+          "status": {
+            "description": "",
+            "type": "string"
+          },
+          "statusDetails": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

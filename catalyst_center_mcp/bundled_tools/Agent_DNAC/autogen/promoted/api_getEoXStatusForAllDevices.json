@@ -1,0 +1,106 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/eox-status/device",
+      "version": "2.3.7.9"
+    },
+    "description": "Use this API for network-wide, device-level retrieval of EOX information when the user wants to display, list, fetch, report, review, or enumerate EOX alerts or EOX status across all devices, every device, or all network devices. It is the correct API for complete per-device EOX alert coverage across the network, including which devices have alerts, each device's alert count, per-device hardware/software/module EOX type breakdown, scan status, comments, and last scan time. This API returns a collection of device records for device-by-device EOX alert visibility across the network, not aggregate network totals.\n\n**MANDATORY POST-PROCESSING:** The returned `deviceId` is for internal lookup only and must not be shown in user-facing output. For every device record that will be included in the response, call `get_device_details` with `device_id` set to the returned `deviceId`, resolve the device name and management IPv4 address, and present the device name or management IP instead of the raw internal identifier.\n\n**Steps:**\n1. Call `api_getEoXStatusForAllDevices`\n2. Read the returned per-device EOX records\n3. For each returned `deviceId`, call `get_device_details` with `device_id` equal to that value\n4. Use the resolved device name and/or management IPv4 address in the final response\n5. Do not expose raw `deviceId` values unless the user explicitly asks for internal UUIDs\n\n**Exception:** If the user explicitly asks for internal device identifiers, the raw `deviceId` may be included. Do not use this API when the user only needs summary counts such as overall hardware, software, module, or total EOX alert counts.",
+    "name": "api_getEoXStatusForAllDevices",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Root",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "items": {
+            "properties": {
+              "alertCount": {
+                "description": "Number of EoX alerts on the network device",
+                "type": "integer"
+              },
+              "comments": {
+                "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "deviceId": {
+                "description": "Internal device UUID for backend lookup only. Do not present this value in user-facing output. Use `get_device_details` with `device_id` set to this UUID to resolve the device name or management IPv4 address, and present the device name or management IP instead. Only expose the raw UUID if the user explicitly asks for internal device identifiers.",
+                "type": "string"
+              },
+              "lastScanTime": {
+                "description": "Time at which the network device was scanned. The representation is unix time.",
+                "type": "integer"
+              },
+              "scanStatus": {
+                "description": "Status of the scan performed on the network device",
+                "enum": [
+                  "NOT_SCANNED",
+                  "SUCCESS",
+                  "FAILED",
+                  "IN_PROGRESS",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              },
+              "summary": {
+                "description": "Summary of the breakdown of EoX alerts. ie:- if the alerts are hardware, software or module.",
+                "items": {
+                  "properties": {
+                    "eoxType": {
+                      "description": "Type of EoX Alert",
+                      "enum": [
+                        "HARDWARE",
+                        "SOFTWARE",
+                        "MODULE",
+                        "NONE"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

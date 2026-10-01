@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{siteId}/profileAssignments/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the count of profiles that the given site has been assigned.  These profiles may either be directly assigned to this site, or were assigned to a parent site and have been inherited.\n",
+    "name": "api_retrievesTheCountOfProfilesThatTheGivenSiteHasBeenAssigned",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "description": "The `id` of the site, retrievable from `/dna/intent/api/v1/sites`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "siteId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

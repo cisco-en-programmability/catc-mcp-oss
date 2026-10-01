@@ -1,0 +1,78 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/tags/networkDevices/membersAssociations",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG PHRASE EXCLUSION:**\n- If the user starts from a named tag using `tag`, `tagged`, `with <value> tag`, `under tag`, or `in tag` and asks which/list/show/get devices or how many devices belong to that value, do not use this inverse device-to-tags tool.\n- The value remains a tag name even if it looks like a switch, device, site, hostname, or operational label. Use `api_getTag` followed by `api_getTagMembersById` for lists, or `api_getTagMemberCount` for counts.\n\n**TAG-TO-DEVICE MEMBERSHIP PROHIBITION:**\n- Do not select this tool when the user starts from one named tag and asks which devices belong to it.\n- Do not select this tool for counts of devices inside one named tag.\n- This tool is only for the inverse direction: starting from devices and asking which tags are assigned to them.\n- For tag-to-device membership, select `api_getTag` together with `api_getTagMembersById`.\n- For tag-to-device counts, select `api_getTag` together with `api_getTagMemberCount`.\n\n\"What tags are assigned to devices?\" \"Show device-to-tag mappings\" \"List tags associated with network devices\" \u2014 USE THIS API only for DEVICE -> TAGS direction.\n\nThis API returns which tags each network device has. It answers device-to-tag mapping questions, not tag-to-device membership questions.\n\n**USE THIS API FOR:**\n- showing tags assigned to devices\n- listing device-to-tag associations\n- asking what tags a device or set of devices has\n\n**DO NOT USE THIS API FOR:**\n- \"List devices tagged with <tag name>\"\n- \"Please list devices tagged <tag name>\"\n- \"Give me the list of devices tagged with <tag name>\"\n- \"Which devices have tag <tag name>?\"\n- \"What devices are tagged with <tag name>?\"\n- \"What are the devices with <tag name> tag?\"\n- \"Get devices under tag <tag name>\"\n- \"How many devices are tagged with <tag name>?\"\n- \"What's the count of devices with <tag name> tag?\"\n- Any request that starts from one named tag and asks for its members or member count\n\n**NEGATIVE FEW-SHOT EXAMPLES:**\n- User: \"Give me the list of devices tagged with <tag name>\" -> do NOT use this API; use `api_getTag` -> `api_getTagMembersById`\n- User: \"What devices are tagged with <tag name>?\" -> do NOT use this API; use `api_getTag` -> `api_getTagMembersById`\n- User: \"What are the devices with <tag name> tag?\" -> do NOT use this API; use `api_getTag` -> `api_getTagMembersById`\n- User: \"How many devices are tagged with <tag name>?\" -> do NOT use this API; use `api_getTag` -> `api_getTagMemberCount`\n\nFor named-tag membership questions, the correct route is:\n1. `api_getTag(name=<tag_name>)`\n2. extract UUID\n3. `api_getTagMembersById(id=<UUID>, memberType='networkdevice')`\n\nFor named-tag member-count questions, the correct route is:\n1. `api_getTag(name=<tag_name>)`\n2. extract UUID\n3. `api_getTagMemberCount(id=<UUID>, memberType='networkdevice')`\n\n**WRONG ROUTING TO AVOID:**\n- STOP if the user names one specific tag and asks for devices in that tag.\n- STOP if the user asks for the count of devices in one named tag.\n- Do not substitute this API for `api_getTag` -> `api_getTagMembersById`.\n- Do not combine this API with `execute_python_code` to reconstruct the members of one named tag.",
+    "name": "api_retrieveTagsAssociatedWithNetworkDevices",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Response body",
+      "properties": {
+        "response": {
+          "description": "List of members with associated tags",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Id of the member (network device or interface)",
+                "type": "string"
+              },
+              "tags": {
+                "description": "List of associated tags",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "Tag id",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Tag name",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

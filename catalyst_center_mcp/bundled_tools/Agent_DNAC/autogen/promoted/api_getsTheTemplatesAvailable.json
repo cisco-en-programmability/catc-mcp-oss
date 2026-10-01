@@ -1,0 +1,148 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "filterConflictingTemplates": "query",
+        "productFamily": "query",
+        "productSeries": "query",
+        "productType": "query",
+        "projectId": "query",
+        "projectNames": "query",
+        "softwareType": "query",
+        "softwareVersion": "query",
+        "sortOrder": "query",
+        "tags": "query",
+        "unCommitted": "query"
+      },
+      "uri": "/dna/intent/api/v1/template-programmer/template",
+      "version": "2.3.7.9"
+    },
+    "description": "List the templates available",
+    "name": "api_getsTheTemplatesAvailable",
+    "parameters": {
+      "properties": {
+        "filterConflictingTemplates": {
+          "description": "Filter template(s) based on confliting templates",
+          "type": "boolean"
+        },
+        "productFamily": {
+          "description": "Filter template(s) based on device family",
+          "type": "string"
+        },
+        "productSeries": {
+          "description": "Filter template(s) based on device series",
+          "type": "string"
+        },
+        "productType": {
+          "description": "Filter template(s) based on device type",
+          "type": "string"
+        },
+        "projectId": {
+          "description": "Filter template(s) based on project UUID",
+          "type": "string"
+        },
+        "projectNames": {
+          "description": "Filter template(s) based on project names",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "softwareType": {
+          "description": "Filter template(s) based software type",
+          "type": "string"
+        },
+        "softwareVersion": {
+          "description": "Filter template(s) based softwareVersion",
+          "type": "string"
+        },
+        "sortOrder": {
+          "description": "Sort Order Ascending (asc) or Descending (des)",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Filter template(s) based on tags",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "unCommitted": {
+          "description": "Filter template(s) based on template commited or not",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "composite": {
+            "description": "Is it composite template",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name of template",
+            "type": "string"
+          },
+          "projectId": {
+            "description": "UUID of project",
+            "type": "string"
+          },
+          "projectName": {
+            "description": "Name of project",
+            "type": "string"
+          },
+          "templateId": {
+            "description": "UUID of template",
+            "type": "string"
+          },
+          "versionsInfo": {
+            "description": "List of versioned templates information",
+            "items": {
+              "properties": {
+                "author": {
+                  "description": "Author of version template",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of template",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "UUID of template",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "Current version of template",
+                  "type": "string"
+                },
+                "versionComment": {
+                  "description": "Version comment",
+                  "type": "string"
+                },
+                "versionTime": {
+                  "description": "Template version time",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

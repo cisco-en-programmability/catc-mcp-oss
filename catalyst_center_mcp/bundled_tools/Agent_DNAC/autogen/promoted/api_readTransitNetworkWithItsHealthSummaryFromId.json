@@ -1,0 +1,248 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "endTime": "query",
+        "id": "path",
+        "startTime": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/transitNetworkHealthSummaries/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get health summary for a specific transit Network by providing the unique transit networks id in the url path.\n\nThis API provides the latest health data until the given `endTime`. If data is not ready for the provided endTime, the request will fail with error code `400 Bad Request`, and the error message will indicate the recommended endTime to use to retrieve a complete data set. This behavior may occur if the provided endTime=currentTime, since we are not a real time system. When `endTime` is not provided, the API returns the latest data.\n\nFor detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-transitNetworkHealthSummaries-1.0.1-resolved.yaml",
+    "name": "api_readTransitNetworkWithItsHealthSummaryFromId",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "The interested fields in the request. For valid attributes, verify the documentation.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "The unique transit network id, Ex \u201c1551156a-bc97-3c63-aeda-8a6d3765b5b9\"",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "view": {
+          "description": "The specific summary view being requested. This is an optional parameter which can be passed to get one or more of the specific health data summaries associated with sites.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "bgpTcpFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpTcpGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpTcpHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "bgpTcpPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpTcpTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "controlPlaneCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "fabricSitesCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "fairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "goodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "goodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "internetAvailTransitFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailTransitGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailTransitHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "internetAvailTransitPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailTransitTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispTransitFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispTransitGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispTransitHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "lispTransitPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispTransitTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "networkProtocol": {
+              "description": "",
+              "type": "string"
+            },
+            "poorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubTransitFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubTransitGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubTransitHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "pubsubTransitPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubTransitTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "siteHierarchy": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchyId": {
+              "description": "",
+              "type": "string"
+            },
+            "totalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitControlPlaneFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitControlPlaneGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitControlPlaneHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "transitControlPlanePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitControlPlaneTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitServicesFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitServicesGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitServicesHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "transitServicesPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitServicesTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "transitType": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

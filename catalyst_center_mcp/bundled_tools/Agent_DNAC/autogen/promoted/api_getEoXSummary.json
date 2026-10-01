@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/eox-status/summary",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves EoX summary for all devices in the network",
+    "name": "api_getEoXSummary",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Root",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "properties": {
+            "hardwareCount": {
+              "description": "Number of hardware EoX alerts detected on the network",
+              "type": "integer"
+            },
+            "moduleCount": {
+              "description": "Number of module EoX alerts detected on the network",
+              "type": "integer"
+            },
+            "softwareCount": {
+              "description": "Number of software EoX alerts detected on the network",
+              "type": "integer"
+            },
+            "totalCount": {
+              "description": "Total number of EoX alerts detected on the network. This is the sum of hardwareCount, softwareCount and moduleCount.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

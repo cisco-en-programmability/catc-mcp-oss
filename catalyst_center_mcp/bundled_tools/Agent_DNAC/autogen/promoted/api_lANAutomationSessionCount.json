@@ -1,0 +1,39 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/lan-automation/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Invoke this API to get the total count of LAN Automation sessions.",
+    "name": "api_lANAutomationSessionCount",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "sessionCount": {
+              "description": "Total number of sessions executed.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

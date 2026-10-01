@@ -1,0 +1,98 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "taskId": "path"
+      },
+      "uri": "/dna/intent/api/v1/endpoint-analytics/tasks/{taskId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetches the details of backend task. Task is typically created by making call to some other API that takes longer time to execute.\n",
+    "name": "api_getTaskDetails",
+    "parameters": {
+      "properties": {
+        "taskId": {
+          "description": "Unique identifier for the task.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "taskId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "additionalInfo": {
+          "description": "Additional information about the task.",
+          "properties": {},
+          "type": "object"
+        },
+        "createdBy": {
+          "description": "Name of the user that created the task.",
+          "type": "string"
+        },
+        "createdOn": {
+          "description": "Task creation timestamp in epoch milliseconds.",
+          "type": "integer"
+        },
+        "errors": {
+          "description": "List of errors in case the `status` of the task is `PARTIALLY_FAILED` or `FAILED`.",
+          "items": {
+            "properties": {
+              "code": {
+                "description": "Error code.",
+                "type": "integer"
+              },
+              "details": {
+                "description": "Optional details about the error.",
+                "type": "string"
+              },
+              "index": {
+                "description": "Index of the input records which had error during processing. In case the input is not an array, or the error is not record specific, this will be -1.\n",
+                "type": "integer"
+              },
+              "message": {
+                "description": "Error message.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "Unique identifier for the task.",
+          "type": "string"
+        },
+        "lastUpdatedOn": {
+          "description": "Last update timestamp in epoch milliseconds.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the task.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the task.",
+          "enum": [
+            "IN_PROGRESS",
+            "COMPLETED",
+            "PARTIALLY_FAILED",
+            "FAILED"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

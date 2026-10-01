@@ -1,0 +1,46 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{networkDeviceId}/config",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the device config by specified device ID",
+    "name": "api_getDeviceConfigById",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "networkDeviceId",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "string"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

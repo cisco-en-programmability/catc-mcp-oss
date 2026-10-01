@@ -1,0 +1,64 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/diagnosticTasks/{id}/detail",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves the details of the diagnostic task identified by the specified `id`.",
+    "name": "api_retrievesDiagnosticTaskDetailsByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The `id` of the diagnostic task to be retrieved",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Details of an asynchronous task",
+          "properties": {
+            "data": {
+              "description": "Any data associated with this task; the value may vary significantly across different tasks",
+              "type": "string"
+            },
+            "errorCode": {
+              "description": "An error code if in case this task has failed in its execution",
+              "type": "string"
+            },
+            "failureReason": {
+              "description": "A textual description indicating the reason why a task has failed",
+              "type": "string"
+            },
+            "progress": {
+              "description": "A textual representation which indicates the progress of this task; the value may vary significantly across different tasks",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,45 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "domain": "query",
+        "subdomain": "query"
+      },
+      "uri": "/dna/intent/api/v1/diagnostics/system/health/count",
+      "version": "2.3.7.9"
+    },
+    "description": "This API gives the count of the latest system events",
+    "name": "api_systemHealthCountAPI",
+    "parameters": {
+      "properties": {
+        "domain": {
+          "description": "Fetch system events with this domain. Possible values of domain are listed here : /dna/platform/app/consumer-portal/developer-toolkit/events",
+          "type": "string"
+        },
+        "subdomain": {
+          "description": "Fetch system events with this subdomain. Possible values of subdomain are listed here : /dna/platform/app/consumer-portal/developer-toolkit/events",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Response",
+      "properties": {
+        "count": {
+          "description": "Count of the events",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

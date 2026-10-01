@@ -1,0 +1,48 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "Content-Type": "header",
+        "executionId": "path",
+        "reportId": "path"
+      },
+      "uri": "/dna/data/api/v1/flexible-report/report/content/{reportId}/{executionId}",
+      "version": "2.3.7.9"
+    },
+    "description": "This is used to download the flexible report. The API returns report content. Save the response to a file by converting the response data as a blob and setting the file format available from content-disposition response header.",
+    "name": "api_downloadFlexibleReport",
+    "parameters": {
+      "properties": {
+        "Content-Type": {
+          "description": "Request body content type",
+          "type": "string"
+        },
+        "executionId": {
+          "description": "Id of execution",
+          "type": "string"
+        },
+        "reportId": {
+          "description": "Id of the report",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Content-Type",
+        "reportId",
+        "executionId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "type": "string"
+    }
+  },
+  "type": "function"
+}

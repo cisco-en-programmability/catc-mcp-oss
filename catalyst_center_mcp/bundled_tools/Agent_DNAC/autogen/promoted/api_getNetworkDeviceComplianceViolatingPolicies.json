@@ -1,0 +1,144 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "networkDeviceId": "path",
+        "offset": "query",
+        "remediationSupported": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliance/networkDevices/{networkDeviceId}/detail/policys",
+      "version": "3.1.6"
+    },
+    "description": "Retrieve the details of violating compliance policies for the network device. \n",
+    "name": "api_getNetworkDeviceComplianceViolatingPolicies",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "The `id` of the network device.",
+          "example": "0003e9dc-4eaf-41bc-a0e4-bcaaf78e6302",
+          "format": "uuid",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "remediationSupported": {
+          "description": "Filters based on whether remediation is supported for the policies and the network device.\n\nIf not specified, all policy results are returned regardless of remediation support.\n",
+          "example": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "The response object.",
+      "properties": {
+        "response": {
+          "description": "List of policy violation details.",
+          "items": {
+            "description": "Represents a policy violation with details about its severity and counts.",
+            "properties": {
+              "errorCount": {
+                "description": "The total number of errors encountered related to the policy.",
+                "example": 1,
+                "format": "int32",
+                "type": "integer"
+              },
+              "lastComplianceRunTime": {
+                "description": "The milliseconds since the UNIX epoch when the compliance check last ran on the device.",
+                "example": 1744787268000,
+                "format": "int64",
+                "type": "integer"
+              },
+              "maxSeverity": {
+                "allOf": [
+                  {
+                    "description": "The severity level of the violation.",
+                    "enum": [
+                      "CRITICAL",
+                      "MAJOR",
+                      "MINOR",
+                      "WARNING",
+                      "INFO"
+                    ],
+                    "example": "MAJOR",
+                    "title": "ViolationSeverity",
+                    "type": "string"
+                  },
+                  {
+                    "description": "The maximum severity level of the policy violations.",
+                    "type": "string"
+                  }
+                ],
+                "description": "The maximum severity level of the policy violations.",
+                "example": "CRITICAL"
+              },
+              "policyDescription": {
+                "description": "The description of the policy.",
+                "example": "This policy ensures the protection of sensitive data across the organization.",
+                "type": "string"
+              },
+              "policyId": {
+                "description": "The unique identifier for the policy.",
+                "example": "a910e834-e35b-4800-9401-a40e22ce09f4",
+                "type": "string"
+              },
+              "policyName": {
+                "description": "The name of the policy.",
+                "example": "Data Protection Policy",
+                "type": "string"
+              },
+              "remediationSupported": {
+                "description": "Indicates whether the remediation is supported for the policy and the network device.\n\nTrue only if all violations have remediation commands and all mandatory site variables used have values assigned.\n",
+                "example": true,
+                "type": "boolean"
+              },
+              "violationsCount": {
+                "description": "The total number of violations related to the policy.",
+                "example": 5,
+                "format": "int32",
+                "type": "integer"
+              }
+            },
+            "readOnly": true,
+            "required": [
+              "policyId",
+              "policyName"
+            ],
+            "title": "PolicyViolationDetails",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_10",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

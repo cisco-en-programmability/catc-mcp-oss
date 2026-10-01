@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "Content-Type": "header"
+      },
+      "uri": "/dna/intent/api/v1/security/threats/type",
+      "version": "2.3.7.9"
+    },
+    "description": "Intent API to fetch all threat types defined.",
+    "name": "api_getThreatTypes",
+    "parameters": {
+      "properties": {
+        "Content-Type": {
+          "description": "The Content Type for the request",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Content-Type"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "isCustom": {
+                "description": "",
+                "type": "boolean"
+              },
+              "isDeleted": {
+                "description": "",
+                "type": "boolean"
+              },
+              "label": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "value": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

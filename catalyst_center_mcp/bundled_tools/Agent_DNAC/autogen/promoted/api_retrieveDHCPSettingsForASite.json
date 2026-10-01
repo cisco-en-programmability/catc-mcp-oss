@@ -1,0 +1,76 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/dhcpSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "**NETWORK SERVER SETTINGS** : Retrieve DHCP settings for a site. For broad queries such as what network server settings are configured at a site, invoke this tool together with the AAA, DNS, image distribution, NTP, time zone, and banner settings tools to build a complete network server settings response. Use this tool for generic site-level DHCP configuration queries, including the configured DHCP servers, inherited DHCP settings, and the parent site from which DHCP settings are inherited. Example queries include: Which DHCP servers are configured for a site? Are DHCP settings for a site inherited? From which parent site? `null` values indicate that the setting will be inherited from the parent site; empty objects (`{}`) indicate that the setting is unset at a site.",
+    "name": "api_retrieveDHCPSettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "default": true,
+          "description": "Include inherited DHCP settings from parent sites.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "_inherited"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "dhcp": {
+              "description": "",
+              "properties": {
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                },
+                "servers": {
+                  "description": "DHCP servers for managing client device networking configuration.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

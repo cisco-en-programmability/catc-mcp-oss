@@ -1,0 +1,146 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "webhookIds": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/webhook",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves configured REST or webhook event destination settings. Use webhookIds for specific destinations. Omit pagination for the first page; the API defaults to 10 records. Use this tool for callback URLs, HTTP methods, certificate trust, proxy routing, or configured headers, not event subscriptions. Do not display secret or credential-bearing header values; report only that protected headers are configured.",
+    "name": "api_getWebhookDestination",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum records to return. Defaults to 10.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Number of matching records to skip. Omit or use 0 for the first page.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        },
+        "webhookIds": {
+          "description": "List of webhook configurations",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "apiStatus": {
+          "description": "Status",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "",
+          "properties": {
+            "errors": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "statusMessage": {
+          "description": "",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "headers": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "defaultValue": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "encrypt": {
+                      "description": "",
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "isProxyRoute": {
+                "description": "",
+                "type": "boolean"
+              },
+              "method": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "tenantId": {
+                "description": "",
+                "type": "string"
+              },
+              "trustCert": {
+                "description": "",
+                "type": "boolean"
+              },
+              "url": {
+                "description": "",
+                "type": "string"
+              },
+              "version": {
+                "description": "",
+                "type": "string"
+              },
+              "webhookId": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

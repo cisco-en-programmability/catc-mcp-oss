@@ -1,0 +1,176 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "policyId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/{policyId}/rules/{id}",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves the details of a specific rule (`id`) within a rule-based compliance (RBC) policy (`policyId`). Resolve `policyId` from the policy name using api_getCompliancePolicies first.",
+    "name": "api_getComplianceRuleById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The `id` of the rule within the compliance policy.",
+          "example": "e8eef5e2-1eab-426c-be77-97ee81dcba06",
+          "format": "uuid",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policyId",
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "properties": {
+        "response": {
+          "description": "This schema defines the structure of a rule.\n",
+          "properties": {
+            "conditionsCount": {
+              "description": "The total number of conditions present within the rule.",
+              "example": 4,
+              "readOnly": true,
+              "type": "integer"
+            },
+            "description": {
+              "description": "A comprehensive description of the rule. This should provide detailed information about what the rule does, its scope, and any other pertinent details that explain its function and purpose.\n",
+              "example": "Detailed description of the rule.",
+              "maxLength": 2000,
+              "type": "string"
+            },
+            "deviceRoles": {
+              "description": "Specifies the roles of the network devices to which the rule applies. If value is not provided, the rule will apply to all device roles.\n",
+              "items": {
+                "description": "Role assigned to the network device.\n",
+                "enum": [
+                  "BORDER_ROUTER",
+                  "CORE",
+                  "DISTRIBUTION",
+                  "ACCESS",
+                  "UNKNOWN"
+                ],
+                "example": "BORDER_ROUTER",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "deviceTypes": {
+              "description": "Defines device types by detailing their family, series, and model to enable the application of rules to targeted devices.\n",
+              "items": {
+                "properties": {
+                  "deviceFamily": {
+                    "description": "The device family.",
+                    "example": "Routers",
+                    "type": "string"
+                  },
+                  "deviceModel": {
+                    "description": "The device model. When a device model is specified, `deviceSeries` is required.",
+                    "example": "Cisco 1240 Connected Grid Router",
+                    "type": "string"
+                  },
+                  "deviceSeries": {
+                    "description": "The device series.",
+                    "example": "Cisco 1000 Series Connected Grid Routers",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "deviceFamily"
+                ],
+                "title": "Rule_deviceTypes",
+                "type": "object"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "id": {
+              "description": "The `id` of the rule.",
+              "example": "b9eef5e2-1eab-426c-be77-97ee81dcba03",
+              "format": "uuid",
+              "readOnly": true,
+              "type": "string"
+            },
+            "impact": {
+              "description": "This describes the potential impact when the conditions of this rule are violated.\n",
+              "example": "Notes on the impact of this rule.",
+              "maxLength": 2000,
+              "type": "string"
+            },
+            "name": {
+              "description": "This is the name of the rule. It should be a concise and descriptive title that clearly identifies the rule's purpose or function. The name must be unique within the specified policy.\n",
+              "example": "DNS server Rule",
+              "maxLength": 255,
+              "type": "string"
+            },
+            "policyId": {
+              "description": "The `id` of the compliance policy.",
+              "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+              "format": "uuid",
+              "readOnly": true,
+              "type": "string"
+            },
+            "softwareType": {
+              "description": "Specifies the software type applicable to the rule. The options include:\n  - `IOS`: Cisco Internetwork Operating System.\n  - `IOS_XE`: Cisco IOS-XE software.\n  - `CISCO_CONTROLLER`: AireOS operating system for Cisco wireless controllers.\n",
+              "enum": [
+                "IOS",
+                "IOS_XE",
+                "CISCO_CONTROLLER"
+              ],
+              "example": "IOS_XE",
+              "type": "string"
+            },
+            "suggestedFix": {
+              "description": "Suggestions on how to fix the issues detected by this rule.\n",
+              "example": "Suggested fix for the rule.",
+              "maxLength": 2000,
+              "type": "string"
+            },
+            "variablesCount": {
+              "description": "The total number of variables present within the rule.",
+              "example": 2,
+              "readOnly": true,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "conditionsCount",
+            "deviceTypes",
+            "id",
+            "name",
+            "policyId",
+            "softwareType",
+            "variablesCount"
+          ],
+          "title": "Rule",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_3",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

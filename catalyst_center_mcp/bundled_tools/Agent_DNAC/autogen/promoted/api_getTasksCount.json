@@ -1,0 +1,70 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "parentId": "query",
+        "rootId": "query",
+        "startTime": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/tasks/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the number of tasks that meet the filter criteria",
+    "name": "api_getTasksCount",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "This is the epoch millisecond end time upto which task records need to be fetched",
+          "type": "integer"
+        },
+        "parentId": {
+          "description": "Fetch tasks that have this parent Id",
+          "type": "string"
+        },
+        "rootId": {
+          "description": "Fetch tasks that have this root Id",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "This is the epoch millisecond start time from which tasks need to be fetched",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Fetch tasks that have this status. Available values : PENDING, FAILURE, SUCCESS",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,68 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/networkDevices/{id}/assignedToSite",
+      "version": "2.3.7.9"
+    },
+    "description": "Site assigned network device. For PnP devices, use api_getPnPDeviceList/api_getPnPDeviceCount.",
+    "name": "api_getSiteAssignedNetworkDevice",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Network Device Id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "deviceId": {
+              "description": "Site assigned network device Id.",
+              "type": "string"
+            },
+            "siteId": {
+              "description": "Site Id where device has been assigned.",
+              "type": "string"
+            },
+            "siteNameHierarchy": {
+              "description": "Site name hierarchy",
+              "type": "string"
+            },
+            "siteType": {
+              "description": "Type of the site where device has been assigned.",
+              "enum": [
+                "building",
+                "floor"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

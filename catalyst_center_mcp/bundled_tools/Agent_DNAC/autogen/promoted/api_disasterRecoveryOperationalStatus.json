@@ -1,0 +1,160 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/disasterrecovery/system/operationstatus",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the status of Disaster Recovery operation performed on the system.",
+    "name": "api_disasterRecoveryOperationalStatus",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "endTimestamp": {
+          "description": "End timestamp of the DR event",
+          "type": "string"
+        },
+        "initiated_by": {
+          "description": "Who initiated this event. Is it a system triggered one or user triggered one.",
+          "type": "string"
+        },
+        "ipconfig": {
+          "description": "VIP of the site where this event occured.",
+          "items": {
+            "properties": {
+              "interface": {
+                "description": "Enterprise or Management interface",
+                "enum": [
+                  "enterprise",
+                  "management"
+                ],
+                "type": "string"
+              },
+              "ip": {
+                "description": "This floating virtual IP address automatically moves to and operates on the site that is currently acting as your network's active site. If the interface is enterprise, then this address manages traffic between your disaster recovery system and your Enterprise network. If the interface is management, then this address manages traffic between your disaster recovery system and your Management network.",
+                "type": "string"
+              },
+              "vip": {
+                "description": "Is this interface a Virtual IP address or not. This is true for Site VIP",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "Detailed Description about the DR event",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of the DR Event.",
+          "enum": [
+            "error",
+            "info"
+          ],
+          "type": "string"
+        },
+        "site": {
+          "description": "Site of the DR in which this event occurred.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Starting timestamp of the DR event",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the DR Event.",
+          "enum": [
+            "inprogress",
+            "complete",
+            "success",
+            "failed"
+          ],
+          "type": "string"
+        },
+        "tasks": {
+          "description": "Nested Event as part of the DR event",
+          "items": {
+            "properties": {
+              "endTimestamp": {
+                "description": "End timestamp of the DR event",
+                "type": "string"
+              },
+              "ipconfig": {
+                "description": "VIP of the site where this event occured",
+                "items": {
+                  "properties": {
+                    "interface": {
+                      "description": "Enterprise or Management interface",
+                      "enum": [
+                        "enterprise",
+                        "management"
+                      ],
+                      "type": "string"
+                    },
+                    "ip": {
+                      "description": "This floating virtual IP address automatically moves to and operates on the site that is currently acting as your network's active site. If the interface is enterprise, then this address manages traffic between your disaster recovery system and your Enterprise network. If the interface is management, then this address manages traffic between your disaster recovery system and your Management network.",
+                      "type": "string"
+                    },
+                    "vip": {
+                      "description": "Is this interface a Virtual IP address or not. This is true for Site VIP",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "message": {
+                "description": "Detailed description about the DR event",
+                "type": "string"
+              },
+              "site": {
+                "description": "Site of the DR in which this event occured",
+                "type": "string"
+              },
+              "startTimestamp": {
+                "description": "Starting timestamp of the DR event",
+                "type": "string"
+              },
+              "status": {
+                "description": "Status of the DR event. ",
+                "enum": [
+                  "inprogress",
+                  "complete",
+                  "success",
+                  "failed"
+                ],
+                "type": "string"
+              },
+              "title": {
+                "description": "DR Event Summary",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "title": {
+          "description": "DR Event Summary",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

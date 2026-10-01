@@ -1,0 +1,112 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/wired/networkDevices/{networkDeviceId}/configFeatures/intended/deviceDeployments",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns device deployment status based on filter criteria.",
+    "name": "api_getDeviceDeploymentStatus",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Network device ID of the wired device to provision. The API /intent/api/v1/network-device can be used to get the network device ID.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "activityId": {
+                "description": "Activity id from intent/api/v1/activity.example: 7f422eeb-effe-4938-9371-ccf6dc2fe15e",
+                "type": "string"
+              },
+              "configGroupName": {
+                "description": "Name of the config group that has been provisioned. example: application.telemetry",
+                "type": "string"
+              },
+              "configGroupVersion": {
+                "description": "Version of the config group that has been provisioned. The version increments everytime for a provisioning operation.",
+                "type": "integer"
+              },
+              "createTime": {
+                "description": "Create time of the service deployment status record; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "endTime": {
+                "description": "Service provisioning task end time; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "error": {
+                "description": "Device Deployment error details",
+                "properties": {
+                  "message": {
+                    "description": "A brief message about the error.example: Connection to device timedout",
+                    "type": "string"
+                  },
+                  "remedy": {
+                    "description": "A brief message to suggest remedy to the failure. example: Upgrade the IOS version",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "lastUpdateTime": {
+                "description": "Last update time of the service deployment status record; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "networkDeviceId": {
+                "description": "Network device ID of the wired device to provision. The API /intent/api/v1/network-device can be used to get the network device ID.",
+                "type": "string"
+              },
+              "startTime": {
+                "description": "Service provisioning task start time; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "status": {
+                "description": "Provisioning status on the device.",
+                "enum": [
+                  "NOT_STARTED",
+                  "SUCCESS",
+                  "FAILED",
+                  "CONFIGURING",
+                  "ROLLBACK_SUCCESS",
+                  "ROLLBACK_FAILURE",
+                  "CANCELLED",
+                  "NOT_SUPPORTED",
+                  "PENDING"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

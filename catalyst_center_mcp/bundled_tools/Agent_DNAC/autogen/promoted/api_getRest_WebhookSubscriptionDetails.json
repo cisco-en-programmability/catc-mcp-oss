@@ -1,0 +1,154 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "instanceId": "query",
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/subscription-details/rest",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the list of subscription details for specified connectorType",
+    "name": "api_getRest_WebhookSubscriptionDetails",
+    "parameters": {
+      "properties": {
+        "instanceId": {
+          "description": "Instance Id of the specific configuration",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the specific configuration",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "body": {
+            "description": "",
+            "type": "string"
+          },
+          "connectTimeout": {
+            "description": "",
+            "type": "integer"
+          },
+          "connectorType": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "headers": {
+            "description": "",
+            "items": {
+              "properties": {
+                "name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "instanceId": {
+            "description": "",
+            "type": "string"
+          },
+          "method": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "",
+            "type": "string"
+          },
+          "pathParams": {
+            "description": "",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "proxyRoute": {
+            "description": "",
+            "type": "boolean"
+          },
+          "queryParams": {
+            "description": "",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "readTimeout": {
+            "description": "",
+            "type": "integer"
+          },
+          "serviceName": {
+            "description": "",
+            "type": "string"
+          },
+          "servicePort": {
+            "description": "",
+            "type": "string"
+          },
+          "trustCert": {
+            "description": "",
+            "type": "boolean"
+          },
+          "url": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

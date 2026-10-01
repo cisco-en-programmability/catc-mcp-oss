@@ -1,0 +1,154 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "Content-Type": "header",
+        "macAddress": "path"
+      },
+      "uri": "/dna/intent/api/v1/security/rogue/wireless-containment/status/{macAddress}",
+      "version": "2.3.7.9"
+    },
+    "description": "Intent API to check the wireless rogue access point containment status. The response includes all the details like containment status, contained by WLC, containment status of each BSSID etc. This API also includes the information of strongest detecting WLC for this rogue access point.",
+    "name": "api_wirelessRogueAPContainmentStatus",
+    "parameters": {
+      "properties": {
+        "Content-Type": {
+          "description": "The Content Type for the request",
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "MAC Address of the Wireless Rogue AP",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Content-Type",
+        "macAddress"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "bssidContainmentStatus": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "bssid": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "containedByWlcIp": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "containmentStatus": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "isAdhoc": {
+                      "description": "",
+                      "type": "boolean"
+                    },
+                    "radioType": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "ssid": {
+                      "description": "",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "classification": {
+                "description": "",
+                "type": "string"
+              },
+              "containedByWlcIp": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "containmentStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "lastSeen": {
+                "description": "",
+                "type": "integer"
+              },
+              "lastTaskDetail": {
+                "description": "",
+                "properties": {
+                  "initiatedOnBssid": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "initiatedOnWlcIp": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "taskId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "taskStartTime": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "taskState": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "taskType": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "macAddress": {
+                "description": "",
+                "type": "string"
+              },
+              "strongestDetectingWlcIp": {
+                "description": "",
+                "type": "string"
+              },
+              "type": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

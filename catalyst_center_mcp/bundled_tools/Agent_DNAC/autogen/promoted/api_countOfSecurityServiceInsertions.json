@@ -1,0 +1,43 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/securityServiceInsertions/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the count of SSI-enabled sites represented by configured Security Service Insertion records. Use this API when the user asks how many SSI-enabled sites exist, the number of configured SSI site records, or the count of configured SSI entries returned by `api_securityServiceInsertions`. In your current SSI scope, this count is effectively the count of SSI-enabled sites, so it matches the enabled-site scope rather than a broader inventory. Treat SSI and Security Service Insertion as the same feature name. This is a count-only API and does not return site or VN details. Prefer this API for count questions tied to configured SSI records, not for full SSI listings, not for readiness, and not for virtual-network-level or switch-level questions.",
+    "name": "api_countOfSecurityServiceInsertions",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Count response.",
+      "properties": {
+        "response": {
+          "description": "Count response for configured SSI site records.",
+          "properties": {
+            "count": {
+              "description": "Number of SSI-enabled sites represented by configured SSI records.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,978 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "attribute": "query",
+        "endTime": "query",
+        "fabricRole": "query",
+        "fabricSiteId": "query",
+        "family": "query",
+        "healthScore": "query",
+        "id": "query",
+        "l2Vn": "query",
+        "l3Vn": "query",
+        "limit": "query",
+        "macAddress": "query",
+        "maintenanceMode": "query",
+        "managementIpAddress": "query",
+        "offset": "query",
+        "order": "query",
+        "role": "query",
+        "serialNumber": "query",
+        "siteHierarchy": "query",
+        "siteHierarchyId": "query",
+        "siteId": "query",
+        "softwareVersion": "query",
+        "sortBy": "query",
+        "startTime": "query",
+        "transitNetworkId": "query",
+        "type": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/networkDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the Network Device details based on the provided query parameters.  When there is no start and end time specified returns the latest device details. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AssuranceNetworkDevices-2.0.1-resolved.yaml",
+    "name": "api_getsTheNetworkDeviceDetailsBasedOnTheProvidedQueryParameters",
+    "parameters": {
+      "properties": {
+        "attribute": {
+          "description": "The List of Network Device model attributes. Please refer to ```NetworkDeviceAttribute``` section in the Open API specification document mentioned in the description.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "fabricRole": {
+          "description": "The list of fabric device role. Examples: fabricRole=BORDER, fabricRole=BORDER&fabricRole=EDGE (multiple fabric device roles with & separator)  Available values : BORDER, EDGE, MAP-SERVER, LEAF, SPINE, TRANSIT-CP, EXTENDED-NODE, WLC, UNIFIED-AP",
+          "type": "string"
+        },
+        "fabricSiteId": {
+          "description": "The fabric site Id or list to fabric site Ids to filter the data  This field supports wildcard asterisk (*) character search support. E.g. *uuid*, *uuid, uuid*  Examples:  `?fabricSiteId=fabricSiteUuid)  ?fabricSiteId=fabricSiteUuid1&fabricSiteId=fabricSiteUuid2 (multiple fabricSiteIds requested)",
+          "type": "string"
+        },
+        "family": {
+          "description": "The list of network device family names Examples:family=Switches and Hubs (single network device family name )family=Switches and Hubs&family=Router&family=Wireless Controller (multiple Network device family names with & separator). This field is not case sensitive.",
+          "type": "string"
+        },
+        "healthScore": {
+          "description": "The list of entity health score categories\n\nExamples:\n\nhealthScore=good,\nhealthScore=good&healthScore=fair (multiple entity healthscore values with & separator). This field is not case sensitive.\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "The list of entity Uuids. (Ex.\"6bef213c-19ca-4170-8375-b694e251101c\")\nExamples: id=6bef213c-19ca-4170-8375-b694e251101c (single entity uuid requested)\nid=6bef213c-19ca-4170-8375-b694e251101c&id=32219612-819e-4b5e-a96b-cf22aca13dd9&id=2541e9a7-b80d-4955-8aa2-79b233318ba0 (multiple entity uuid with '&' separator)\n",
+          "type": "string"
+        },
+        "l2Vn": {
+          "description": "The L2 Virtual Network Id or list to Virtual Network Ids to filter the data  This field supports wildcard asterisk (*) character search support. E.g. *uuid*, *uuid, uuid*  Examples:  `?l2Vn=virtualNetworkId  ?l2Vn=virtualNetworkId1&l2Vn=virtualNetworkId2 (multiple virtualNetworkId's requested)",
+          "type": "string"
+        },
+        "l3Vn": {
+          "description": "The L3 Virtual Network Id or list to Virtual Network Ids to filter the data  This field supports wildcard asterisk (*) character search support. E.g. *uuid*, *uuid, uuid*  Examples:  `?l3Vn=virtualNetworkId  ?l3Vn=virtualNetworkId1&l3Vn=virtualNetworkId2 (multiple virtualNetworkId's requested)",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "macAddress": {
+          "description": "The macAddress of the network device or client\nThis field supports wildcard (`*`) character-based search. \nEx: `*AB:AB:AB*` or `AB:AB:AB*` or `*AB:AB:AB`\nExamples:\n\n`macAddress=AB:AB:AB:CD:CD:CD` (single macAddress requested)\n\n`macAddress=AB:AB:AB:CD:CD:DC&macAddress=AB:AB:AB:CD:CD:FE` (multiple macAddress requested)\n",
+          "type": "string"
+        },
+        "maintenanceMode": {
+          "description": "The device maintenanceMode status true or false",
+          "type": "boolean"
+        },
+        "managementIpAddress": {
+          "description": "The list of entity management IP Address. It can be either Ipv4 or Ipv6 address or combination of both(Ex. \"121.1.1.10\")\n\nThis field supports wildcard (`*`) character-based search.  Ex: `*1.1*` or `1.1*` or `*1.1`\n\nExamples:\nmanagementIpAddresses=121.1.1.10\nmanagementIpAddresses=121.1.1.10&managementIpAddresses=172.20.1.10&managementIpAddresses=200:10&=managementIpAddresses172.20.3.4 (multiple entity IP Address with & separator)\n",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "role": {
+          "description": "The list of network device role. Examples:role=CORE, role=CORE&role=ACCESS&role=ROUTER (multiple Network device roles with & separator). This field is not case sensitive.",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The list of network device serial numbers. This field supports wildcard (`*`) character-based search.  Ex: `*MS1SV*` or `MS1SV*` or `*MS1SV`\nExamples:\nserialNumber=9FUFMS1SVAX serialNumber=9FUFMS1SVAX&FCW2333Q0BY&FJC240617JX(multiple Network device serial number with & separator)\n",
+          "type": "string"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (*) character search support. E.g. */San*, */San, /San*\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (*) character search support. E.g. `*uuid*, *uuid, uuid*\n\nExamples:\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&siteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nThis field supports wildcard asterisk (*) character search support. E.g.*flooruuid*, *flooruuid, flooruuid*\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "softwareVersion": {
+          "description": "The list of network device software version This field supports wildcard (`*`) character-based search. Ex: `*17.8*` or `*17.8` or `17.8*`\nExamples:\nsoftwareVersion=2.3.4.0 (single network device software version )\nsoftwareVersion=17.9.3.23&softwareVersion=17.7.1.2&softwareVersion=*.17.7 (multiple Network device software versions with & separator)\n",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A field within the response to sort by.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to current time.\n",
+          "type": "number"
+        },
+        "transitNetworkId": {
+          "description": "The Transit Network Id or list to Transit Network Ids to filter the data  This field supports wildcard asterisk (*) character search support. E.g. *uuid*, *uuid, uuid*  Examples:  `?transitNetworkId=transitNetworkId  ?transitNetworkId=transitNetworkuuid1&transitNetworkId=transitNetworkuuid1 (multiple transitNetworkIds requested",
+          "type": "string"
+        },
+        "type": {
+          "description": "The list of network device type This field supports wildcard (`*`) character-based search. Ex: `*9407R*` or `*9407R` or `9407R*`\nExamples:\ntype=SwitchesCisco Catalyst 9407R Switch (single network device types )\ntype=Cisco Catalyst 38xx stack-able ethernet switch&type=Cisco 3945 Integrated Services Router G2 (multiple Network device types with & separator)\n",
+          "type": "string"
+        },
+        "view": {
+          "description": "The List of Network Device model views. Please refer to ```NetworkDeviceView``` section in the Open API specification document mentioned in the description.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "order": {
+              "description": "",
+              "type": "string"
+            },
+            "sortBy": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "aggregateAttributes": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "function": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "apDetails": {
+                "description": "",
+                "properties": {
+                  "adminState": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apGroup": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apOperationalState": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "apType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "connectedTime": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "connectedWlcName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ethernetMac": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "flexGroup": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "homeApEnabled": {
+                    "description": "",
+                    "type": "boolean"
+                  },
+                  "icapCapability": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ledFlashEnabled": {
+                    "description": "",
+                    "type": "boolean"
+                  },
+                  "ledFlashSeconds": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "operationalMode": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "policyTagName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "powerCalendarProfile": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "powerMode": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "powerProfile": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "powerSaveMode": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "powerSaveModeCapable": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "powerType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "protocol": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "radios": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "airQuality": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "band": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "clientCount": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "id": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "interference": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "noise": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "trafficUtil": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "utilization": {
+                          "description": "",
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "regulatoryDomain": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "resetReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "rfTagName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "siteTagName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "subMode": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "clientCount": {
+                "description": "",
+                "type": "integer"
+              },
+              "collectionStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "communicationState": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceFamily": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceGroupHierarchyId": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceRole": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceSeries": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceType": {
+                "description": "",
+                "type": "string"
+              },
+              "fabricDetails": {
+                "description": "",
+                "properties": {
+                  "fabricRole": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "fabricSiteId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "fabricSiteName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "l2Vns": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "l3Vns": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "networkProtocol": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "transitFabrics": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "fabricMetricsDetails": {
+                "description": "",
+                "properties": {
+                  "aaaStatusScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "bgpBgpSiteScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "bgpEvpnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "bgpPeerInfraVnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "bgpPeerScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "bgpPubsubSiteScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "bgpTcpScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "ctsEnvDataDownloadScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "fabricSiteScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "fabricTransitScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "fabricVnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "fabsiteFcpScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "fabsiteFsconnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "fabsiteInfraScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "internetAvailScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "lispCpConnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "lispTransitConnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "mcastScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "overallFabricScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "peerScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "portChannelScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "pubsubInfraVnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "pubsubSessionScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "pubsubTransitConnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "remoteInternetAvailScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "tcpConnScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "transitControlPlaneScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "transitServicesScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "vnExitScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "vnFcpScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "vnServiceScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "vnStatusScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "vniStatusScore": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "featureFlagList": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "haLastResetReason": {
+                "description": "",
+                "type": "string"
+              },
+              "haStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "ipv4Address": {
+                "description": "",
+                "type": "string"
+              },
+              "ipv6Address": {
+                "description": "",
+                "type": "string"
+              },
+              "lastBootTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "macAddress": {
+                "description": "",
+                "type": "string"
+              },
+              "maintenanceModeEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "managementIpAddress": {
+                "description": "",
+                "type": "string"
+              },
+              "metricsDetails": {
+                "description": "",
+                "properties": {
+                  "airQualityScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "apCount": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "avgTemperature": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "cpuScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "cpuUtilization": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "discardInterfaces": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "discardScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "errorInterfaces": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "errorScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "freeMemoryBuffer": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "freeMemoryBufferScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "freeTimer": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "freeTimerScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "highLinkUtilizationInterfaces": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "interDeviceConnectedDownInterfaces": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "interDeviceLinkScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "interferenceScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "linkUtilizationScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "maxTemperature": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "memoryScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "memoryUtilization": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "noiseScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "overallHealthScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "packetPool": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "packetPoolScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "utilizationScore": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "wqePool": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "wqePoolScore": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "osType": {
+                "description": "",
+                "type": "string"
+              },
+              "physicalPortCount": {
+                "description": "",
+                "type": "integer"
+              },
+              "platformId": {
+                "description": "",
+                "type": "string"
+              },
+              "portCount": {
+                "description": "",
+                "type": "integer"
+              },
+              "productVendor": {
+                "description": "",
+                "type": "string"
+              },
+              "redundancyMode": {
+                "description": "",
+                "type": "string"
+              },
+              "redundancyPeerState": {
+                "description": "",
+                "type": "string"
+              },
+              "redundancyPeerStateDerived": {
+                "description": "",
+                "type": "string"
+              },
+              "redundancyState": {
+                "description": "",
+                "type": "string"
+              },
+              "redundancyStateDerived": {
+                "description": "",
+                "type": "string"
+              },
+              "ringStatus": {
+                "description": "",
+                "type": "boolean"
+              },
+              "serialNumber": {
+                "description": "",
+                "type": "string"
+              },
+              "siteHierarchy": {
+                "description": "",
+                "type": "string"
+              },
+              "siteHierarchyId": {
+                "description": "",
+                "type": "string"
+              },
+              "siteId": {
+                "description": "",
+                "type": "string"
+              },
+              "softwareVersion": {
+                "description": "",
+                "type": "string"
+              },
+              "stackType": {
+                "description": "",
+                "type": "string"
+              },
+              "switchPoeDetails": {
+                "description": "",
+                "properties": {
+                  "chassisCount": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "freePortCount": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "moduleCount": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "moduleDetails": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "chassisId": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "interfacePowerMax": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "moduleFreePortCount": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "moduleId": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "modulePoePowerAllocated": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "modulePoePowerConsumed": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "modulePortCount": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "modulePowerBudget": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "modulePowerConsumed": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "modulePowerRemaining": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "moduleSystemPowerAllocated": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "moduleSystemPowerConsumed": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "moduleUsedPortCount": {
+                          "description": "",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "poePowerAllocated": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "poePowerConsumed": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "poeVersion": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "portCount": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "powerBudget": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "powerConsumed": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "powerRemaining": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "systemPowerAllocated": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "systemPowerConsumed": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "usedPortCount": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "tagNames": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "upTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "virtualPortCount": {
+                "description": "",
+                "type": "integer"
+              },
+              "wiredClientCount": {
+                "description": "",
+                "type": "integer"
+              },
+              "wirelessClientCount": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

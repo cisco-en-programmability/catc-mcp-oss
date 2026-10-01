@@ -1,0 +1,444 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "siteId": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{siteId}/wirelessSettings/ssids/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get an SSID (Service Set Identifier) by ID at the given site",
+    "name": "api_getSSIDByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "SSID ID",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Site UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "siteId",
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "aaaOverride": {
+              "description": "Activate the AAA Override feature when set to true",
+              "type": "boolean"
+            },
+            "acctServers": {
+              "description": "List of Accounting server IpAddresses",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "aclName": {
+              "description": "Pre-Auth Access Control List (ACL) Name",
+              "type": "string"
+            },
+            "authServer": {
+              "description": "Authentication Server, Mandatory for Guest SSIDs with wlanType=Guest and l3AuthType=web_auth",
+              "enum": [
+                "auth_ise",
+                "auth_external",
+                "auth_internal"
+              ],
+              "type": "string"
+            },
+            "authServers": {
+              "description": "List of Authentication/Authorization server IpAddresses",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "authType": {
+              "description": "L2 Authentication Type (If authType is not open , then atleast one RSN Cipher Suite and corresponding valid AKM must be enabled)",
+              "enum": [
+                "WPA2_ENTERPRISE",
+                "WPA2_PERSONAL",
+                "OPEN",
+                "WPA3_ENTERPRISE",
+                "WPA3_PERSONAL",
+                "WPA2_WPA3_PERSONAL",
+                "WPA2_WPA3_ENTERPRISE",
+                "OPEN-SECURED"
+              ],
+              "type": "string"
+            },
+            "basicServiceSetClientIdleTimeout": {
+              "description": "This refers to the duration of inactivity, measured in seconds, before a client connected to the Basic Service Set is considered idle and timed out",
+              "type": "integer"
+            },
+            "basicServiceSetMaxIdleEnable": {
+              "description": "Activate the maximum idle feature for the Basic Service Set",
+              "type": "boolean"
+            },
+            "cckmTsfTolerance": {
+              "description": "Cckm TImestamp Tolerance(in milliseconds)",
+              "type": "integer"
+            },
+            "clientExclusionEnable": {
+              "description": "Activate the feature that allows for the exclusion of clients",
+              "type": "boolean"
+            },
+            "clientExclusionTimeout": {
+              "description": "This refers to the length of time, in seconds, a client is excluded or blocked from accessing the network after a specified number of unsuccessful attempts",
+              "type": "integer"
+            },
+            "clientRateLimit": {
+              "description": "This pertains to the maximum data transfer rate, specified in bits per second, that a client is permitted to achieve",
+              "type": "integer"
+            },
+            "coverageHoleDetectionEnable": {
+              "description": "Activate Coverage Hole Detection feature when set to true",
+              "type": "boolean"
+            },
+            "directedMulticastServiceEnable": {
+              "description": "The Directed Multicast Service feature becomes operational when it is set to true",
+              "type": "boolean"
+            },
+            "egressQos": {
+              "description": "Egress QOS",
+              "enum": [
+                "PLATINUM",
+                "SILVER",
+                "GOLD",
+                "BRONZE"
+              ],
+              "type": "string"
+            },
+            "externalAuthIpAddress": {
+              "description": "External WebAuth URL (Mandatory for Guest SSIDs with wlanType = Guest, l3AuthType = web_auth and authServer = auth_external)",
+              "type": "string"
+            },
+            "fastTransition": {
+              "description": "Fast Transition",
+              "enum": [
+                "ADAPTIVE",
+                "ENABLE",
+                "DISABLE"
+              ],
+              "type": "string"
+            },
+            "fastTransitionOverTheDistributedSystemEnable": {
+              "description": "Enable Fast Transition over the Distributed System when set to true",
+              "type": "boolean"
+            },
+            "ghz24Policy": {
+              "description": "2.4 Ghz Band Policy value. Allowed only when 2.4 Radio Band is enabled in ssidRadioType",
+              "enum": [
+                "dot11-bg-only",
+                "dot11-g-only"
+              ],
+              "type": "string"
+            },
+            "ghz6PolicyClientSteering": {
+              "description": "True if 6 GHz Policy Client Steering is enabled, else False",
+              "type": "boolean"
+            },
+            "id": {
+              "description": "SSID ID",
+              "type": "string"
+            },
+            "ingressQos": {
+              "description": "Ingress QOS",
+              "enum": [
+                "PLATINUM-UP",
+                "SILVER-UP",
+                "GOLD-UP",
+                "BRONZE-UP"
+              ],
+              "type": "string"
+            },
+            "inheritedSiteId": {
+              "description": "Site UUID from where the SSID is inherited",
+              "type": "string"
+            },
+            "inheritedSiteName": {
+              "description": "Site Name from where the SSID is inherited",
+              "type": "string"
+            },
+            "inheritedSiteNameHierarchy": {
+              "description": "Inherited Site Name Hierarchy",
+              "type": "string"
+            },
+            "inheritedSiteUUID": {
+              "description": "Inherited Site UUID",
+              "type": "string"
+            },
+            "isApBeaconProtectionEnabled": {
+              "description": "When set to true, the Access Point (AP) Beacon Protection feature is activated, enhancing the security of the network.",
+              "type": "boolean"
+            },
+            "isAuthKey8021x": {
+              "description": "When set to true, the 802.1X authentication key is in use",
+              "type": "boolean"
+            },
+            "isAuthKey8021xPlusFT": {
+              "description": "When set to true, the 802.1X-Plus-FT authentication key is in use",
+              "type": "boolean"
+            },
+            "isAuthKey8021x_SHA256": {
+              "description": "When set to true, the feature that enables 802.1X authentication using the SHA256 algorithm is turned on",
+              "type": "boolean"
+            },
+            "isAuthKeyEasyPSK": {
+              "description": "When set to true, the feature that enables the use of Easy Pre-shared Key (PSK) authentication is activated",
+              "type": "boolean"
+            },
+            "isAuthKeyOWE": {
+              "description": " When set to true, the Opportunistic Wireless Encryption (OWE) authentication key feature is turned on",
+              "type": "boolean"
+            },
+            "isAuthKeyPSK": {
+              "description": "When set to true, the Pre-shared Key (PSK) authentication feature is enabled",
+              "type": "boolean"
+            },
+            "isAuthKeyPSKPlusFT": {
+              "description": "When set to true, the feature that enables the combination of Pre-shared Key (PSK) and Fast Transition (FT) authentication keys is activated",
+              "type": "boolean"
+            },
+            "isAuthKeyPSKSHA256": {
+              "description": "The feature that allows the use of Pre-shared Key (PSK) authentication with the SHA256 algorithm is enabled when it is set to true",
+              "type": "boolean"
+            },
+            "isAuthKeySae": {
+              "description": "When set to true, the feature enabling the Simultaneous Authentication of Equals (SAE) authentication key is activated",
+              "type": "boolean"
+            },
+            "isAuthKeySaeExt": {
+              "description": "When set to true, the Simultaneous Authentication of Equals (SAE) Extended Authentication key feature is turned on.",
+              "type": "boolean"
+            },
+            "isAuthKeySaeExtPlusFT": {
+              "description": "When set to true, the Simultaneous Authentication of Equals (SAE) combined with Fast Transition (FT) Authentication Key feature is enabled.",
+              "type": "boolean"
+            },
+            "isAuthKeySaePlusFT": {
+              "description": "Activating this setting by switching it to true turns on the authentication key feature that supports both Simultaneous Authentication of Equals (SAE) and Fast Transition (FT)",
+              "type": "boolean"
+            },
+            "isAuthKeySuiteB1921x": {
+              "description": "When set to true, the SuiteB192-1x authentication key feature is enabled.",
+              "type": "boolean"
+            },
+            "isAuthKeySuiteB1x": {
+              "description": "When activated by setting it to true, the SuiteB-1x authentication key feature is engaged.",
+              "type": "boolean"
+            },
+            "isBroadcastSSID": {
+              "description": "When activated by setting it to true, the Broadcast SSID feature will make the SSID publicly visible to wireless devices searching for available networks",
+              "type": "boolean"
+            },
+            "isCckmEnabled": {
+              "description": "True if CCKM is enabled, else False",
+              "type": "boolean"
+            },
+            "isCustomNasIdOptions": {
+              "description": "Set to true if Custom NAS ID Options provided",
+              "type": "boolean"
+            },
+            "isEnabled": {
+              "description": "Set SSID's admin status as 'Enabled' when set to true",
+              "type": "boolean"
+            },
+            "isFastLaneEnabled": {
+              "description": "True if FastLane is enabled, else False",
+              "type": "boolean"
+            },
+            "isHex": {
+              "description": "True if passphrase is in Hex format, else False.",
+              "type": "boolean"
+            },
+            "isMacFilteringEnabled": {
+              "description": "When set to true, MAC Filtering will be activated, allowing control over network access based on the MAC address of the device",
+              "type": "boolean"
+            },
+            "isPosturingEnabled": {
+              "description": "Applicable only for Enterprise SSIDs. When set to True, Posturing will enabled. Required to be set to True if ACL needs to be mapped for Enterprise SSID. ",
+              "type": "boolean"
+            },
+            "isRandomMacFilterEnabled": {
+              "description": "Deny clients using randomized MAC addresses when set to true",
+              "type": "boolean"
+            },
+            "isSensorPnp": {
+              "description": "True if SSID is a sensor SSID",
+              "type": "boolean"
+            },
+            "l3AuthType": {
+              "description": "L3 Authentication Type",
+              "enum": [
+                "open",
+                "web_auth"
+              ],
+              "type": "string"
+            },
+            "managementFrameProtectionClientprotection": {
+              "description": "Management Frame Protection Client",
+              "enum": [
+                "OPTIONAL",
+                "DISABLED",
+                "REQUIRED"
+              ],
+              "type": "string"
+            },
+            "multiPSKSettings": {
+              "description": "Multi PSK Settings (Only applicable for SSID with PERSONAL auth type and PSK)",
+              "items": {
+                "properties": {
+                  "passphrase": {
+                    "description": "Passphrase needs to be between 8 and 63 characters for ASCII type. HEX passphrase needs to be 64 characters",
+                    "type": "string"
+                  },
+                  "passphraseType": {
+                    "description": "Passphrase Type",
+                    "enum": [
+                      "ASCII",
+                      "HEX"
+                    ],
+                    "type": "string"
+                  },
+                  "priority": {
+                    "description": "Priority",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "nasOptions": {
+              "description": "Pre-Defined NAS Options : AP ETH Mac Address, AP IP address, AP Location , AP MAC Address, AP Name, AP Policy Tag, AP Site Tag, SSID, System IP Address, System MAC Address, System Name.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "neighborListEnable": {
+              "description": "The Neighbor List feature is enabled when it is set to true",
+              "type": "boolean"
+            },
+            "openSsid": {
+              "description": "Open SSID which is already created in the design and not associated to any other OPEN-SECURED SSID",
+              "type": "string"
+            },
+            "passphrase": {
+              "description": "Passphrase (Only applicable for SSID with PERSONAL security level). Passphrase needs to be between 8 and 63 characters for ASCII type. HEX passphrase needs to be 64 characters",
+              "type": "string"
+            },
+            "policyProfileName": {
+              "description": "Policy Profile Name. If not passed, profileName value will be used to populate this parameter",
+              "type": "string"
+            },
+            "profileName": {
+              "description": "WLAN Profile Name, if not passed autogenerated profile name will be assigned",
+              "type": "string"
+            },
+            "protectedManagementFrame": {
+              "description": "(REQUIRED is applicable for authType WPA3_PERSONAL, WPA3_ENTERPRISE, OPEN_SECURED) and (OPTIONAL/REQUIRED is applicable for authType WPA2_WPA3_PERSONAL and WPA2_WPA3_ENTERPRISE)",
+              "enum": [
+                "OPTIONAL",
+                "DISABLED",
+                "REQUIRED"
+              ],
+              "type": "string"
+            },
+            "rsnCipherSuiteCcmp128": {
+              "description": "When set to true, the Robust Security Network (RSN) Cipher Suite CCMP128 encryption protocol is activated",
+              "type": "boolean"
+            },
+            "rsnCipherSuiteCcmp256": {
+              "description": "When set to true, the Robust Security Network (RSN) Cipher Suite CCMP256 encryption protocol is activated",
+              "type": "boolean"
+            },
+            "rsnCipherSuiteGcmp128": {
+              "description": "When set to true, the Robust Security Network (RSN) Cipher Suite GCMP128 encryption protocol is activatedTrue if RSN Cipher Suite GCMP128 is enabled, else False",
+              "type": "boolean"
+            },
+            "rsnCipherSuiteGcmp256": {
+              "description": "When set to true, the Robust Security Network (RSN) Cipher Suite GCMP256 encryption protocol is activated",
+              "type": "boolean"
+            },
+            "sessionTimeOut": {
+              "description": "This denotes the allotted time span, expressed in seconds, before a session is automatically terminated due to inactivity",
+              "type": "integer"
+            },
+            "sessionTimeOutEnable": {
+              "description": "Turn on the feature that imposes a time limit on user sessions",
+              "type": "boolean"
+            },
+            "sleepingClientEnable": {
+              "description": "When set to true, this will activate the timeout settings that apply to clients in sleep mode",
+              "type": "boolean"
+            },
+            "sleepingClientTimeout": {
+              "description": "This refers to the amount of time, measured in minutes, before a sleeping (inactive) client is timed out of the network",
+              "type": "integer"
+            },
+            "ssid": {
+              "description": "Name of the SSID",
+              "type": "string"
+            },
+            "ssidRadioType": {
+              "description": "Radio Policy Enum (default: Triple band operation(2.4GHz, 5GHz and 6GHz))",
+              "enum": [
+                "Triple band operation(2.4GHz, 5GHz and 6GHz)",
+                "5GHz only",
+                "2.4GHz only",
+                "6GHz only",
+                "2.4 and 5 GHz",
+                "2.4 and 6 GHz",
+                "5 and 6 GHz",
+                "Triple band operation with band select"
+              ],
+              "type": "string"
+            },
+            "webPassthrough": {
+              "description": "When set to true, the Web-Passthrough feature will be activated for the Guest SSID, allowing guests to bypass certain login requirements",
+              "type": "boolean"
+            },
+            "wlanBandSelectEnable": {
+              "description": "Band select is allowed only when band options selected contains at least 2.4 GHz and 5 GHz band",
+              "type": "boolean"
+            },
+            "wlanType": {
+              "description": "Wlan Type",
+              "enum": [
+                "Enterprise",
+                "Guest"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

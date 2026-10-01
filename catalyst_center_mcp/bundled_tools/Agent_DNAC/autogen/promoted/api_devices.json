@@ -1,0 +1,386 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceRole": "query",
+        "endTime": "query",
+        "health": "query",
+        "limit": "query",
+        "offset": "query",
+        "siteId": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/device-health",
+      "version": "2.3.7.9"
+    },
+    "description": "Intent API for accessing DNA Assurance Device object for generating reports, creating dashboards or creating additional value added services.",
+    "name": "api_devices",
+    "parameters": {
+      "properties": {
+        "deviceRole": {
+          "description": "CORE, ACCESS, DISTRIBUTION, ROUTER, WLC, or AP (case insensitive)",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "UTC epoch time in milliseconds",
+          "type": "number"
+        },
+        "health": {
+          "description": "Cisco Catalyst Center health catagory: POOR, FAIR, or GOOD (case insensitive)",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "siteId": {
+          "description": "Cisco Catalyst Center site UUID",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "UTC epoch time in milliseconds",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Overall device health response",
+      "properties": {
+        "response": {
+          "description": "List of device health data",
+          "items": {
+            "properties": {
+              "airQualityHealth": {
+                "description": "WIFI air quaulify per radio. (Property name format radio<slotNumber>)",
+                "properties": {
+                  "Ghz24": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "Ghz50": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio0": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio1": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio2": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio3": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "apCount": {
+                "description": "Number of AP count",
+                "type": "integer"
+              },
+              "avgTemperature": {
+                "description": "Average device (switch) temperature",
+                "type": "number"
+              },
+              "band": {
+                "description": "WIFI band per radio. (Property name format radio<slotNumber>)",
+                "properties": {
+                  "radio0": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "radio1": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "radio2": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "radio3": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "clientCount": {
+                "description": "Client count per radio. (Property name format radio<slotNumber>)",
+                "properties": {
+                  "Ghz24": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "Ghz50": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio0": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio1": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio2": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio3": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "cpuHealth": {
+                "description": "Device CPU health score",
+                "type": "integer"
+              },
+              "cpuUlitilization": {
+                "description": "Device's CPU utilization",
+                "type": "number"
+              },
+              "cpuUtilization": {
+                "description": "Device's CPU utilization",
+                "type": "number"
+              },
+              "deviceFamily": {
+                "description": "Device family",
+                "type": "string"
+              },
+              "deviceType": {
+                "description": "Device type",
+                "type": "string"
+              },
+              "freeMemoryBuffer": {
+                "description": "Device free memory",
+                "type": "number"
+              },
+              "freeMemoryBufferHealth": {
+                "description": "Device free memory buffer health",
+                "type": "integer"
+              },
+              "freeTimer": {
+                "description": "Device free timer",
+                "type": "string"
+              },
+              "freeTimerScore": {
+                "description": "Device free timer health score",
+                "type": "integer"
+              },
+              "interDeviceLinkAvailFabric": {
+                "description": "Device uplink health",
+                "type": "integer"
+              },
+              "interDeviceLinkAvailHealth": {
+                "description": "Device connectivity status",
+                "type": "integer"
+              },
+              "interfaceLinkErrHealth": {
+                "description": "Device (AP) error health score",
+                "type": "integer"
+              },
+              "interferenceHealth": {
+                "description": "WIFI Interference per radio. (Property name format radio<slotNumber>)",
+                "properties": {
+                  "Ghz24": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "Ghz50": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio0": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio1": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio2": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio3": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "ipAddress": {
+                "description": "Management IP address of the device",
+                "type": "string"
+              },
+              "issueCount": {
+                "description": "Number of issues",
+                "type": "integer"
+              },
+              "location": {
+                "description": "Site location in which this device is assigned to",
+                "type": "string"
+              },
+              "macAddress": {
+                "description": "MAC address of the device",
+                "type": "string"
+              },
+              "maxTemperature": {
+                "description": "Max device (switch) temperature",
+                "type": "number"
+              },
+              "memoryUtilization": {
+                "description": "Device memory utilization",
+                "type": "number"
+              },
+              "memoryUtilizationHealth": {
+                "description": "Device memory utilization health score",
+                "type": "integer"
+              },
+              "model": {
+                "description": "Device model string",
+                "type": "string"
+              },
+              "name": {
+                "description": "Device name",
+                "type": "string"
+              },
+              "noiseHealth": {
+                "description": "WIFI noise per radio. (Property name format radio<slotNumber>)",
+                "properties": {
+                  "Ghz24": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "Ghz50": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio0": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio1": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio2": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio3": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "osVersion": {
+                "description": "Device OS version string",
+                "type": "string"
+              },
+              "overallHealth": {
+                "description": "Overall health score",
+                "type": "integer"
+              },
+              "packetPool": {
+                "description": "Device packet pool",
+                "type": "integer"
+              },
+              "packetPoolHealth": {
+                "description": "Device packet pool",
+                "type": "integer"
+              },
+              "reachabilityHealth": {
+                "description": "Device reachability in the network",
+                "type": "string"
+              },
+              "utilizationHealth": {
+                "description": "Utilization (AP) per radio. (Property name format radio<slotNumber>)",
+                "properties": {
+                  "Ghz24": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "Ghz50": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio0": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio1": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio2": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "radio3": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "uuid": {
+                "description": "Device UUID",
+                "type": "string"
+              },
+              "wanLinkUtilization": {
+                "description": "WLAN link utilization",
+                "type": "number"
+              },
+              "wqePools": {
+                "description": "Device WQE pool",
+                "type": "number"
+              },
+              "wqePoolsHealth": {
+                "description": "Device WQE pool health",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "Total number of devices",
+          "type": "integer"
+        },
+        "version": {
+          "description": "Response data's version string",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

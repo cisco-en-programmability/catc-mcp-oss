@@ -1,0 +1,119 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "domain": "query",
+        "limit": "query",
+        "offset": "query",
+        "subdomain": "query",
+        "summary": "query"
+      },
+      "uri": "/dna/intent/api/v1/diagnostics/system/health",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves the latest system events ",
+    "name": "api_systemHealthAPI",
+    "parameters": {
+      "properties": {
+        "domain": {
+          "description": "Fetch system events with this domain. Possible values of domain are listed here : /dna/platform/app/consumer-portal/developer-toolkit/events",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "subdomain": {
+          "description": "Fetch system events with this subdomain. Possible values of subdomain are listed here : /dna/platform/app/consumer-portal/developer-toolkit/events",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Fetch the latest high severity event",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "cimcaddress": {
+          "description": "List of configured cimc addresse(s)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "healthEvents": {
+          "description": "Array of events",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "Details of the event",
+                "type": "string"
+              },
+              "domain": {
+                "description": "Domain of the event",
+                "type": "string"
+              },
+              "hostname": {
+                "description": "Hostname of the event",
+                "type": "string"
+              },
+              "instance": {
+                "description": "Instance of the event",
+                "type": "string"
+              },
+              "severity": {
+                "description": "Severity of the event",
+                "type": "string"
+              },
+              "state": {
+                "description": "State of the event",
+                "type": "string"
+              },
+              "status": {
+                "description": "Event status",
+                "type": "string"
+              },
+              "subDomain": {
+                "description": "Sub domain of the event",
+                "type": "string"
+              },
+              "timestamp": {
+                "description": "Time of the event occurance",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "hostName": {
+          "description": "Cluster name ",
+          "type": "string"
+        },
+        "version": {
+          "description": "API version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

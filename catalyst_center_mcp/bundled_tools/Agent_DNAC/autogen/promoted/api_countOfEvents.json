@@ -1,0 +1,47 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "eventId": "query",
+        "tags": "query"
+      },
+      "uri": "/dna/intent/api/v1/events/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of registered events with provided eventIds or tags as mandatory",
+    "name": "api_countOfEvents",
+    "parameters": {
+      "properties": {
+        "eventId": {
+          "description": "The registered EventId should be provided",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The registered Tags should be provided",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tags"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

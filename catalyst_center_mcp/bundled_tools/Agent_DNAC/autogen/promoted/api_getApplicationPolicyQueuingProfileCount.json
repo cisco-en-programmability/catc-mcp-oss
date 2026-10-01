@@ -1,0 +1,37 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/app-policy-queuing-profile-count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the number of all existing  application policy queuing profile",
+    "name": "api_getApplicationPolicyQueuingProfileCount",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Total number of Queueing Profile",
+          "type": "integer"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,43 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/tags/interfaces/membersAssociations/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetches the count of interfaces that are associated with at least one tag. A tag is a user-defined or system-defined construct to group resources. When an interface is tagged, it is called a member of the tag.",
+    "name": "api_retrieveTheCountOfInterfacesThatAreAssociatedWithAt_6c330a1b",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "description": "Reponse object containing the count.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

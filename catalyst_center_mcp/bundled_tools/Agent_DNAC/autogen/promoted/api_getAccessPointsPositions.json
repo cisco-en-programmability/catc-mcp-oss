@@ -1,0 +1,168 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "floorId": "path",
+        "limit": "query",
+        "macAddress": "query",
+        "model": "query",
+        "name": "query",
+        "offset": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v2/floors/{floorId}/accessPointPositions",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve all Access Points positions assigned for a specific floor",
+    "name": "api_getAccessPointsPositions",
+    "parameters": {
+      "properties": {
+        "floorId": {
+          "description": "Floor Id",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "macAddress": {
+          "description": "Access Point mac address.",
+          "type": "string"
+        },
+        "model": {
+          "description": "Access Point model.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Access Point name.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "description": "Access Point type.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "floorId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Access Point Id (readonly)",
+                "type": "string"
+              },
+              "macAddress": {
+                "description": "Access Point MAC address (readonly)",
+                "type": "string"
+              },
+              "model": {
+                "description": "Access Point model (readonly)",
+                "type": "string"
+              },
+              "name": {
+                "description": "Access Point Name (readonly)",
+                "type": "string"
+              },
+              "position": {
+                "description": "",
+                "properties": {
+                  "x": {
+                    "description": "Access Point X coordinate in feet",
+                    "type": "number"
+                  },
+                  "y": {
+                    "description": "Access Point Y coordinate in feet",
+                    "type": "number"
+                  },
+                  "z": {
+                    "description": "Access Point Z coordinate in feet",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "radios": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "antenna": {
+                      "description": "",
+                      "properties": {
+                        "azimuth": {
+                          "description": "Angle of the antenna, measured relative to the x axis, clockwise. The azimuth range is from 0 through 360",
+                          "type": "integer"
+                        },
+                        "elevation": {
+                          "description": "Elevation of the antenna. The elevation range is from -90 through 90",
+                          "type": "integer"
+                        },
+                        "name": {
+                          "description": "Antenna type for this Access Point. Use `/dna/intent/api/v1/maps/supported-access-points` to find supported Antennas for a particualr Access Point model.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "bands": {
+                      "description": "Radio frequencies in GHz (readonly). Radio frequencies are expected to be 2.4, 5, and 6. MinItems: 1; MaxItems: 3",
+                      "items": {
+                        "type": "number"
+                      },
+                      "type": "array"
+                    },
+                    "channel": {
+                      "description": "Channel to be used by the Access Point (readonly). The value gets updated only every 24 hours",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "Radio Id (readonly)",
+                      "type": "string"
+                    },
+                    "txPower": {
+                      "description": "Transmit power for the channel in Decibel milliwatts (dBm) (readonly). The value gets updated only every 24 hours",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "Access Point type (readonly)",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

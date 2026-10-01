@@ -1,0 +1,242 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "path",
+        "recordsToReturn": "path",
+        "startIndex": "path"
+      },
+      "uri": "/dna/intent/api/v1/interface/network-device/{deviceId}/{startIndex}/{recordsToReturn}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the list of interfaces for the device for the specified range",
+    "name": "api_getDeviceInterfacesBySpecifiedRange",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "Device ID",
+          "type": "string"
+        },
+        "recordsToReturn": {
+          "description": "Number of records to return",
+          "type": "integer"
+        },
+        "startIndex": {
+          "description": "Start index",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "deviceId",
+        "startIndex",
+        "recordsToReturn"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "addresses": {
+                "description": "This field holds IPAddress details.",
+                "items": {
+                  "properties": {
+                    "address": {
+                      "description": "",
+                      "properties": {
+                        "ipAddress": {
+                          "description": "",
+                          "properties": {
+                            "address": {
+                              "description": "IP address of the interface",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "ipMask": {
+                          "description": "",
+                          "properties": {
+                            "address": {
+                              "description": "IP Mask of the interface",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "isInverseMask": {
+                          "description": "Inverse Mask of the IP address is enabled or not",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "description": "Type of the interface. For e.g. IPv4, IPv6 (with unicast, multicast, anycast, etc.)",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "adminStatus": {
+                "description": "Admin status as ('UP'/'DOWN')",
+                "type": "string"
+              },
+              "className": {
+                "description": "Classifies the port as switch port ,loopback interface etc.",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description for the Interface",
+                "type": "string"
+              },
+              "deviceId": {
+                "description": "Device Id of the device",
+                "type": "string"
+              },
+              "duplex": {
+                "description": "Interface duplex as AutoNegotiate or FullDuplex",
+                "type": "string"
+              },
+              "id": {
+                "description": "ID of the Interface",
+                "type": "string"
+              },
+              "ifIndex": {
+                "description": "Interface index",
+                "type": "string"
+              },
+              "instanceTenantId": {
+                "description": "Instance Tenant Id of the Interface",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "Instance Uuid of the Interface",
+                "type": "string"
+              },
+              "interfaceType": {
+                "description": "Interface type as Physical or Virtual",
+                "type": "string"
+              },
+              "ipv4Address": {
+                "description": "IPV4 Address of the device",
+                "type": "string"
+              },
+              "ipv4Mask": {
+                "description": "IPV4 Mask of the device",
+                "type": "string"
+              },
+              "isisSupport": {
+                "description": "Flag for ISIS enabled / disabled",
+                "type": "string"
+              },
+              "lastIncomingPacketTime": {
+                "description": "Time, in milliseconds since UNIX epoch, when the last packet was received on this interface",
+                "type": "number"
+              },
+              "lastOutgoingPacketTime": {
+                "description": "Time, in milliseconds since UNIX epoch, when the last packet was sent from this interface",
+                "type": "number"
+              },
+              "lastUpdated": {
+                "description": "Time when the device interface info last got updated",
+                "type": "string"
+              },
+              "macAddress": {
+                "description": "MAC address of interface",
+                "type": "string"
+              },
+              "mappedPhysicalInterfaceId": {
+                "description": "ID of physical interface mapped with the virtual interface of WLC",
+                "type": "string"
+              },
+              "mappedPhysicalInterfaceName": {
+                "description": "Physical interface name mapped with the virtual interface of WLC",
+                "type": "string"
+              },
+              "mediaType": {
+                "description": "Media Type of the interface",
+                "type": "string"
+              },
+              "mtu": {
+                "description": "MTU Information of Interface",
+                "type": "string"
+              },
+              "name": {
+                "description": "Name for the interface",
+                "type": "string"
+              },
+              "nativeVlanId": {
+                "description": "Vlan to receive untagged frames on trunk port",
+                "type": "string"
+              },
+              "ospfSupport": {
+                "description": "Flag for OSPF enabled / disabled",
+                "type": "string"
+              },
+              "pid": {
+                "description": "Platform ID of the device",
+                "type": "string"
+              },
+              "portMode": {
+                "description": "Port mode as access, trunk, routed",
+                "type": "string"
+              },
+              "portName": {
+                "description": "Interface name",
+                "type": "string"
+              },
+              "portType": {
+                "description": "Port type as Ethernet Port / Ethernet SVI / Ethernet Sub Interface",
+                "type": "string"
+              },
+              "serialNo": {
+                "description": "Serial number of the device",
+                "type": "string"
+              },
+              "series": {
+                "description": "Series of the device",
+                "type": "string"
+              },
+              "speed": {
+                "description": "Speed of the interface",
+                "type": "string"
+              },
+              "status": {
+                "description": "Interface status as Down / Up",
+                "type": "string"
+              },
+              "vlanId": {
+                "description": "Vlan ID of interface",
+                "type": "string"
+              },
+              "voiceVlan": {
+                "description": "Vlan information of the interface",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,103 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/networkDeviceLicenses/summary",
+      "version": "2.3.7.9"
+    },
+    "description": "**Retrieves** the summary of consumed network device licenses.\\n\\nUse this tool to obtain **aggregate statistics** and license usage counts by type (e.g. 'DNA Advantage' counts).\\n\\n**CRITICAL INSTRUCTION: SUMMARY ONLY**\\nThis tool returns **ONLY counts**, it does **NOT** return device lists or details. It provides high-level dashboard data.\\n\\n**Do NOT:**\\n- Use this tool for queries asking to **list**, **show**, **find**, or **get** details of devices.\\n- Use this tool if the user needs to know *which* devices have a license. Use `api_readNetworkDeviceLicenses` for that purpose.\\n\\n**Use Case Limitation:**\\nUnless the user specifically asks for 'Summary' or 'Breakdown', ALWAYS prefer `api_readNetworkDeviceLicenses` for finding devices.\\n\\nDO NOT USE FOR SYSTEM-LEVEL QUERIES: This API is ONLY for network device license summaries (switches, routers, APs managed BY Catalyst Center). DO NOT use for \"my system\", \"the system\", \"CatC\", or \"Catalyst Center platform\" queries - use api_systemLicensingStatus for those instead.\\n\\n**USE THIS API WHEN:**\\n- Query asks for network device license summary (devices managed by CatC)\\n- Need counts of unregistered, out-of-compliance, expired, or expiring DEVICE licenses\\n- Want aggregated counts of Network/DNA/CNS licenses consumed by managed network devices\\n\\n**DO NOT USE THIS API WHEN:**\\n- \"How many licenses are consumed by my system?\" \u2192 api_systemLicensingStatus\\n- \"License usage of my system\" \u2192 api_systemLicensingStatus  \\n- \"How many licenses have I consumed?\" (no device specifics) \u2192 api_systemLicensingStatus\\n- \"Show license consumption details\" (no device type) \u2192 api_systemLicensingStatus\\n- \"What licenses does my CatC use?\" \u2192 api_systemLicensingStatus\\n- \"How many purchased licenses are there for switch devices?\" \u2192 api_getLicenseUsage with productFamily: SWITCH\\n- \"How many used licenses do I have for routers?\" \u2192 api_getLicenseUsage with productFamily: ROUTER\\n- \"How many licenses are used by managed devices for WLCs?\" \u2192 api_getLicenseUsage with productFamily: UNIFIED_AP\\n- \"Show license usage for WLC device type\" \u2192 api_getLicenseUsage with productFamily: UNIFIED_AP\\n- For purchased/used/available license totals by product family (switch/router/WLC/wireless/AP/ISE), use api_getLicenseUsage (NOT this API).\\n\\nRetrieves the summary of consumed network, DNA, and unified licenses BY MANAGED NETWORK DEVICES (not the CatC system itself), along with the counts of unregistered and out-of-compliance network devices, and expired and expiring network device licenses. This is a network device aggregate view, not a system-level or account-level view.",
+    "name": "api_retrievesSummaryOfNetworkDeviceLicenses",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Summary of consumed network, DNA, and unified licenses, along with the counts of unregistered and out-of-compliance network devices, and expired and expiring network device licenses",
+          "properties": {
+            "expiredNetworkDeviceLicenseCount": {
+              "description": "Count of network devices with expired licenses",
+              "type": "integer"
+            },
+            "expiringNetworkDeviceLicenseCount": {
+              "description": "Count of network device licenses expiring in 30 days",
+              "type": "integer"
+            },
+            "networkDeviceLicenseSummary": {
+              "description": "Counts of consumed network, DNA, and unified network device licenses",
+              "properties": {
+                "dnaLicenseSummary": {
+                  "description": "Summary of consumed DNA licenses",
+                  "properties": {
+                    "advantageCount": {
+                      "description": "Count of consumed advantage licenses",
+                      "type": "integer"
+                    },
+                    "essentialCount": {
+                      "description": "Count of consumed essential licenses",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "networkLicenseSummary": {
+                  "description": "Summary of consumed network licenses",
+                  "properties": {
+                    "advantageCount": {
+                      "description": "Count of consumed advantage licenses",
+                      "type": "integer"
+                    },
+                    "essentialCount": {
+                      "description": "Count of consumed essential licenses",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "unifiedLicenseSummary": {
+                  "description": "Summary of consumed unified licenses",
+                  "properties": {
+                    "advantageCount": {
+                      "description": "Count of consumed advantage licenses",
+                      "type": "integer"
+                    },
+                    "essentialCount": {
+                      "description": "Count of consumed essential licenses",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "outOfComplianceNetworkDeviceCount": {
+              "description": "Count of network devices with out-of-compliance licenses. This state is seen when the license does not have an available license in the corresponding Virtual Account that the network device is registered to in the Cisco Smart Account.",
+              "type": "integer"
+            },
+            "unregisteredNetworkDeviceCount": {
+              "description": "Count of network devices that do not have licenses enabled",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

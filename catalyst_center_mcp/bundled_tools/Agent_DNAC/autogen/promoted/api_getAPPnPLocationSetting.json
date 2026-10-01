@@ -1,0 +1,33 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/systemSettings/apPnPLocation",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve the current AP PnP Location setting from the system.Once the AP PnP Location Setting is enabled, the Access Point's assigned Site name will be configured as the AP Location during the PnP Claim process. This applies only during the PnP onboarding process and not during any subsequent provisioning (dayN).",
+    "name": "api_getAPPnPLocationSetting",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "apPnPLocation": {
+          "description": "Enable Or Disable.Once the AP PnP Location Setting is enabled, the Access Point's assigned Site name will be configured as the AP Location during the PnP Claim process. This applies only during the PnP onboarding process and not during any subsequent provisioning (dayN).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

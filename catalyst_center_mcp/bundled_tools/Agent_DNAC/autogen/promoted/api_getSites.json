@@ -1,0 +1,154 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent",
+        "catalyst_flexible_reports_agent"
+      ],
+      "always_included": true
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_unitsOfMeasure": "query",
+        "limit": "query",
+        "name": "query",
+        "nameHierarchy": "query",
+        "offset": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/sites",
+      "version": "2.3.7.9"
+    },
+    "description": "Converts site names or site hierarchies (nameHierarchy) into site identifiers (siteId/UUID), and retrieves site inventory attributes for areas, buildings, and floors. Use this tool when you have a site name (e.g., 'AreaName', 'Global') or hierarchy path (e.g., 'Global/AreaName/BuildingName/FloorName') and need the corresponding siteId for other tool calls, need to validate the existence of a provided site, or need site attributes such as floor number, RF model, floor dimensions, nameHierarchy, type, id, or parentId. MANDATORY parent-detail workflow: when the user asks for a site's parent details, you MUST first call `api_getSites` with the user-provided site name or hierarchy, derive the parent hierarchy by removing the final segment from the matching site's `nameHierarchy`, then you MUST call `api_getSites` again with that parent hierarchy name. Do not skip the second `api_getSites` call for parent details. MANDATORY descendant-sites workflow: when the user asks for descendants, child sites, or sites under a given site, you MUST first call `api_getSites` with the user-provided site name or hierarchy, take the matching site's exact `nameHierarchy`, then you MUST call `api_getSites` again with `nameHierarchy` set to `<matching nameHierarchy>/.*`. Do not skip the first resolution call, and do not use the raw user-provided name to build the descendant query. DO NOT call this tool if you already have the siteId and only need to pass that siteId to another tool. Returns site details including id (the siteId UUID to use in other calls), name, nameHierarchy, type, floorNumber, rfModel, width, length, height, unitsOfMeasure, and additional attributes. DO NOT use this tool for queries related to understanding the site's health, performance, issues, or associated devices and clients. For fabric site/zone questions, do not call api_getSites; use get_sda_fabric_site_details.",
+    "name": "api_getSites",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of records to be fetched. If not provided, 10 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Site name, including area, building, or floor name.",
+          "type": "string"
+        },
+        "nameHierarchy": {
+          "description": "Exact full site hierarchy path starting with 'Global/', such as 'Global/AreaName/BuildingName/FloorName'. Prefer this over `name` whenever the user provides or clearly implies the FULL hierarchy.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "description": "Site type: area, building, or floor.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "address": {
+                "description": "Building address. Example: 4900 Marie P. Debartolo Way, Santa Clara, California 95054, United States",
+                "type": "string"
+              },
+              "country": {
+                "description": "Country name for the building.",
+                "type": "string"
+              },
+              "floorNumber": {
+                "description": "Floor number for a floor site.",
+                "type": "integer"
+              },
+              "height": {
+                "description": "Floor dimension: height.",
+                "type": "number"
+              },
+              "id": {
+                "description": "Site Id. Read only.",
+                "type": "string"
+              },
+              "latitude": {
+                "description": "Building Latitude. Example: 37.403712",
+                "type": "number"
+              },
+              "length": {
+                "description": "Floor dimension: length.",
+                "type": "number"
+              },
+              "longitude": {
+                "description": "Building Longitude. Example: -121.971063",
+                "type": "number"
+              },
+              "name": {
+                "description": "Site name.",
+                "type": "string"
+              },
+              "nameHierarchy": {
+                "description": "Site hierarchical name. Read only. Example: Global/USA/San Jose/Building1",
+                "type": "string"
+              },
+              "parentId": {
+                "description": "Parent Id. Read only",
+                "type": "string"
+              },
+              "rfModel": {
+                "description": "RF model configured for a floor site.",
+                "enum": [
+                  "Free Space",
+                  "Outdoor Open Space",
+                  "Cubes And Walled Offices",
+                  "Indoor High Ceiling",
+                  "Drywall Office Only"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "",
+                "enum": [
+                  "area",
+                  "building",
+                  "floor"
+                ],
+                "type": "string"
+              },
+              "unitsOfMeasure": {
+                "description": "Unit of measure for floor dimensions.",
+                "enum": [
+                  "feet",
+                  "meters"
+                ],
+                "type": "string"
+              },
+              "width": {
+                "description": "Floor dimension: width.",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

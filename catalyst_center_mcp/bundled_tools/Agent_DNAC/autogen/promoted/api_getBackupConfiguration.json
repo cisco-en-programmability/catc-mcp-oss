@@ -1,0 +1,59 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "SMO_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/backupConfiguration",
+      "version": "1.0.0-oas3"
+    },
+    "description": "**Pick this tool for backup SETTINGS and configuration questions.**\n\nThis tool retrieves the current Catalyst Center backup configuration, including retention policy, configured storage type, mount path, and whether an encryption passphrase is available.\n\n**Use this tool when the user asks:**\n- whether backups are configured\n- what the backup retention policy is\n- what storage backend or mount path is configured for backups\n- whether an encryption passphrase is available for backups\n- what the current backup settings are\n\n**Pick this tool for questions like:**\n- \"Is backup configured on this cluster?\"\n- \"What is the backup retention policy?\"\n- \"What backup settings are configured?\"\n- \"What mount path is configured for backups?\"\n- \"Is an encryption passphrase configured for backup?\"\n\n**Do NOT use this tool for:**\n- listing historical backups or available backups\n- backup or restore job history\n- NFS server health or unhealthy nodes\n\nUse `api_getAllBackup` for backup inventory/history and `api_getNfsConfigurations` for NFS backup server health details.",
+    "name": "api_getBackupConfiguration",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Contains the information about backup configuration.",
+      "properties": {
+        "dataRetention": {
+          "description": "Date retention policy of the backup",
+          "example": 14,
+          "type": "integer"
+        },
+        "id": {
+          "description": "The UUID of the backup configuration",
+          "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+          "type": "string"
+        },
+        "isEncryptionPassPhraseAvailable": {
+          "description": "Indicates whether an encryption pass phrase is available in the configuration",
+          "example": true,
+          "type": "boolean"
+        },
+        "mountPath": {
+          "description": "Backup storage mount path",
+          "example": "/sda1/",
+          "type": "string"
+        },
+        "type": {
+          "description": "The storage type",
+          "enum": [
+            "PHYSICAL_DISK",
+            "NFS"
+          ],
+          "example": "NFS",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

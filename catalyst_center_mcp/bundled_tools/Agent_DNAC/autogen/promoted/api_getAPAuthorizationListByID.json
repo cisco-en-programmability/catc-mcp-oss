@@ -1,0 +1,97 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/apAuthorizationLists/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get an AP Authorization List by AP Authorization List ID that captured in wireless settings design.",
+    "name": "api_getAPAuthorizationListByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "AP Authorization List ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "apAuthorizationListName": {
+              "description": "",
+              "type": "string"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "localAuthorization": {
+              "description": "",
+              "properties": {
+                "apMacEntries": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "apSerialNumberEntries": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "remoteAuthorization": {
+              "description": "",
+              "properties": {
+                "aaaServers": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "authorizeApWithMac": {
+                  "description": "",
+                  "type": "boolean"
+                },
+                "authorizeApWithSerialNumber": {
+                  "description": "",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

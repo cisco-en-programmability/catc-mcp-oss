@@ -1,0 +1,65 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "cvssBaseScore": "query",
+        "deviceCount": "query",
+        "id": "query",
+        "securityImpactRating": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/advisories/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the total count of security advisories, PSIRTs, and vulnerabilities affecting all devices in the network. Use this API to answer questions like 'How many security advisories affected the devices?' or 'What is the total number of vulnerabilities across the network devices?'. This tool provides an aggregate count for all devices, not for a specific device.",
+    "name": "api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevices",
+    "parameters": {
+      "properties": {
+        "cvssBaseScore": {
+          "description": "Return advisories with cvssBaseScore greater than this cvssBaseScore. E.g. : 8.5",
+          "type": "string"
+        },
+        "deviceCount": {
+          "description": "Return advisories with deviceCount greater than this deviceCount",
+          "type": "number"
+        },
+        "id": {
+          "description": "Id of the security advisory",
+          "type": "string"
+        },
+        "securityImpactRating": {
+          "description": "Return advisories with this securityImpactRating. Available values : CRITICAL, HIGH.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

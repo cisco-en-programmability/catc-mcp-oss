@@ -1,0 +1,225 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "includeDeleted": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "ruleType": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/endpoint-analytics/profiling-rules",
+      "version": "2.3.7.9"
+    },
+    "description": "This API fetches the list of profiling rules. It can be used to show profiling rules in client applications, or export those from an environment. 'POST /profiling-rules/bulk' API can be used to import such exported rules into another environment.\nIf this API is used to export rules to be imported into another Cisco Catalyst Center system, then ensure that 'includeDeleted' parameter is 'true', so that deleted rules get synchronized correctly.\nUse query parameters to filter the data, as required. If no filter is provided, then it will include only rules of type 'Custom Rule' in the response. By default, the response is limited to 500 records. Use 'limit' parameter to fetch higher number of records, if required. 'GET /profiling-rules/count' API can be used to find out the total number of rules in the system.\n",
+    "name": "api_getListOfProfilingRules",
+    "parameters": {
+      "properties": {
+        "includeDeleted": {
+          "description": "Flag to indicate whether deleted rules should be part of the records fetched.",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 0",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Order to be used for sorting.",
+          "type": "string"
+        },
+        "ruleType": {
+          "description": "Use comma-separated list of rule types to filter the data. Defaults to 'Custom Rule'.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Name of the column to sort the results on. Please note that fetch might take more time if sorting is requested.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "profilingRules": {
+          "description": "List of profiling rules.",
+          "items": {
+            "properties": {
+              "clusterId": {
+                "description": "Unique identifier for ML cluster. Only applicable for 'ML Rule'.",
+                "type": "string"
+              },
+              "conditionGroups": {
+                "description": "Complex object that describes various conditions that should be met for the current rule to be applied.",
+                "properties": {
+                  "condition": {
+                    "description": "",
+                    "properties": {
+                      "attribute": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "attributeDictionary": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "operator": {
+                        "description": "",
+                        "enum": [
+                          "equals",
+                          "contains",
+                          "startswith",
+                          "matches"
+                        ],
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "conditionGroup": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "operator": {
+                    "description": "",
+                    "enum": [
+                      "and",
+                      "or"
+                    ],
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "",
+                    "enum": [
+                      "attr",
+                      "classification"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "isDeleted": {
+                "description": "Flag to indicate whether the rule was deleted.",
+                "type": "boolean"
+              },
+              "lastModifiedBy": {
+                "description": "User that last modified the rule. It is read-only, and is ignored if provided as part of input request.",
+                "type": "string"
+              },
+              "lastModifiedOn": {
+                "description": "Timestamp (in epoch milliseconds) of last modification. It is read-only, and is ignored if provided as part of\ninput request.\n",
+                "type": "integer"
+              },
+              "pluginId": {
+                "description": "Plugin for the rule. Only applicable for 'Cisco Default' rules.",
+                "type": "string"
+              },
+              "rejected": {
+                "description": "Flag to indicate whether rule has been rejected by user or not. Only applicable for 'ML Rule'.",
+                "type": "boolean"
+              },
+              "result": {
+                "description": "Object containing profiling result as determined by the rule.",
+                "properties": {
+                  "deviceType": {
+                    "description": "List of device types determined by the current rule.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "hardwareManufacturer": {
+                    "description": "List of hardware manufacturers determined by the current rule.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "hardwareModel": {
+                    "description": "List of hardware models determined by the current rule.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "operatingSystem": {
+                    "description": "List of operating systems determined by the current rule.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "ruleId": {
+                "description": "Unique identifier for the rule. This is normally generated by the system, and client does not need to provide\nit for rules that need to be newly created.\n",
+                "type": "string"
+              },
+              "ruleName": {
+                "description": "Human readable name for the rule.",
+                "type": "string"
+              },
+              "rulePriority": {
+                "description": "Priority for the rule.",
+                "type": "integer"
+              },
+              "ruleType": {
+                "description": "Type of the rule.",
+                "enum": [
+                  "Cisco Default - Static",
+                  "Cisco Default - Dynamic",
+                  "Custom Rule",
+                  "ML Rule"
+                ],
+                "type": "string"
+              },
+              "ruleVersion": {
+                "description": "Version of the rule.",
+                "type": "integer"
+              },
+              "sourcePriority": {
+                "description": "Source priority for the rule.",
+                "type": "integer"
+              },
+              "usedAttributes": {
+                "description": "List of attributes used in the rule. Only applicable for 'Cisco Default' rules.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,93 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "authSource": "query",
+        "invokeSource": "query"
+      },
+      "uri": "/dna/system/api/v1/user",
+      "version": "2.3.7.9"
+    },
+    "description": "Get all users in the system",
+    "name": "api_getUsersAPI",
+    "parameters": {
+      "properties": {
+        "authSource": {
+          "description": "The source that authenticates the user. The value of this query parameter can be set to \"internal\" or \"external\". If not provided, then all users will be returned in the response.",
+          "type": "string"
+        },
+        "invokeSource": {
+          "description": "The source that invokes this API. The value of this query parameter must be set to \"external\".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "invokeSource"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "users": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "authSource": {
+                    "description": "Authentiction source, internal or external",
+                    "type": "string"
+                  },
+                  "email": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "passphraseUpdateTime": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "roleList": {
+                    "description": "A list of role ids",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "userId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "username": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,194 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "Accept-Language": "header",
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "id": "path",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/assuranceIssues/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": " Returns all the details and suggested actions of an issue for the given issue id. https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-IssuesList-1.0.0-resolved.yaml",
+    "name": "api_getAllTheDetailsAndSuggestedActionsOfAnIssueForTheG_34a1791b",
+    "parameters": {
+      "properties": {
+        "Accept-Language": {
+          "description": "This header parameter can be used to specify the language in which issue description and suggested actions need to be returned. Available options are - 'en' (English), 'ja' (Japanese), 'ko' (Korean), 'zh' (Chinese). If this parameter is not present the issue details are returned in English language.",
+          "type": "string"
+        },
+        "X-CALLER-ID": {
+          "description": "Caller ID can be used to trace the caller for queries executed on database. The caller id is like a optional attribute which can be added to API invocation like ui, python, postman, test-automation etc",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "List of attributes related to the issue. If these are provided, then only those attributes will be part of response along with the default attributes. Please refer to the `IssuesResponseAttribute` Model for supported attributes.\nExamples: `attribute=deviceType` (single attribute requested) `attribute=deviceType&attribute=updatedBy` (multiple attributes requested)\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "The issue Uuid",
+          "type": "string"
+        },
+        "view": {
+          "description": "The name of the View. Each view represents a specific data set. Please refer to the `IssuesView` Model for supported views. View is predefined set of attributes supported by the API. Only the attributes related to the given view will be part of the API response along with default attributes. If multiple views are provided, then response will contain attributes from all those views. If no views are specified, all attributes will be returned.\n\n| View Name | Included Attributes |\n| --- | --- |\n| `update` | updatedTime, updatedBy |\n| `site` | siteName, siteHierarchy, siteId, siteHierarchyId |\nExamples: `view=update` (single view requested) `view=update&view=site` (multiple views requested)       \n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "additionalAttributes": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "category": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceType": {
+              "description": "",
+              "type": "string"
+            },
+            "entityId": {
+              "description": "",
+              "type": "string"
+            },
+            "entityType": {
+              "description": "",
+              "type": "string"
+            },
+            "firstOccurredTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "isGlobal": {
+              "description": "",
+              "type": "boolean"
+            },
+            "issueId": {
+              "description": "",
+              "type": "string"
+            },
+            "mostRecentOccurredTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "notes": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "priority": {
+              "description": "",
+              "type": "string"
+            },
+            "severity": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchy": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "siteHierarchyId": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "siteId": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "siteName": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "status": {
+              "description": "",
+              "type": "string"
+            },
+            "suggestedActions": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "message": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "steps": {
+                    "description": "",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "summary": {
+              "description": "",
+              "type": "string"
+            },
+            "updatedBy": {
+              "description": "",
+              "type": "string"
+            },
+            "updatedTime": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

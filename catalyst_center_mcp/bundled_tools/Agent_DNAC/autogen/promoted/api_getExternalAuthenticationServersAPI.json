@@ -1,0 +1,93 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "invokeSource": "query"
+      },
+      "uri": "/dna/system/api/v1/users/external-servers",
+      "version": "2.3.7.9"
+    },
+    "description": "Get external users authentication servers.",
+    "name": "api_getExternalAuthenticationServersAPI",
+    "parameters": {
+      "properties": {
+        "invokeSource": {
+          "description": "The source that invokes this API. The value of this query parameter must be set to \"external\".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "invokeSource"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "aaa-servers": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "aaaAttribute": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "accountingPort": {
+                    "description": "RADIUS server accounting requests port",
+                    "type": "integer"
+                  },
+                  "authenticationPort": {
+                    "description": "RADIUS server authorization requests port",
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "retries": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "role": {
+                    "description": "Role of AAA server, primary or secondary server",
+                    "type": "string"
+                  },
+                  "serverId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "serverIp": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "sharedSecret": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "socketTimeout": {
+                    "description": "Timeout in seconds",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

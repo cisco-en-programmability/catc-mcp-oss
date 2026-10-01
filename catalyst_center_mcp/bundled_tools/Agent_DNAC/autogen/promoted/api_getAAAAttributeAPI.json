@@ -1,0 +1,48 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/users/external-servers/aaa-attribute",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the current value of the custom AAA attribute.",
+    "name": "api_getAAAAttributeAPI",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "aaa-attributes": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "attributeName": {
+                    "description": "Value of the custom AAA attribute name",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,222 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "sort": "query",
+        "sortOrder": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/onboarding/pnp-workflow",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the list of workflows based on filter criteria. If a limit is not specified, it will default to return 50 workflows. Pagination and sorting are also supported by this endpoint",
+    "name": "api_getWorkflows",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Workflow Name",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sort": {
+          "description": "Comma seperated lost of fields to sort on",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sortOrder": {
+          "description": "Sort Order Ascending (asc) or Descending (des)",
+          "type": "string"
+        },
+        "type": {
+          "description": "Workflow Type",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "_id": {
+            "description": "",
+            "type": "string"
+          },
+          "addToInventory": {
+            "description": "",
+            "type": "boolean"
+          },
+          "addedOn": {
+            "description": "",
+            "type": "number"
+          },
+          "configId": {
+            "description": "",
+            "type": "string"
+          },
+          "currTaskIdx": {
+            "description": "",
+            "type": "number"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "endTime": {
+            "description": "",
+            "type": "number"
+          },
+          "execTime": {
+            "description": "",
+            "type": "number"
+          },
+          "imageId": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceType": {
+            "description": "",
+            "type": "string"
+          },
+          "lastupdateOn": {
+            "description": "",
+            "type": "number"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "startTime": {
+            "description": "",
+            "type": "number"
+          },
+          "state": {
+            "description": "",
+            "type": "string"
+          },
+          "tasks": {
+            "description": "",
+            "items": {
+              "properties": {
+                "currWorkItemIdx": {
+                  "description": "",
+                  "type": "number"
+                },
+                "endTime": {
+                  "description": "",
+                  "type": "number"
+                },
+                "name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "startTime": {
+                  "description": "",
+                  "type": "number"
+                },
+                "state": {
+                  "description": "",
+                  "type": "string"
+                },
+                "taskSeqNo": {
+                  "description": "",
+                  "type": "number"
+                },
+                "timeTaken": {
+                  "description": "",
+                  "type": "number"
+                },
+                "type": {
+                  "description": "",
+                  "type": "string"
+                },
+                "workItemList": {
+                  "description": "",
+                  "items": {
+                    "properties": {
+                      "command": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "endTime": {
+                        "description": "",
+                        "type": "number"
+                      },
+                      "outputStr": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "startTime": {
+                        "description": "",
+                        "type": "number"
+                      },
+                      "state": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "timeTaken": {
+                        "description": "",
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "tenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "type": {
+            "description": "",
+            "type": "string"
+          },
+          "useState": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,230 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/onboarding/pnp-settings",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns global PnP settings of the user",
+    "name": "api_getPnPGlobalSettings",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "aaaCredentials": {
+          "description": "",
+          "properties": {
+            "password": {
+              "description": "",
+              "type": "string"
+            },
+            "username": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "acceptEula": {
+          "description": "",
+          "type": "boolean"
+        },
+        "defaultProfile": {
+          "description": "",
+          "properties": {
+            "cert": {
+              "description": "",
+              "type": "string"
+            },
+            "fqdnAddresses": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "ipAddresses": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "port": {
+              "description": "",
+              "type": "number"
+            },
+            "proxy": {
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "",
+          "type": "string"
+        },
+        "savaMappingList": {
+          "description": "",
+          "items": {
+            "properties": {
+              "autoSyncPeriod": {
+                "description": "",
+                "type": "number"
+              },
+              "ccoUser": {
+                "description": "",
+                "type": "string"
+              },
+              "expiry": {
+                "description": "",
+                "type": "number"
+              },
+              "lastSync": {
+                "description": "",
+                "type": "number"
+              },
+              "profile": {
+                "description": "",
+                "properties": {
+                  "addressFqdn": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "addressIpV4": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "cert": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "makeDefault": {
+                    "description": "",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "port": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "profileId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "proxy": {
+                    "description": "",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "smartAccountId": {
+                "description": "",
+                "type": "string"
+              },
+              "syncResult": {
+                "description": "",
+                "properties": {
+                  "syncList": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "deviceSnList": {
+                          "description": "",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "syncType": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "syncMsg": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "syncResultStr": {
+                "description": "",
+                "type": "string"
+              },
+              "syncStartTime": {
+                "description": "",
+                "type": "number"
+              },
+              "syncStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "tenantId": {
+                "description": "",
+                "type": "string"
+              },
+              "token": {
+                "description": "",
+                "type": "string"
+              },
+              "virtualAccountId": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "taskTimeOuts": {
+          "description": "",
+          "properties": {
+            "configTimeOut": {
+              "description": "",
+              "type": "number"
+            },
+            "generalTimeOut": {
+              "description": "",
+              "type": "number"
+            },
+            "imageDownloadTimeOut": {
+              "description": "",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "tenantId": {
+          "description": "",
+          "type": "string"
+        },
+        "version": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

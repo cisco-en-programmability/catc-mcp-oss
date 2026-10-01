@@ -1,0 +1,91 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "limit": "query",
+        "offset": "query",
+        "policyTagName": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessProfiles/{id}/policyTags",
+      "version": "2.3.7.9"
+    },
+    "description": "This endpoint retrieves a list of all `Policy Tags` associated with a specific `Wireless Profile`. This API requires the `id` of the `Wireless Profile` to be provided as a path parameter.",
+    "name": "api_retrieveAllPolicyTagsForAWirelessProfile",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Wireless Profile Id",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "policyTagName": {
+          "description": "PolicyTagName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "apZones": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "policyTagId": {
+                "description": "",
+                "type": "string"
+              },
+              "policyTagName": {
+                "description": "Use English letters, numbers, special characters except <, /, '.*', ? and leading/trailing space.",
+                "type": "string"
+              },
+              "siteIds": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

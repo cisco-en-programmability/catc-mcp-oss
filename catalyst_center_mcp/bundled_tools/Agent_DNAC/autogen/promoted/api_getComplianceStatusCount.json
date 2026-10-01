@@ -1,0 +1,46 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "complianceStatus": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliance/count",
+      "version": "2.3.7.9"
+    },
+    "description": "\"How many devices are compliant?\" \"How many devices are non-compliant?\" \"Count of compliant devices\" \"Total non-compliant devices\" \u2014 USE THIS API for all these questions.\n\nThis API returns the TRUE TOTAL count of devices for a compliance status across the entire network. It is the ONLY correct API for global compliance count questions because it has no pagination limit. `api_getComplianceDetail` MUST NOT be used for counting \u2014 it caps at 500 records and produces WRONG results at scale.\n\n**MANDATORY \u2014 USE THIS API FOR:**\n- \"How many devices are compliant?\" \u2192 complianceStatus=COMPLIANT\n- \"How many devices are non-compliant?\" \u2192 complianceStatus=NON_COMPLIANT\n- \"Give me the count of compliant devices\" \u2192 complianceStatus=COMPLIANT\n- \"What is the number of devices with COMPLIANT status?\" \u2192 complianceStatus=COMPLIANT\n- \"What is the number of devices with NON_COMPLIANT status?\" \u2192 complianceStatus=NON_COMPLIANT\n- \"Count devices whose compliance state is compliant\" \u2192 complianceStatus=COMPLIANT\n- \"How many devices have compliance in progress?\" \u2192 complianceStatus=IN_PROGRESS\n- \"How many devices have compliance errors?\" \u2192 complianceStatus=ERROR\n- Any question asking for the count, total, or number of devices by overall compliance status without specifying a compliance TYPE (IMAGE, PSIRT, RUNNING_CONFIG, etc.)\n\nFor compliance-TYPE-specific counts (e.g., \"How many non-compliant for RUNNING_CONFIG?\"), use `api_getComplianceDetailCount` instead.\nFor site-scoped counts (e.g., \"How many compliant in BGL 17?\"), use `api_getComplianceDetail` with pre-resolved device UUIDs.",
+    "name": "api_getComplianceStatusCount",
+    "parameters": {
+      "properties": {
+        "complianceStatus": {
+          "description": "Specify compliance status(es) as a comma-separated string. Possible values are COMPLIANT, NON_COMPLIANT, IN_PROGRESS, NOT_AVAILABLE, NOT_APPLICABLE, and ERROR. When the user does not provide a compliance status, use exactly this default value: COMPLIANT,NON_COMPLIANT,IN_PROGRESS,NOT_AVAILABLE,ERROR.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "complianceStatus"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Returns count of compliant status",
+          "type": "number"
+        },
+        "version": {
+          "description": "Version of the API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

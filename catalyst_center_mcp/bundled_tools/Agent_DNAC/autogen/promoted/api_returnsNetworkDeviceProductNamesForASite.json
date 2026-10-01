@@ -1,0 +1,113 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "notes": [
+        "Always reuse the casing returned by this API when passing productName into follow-up calls.",
+        "Capture productNameOrdinal values from this response and feed them directly into api_returnsListOfSoftwareImages."
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "productName": "query",
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/siteWiseProductNames",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: CRITICAL**\\n\\nReturns the list of network device product names (for example, Wireless Controller, Switches and Hubs) for a specific site, along with counts and image metadata.\\n\\n**REQUIRED PRE-REQUISITE:**\\nYou MUST call `api_getSites` BEFORE calling this tool so you can pass the correct `siteId`.\\n\\n**Step-by-step process:**\\n1. Invoke `api_getSites` with `name=\\\"Global\\\"` (or the user-supplied site name/hierarchy)\\n2. Read the UUID from that response\\n3. Call `api_returnsNetworkDeviceProductNamesForASite` with `siteId` set to that UUID\\n\\n**Downstream dependency:**\\nUse the `productName` strings and `productNameOrdinal` values returned here as inputs to `api_returnsListOfSoftwareImages`.\\n\\n**Exception:**\\nIf the user already gives a valid site UUID, you may skip step 1 and reuse it.\\n\\n**Do NOT:**\\n- Pass an empty/None `siteId`\\n- Invent product names or ordinals\\n- Skip this tool when a workflow requires product ordinals for software-image queries",
+    "name": "api_returnsNetworkDeviceProductNamesForASite",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of records to be fetched. If not provided, 10 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "productName": {
+          "description": "Filter with the network device product name. The API performs **partial substring matching** (case-insensitive, minimum 3 characters). Extract the key identifier from the user's question and use it as the filter.\\n\\n**Extraction Strategy:**\\n\\n1. **Identify device type or model number** from user input:\\n   - Look for: model numbers (9300, 9800-CL, 3850, etc.), device categories (switch, router, wireless controller), or product families (Catalyst, ASR, ISR, etc.)\\n   - Extract the most specific identifier mentioned\\n\\n2. **Choose the appropriate filter** based on what you extracted:\\n\\n   **If user mentions a MODEL NUMBER:**\\n   - Extract the model number and use it directly\\n   - Examples:\\n     - \"9800-CL wlc\" \u2192 extract `\"9800-CL\"`\\n     - \"9300 switches\" \u2192 extract `\"9300\"`\\n     - \"3850 switch\" \u2192 extract `\"3850\"` or `\"38xx\"`\\n     - \"ISR 4000\" \u2192 extract `\"ISR 4000\"` or `\"4000\"`\\n     - \"ASR 1000\" \u2192 extract `\"ASR 1000\"` or `\"1000\"`\\n\\n   **If user mentions a DEVICE TYPE/CATEGORY only:**\\n   - Use the device category keyword\\n   - Examples:\\n     - \"wireless controllers\", \"wlc\", \"wlcs\" \u2192 use `\"Wireless Controller\"`\\n     - \"switches\" \u2192 use `\"Switch\"`\\n     - \"routers\" \u2192 use `\"Router\"`\\n     - \"access points\", \"aps\" \u2192 use `\"Access Point\"`\\n\\n   **If user mentions a PRODUCT FAMILY:**\\n   - Use the family name\\n   - Examples:\\n     - \"Catalyst switches\" \u2192 use `\"Catalyst\"`\\n     - \"Nexus\" \u2192 use `\"Nexus\"`\\n     - \"Meraki\" \u2192 use `\"Meraki\"`\\n\\n   **For common ACRONYMS that appear spelled out:**\\n   - CSR \u2192 use `\"Cloud Services Router\"`\\n   - WLC \u2192 use `\"Wireless Controller\"`\\n   - Don't use abbreviations that don't appear in actual product names\\n\\n3. **Priority order** (most specific to least specific):\\n   - 1st: Full model number (\"9800-CL\", \"3850\", \"ISR 4451\")\\n   - 2nd: Product family + model (\"Catalyst 9300\")\\n   - 3rd: Product family (\"Catalyst\")\\n   - 4th: Device category (\"Switch\", \"Wireless Controller\")\\n\\n**Examples of extraction:**\\n- \"Show me all 9800-CL wireless controllers\" \u2192 `productName=\"9800-CL\"`\\n- \"List the switches\" \u2192 `productName=\"Switch\"`\\n- \"What Catalyst 9300 devices do we have?\" \u2192 `productName=\"9300\"` or `\"Catalyst 9300\"`\\n- \"Give me info on our wlcs\" \u2192 `productName=\"Wireless Controller\"`\\n- \"CSR 1000V routers\" \u2192 `productName=\"Cloud Services Router\"` or `\"1000V\"`\\n- \"Show all Catalyst switches\" \u2192 `productName=\"Catalyst\"`\\n\\n**Key principle:** The filter must be a **substring** that actually appears in the API's product name responses. Model numbers and standard Cisco naming conventions (Catalyst, Nexus, ISR, ASR, etc.) work reliably.",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "UUID of the site whose product names should be listed. Always resolve site names or hierarchies by calling `api_getSites` first\u2014even for the global default (pass `name=\"Global\"`). Defaults to the global site UUID if not provided. See https://developer.cisco.com/docs/dna-center/get-site for details.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": " Network device products summary",
+          "properties": {
+            "id": {
+              "description": "The unique identifier for the record is the `id`. If there is no supervisor engine involved, the `id` will be the same as the `productNameOrdinal`. However, if the supervisor engine is applicable, the `id` will be in the form of `<productNameOrdinal>-<supervisorProductNameOrdinal>`.",
+              "type": "string"
+            },
+            "imageSummary": {
+              "description": "",
+              "properties": {
+                "goldenImageCount": {
+                  "description": "Count of golden tagged images",
+                  "type": "integer"
+                },
+                "installedImageAdvisorCount": {
+                  "description": "Count of advisor on installed images",
+                  "type": "integer"
+                },
+                "installedImageCount": {
+                  "description": "Count of installed images",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "networkDeviceCount": {
+              "description": "Count of network devices",
+              "type": "integer"
+            },
+            "productName": {
+              "description": "Name of product",
+              "type": "string"
+            },
+            "productNameOrdinal": {
+              "description": "Product name ordinal",
+              "type": "number"
+            },
+            "supervisorProductName": {
+              "description": "Name of the Supervisor Engine Module, supported by the `productName`.                  Example: The `Cisco Catalyst 9404R Switch` chassis is capable of supporting  different supervisor engine modules: the `Cisco Catalyst 9400 Supervisor Engine-1`, the `Cisco Catalyst 9400 Supervisor Engine-1XL`, the `Cisco Catalyst 9400 Supervisor Engine-1XL-Y`, etc.",
+              "type": "string"
+            },
+            "supervisorProductNameOrdinal": {
+              "description": "Supervisor Engine Module Ordinal, supported by the `productNameOrdinal`. Example: The `286315691` chassis ordinal is capable of supporting  different supervisor engine module ordinals: `286316172`, `286316710`, `286320394` etc.",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

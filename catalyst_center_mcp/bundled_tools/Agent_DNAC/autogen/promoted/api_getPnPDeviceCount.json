@@ -1,0 +1,158 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "contactedStatus": "query",
+        "deviceType": "query",
+        "hostname": "query",
+        "imageVersion": "query",
+        "ipAddress": "query",
+        "macAddress": "query",
+        "onboardingState": "query",
+        "pid": "query",
+        "serialNumber": "query",
+        "siteNameHierarchy": "query",
+        "smartAccount": "query",
+        "source": "query",
+        "state": "query",
+        "svlClaimable": "query",
+        "svlDevice": "query",
+        "virtualAccount": "query"
+      },
+      "uri": "/dna/intent/api/v1/pnpNetworkDevices/count",
+      "version": "3.2.1"
+    },
+    "description": "Returns the count of PnP network devices using filters such as state, onboarding state, device type, PID, IP, site. For device types, use these exact values: SWITCH, ROUTER, ACCESS_POINT (for APs), WIRELESS_CONTROLLER (for WLCs), MOBILITY_EXPRESS, EWC, SENSOR. For model/family fragments, use pid with wildcards (do not use exact pid unless the user gives a full model). Examples: 9200 -> pid=*9200*; AIR-AP -> pid=AIR-AP*; Cat9k -> pid in [C9200*, C9300*, C9350*, C9404R*, C9407R*, C9410R*, C9500*, C9606R*, C9610*, C9KV*]; Cat3k -> pid in [WS-C3560*, WS-C3650*, WS-C3850*]; IE-3k -> pid=IE-3?00*; ISR 4k -> pid in [ISR4321*, ISR4331*, ISR4351*, ISR4431*, ISR4451*, ISR4461*]; ASR 1k -> pid=ASR1???*. Map claimed requests to state=Planned. For site filters: use siteNameHierarchy directly, or if you need siteId, call api_getSites first. Strict prohibition: For runtime WLAN/SSID/controller detail queries that include serial number, do not call this API. Use get_device_details to resolve canonical networkDeviceId; if unresolved, ask for hostname or management IP. This API is only for explicit PnP onboarding, claim, or history workflows.",
+    "name": "api_getPnPDeviceCount",
+    "parameters": {
+      "properties": {
+        "contactedStatus": {
+          "description": "Filter devices by whether they have contacted the PnP server. Use CONTACTED to count devices that have connected at least once; use NOT_CONTACTED to count devices that have never connected.",
+          "enum": [
+            "CONTACTED",
+            "NOT_CONTACTED"
+          ],
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "PnP device type filter. Supported values include Router, Switch, AP, ME, Catalyst WLC (wireless controller/WLC), EWC, and Sensor.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hostname": {
+          "description": "PnP device hostname filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "imageVersion": {
+          "description": "Filter by device software image version. Supports glob wildcards: use * to match any characters (e.g. 17.9* matches 17.9.1, 17.9.5) and ? to match a single character.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "PnP device IP address filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "macAddress": {
+          "description": "PnP device MAC address filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "onboardingState": {
+          "description": "PnP device onboarding state filter (for example Planned, Onboarding).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pid": {
+          "description": "PnP device product ID (PID) filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serialNumber": {
+          "description": "PnP device serial number filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "siteNameHierarchy": {
+          "description": "PnP device site hierarchy name filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "smartAccount": {
+          "description": "Smart Account identifier filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "source": {
+          "description": "Filter by how the device was added to PnP. USER = manually added through the UI or API, NETWORK = device discovered the PnP server on bootup, SMART_ACCOUNT = synced from Cisco Smart Account inventory.",
+          "enum": [
+            "NETWORK",
+            "USER",
+            "SMART_ACCOUNT"
+          ],
+          "type": "string"
+        },
+        "state": {
+          "description": "PnP device lifecycle state filter (for example Unclaimed, Planned, Provisioned, Error). For user wording 'claimed', use Planned.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "svlClaimable": {
+          "description": "Filter for StackWise-Virtual Link (SVL) claimable neighbor devices. Set true to find devices that can be paired with a neighbor to form an SVL link.",
+          "type": "boolean"
+        },
+        "svlDevice": {
+          "description": "Filter for devices that have a formed StackWise-Virtual Link (SVL) pair. Set true to find devices already in an SVL pair.",
+          "type": "boolean"
+        },
+        "virtualAccount": {
+          "description": "Virtual Account identifier filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

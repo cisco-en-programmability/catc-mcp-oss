@@ -1,0 +1,65 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "deviceType": "query",
+        "id": "query",
+        "includeForOverallHealth": "query"
+      },
+      "uri": "/dna/intent/api/v1/healthScoreDefinitions/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of health score definitions based on provided filters. Supported filters are id, name and overall health include status. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-issueAndHealthDefinitions-1.0.0-resolved.yaml\n",
+    "name": "api_getTheCountOfHealthScoreDefinitionsBasedOnProvidedFilters",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "These are the device families supported for health score definitions. If no input is made on device family, all device families are considered.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The definition identifier.\n\nExamples:\n\nid=015d9cba-4f53-4087-8317-7e49e5ffef46 (single entity id request)\n\nid=015d9cba-4f53-4087-8317-7e49e5ffef46&id=015d9cba-4f53-4087-8317-7e49e5ffef47 (multiple ids in the query param)\n",
+          "type": "string"
+        },
+        "includeForOverallHealth": {
+          "description": "The inclusion status of the issue definition, either true or false. true indicates that particular health metric is included in overall health computation, otherwise false. By default it's set to true.",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

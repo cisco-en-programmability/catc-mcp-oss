@@ -1,0 +1,131 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "2.3.7.10"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "entity_type": "header",
+        "entity_value": "header"
+      },
+      "uri": "/dna/intent/api/v2/issue-enrichment-details",
+      "version": "2.3.7.10"
+    },
+    "description": "Retrieve /dna/intent/api/v2/issue-enrichment-details for assurance issue enrichment identified by issue ID or impacted client MAC address. Select this tool when the primary subject is enriched issue context, impacted hosts, issue severity/category/name/source, or suggested remediation actions. If issue enrichment or remediation context is requested for a known issue identifier, call this tool directly; do not satisfy the request with basic issue-by-id lookup, issue-list, issue summary, client endpoint enrichment, user enrichment, or device topology enrichment tools. Always send both required parameters: set entity_type to issue_id for an issue identifier or mac_address for a client MAC address, and put the actual identifier only in entity_value.",
+    "name": "api_getIssueEnrichmentDetailsV2",
+    "parameters": {
+      "properties": {
+        "entity_type": {
+          "description": "Identifier type for issue enrichment. Use issue_id for a known issue identifier and mac_address for a client MAC address.",
+          "type": "string"
+        },
+        "entity_value": {
+          "description": "Required identifier value matching entity_type. Put the issue identifier or client MAC address in this parameter; do not use id, issue_id, macAddress, or any alternate key for the identifier value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_type",
+        "entity_value"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "issueDetails": {
+          "description": "",
+          "properties": {
+            "issue": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "impactedHosts": {
+                    "description": "",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "issueCategory": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueDescription": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueEntity": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueEntityValue": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issuePriority": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueSeverity": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueSource": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueSummary": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueTimestamp": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "suggestedActions": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "message": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "steps": {
+                          "description": "",
+                          "items": {
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,113 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "offset": "query",
+        "order": "query",
+        "scanMode": "query",
+        "scanStatus": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/bugs/{id}/networkDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the network devices affected by a specific network bug ID. Use this tool for questions like 'which devices are affected by CSCwd12345?', 'what devices are impacted by bug CSCwr77118?', or 'show devices with failed scans for CSCwd12345'. A CSC ID in a bug-impact question is a network bug ID, not a security advisory ID. Use scanStatus when the user asks for failed, successful, in-progress, or not-scanned bug scans. Do not use security advisory network-device tools for CSC network bug device-impact questions unless the user explicitly says security advisory, PSIRT, Cisco advisory, or CVE.",
+    "name": "api_getNetworkBugDevicesForTheBug",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Network bug ID, usually a CSC identifier such as CSCwd12345.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc",
+          "type": "string"
+        },
+        "scanMode": {
+          "description": "Mode or the criteria using which the network device was scanned. Available values : ESSENTIALS, ADVANTAGE, CX_CLOUD, NOT_AVAILABLE",
+          "type": "string"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED, FALL_BACK",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Network bug device details",
+      "properties": {
+        "response": {
+          "description": "Network bug device details",
+          "items": {
+            "properties": {
+              "bugCount": {
+                "description": "Number of bugs to which the network device is vulnerable",
+                "type": "integer"
+              },
+              "comments": {
+                "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure",
+                "type": "string"
+              },
+              "lastScanTime": {
+                "description": "Time at which the device was scanned",
+                "type": "integer"
+              },
+              "networkDeviceId": {
+                "description": "Id of the device",
+                "type": "string"
+              },
+              "scanMode": {
+                "description": "'ESSENTIALS' - the device was scanned using a version based match criteria. 'CX_CLOUD' - the device was scanned using CX cloud engine which uses advanced matching criteria which eliminates false positives. 'ADVANTAGE' - the device was scanned using a version based match and user provided config match criteria. \u2018NOT_AVAILABLE\u2019 - scan mode is not available. e.g. when the device is not scanned",
+                "type": "string"
+              },
+              "scanStatus": {
+                "description": "'NOT_SCANNED' - the device was not scanned. 'IN_PROGRESS' - a scan is in progress for the device. 'SUCCESS' - device scan was successful. 'FAILED' - device scan failed. 'FALL_BACK' - the device was supposed to be scanned using CX_CLOUD but because of connectivity issues fell back to a ESSENTIALS scan",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

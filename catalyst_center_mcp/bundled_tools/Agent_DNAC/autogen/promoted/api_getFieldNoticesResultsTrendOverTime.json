@@ -1,0 +1,74 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "scanTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/fieldNotices/resultsTrend",
+      "version": "2.3.7.9"
+    },
+    "description": "Get field notices results trend over time. The default sort is by scan time descending.",
+    "name": "api_getFieldNoticesResultsTrendOverTime",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "scanTime": {
+          "description": "Return field notices trend with scanTime greater than this scanTime",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Field notices trend",
+          "items": {
+            "properties": {
+              "hardwareFieldNoticesCount": {
+                "description": "Number of field notices of type HARDWARE",
+                "type": "integer"
+              },
+              "scanTime": {
+                "description": "End time for the scan",
+                "type": "integer"
+              },
+              "softwareFieldNoticesCount": {
+                "description": "Number of field notices of type SOFTWARE",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

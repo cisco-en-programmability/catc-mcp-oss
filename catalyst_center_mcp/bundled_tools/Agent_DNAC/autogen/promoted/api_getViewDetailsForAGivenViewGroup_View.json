@@ -1,0 +1,268 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "viewGroupId": "path",
+        "viewId": "path"
+      },
+      "uri": "/dna/intent/api/v1/data/view-groups/{viewGroupId}/views/{viewId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Gives complete information of the view that is required to configure a report. Use \"Get views for a given view group\" API to get the viewIds  (required as a query param for this API) for available views.",
+    "name": "api_getViewDetailsForAGivenViewGroup_View",
+    "parameters": {
+      "properties": {
+        "viewGroupId": {
+          "description": "viewGroupId of viewgroup",
+          "type": "string"
+        },
+        "viewId": {
+          "description": "view id of view",
+          "type": "string"
+        }
+      },
+      "required": [
+        "viewGroupId",
+        "viewId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "deliveries": {
+          "description": "Array of available delivery channels",
+          "items": {
+            "properties": {
+              "default": {
+                "description": "true, if the delivery type is considered default",
+                "type": "boolean"
+              },
+              "type": {
+                "description": "delivery type",
+                "enum": [
+                  "EMAIL",
+                  "WEBHOOK",
+                  "DOWNLOAD"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "description": {
+          "description": "view description",
+          "type": "string"
+        },
+        "fieldGroups": {
+          "description": "Field available for specific type of reports(CSV, TDE, JSON)",
+          "items": {
+            "properties": {
+              "fieldGroupDisplayName": {
+                "description": "Field group label/displayname for user",
+                "type": "string"
+              },
+              "fieldGroupName": {
+                "description": "Field group name",
+                "type": "string"
+              },
+              "fields": {
+                "description": "Fields available in the fieldgroup",
+                "items": {
+                  "properties": {
+                    "displayName": {
+                      "description": "field label/displayname",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "field name",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "tableId": {
+                "description": "Table Id of the corresponding table mapped to fieldgroup",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "filters": {
+          "description": "Metadata of filters for the report. Also contains information for fetching the filter options.",
+          "items": {
+            "properties": {
+              "additionalInfo": {
+                "description": "Additional info for managing filter options",
+                "properties": {},
+                "type": "object"
+              },
+              "cacheFilter": {
+                "description": "",
+                "type": "boolean"
+              },
+              "dataType": {
+                "description": "data type of filter value",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "filter label/displayname",
+                "type": "string"
+              },
+              "filterSource": {
+                "description": "filter data source definition",
+                "properties": {
+                  "dataSource": {
+                    "description": "",
+                    "type": "object"
+                  },
+                  "displayValuePath": {
+                    "description": "JSONPath of the label of filter option from the filter option as root",
+                    "type": "string"
+                  },
+                  "rootPath": {
+                    "description": "JSONPath of the filter options array in the API response",
+                    "type": "string"
+                  },
+                  "valuePath": {
+                    "description": "JSONPath of the value of filter option from the filter option as root",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": {
+                "description": "filter name",
+                "type": "string"
+              },
+              "required": {
+                "description": "true if the filter is required",
+                "type": "boolean"
+              },
+              "timeOptions": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "info": {
+                      "description": "Time range option description",
+                      "type": "string"
+                    },
+                    "maxValue": {
+                      "description": "Maximum number of hours allowed for the time range option. (Client Validation)",
+                      "type": "integer"
+                    },
+                    "minValue": {
+                      "description": "Minimum number of hours allowed for the time range option. (Client Validation)",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "Time range option label",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Time range option value",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "filter type. Used to handle filter value selection by the client for report configuration.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "formats": {
+          "description": "Array of available formats for the report",
+          "items": {
+            "properties": {
+              "default": {
+                "description": "true, if the format type is considered default",
+                "type": "boolean"
+              },
+              "format": {
+                "description": "format type",
+                "enum": [
+                  "CSV",
+                  "TDE",
+                  "JSON",
+                  "PDF"
+                ],
+                "type": "string"
+              },
+              "name": {
+                "description": "format name",
+                "type": "string"
+              },
+              "template": {
+                "description": "Template details for the report",
+                "properties": {
+                  "jsTemplateId": {
+                    "description": "TemplateId of template",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "schedules": {
+          "description": "Array of available schedule types",
+          "items": {
+            "properties": {
+              "default": {
+                "description": "true, if the schedule type is default",
+                "type": "boolean"
+              },
+              "type": {
+                "description": "schedule type",
+                "enum": [
+                  "SCHEDULE_NOW",
+                  "SCHEDULE_LATER",
+                  "SCHEDULE_RECURRENCE"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "viewId": {
+          "description": "Unique view Id",
+          "type": "string"
+        },
+        "viewInfo": {
+          "description": "view filters info",
+          "type": "string"
+        },
+        "viewName": {
+          "description": "view name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

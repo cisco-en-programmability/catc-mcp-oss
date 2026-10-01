@@ -1,0 +1,172 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/images/{id}/addonImages",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the list of applicable add-on images if available for the given software image. `id` can be obtained from the response of API [ /dna/intent/api/v1/images?hasAddonImages=true ].",
+    "name": "api_retrieveApplicableAdd_onImagesForTheGivenSoftwareImage",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Software image identifier. Check `/dna/intent/api/v1/images?hasAddonImages=true` API to get the same.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "ciscoLatest": {
+                "description": "`true` if the image is latest/suggested from Cisco.com",
+                "type": "boolean"
+              },
+              "goldenTaggingDetails": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "deviceRoles": {
+                      "description": "Golden tagging based on the device roles",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "deviceTags": {
+                      "description": "Golden tagging based on the device tags",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "inheritedSiteId": {
+                      "description": "The Site Id of the site that this setting is inherited from.",
+                      "type": "string"
+                    },
+                    "inheritedSiteName": {
+                      "description": "The name of the site that this setting is inherited from",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "hasAddonImages": {
+                "description": "Software images that have an applicable list of add-on images. The value of `true` will return software images with add-on images, while the value of `false` will return software images without add-on images",
+                "type": "boolean"
+              },
+              "id": {
+                "description": "Software image identifier",
+                "type": "string"
+              },
+              "imageType": {
+                "description": "Software image type",
+                "enum": [
+                  "SYSTEM",
+                  "SMU",
+                  "SUBPACKAGE",
+                  "PSIRT_SMU",
+                  "APSP",
+                  "APDP",
+                  "ROMMON_SW"
+                ],
+                "type": "string"
+              },
+              "imported": {
+                "description": "Flag for image info whether it is imported image or cloud image",
+                "type": "boolean"
+              },
+              "integrityStatus": {
+                "description": "Image Integrity verification status with Known Good Verification",
+                "enum": [
+                  "VERIFIED",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              },
+              "isAddonImage": {
+                "description": "The value of `true` will indicate the image as an add-on image, while the value of `false` will indicate software image",
+                "type": "boolean"
+              },
+              "isGoldenTagged": {
+                "description": "The value of `true` will indicate the image marked as golden, while the value of `false` will indicate the image not marked as golden",
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Name of the software image",
+                "type": "string"
+              },
+              "productNames": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "Product name ordinal is unique value for each network device product",
+                      "type": "string"
+                    },
+                    "productName": {
+                      "description": "Network device product name",
+                      "type": "string"
+                    },
+                    "productNameOrdinal": {
+                      "description": "Product name ordinal is unique value for each network device product",
+                      "type": "number"
+                    },
+                    "supervisorProductName": {
+                      "description": "Name of the Supervisor Engine Module, supported by the `productName`.                  Example: The `Cisco Catalyst 9404R Switch` chassis is capable of supporting  different supervisor engine modules: the `Cisco Catalyst 9400 Supervisor Engine-1`, the `Cisco Catalyst 9400 Supervisor Engine-1XL`, the `Cisco Catalyst 9400 Supervisor Engine-1XL-Y`, etc.",
+                      "type": "string"
+                    },
+                    "supervisorProductNameOrdinal": {
+                      "description": "Supervisor Engine Module Ordinal, supported by the `productNameOrdinal`. Example: The `286315691` chassis ordinal is capable of supporting different supervisor engine module ordinals: `286316172`, `286316710`, `286320394` etc.",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "recommended": {
+                "description": "CISCO if the image is recommended from Cisco.com",
+                "enum": [
+                  "CISCO",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              },
+              "version": {
+                "description": "Software image  version",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

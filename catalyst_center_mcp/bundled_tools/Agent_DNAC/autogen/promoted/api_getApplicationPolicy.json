@@ -1,0 +1,517 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "policyScope": "query"
+      },
+      "uri": "/dna/intent/api/v1/app-policy",
+      "version": "2.3.7.9"
+    },
+    "description": "Get all existing application policies",
+    "name": "api_getApplicationPolicy",
+    "parameters": {
+      "properties": {
+        "policyScope": {
+          "description": "policy scope name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "items": {
+            "properties": {
+              "advancedPolicyScope": {
+                "description": "Advanced policy scope",
+                "properties": {
+                  "advancedPolicyScopeElement": {
+                    "description": "Advanced policy scope element",
+                    "items": {
+                      "properties": {
+                        "displayName": {
+                          "description": "Display name",
+                          "type": "string"
+                        },
+                        "groupId": {
+                          "description": "Group id",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "description": "Id of Advanced policy scope element",
+                          "type": "string"
+                        },
+                        "instanceCreatedOn": {
+                          "description": "Instance created on",
+                          "type": "integer"
+                        },
+                        "instanceId": {
+                          "description": "Instance id",
+                          "type": "integer"
+                        },
+                        "instanceUpdatedOn": {
+                          "description": "Instance updated on",
+                          "type": "integer"
+                        },
+                        "instanceVersion": {
+                          "description": "Instance version",
+                          "type": "number"
+                        },
+                        "ssid": {
+                          "description": "Ssid",
+                          "items": {
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "displayName": {
+                    "description": "Display name",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Id of Advanced policy scope",
+                    "type": "string"
+                  },
+                  "instanceCreatedOn": {
+                    "description": "Instance created on",
+                    "type": "integer"
+                  },
+                  "instanceId": {
+                    "description": "Instance id",
+                    "type": "integer"
+                  },
+                  "instanceUpdatedOn": {
+                    "description": "Instance updated on",
+                    "type": "integer"
+                  },
+                  "instanceVersion": {
+                    "description": "Instance version",
+                    "type": "number"
+                  },
+                  "name": {
+                    "description": "Policy name",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "cfsChangeInfo": {
+                "description": "Cfs change info",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "consumer": {
+                "description": "Consumer",
+                "properties": {
+                  "displayName": {
+                    "description": "Display name",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Id of Consumer",
+                    "type": "string"
+                  },
+                  "instanceCreatedOn": {
+                    "description": "Instance created on",
+                    "type": "integer"
+                  },
+                  "instanceId": {
+                    "description": "Instance id",
+                    "type": "integer"
+                  },
+                  "instanceUpdatedOn": {
+                    "description": "Instance updated on",
+                    "type": "integer"
+                  },
+                  "instanceVersion": {
+                    "description": "Instance version",
+                    "type": "number"
+                  },
+                  "scalableGroup": {
+                    "description": "Scalable group",
+                    "items": {
+                      "properties": {
+                        "idRef": {
+                          "description": "Id ref to application Scalable group",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "contractList": {
+                "description": "Contract list",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "createTime": {
+                "description": "Create time",
+                "type": "integer"
+              },
+              "customProvisions": {
+                "description": "Custom provisions",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "deletePolicyStatus": {
+                "description": "NONE: deployed policy to devices, DELETED: delete policy from devices, RESTORED: restored to original configuration",
+                "enum": [
+                  "NONE",
+                  "DELETED",
+                  "RESTORED"
+                ],
+                "type": "string"
+              },
+              "deployed": {
+                "description": "Deployed",
+                "type": "boolean"
+              },
+              "displayName": {
+                "description": "Display name",
+                "type": "string"
+              },
+              "exclusiveContract": {
+                "description": "Exclusive contract",
+                "properties": {
+                  "clause": {
+                    "description": "Clause",
+                    "items": {
+                      "properties": {
+                        "deviceRemovalBehavior": {
+                          "description": "Device removal behavior",
+                          "enum": [
+                            "DELETE",
+                            "RESTORE",
+                            "IGNORE"
+                          ],
+                          "type": "string"
+                        },
+                        "displayName": {
+                          "description": "Display name",
+                          "type": "string"
+                        },
+                        "hostTrackingEnabled": {
+                          "description": "Host tracking enabled",
+                          "type": "boolean"
+                        },
+                        "id": {
+                          "description": "Id of Business relevance or Application policy knobs clause",
+                          "type": "string"
+                        },
+                        "instanceCreatedOn": {
+                          "description": "Instance created on",
+                          "type": "integer"
+                        },
+                        "instanceId": {
+                          "description": "Instance id",
+                          "type": "integer"
+                        },
+                        "instanceUpdatedOn": {
+                          "description": "Instance updated on",
+                          "type": "integer"
+                        },
+                        "instanceVersion": {
+                          "description": "Instance version",
+                          "type": "number"
+                        },
+                        "priority": {
+                          "description": "Priority",
+                          "type": "integer"
+                        },
+                        "relevanceLevel": {
+                          "description": "Relevance level",
+                          "enum": [
+                            "BUSINESS_RELEVANT",
+                            "BUSINESS_IRRELEVANT",
+                            "DEFAULT"
+                          ],
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Type",
+                          "enum": [
+                            "BUSINESS_RELEVANCE",
+                            "APPLICATION_POLICY_KNOBS"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "displayName": {
+                    "description": "Display name",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Id of Exclusive contract",
+                    "type": "string"
+                  },
+                  "instanceCreatedOn": {
+                    "description": "Instance created on",
+                    "type": "integer"
+                  },
+                  "instanceId": {
+                    "description": "Instance id",
+                    "type": "integer"
+                  },
+                  "instanceUpdatedOn": {
+                    "description": "Instance updated on",
+                    "type": "integer"
+                  },
+                  "instanceVersion": {
+                    "description": "Instance version",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "Id of Group based policy",
+                "type": "string"
+              },
+              "identitySource": {
+                "description": "Identity source",
+                "properties": {
+                  "displayName": {
+                    "description": "Display name",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Id of Identity source",
+                    "type": "string"
+                  },
+                  "instanceCreatedOn": {
+                    "description": "Instance created on",
+                    "type": "integer"
+                  },
+                  "instanceId": {
+                    "description": "Instance id",
+                    "type": "integer"
+                  },
+                  "instanceUpdatedOn": {
+                    "description": "Instance updated on",
+                    "type": "integer"
+                  },
+                  "instanceVersion": {
+                    "description": "Instance version",
+                    "type": "number"
+                  },
+                  "state": {
+                    "description": "State",
+                    "enum": [
+                      "INACTIVE",
+                      "ACTIVE",
+                      "DELETED"
+                    ],
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type",
+                    "enum": [
+                      "APIC_EM",
+                      "NBAR"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "instanceCreatedOn": {
+                "description": "Instance created on",
+                "type": "integer"
+              },
+              "instanceId": {
+                "description": "Instance id",
+                "type": "integer"
+              },
+              "instanceUpdatedOn": {
+                "description": "Instance updated on",
+                "type": "integer"
+              },
+              "instanceVersion": {
+                "description": "Instance version",
+                "type": "number"
+              },
+              "internal": {
+                "description": "Internal",
+                "type": "boolean"
+              },
+              "isDeleted": {
+                "description": "Is deleted",
+                "type": "boolean"
+              },
+              "isEnabled": {
+                "description": "Is enabled",
+                "type": "boolean"
+              },
+              "isScopeStale": {
+                "description": "Is scope stale",
+                "type": "boolean"
+              },
+              "isSeeded": {
+                "description": "Is seeded",
+                "type": "boolean"
+              },
+              "isStale": {
+                "description": "Is stale",
+                "type": "boolean"
+              },
+              "iseReserved": {
+                "description": "Is reserved",
+                "type": "boolean"
+              },
+              "lastUpdateTime": {
+                "description": "Last update time",
+                "type": "integer"
+              },
+              "name": {
+                "description": "Concatination of <polcy name>_<application-set-name> or <polcy name>_global_policy_configuration or <polcy name>_queuing_customization",
+                "type": "string"
+              },
+              "namespace": {
+                "description": "Namespace",
+                "type": "string"
+              },
+              "policyScope": {
+                "description": "Policy name",
+                "type": "string"
+              },
+              "policyStatus": {
+                "description": "Policy status",
+                "enum": [
+                  "ENABLED",
+                  "DISABLED",
+                  "MONITOR"
+                ],
+                "type": "string"
+              },
+              "priority": {
+                "description": "Priority",
+                "type": "integer"
+              },
+              "producer": {
+                "description": "Producer",
+                "properties": {
+                  "displayName": {
+                    "description": "Display name",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Id of Producer",
+                    "type": "string"
+                  },
+                  "instanceCreatedOn": {
+                    "description": "Instance created on",
+                    "type": "integer"
+                  },
+                  "instanceId": {
+                    "description": "Instance id",
+                    "type": "integer"
+                  },
+                  "instanceUpdatedOn": {
+                    "description": "Instance updated on",
+                    "type": "integer"
+                  },
+                  "instanceVersion": {
+                    "description": "Instance version",
+                    "type": "number"
+                  },
+                  "scalableGroup": {
+                    "description": "Scalable group",
+                    "items": {
+                      "properties": {
+                        "idRef": {
+                          "description": "Id ref to application-set or application Scalable group",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "provisioningState": {
+                "description": "Provisioning state",
+                "enum": [
+                  "UNKNOWN",
+                  "DEFINED",
+                  "DEPLOYED",
+                  "FAILED",
+                  "VERIFIED",
+                  "DEPLOYING",
+                  "SUBMITTED",
+                  "PREPROCESSED",
+                  "VALIDATED"
+                ],
+                "type": "string"
+              },
+              "pushed": {
+                "description": "Pushed",
+                "type": "boolean"
+              },
+              "qualifier": {
+                "description": "Qualifier",
+                "type": "string"
+              },
+              "resourceVersion": {
+                "description": "Resource version",
+                "type": "number"
+              },
+              "targetIdList": {
+                "description": "Target id list",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "Type",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

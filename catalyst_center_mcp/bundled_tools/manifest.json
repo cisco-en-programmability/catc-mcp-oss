@@ -1,0 +1,3333 @@
+{
+  "ci_tools": {
+    "commit": null,
+    "dirty": false,
+    "path": "/docker/geneva/catalyst-center-mcp/ci-tools"
+  },
+  "dialographer_kb": {
+    "commit": null,
+    "dirty": false,
+    "path": "/docker/geneva/catalyst-center-mcp/dialographer-kb"
+  },
+  "excluded_tool_count": 15,
+  "excluded_tools": [
+    {
+      "max_controller_version": "2.3.7.9",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getAnchorGroups",
+      "reason": "unsupported_release",
+      "source": "api_getAnchorGroups.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getCountOfAllDiscoveryJobs",
+      "reason": "unsupported_release",
+      "source": "api_getCountOfAllDiscoveryJobs.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getDevicesDiscoveredById",
+      "reason": "unsupported_release",
+      "source": "api_getDevicesDiscoveredById.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getDiscoveredDevicesByRange",
+      "reason": "unsupported_release",
+      "source": "api_getDiscoveredDevicesByRange.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getDiscoveredNetworkDevicesByDiscoveryId",
+      "reason": "unsupported_release",
+      "source": "api_getDiscoveredNetworkDevicesByDiscoveryId.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getDiscoveriesByRange",
+      "reason": "unsupported_release",
+      "source": "api_getDiscoveriesByRange.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getDiscoveryById",
+      "reason": "unsupported_release",
+      "source": "api_getDiscoveryById.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getDiscoveryJobsByIP",
+      "reason": "unsupported_release",
+      "source": "api_getDiscoveryJobsByIP.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getListOfDiscoveriesByDiscoveryId",
+      "reason": "unsupported_release",
+      "source": "api_getListOfDiscoveriesByDiscoveryId.json"
+    },
+    {
+      "max_controller_version": "3.1.3",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getNetworkDevicesFromDiscovery",
+      "reason": "unsupported_release",
+      "source": "api_getNetworkDevicesFromDiscovery.json"
+    },
+    {
+      "max_controller_version": "3.1.6",
+      "min_controller_version": null,
+      "name": "api_getPnPDeviceCount_legacy",
+      "reason": "unsupported_release",
+      "source": "api_getPnPDeviceCount_legacy.json"
+    },
+    {
+      "max_controller_version": "3.1.6",
+      "min_controller_version": null,
+      "name": "api_getPnPDeviceList_legacy",
+      "reason": "unsupported_release",
+      "source": "api_getPnPDeviceList_legacy.json"
+    },
+    {
+      "max_controller_version": "2.3.7.9",
+      "min_controller_version": "2.3.7.9",
+      "name": "api_getsTheTotalNetworkDeviceCountsBasedOnTheProvidedQu_13e6628b",
+      "reason": "unsupported_release",
+      "source": "api_getsTheTotalNetworkDeviceCountsBasedOnTheProvidedQu_13e6628b.json"
+    },
+    {
+      "max_controller_version": "2.3.7.10",
+      "min_controller_version": "2.3.7.10",
+      "name": "api_getsTheTotalNetworkDeviceCountsBasedOnThe_e45f5335_v2_3_7_10",
+      "reason": "unsupported_release",
+      "source": "api_getsTheTotalNetworkDeviceCountsBasedOnThe_e45f5335_v2_3_7_10.json"
+    },
+    {
+      "duplicate_of": "api_getLicenseUsage.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getLicenseUsage",
+      "reason": "duplicate_tool_name",
+      "source": "api_licenseUsageCount.json"
+    }
+  ],
+  "generated_by": "ci-tools.jenkinsfiles.scripts.catalyst_mcp_bundle",
+  "included_tool_count": 532,
+  "included_tools": [
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_applications.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_applications"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_ciscoCatalystCenterNodesConfigurationSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_ciscoCatalystCenterNodesConfigurationSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_ciscoCatalystCenterPackagesSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_ciscoCatalystCenterPackagesSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_ciscoCatalystCenterReleaseSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_ciscoCatalystCenterReleaseSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_ciscoISEServerIntegrationStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_ciscoISEServerIntegrationStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_clientProximity.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_clientProximity"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_complianceDetailsOfDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_complianceDetailsOfDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countClientsEnergy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countClientsEnergy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countDevicesEnergy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countDevicesEnergy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countDiscoveredNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_countDiscoveredNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countDiscoveries.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_countDiscoveries"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countDiscoveryJobs.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_countDiscoveryJobs"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfEventSubscriptions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfEventSubscriptions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfEvents.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfEvents"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfNetworkDeviceConfigurationFiles.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfNetworkDeviceConfigurationFiles"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfNetworkDeviceImageUpdates.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfNetworkDeviceImageUpdates"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfNetworkProductNames.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfNetworkProductNames"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfNotifications.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfNotifications"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfSecurityServiceInsertionSummaries.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfSecurityServiceInsertionSummaries"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countOfSecurityServiceInsertions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countOfSecurityServiceInsertions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countSitesEnergy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countSitesEnergy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countSitesEnergyForTheGivenTaskID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countSitesEnergyForTheGivenTaskID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countTheNumberOfEvents.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countTheNumberOfEvents"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countTheNumberOfNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countTheNumberOfNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countsGlobalIPAddressPools.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countsGlobalIPAddressPools"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countsIPAddressSubpools.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countsIPAddressSubpools"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_countsSubpoolsOfAGlobalIPAddressPool.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_countsSubpoolsOfAGlobalIPAddressPool"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_custom_promptSupportGETAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_custom_promptSupportGETAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_deviceComplianceStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_deviceComplianceStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_devices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_devices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_disasterRecoveryOperationalStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_disasterRecoveryOperationalStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_disasterRecoveryStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_disasterRecoveryStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_downloadAFileByFileId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_downloadAFileByFileId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_downloadFlexibleReport.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_downloadFlexibleReport"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_downloadReportContent.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_downloadReportContent"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_downloadsASpecificICAPPacketCaptureFile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_downloadsASpecificICAPPacketCaptureFile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_eventArtifactCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_eventArtifactCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_fetchTheCountOfEndpoints.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_fetchTheCountOfEndpoints"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_get802_11beProfileByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_get802_11beProfileByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_get802_11beProfiles.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_get802_11beProfiles"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_get802_11beProfilesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_get802_11beProfilesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAAAAttributeAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAAAAttributeAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAAAOverrideVlanSettingsBySite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAAAOverrideVlanSettingsBySite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAAARadiusAttributesConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAAARadiusAttributesConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAIEndpointAnalyticsAttributeDictionaries.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAIEndpointAnalyticsAttributeDictionaries"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getANCPolicies.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getANCPolicies"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAPAuthorizationListByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAPAuthorizationListByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAPAuthorizationListByNetworkDeviceId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAPAuthorizationListByNetworkDeviceId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAPPnPLocationSetting.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAPPnPLocationSetting"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAPProfileByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAPProfileByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAPProfiles.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAPProfiles"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAPProfilesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAPProfilesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAScheduledReport.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAScheduledReport"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAccessPointConfigurationTaskResult.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAccessPointConfigurationTaskResult"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAccessPointRebootTaskResult.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAccessPointRebootTaskResult"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAccessPoint_s_FactoryResetStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAccessPoint_s_FactoryResetStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAccessPointsPositions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAccessPointsPositions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAccessPointsPositionsCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAccessPointsPositionsCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getActivities.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getActivities"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getActivityByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getActivityByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAdvancedSSIDConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAdvancedSSIDConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllBackup.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllBackup"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllDiscoveryDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getAllDiscoveryDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllExecutionDetailsForAGivenReport.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllExecutionDetailsForAGivenReport"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllFlexibleReportSchedules.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllFlexibleReportSchedules"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllGlobalCredentialsV2.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllGlobalCredentialsV2"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllHealthScoreDefinitionsForGivenFilters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllHealthScoreDefinitionsForGivenFilters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllITSMIntegrationSettings.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllITSMIntegrationSettings"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllInterfaces.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllInterfaces"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllKeywordsOfCLIsAcceptedByCommandRunner.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllKeywordsOfCLIsAcceptedByCommandRunner"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllRelease.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getAllRelease"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllTheCustomIssueDefinitionsBasedOnTheGivenFilters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllTheCustomIssueDefinitionsBasedOnTheGivenFilters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllTheDetailsAndSuggestedActionsOfAnIssueForTheG_34a1791b.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllTheDetailsAndSuggestedActionsOfAnIssueForTheG_34a1791b"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllowedMacAddress.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllowedMacAddress"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAllowedMacAddressCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAllowedMacAddressCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAnchorCapableDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAnchorCapableDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAnchorGroupByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAnchorGroupByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAnchorGroups_v2_3_7_10.json",
+      "max_controller_version": null,
+      "min_controller_version": "2.3.7.10",
+      "name": "api_getAnchorGroups_v2_3_7_10"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAnchorManagedAPLocationsForSpecificWirelessController.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAnchorManagedAPLocationsForSpecificWirelessController"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationPolicy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationPolicy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationPolicyDefault.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationPolicyDefault"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationPolicyQueuingProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationPolicyQueuingProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationPolicyQueuingProfileCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationPolicyQueuingProfileCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationSetCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationSetCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationSet_s.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationSet_s"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationSets.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationSets"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationSetsCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationSetsCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplication_s.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplication_s"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplications.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplications"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getApplicationsCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getApplicationsCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAuditLogParentRecords.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAuditLogParentRecords"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAuditLogRecords.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAuditLogRecords"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAuditLogSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAuditLogSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getAuthenticationAndPolicyServers.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getAuthenticationAndPolicyServers"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBackupById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBackupById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBackupConfiguration.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBackupConfiguration"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBackupRestoreExecution.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBackupRestoreExecution"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBackupRestoreExecutions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBackupRestoreExecutions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBackupStorages.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBackupStorages"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBugAffectingTheNetworkDeviceByDeviceIdAndBugId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBugAffectingTheNetworkDeviceByDeviceIdAndBugId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBugsAffectingTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBugsAffectingTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getBusinessAPIExecutionDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getBusinessAPIExecutionDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCMDBSyncStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCMDBSyncStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getChassisDetailsForDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getChassisDetailsForDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCleanAirConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCleanAirConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getClientDetail.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getClientDetail"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getClientEnergyByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getClientEnergyByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getClientEnrichmentDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getClientEnrichmentDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getClientEnrichmentDetailsV2.json",
+      "max_controller_version": null,
+      "min_controller_version": "2.3.7.10",
+      "name": "api_getClientEnrichmentDetailsV2"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getClientsEnergy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getClientsEnergy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceConditionById.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceConditionById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceConditionCount.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceConditionCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceConditions.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceConditions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceDetail.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getComplianceDetail"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceDetailCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getComplianceDetailCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCompliancePolicies.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getCompliancePolicies"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCompliancePolicyAssignment.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getCompliancePolicyAssignment"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCompliancePolicyById.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getCompliancePolicyById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCompliancePolicyCount.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getCompliancePolicyCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceRuleById.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceRuleById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceRuleCountWithinPolicy.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceRuleCountWithinPolicy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceRules.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceRules"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getComplianceStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceStatusCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getComplianceStatusCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceVariableAssignment.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceVariableAssignment"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceVariableById.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceVariableById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceVariableCount.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceVariableCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getComplianceVariables.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getComplianceVariables"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConfigTaskDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConfigTaskDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConfigurationArchiveDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConfigurationArchiveDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConfigurationFileDetailsByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConfigurationFileDetailsByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConfigurationsForADeployedLayer2FeatureOnAWiredDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConfigurationsForADeployedLayer2FeatureOnAWiredDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConfigurationsForAnIntendedLayer2FeatureOnAWiredDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConfigurationsForAnIntendedLayer2FeatureOnAWiredDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConfigurationsForIntendedLayer2FeaturesOnAWiredDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConfigurationsForIntendedLayer2FeaturesOnAWiredDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConnectedDeviceDetail.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConnectedDeviceDetail"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getConnectorTypes.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getConnectorTypes"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfAnchorGroups.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfAnchorGroups"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfBugsAffectingTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfBugsAffectingTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfFieldNoticeNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfFieldNoticeNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfFieldNoticeNetworkDevicesForTheNotice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfFieldNoticeNetworkDevicesForTheNotice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfFieldNotices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfFieldNotices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfFieldNoticesAffectingTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfFieldNoticesAffectingTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfFieldNoticesResultsTrendOverTime.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfFieldNoticesResultsTrendOverTime"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfNetworkBugDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfNetworkBugDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfNetworkBugDevicesForTheBug.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfNetworkBugDevicesForTheBug"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfNetworkBugs.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfNetworkBugs"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfNetworkBugsResultsTrendOverTime.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfNetworkBugsResultsTrendOverTime"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfProfilingRules.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfProfilingRules"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfSecurityAdvisoriesResultsTrendOverTime.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfSecurityAdvisoriesResultsTrendOverTime"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfSecurityAdvisoryNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfSecurityAdvisoryNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getCountOfSecurityAdvisoryNetworkDevicesForTheSecur_ffbe1ab0.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getCountOfSecurityAdvisoryNetworkDevicesForTheSecur_ffbe1ab0"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDetailsOfASingleAssuranceEvent.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDetailsOfASingleAssuranceEvent"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDetailsOfASingleNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDetailsOfASingleNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDetailsOfASingleProfilingRule.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDetailsOfASingleProfilingRule"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceBySerialNumber.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceBySerialNumber"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceConfigById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceConfigById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceConfigCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceConfigCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceControllabilitySettings.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceControllabilitySettings"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceCredentialSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceCredentialSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceDeploymentStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceDeploymentStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceDeploymentStatusCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceDeploymentStatusCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceEnergyByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceEnergyByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceEnrichmentDetailsV2.json",
+      "max_controller_version": null,
+      "min_controller_version": "2.3.7.10",
+      "name": "api_getDeviceEnrichmentDetailsV2"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceHistory.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceHistory"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceInterfaceCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceInterfaceCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceInterfaceVLANs.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceInterfaceVLANs"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceInterfacesBySpecifiedRange.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceInterfacesBySpecifiedRange"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDeviceValuesThatMatchFullyOrPartiallyAnAttribute.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDeviceValuesThatMatchFullyOrPartiallyAnAttribute"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDevicesEnergy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDevicesEnergy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDevicesRegisteredForWSANotification.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDevicesRegisteredForWSANotification"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDiscoveredNetworkDevicesBySettingsId.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getDiscoveredNetworkDevicesBySettingsId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDiscoveryDetailsById.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getDiscoveryDetailsById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDiscoveryJobByJobId.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getDiscoveryJobByJobId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDiscoveryJobBySettingsId.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getDiscoveryJobBySettingsId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDiscoveryJobsSummarys.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getDiscoveryJobsSummarys"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDot11axConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDot11axConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getDot11beStatusConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getDot11beStatusConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEmailDestination.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEmailDestination"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEmailEventSubscriptions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEmailEventSubscriptions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEmailSubscriptionDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEmailSubscriptionDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEndpointDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEndpointDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEoXDetailsPerDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEoXDetailsPerDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEoXStatusForAllDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEoXStatusForAllDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEoXSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEoXSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEventArtifacts.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEventArtifacts"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEventDrivenRRMConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEventDrivenRRMConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEventSubscriptions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEventSubscriptions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getEvents.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getEvents"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getExecutionIdByReportId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getExecutionIdByReportId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getExternalAuthenticationServersAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getExternalAuthenticationServersAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getExternalAuthenticationSettingAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getExternalAuthenticationSettingAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFailedITSMEvents.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFailedITSMEvents"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFeatureTemplateSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFeatureTemplateSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticeAffectingTheNetworkDeviceByDeviceIdAndNoticeId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticeAffectingTheNetworkDeviceByDeviceIdAndNoticeId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticeById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticeById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticeNetworkDeviceByDeviceId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticeNetworkDeviceByDeviceId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticeNetworkDeviceForTheNoticeByNetworkDeviceId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticeNetworkDeviceForTheNoticeByNetworkDeviceId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticeNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticeNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticeNetworkDevicesForTheNotice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticeNetworkDevicesForTheNotice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNotices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNotices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticesAffectingTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticesAffectingTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFieldNoticesResultsTrendOverTime.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFieldNoticesResultsTrendOverTime"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFlexConnectConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFlexConnectConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFlexibleReportScheduleByReportId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFlexibleReportScheduleByReportId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFloorSettings.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFloorSettings"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFunctionalCapabilityById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFunctionalCapabilityById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getFunctionalCapabilityForDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getFunctionalCapabilityForDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getGlobalCredentials.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getGlobalCredentials"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getHealthScoreDefinitionForTheGivenId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getHealthScoreDefinitionForTheGivenId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getICAPConfigurationStatusPerNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getICAPConfigurationStatusPerNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getISISInterfaces.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getISISInterfaces"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getITSMIntegrationSettingById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getITSMIntegrationSettingById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getITSMIntegrationStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getITSMIntegrationStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getInstalledRelease.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getInstalledRelease"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getInterfaceByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getInterfaceById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getInterfaceByIP.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getInterfaceByIP"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getInterfaces.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getInterfaces"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getInterfacesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getInterfacesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getIssueEnrichmentDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getIssueEnrichmentDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getIssueEnrichmentDetailsV2.json",
+      "max_controller_version": null,
+      "min_controller_version": "2.3.7.10",
+      "name": "api_getIssueEnrichmentDetailsV2"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getIssueTriggerDefinitionForGivenId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getIssueTriggerDefinitionForGivenId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getL3TopologyDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getL3TopologyDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getLicenseUsage.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getLicenseUsage"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getLinecardDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getLinecardDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getListOfAvailableNamespaces.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getListOfAvailableNamespaces"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getListOfChildEventsForTheGivenWirelessClientEvent.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getListOfChildEventsForTheGivenWirelessClientEvent"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getListOfProfilingRules.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getListOfProfilingRules"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getListOfScheduledReports.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getListOfScheduledReports"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getManagedAPLocationsCountForSpecificWirelessController.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getManagedAPLocationsCountForSpecificWirelessController"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getMeshApNeighbours.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getMeshApNeighbours"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getMeshApNeighboursCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getMeshApNeighboursCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getMobilityGroups.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getMobilityGroups"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getMobilityGroupsCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getMobilityGroupsCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getModuleCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getModuleCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getModuleInfoById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getModuleInfoById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getModules.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getModules"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getMulticastConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getMulticastConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNativeVlanSettingsBySite.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getNativeVlanSettingsBySite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugDeviceByDeviceId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugDeviceByDeviceId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugDeviceForTheBugByNetworkDeviceId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugDeviceForTheBugByNetworkDeviceId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugDevicesForTheBug.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugDevicesForTheBug"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugs.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugs"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkBugsResultsTrendOverTime.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkBugsResultsTrendOverTime"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkDeviceByIP.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkDeviceByIP"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkDeviceCompliancePolicyViolations.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getNetworkDeviceCompliancePolicyViolations"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkDeviceComplianceViolatingPolicies.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.1.6",
+      "name": "api_getNetworkDeviceComplianceViolatingPolicies"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkDeviceConfigurationFileDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkDeviceConfigurationFileDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNetworkDevicesCredentialsSyncStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNetworkDevicesCredentialsSyncStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNfsConfigurations.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNfsConfigurations"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNotifications.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNotifications"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNumberOfConfigurationsForADeployedLayer2FeatureOnADevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNumberOfConfigurationsForADeployedLayer2FeatureOnADevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getNumberOfConfigurationsForAnIntendedLayer2FeatureOnADevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getNumberOfConfigurationsForAnIntendedLayer2FeatureOnADevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getOSPFInterfaces.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getOSPFInterfaces"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getOrganizationListForMeraki.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getOrganizationListForMeraki"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPendingFabricEvents.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPendingFabricEvents"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPermissionsAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPermissionsAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPlannedAccessPointsForBuilding.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPlannedAccessPointsForBuilding"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPlannedAccessPointsForFloor.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPlannedAccessPointsForFloor"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPlannedAccessPointsPositions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPlannedAccessPointsPositions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPlannedAccessPointsPositionsCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPlannedAccessPointsPositionsCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPnPDeviceCount.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getPnPDeviceCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPnPDeviceList.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getPnPDeviceList"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPnPGlobalSettings.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPnPGlobalSettings"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPollingIntervalById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPollingIntervalById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPollingIntervalForAllDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPollingIntervalForAllDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPortChannelInformationById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPortChannelInformationById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPortChannels.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPortChannels"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPowerProfileByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPowerProfileByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPowerProfiles.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPowerProfiles"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPowerProfilesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPowerProfilesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getPrimaryManagedAPLocationsForSpecificWirelessController.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getPrimaryManagedAPLocationsForSpecificWirelessController"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getProvisionedDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getProvisionedDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getProvisionedDevicesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getProvisionedDevicesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getProvisioningSettings.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getProvisioningSettings"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getQosDeviceInterfaceInfo.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getQosDeviceInterfaceInfo"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getQosDeviceInterfaceInfoCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getQosDeviceInterfaceInfoCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRFProfileByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRFProfileByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRFProfiles.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRFProfiles"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRFProfilesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRFProfilesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRRMFRAConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRRMFRAConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRRMGeneralConfigurationFeatureTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRRMGeneralConfigurationFeatureTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getReleaseByNameAndVersion.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getReleaseByNameAndVersion"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRest_WebhookEventSubscriptions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRest_WebhookEventSubscriptions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRest_WebhookSubscriptionDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRest_WebhookSubscriptionDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getResyncIntervalForTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getResyncIntervalForTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getRolesAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getRolesAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSNMPDestination.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSNMPDestination"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSNMPProperties.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSNMPProperties"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSSIDByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSSIDByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSSIDBySite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSSIDBySite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSSIDCountBySite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSSIDCountBySite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSSIDCountForSpecificWirelessController.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSSIDCountForSpecificWirelessController"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSSIDDetailsForSpecificWirelessController.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSSIDDetailsForSpecificWirelessController"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecondaryManagedAPLocationsForSpecificWirelessController.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecondaryManagedAPLocationsForSpecificWirelessController"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoriesAffectingTheNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoriesAffectingTheNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoriesAffectingTheNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoriesAffectingTheNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoriesResultsTrendOverTime.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoriesResultsTrendOverTime"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoryAffectingTheNetworkDeviceByDevic_978ac4ec.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoryAffectingTheNetworkDeviceByDevic_978ac4ec"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoryAffectingTheNetworkDevicesById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoryAffectingTheNetworkDevicesById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoryNetworkDeviceByNetworkDeviceId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoryNetworkDeviceByNetworkDeviceId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoryNetworkDeviceForTheSecurityAdvis_a527030a.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoryNetworkDeviceForTheSecurityAdvis_a527030a"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoryNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoryNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSecurityAdvisoryNetworkDevicesForTheSecurityAdvisory.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSecurityAdvisoryNetworkDevicesForTheSecurityAdvisory"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getServiceDeploymentStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getServiceDeploymentStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getServiceProviderDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getServiceProviderDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getServiceProviderDetailsV2.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getServiceProviderDetailsV2"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteAnalyticsForOneSite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteAnalyticsForOneSite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteAnalyticsForTheChildSitesOfGivenParentSiteAn_104cea52.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteAnalyticsForTheChildSitesOfGivenParentSiteAn_104cea52"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteAnalyticsSummaryDataForTheGivenTaskId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteAnalyticsSummaryDataForTheGivenTaskId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteAnalyticsTrendDataForTheGivenTaskId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteAnalyticsTrendDataForTheGivenTaskId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteAssignedNetworkDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteAssignedNetworkDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteEnergyByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteEnergyByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSiteTopology.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSiteTopology"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSites.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSites"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSitesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSitesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSitesEnergy.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSitesEnergy"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSoftwareManagementExecutionDetail.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_getSoftwareManagementExecutionDetail"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getStackDetailsForDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getStackDetailsForDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getStatusAPIForEvents.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getStatusAPIForEvents"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSupervisorCardDetail.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSupervisorCardDetail"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSyslogDestination.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSyslogDestination"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSyslogEventSubscriptions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSyslogEventSubscriptions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getSyslogSubscriptionDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getSyslogSubscriptionDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTag.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTag"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTagById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTagById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTagCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTagCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTagMemberCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTagMemberCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTagMembersById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTagMembersById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTagResourceTypes.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTagResourceTypes"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTaskDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTaskDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTaskDetailsByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTaskDetailsByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTasks.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTasks"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTasksByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTasksByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTasksCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTasksCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplateProject.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplateProject"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplateProjectCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplateProjectCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplateProjects.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplateProjects"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplateVersion.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplateVersion"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplateVersions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplateVersions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplateVersionsCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplateVersionsCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTemplate_s_Details.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTemplate_s_Details"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheCountOfHealthScoreDefinitionsBasedOnProvidedFilters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheCountOfHealthScoreDefinitionsBasedOnProvidedFilters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheCountOfSystemDefinedIssueDefinitionsBasedOnPr_45aa6c33.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheCountOfSystemDefinedIssueDefinitionsBasedOnPr_45aa6c33"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheCustomIssueDefinitionForTheGivenCustomIssueDe_9bd4ac38.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheCustomIssueDefinitionForTheGivenCustomIssueDe_9bd4ac38"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheDetailsOfPhysicalComponentsOfTheGivenDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheDetailsOfPhysicalComponentsOfTheGivenDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheInterfaceDataForTheGivenInterfaceId_instanceU_0b78da7f.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheInterfaceDataForTheGivenInterfaceId_instanceU_0b78da7f"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheSupportedLayer2FeaturesOnAWiredDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheSupportedLayer2FeaturesOnAWiredDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheTotalCustomIssueDefinitionsCountBasedOnThePro_240c53aa.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheTotalCustomIssueDefinitionsCountBasedOnThePro_240c53aa"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheTotalNumberOfIssuesForGivenSetOfFilters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheTotalNumberOfIssuesForGivenSetOfFilters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTheTotalNumberOfSiteAnalyticsRecordsAvailableFor_25bb5c48.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTheTotalNumberOfSiteAnalyticsRecordsAvailableFor_25bb5c48"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getThreatLevels.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getThreatLevels"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getThreatTypes.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getThreatTypes"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTopNEntitiesRelatedToSiteAnalyticsForTheGivenTaskId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTopNEntitiesRelatedToSiteAnalyticsForTheGivenTaskId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTopologyDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTopologyDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTrialDetailsForBugsDetectionOnNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTrialDetailsForBugsDetectionOnNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTrialDetailsForFieldNoticesDetectionOnNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTrialDetailsForFieldNoticesDetectionOnNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTrialDetailsForSecurityAdvisoriesDetectionOnNetw_ff9164da.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTrialDetailsForSecurityAdvisoriesDetectionOnNetw_ff9164da"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getTriggeredJobsByActivityId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getTriggeredJobsByActivityId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getUserEnrichmentDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getUserEnrichmentDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getUserEnrichmentDetailsV2.json",
+      "max_controller_version": null,
+      "min_controller_version": "2.3.7.10",
+      "name": "api_getUserEnrichmentDetailsV2"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getUsersAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getUsersAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getVLANDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getVLANDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getViewDetailsForAGivenViewGroup_View.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getViewDetailsForAGivenViewGroup_View"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getViewsForAGivenViewGroup.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getViewsForAGivenViewGroup"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWebhookDestination.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWebhookDestination"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWirelessLanControllerDetailsById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWirelessLanControllerDetailsById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWirelessProfileByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWirelessProfileByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWirelessProfiles.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWirelessProfiles"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWirelessProfilesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWirelessProfilesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWorkflowById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWorkflowById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWorkflowCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWorkflowCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getWorkflows.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getWorkflows"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_get_dna_intent_api_v1_global_credential_id.json",
+      "max_controller_version": null,
+      "min_controller_version": "2.3.7.10",
+      "name": "api_get_dna_intent_api_v1_global_credential_id"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsAllTheVersionsOfAGivenTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsAllTheVersionsOfAGivenTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsDetailsOfAGivenTemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsDetailsOfAGivenTemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsInterfacesAlongWithStatisticsAndPoeDataFromAllN_d99ee240.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsInterfacesAlongWithStatisticsAndPoeDataFromAllN_d99ee240"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsTheDeviceConfigForTheConfigurationModel.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsTheDeviceConfigForTheConfigurationModel"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsTheNetworkDeviceDetailsBasedOnTheProvidedQueryParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsTheNetworkDeviceDetailsBasedOnTheProvidedQueryParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsTheTemplatesAvailable.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsTheTemplatesAvailable"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_getsTheTotalNetworkDeviceInterfaceCountsInTheSpecif_a404d76e.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_getsTheTotalNetworkDeviceInterfaceCountsInTheSpecif_a404d76e"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_importMapArchive_ImportStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_importMapArchive_ImportStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_inventoryInsightDeviceLinkMismatchAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_inventoryInsightDeviceLinkMismatchAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_issues.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_issues"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationActiveSessions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationActiveSessions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationLog.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationLog"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationLogById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationLogById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationLogsForIndividualDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationLogsForIndividualDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationSessionCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationSessionCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_lANAutomationStatusById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_lANAutomationStatusById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_legitOperationsForInterface.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_legitOperationsForInterface"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_licenseTermDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_licenseTermDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_listsICAPPacketCaptureFilesMatchingSpecifiedCriteria.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_listsICAPPacketCaptureFilesMatchingSpecifiedCriteria"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_mapsSupportedAccessPoints.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_mapsSupportedAccessPoints"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_pOEDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_pOEDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_querySitesEnergyForTheGivenTaskID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_querySitesEnergyForTheGivenTaskID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_queryTheEndpoints.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_queryTheEndpoints"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readFabricSitesWithHealthSummaryFromId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_readFabricSitesWithHealthSummaryFromId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readNetworkDeviceLicenses.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_readNetworkDeviceLicenses"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readNetworkDeviceLicensesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_readNetworkDeviceLicensesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readTransitNetworkWithItsHealthSummaryFromId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_readTransitNetworkWithItsHealthSummaryFromId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readVirtualNetworkWithItsHealthSummaryFromId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_readVirtualNetworkWithItsHealthSummaryFromId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readinessStatusForAFabricSite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_readinessStatusForAFabricSite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_readinessStatusOfSwitchesInASpecifiedVirtualNetwork_d64c1de3.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_readinessStatusOfSwitchesInASpecifiedVirtualNetwork_d64c1de3"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveAAASettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveAAASettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveACountOfTheNumberOfAssuranceTasksThatCurrentlyExist.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveACountOfTheNumberOfAssuranceTasksThatCurrentlyExist"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveAListOfAssuranceTasks.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveAListOfAssuranceTasks"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveANetworkProfileForSitesById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveANetworkProfileForSitesById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveASpecificAssuranceTaskById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveASpecificAssuranceTaskById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveASpecificPolicyTagForAWirelessProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveASpecificPolicyTagForAWirelessProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveASpecificSiteTagForAWirelessProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveASpecificSiteTagForAWirelessProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveAllPolicyTagsForAWirelessProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveAllPolicyTagsForAWirelessProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveAllSiteTagsForAWirelessProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveAllSiteTagsForAWirelessProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveApplicableAdd_onImagesForTheGivenSoftwareImage.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveApplicableAdd_onImagesForTheGivenSoftwareImage"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveBannerSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveBannerSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveCLITemplatesAttachedToANetworkProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveCLITemplatesAttachedToANetworkProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveCountOfCLITemplatesAttachedToANetworkProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveCountOfCLITemplatesAttachedToANetworkProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveCountOfNetworkProfilesAttachedToACLITemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveCountOfNetworkProfilesAttachedToACLITemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveDHCPSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveDHCPSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveDNSSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveDNSSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveImageDistributionServers.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveImageDistributionServers"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveImageDistributionSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveImageDistributionSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveLicenseSetting.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveLicenseSetting"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveNTPSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveNTPSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveNetworkDeviceProductName.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveNetworkDeviceProductName"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveScheduledMaintenanceWindowsForNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveScheduledMaintenanceWindowsForNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveSitesWithOverriddenSSIDs.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveSitesWithOverriddenSSIDs"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveSpecificImageDistributionServer.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveSpecificImageDistributionServer"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTagsAssociatedWithNetworkDevices.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTagsAssociatedWithNetworkDevices"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTagsAssociatedWithTheInterfaces.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTagsAssociatedWithTheInterfaces"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTelemetrySettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTelemetrySettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheCountOfInterfacesThatAreAssociatedWithAt_6c330a1b.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheCountOfInterfacesThatAreAssociatedWithAt_6c330a1b"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheCountOfNetworkDevicesForTheGivenApplicat_cdbaad0f.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheCountOfNetworkDevicesForTheGivenApplicat_cdbaad0f"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheCountOfNetworkDevicesThatAreAssociatedWi_b9832de8.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheCountOfNetworkDevicesThatAreAssociatedWi_b9832de8"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheCountOfPolicyTagsForAWirelessProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheCountOfPolicyTagsForAWirelessProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheCountOfSiteTagsForAWirelessProfile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheCountOfSiteTagsForAWirelessProfile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheListOfNetworkDevicesWithTheirApplication_479dd261.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheListOfNetworkDevicesWithTheirApplication_479dd261"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheNetworkProfilesAttachedToACLITemplate.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheNetworkProfilesAttachedToACLITemplate"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheStatusOfAllTheDeviceReplacementWorkflows.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheStatusOfAllTheDeviceReplacementWorkflows"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheStatusOfDeviceReplacementWorkflowThatRep_a2407523.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheStatusOfDeviceReplacementWorkflowThatRep_a2407523"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTheTotalNumberOfScheduledMaintenanceWindows.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTheTotalNumberOfScheduledMaintenanceWindows"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrieveTimeZoneSettingsForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrieveTimeZoneSettingsForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesAGlobalIPAddressPool.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesAGlobalIPAddressPool"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesAllPreviousPathtracesSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesAllPreviousPathtracesSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesAllTheValidationSets.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesAllTheValidationSets"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesAnIPAddressSubpool.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesAnIPAddressSubpool"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesCSSMConnectionMode.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesCSSMConnectionMode"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesCiscoIMCConfigurationsForCatalystCenterNodes.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesCiscoIMCConfigurationsForCatalystCenterNodes"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesConfigurationDetailsOfTheExternalIPAMServer.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesConfigurationDetailsOfTheExternalIPAMServer"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesDeployedICAPConfigurationsWhileSupportingB_0c45cdf6.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesDeployedICAPConfigurationsWhileSupportingB_0c45cdf6"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesDetailsOfASpecificICAPPacketCaptureFile.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesDetailsOfASpecificICAPPacketCaptureFile"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesDiagnosticTaskByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesDiagnosticTaskByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesDiagnosticTaskDetailsByID.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesDiagnosticTaskDetailsByID"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesGlobalIPAddressPools.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesGlobalIPAddressPools"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesIPAddressSubpools.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesIPAddressSubpools"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesPreviousPathtrace.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesPreviousPathtrace"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesSpecificClientInformationMatchingTheMACAddress.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesSpecificClientInformationMatchingTheMACAddress"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesSubpoolsIDsOfAGlobalIPAddressPool.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesSubpoolsIDsOfAGlobalIPAddressPool"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesSummaryOfNetworkDeviceLicenses.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesSummaryOfNetworkDeviceLicenses"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheApplicationQoSPolicySetting.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheApplicationQoSPolicySetting"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCiscoIMCConfigurationForACatalystCenterNode.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCiscoIMCConfigurationForACatalystCenterNode"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfActivities.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfActivities"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfDeployedICAPConfigurationsWhileS_4d6c040d.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfDeployedICAPConfigurationsWhileS_4d6c040d"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfNetworkProfilesForSites.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfNetworkProfilesForSites"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfProfilesThatTheGivenSiteHasBeenAssigned.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfProfilesThatTheGivenSiteHasBeenAssigned"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfSitesThatTheGivenNetworkProfileF_40cb52b6.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfSitesThatTheGivenNetworkProfileF_40cb52b6"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfTriggeredJobsByActivityId.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfTriggeredJobsByActivityId"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheCountOfValidationWorkflows.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheCountOfValidationWorkflows"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheDetailsOfASpecificAAAServiceMatchingThe_dacfed38.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheDetailsOfASpecificAAAServiceMatchingThe_dacfed38"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheDetailsOfASpecificDHCPServiceMatchingTh_323b9f73.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheDetailsOfASpecificDHCPServiceMatchingTh_323b9f73"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheDetailsOfASpecificDNSServiceMatchingThe_9f12711c.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheDetailsOfASpecificDNSServiceMatchingThe_9f12711c"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheDevice_sCLIsOfTheICAPIntent.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheDevice_sCLIsOfTheICAPIntent"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfAAAServicesForGivenParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfAAAServicesForGivenParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfDHCPServicesForGivenParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfDHCPServicesForGivenParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfDNSServicesForGivenParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfDNSServicesForGivenParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfNetworkApplicationsAlongWithExper_23fa3c77.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfNetworkApplicationsAlongWithExper_23fa3c77"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfNetworkProfilesForSites.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfNetworkProfilesForSites"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfNetworkProfilesThatTheGivenSiteHa_0bebd066.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfNetworkProfilesThatTheGivenSiteHa_0bebd066"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfSitesThatTheGivenNetworkProfileFo_cb2b520e.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfSitesThatTheGivenNetworkProfileFo_cb2b520e"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfThousandEyesTestResultsAlongWithR_c8c74987.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfThousandEyesTestResultsAlongWithR_c8c74987"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheListOfValidationWorkflows.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheListOfValidationWorkflows"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheMaintenanceScheduleInformation.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheMaintenanceScheduleInformation"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheSpectrumInterferenceDevicesReportsSentB_e4e5f9fd.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheSpectrumInterferenceDevicesReportsSentB_e4e5f9fd"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheSpectrumSensorReportsSentByWLCForProvidedAPMac.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheSpectrumSensorReportsSentByWLCForProvidedAPMac"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalCountOfClientsByApplyingBasicFiltering.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalCountOfClientsByApplyingBasicFiltering"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalCountOfNetworkApplicationsByApplyi_72ae1f9d.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalCountOfNetworkApplicationsByApplyi_72ae1f9d"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalCountOfThousandEyesTestResults.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalCountOfThousandEyesTestResults"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalNumberOfAAAServicesForGivenParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalNumberOfAAAServicesForGivenParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalNumberOfDHCPServicesForGivenParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalNumberOfDHCPServicesForGivenParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalNumberOfDNSServicesForGivenParameters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalNumberOfDNSServicesForGivenParameters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesTheTotalNumberOfPacketCaptureFilesMatching_e4bb30c7.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesTheTotalNumberOfPacketCaptureFilesMatching_e4bb30c7"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesValidationDetailsForAValidationSet.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesValidationDetailsForAValidationSet"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_retrievesValidationWorkflowDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_retrievesValidationWorkflowDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnListOfReplacementDevicesWithReplacementDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnListOfReplacementDevicesWithReplacementDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnReplacementDevicesCount.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnReplacementDevicesCount"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsAllIssueTriggerDefinitionsForGivenFilters.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsAllIssueTriggerDefinitionsForGivenFilters"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsCountOfAdd_onImages.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsCountOfAdd_onImages"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsCountOfSoftwareImages.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsCountOfSoftwareImages"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsListOfSoftwareImages.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsListOfSoftwareImages"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsNetworkDeviceProductNamesForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsNetworkDeviceProductNamesForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsPOEInterfaceDetailsForTheDevice.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsPOEInterfaceDetailsForTheDevice"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsTheCountOfNetworkDeviceProductNamesForASite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsTheCountOfNetworkDeviceProductNamesForASite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_returnsTheImageSummaryForTheGivenSite.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_returnsTheImageSummaryForTheGivenSite"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_sdaFabricSitesReadiness.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_sdaFabricSitesReadiness"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_securityServiceInsertionById.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_securityServiceInsertionById"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_securityServiceInsertionReadiness.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_securityServiceInsertionReadiness"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_securityServiceInsertionSummary.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_securityServiceInsertionSummary"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_securityServiceInsertions.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_securityServiceInsertions"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_sensorTestResults.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_sensorTestResults"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_sensors.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_sensors"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_smartAccountDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_smartAccountDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_statusOfTemplateDeployment.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_statusOfTemplateDeployment"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_systemHealthAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_systemHealthAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_systemHealthCountAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_systemHealthCountAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_systemLicensingLastOperationStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_systemLicensingLastOperationStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_systemLicensingStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": "3.2.1",
+      "name": "api_systemLicensingStatus"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_systemPerformanceAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_systemPerformanceAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_systemPerformanceHistoricalAPI.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_systemPerformanceHistoricalAPI"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_theTrendAnalyticsDataForAFabricSiteInTheSpecifiedTimeRange.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_theTrendAnalyticsDataForAFabricSiteInTheSpecifiedTimeRange"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_theTrendAnalyticsDataForATransitNetworkInTheSpecifi_5c01728a.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_theTrendAnalyticsDataForATransitNetworkInTheSpecifi_5c01728a"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_theTrendAnalyticsDataForAVirtualNetworkInTheSpecifi_66fff53f.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_theTrendAnalyticsDataForAVirtualNetworkInTheSpecifi_66fff53f"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_theTrendAnalyticsDataForThousandEyesTestResultsInTh_312f30ed.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_theTrendAnalyticsDataForThousandEyesTestResultsInTh_312f30ed"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_virtualAccountDetails.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_virtualAccountDetails"
+    },
+    {
+      "file": "Agent_DNAC/autogen/promoted/api_wirelessRogueAPContainmentStatus.json",
+      "max_controller_version": null,
+      "min_controller_version": null,
+      "name": "api_wirelessRogueAPContainmentStatus"
+    }
+  ],
+  "jenkins": {
+    "build_number": "43",
+    "build_tag": "jenkins-Pipelines-apic-build-geneva-SyncCatcMcpServer-43",
+    "build_url": "https://engci-private-sjc.cisco.com/jenkins/apic/job/Pipelines/job/apic-build/job/geneva/job/SyncCatcMcpServer/43/",
+    "job_name": "Pipelines/apic-build/geneva/SyncCatcMcpServer",
+    "job_url": "https://engci-private-sjc.cisco.com/jenkins/apic/job/Pipelines/job/apic-build/job/geneva/job/SyncCatcMcpServer/"
+  },
+  "platform": "DNAC",
+  "pyfe": {
+    "commit": null,
+    "dirty": false,
+    "path": "/docker/geneva/catalyst-center-mcp/pyfe"
+  },
+  "release": "3.4.1",
+  "schema_version": 1,
+  "source_tool_count": 547
+}

@@ -1,0 +1,123 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/wirelessMobilityGroups",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve configured mobility groups if no Network Device Id is provided as a query parameter. If a Network Device Id is given and a mobility group is configured for it, return the configured details; otherwise, return the default values from the device.",
+    "name": "api_getMobilityGroups",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Employ this query parameter to obtain the details of the Mobility Group corresponding to the provided networkDeviceId. Obtain the network device ID value by using the API GET call /dna/intent/api/v1/network-device/ip-address/${ipAddress}.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Self Mobility group details and Peer details.",
+          "items": {
+            "properties": {
+              "dataLinkEncryption": {
+                "description": " A secure link in which data is encrypted using CAPWAP DTLS protocol can be established between two controllers. This value will be applied to all peers during POST operation.",
+                "type": "boolean"
+              },
+              "dtlsHighCipher": {
+                "description": "DTLS High Cipher.",
+                "type": "boolean"
+              },
+              "macAddress": {
+                "description": "Device mobility MAC Address. Allowed formats are:0a0b.0c01.0211, 0a0b0c010211, 0a:0b:0c:01:02:11",
+                "type": "string"
+              },
+              "managementIp": {
+                "description": " Self device wireless Management IP.",
+                "type": "string"
+              },
+              "mobilityGroupName": {
+                "description": "Self device Group Name. Must be alphanumeric without {!,<,space,?/'} and maximum of 31 characters.",
+                "type": "string"
+              },
+              "mobilityPeers": {
+                "description": "Peer details. Maximum 24 peers are allowed.",
+                "items": {
+                  "properties": {
+                    "dataLinkEncryption": {
+                      "description": "A secure link in which data is encrypted using CAPWAP DTLS protocol can be established between two controllers. ",
+                      "type": "boolean"
+                    },
+                    "deviceSeries": {
+                      "description": "Peer device mobility belongs to AireOS or IOX-XE family. 0 - indicates AireOS and 1 - indicates C9800.",
+                      "enum": [
+                        "1",
+                        "0"
+                      ],
+                      "type": "string"
+                    },
+                    "hashKey": {
+                      "description": "SSC hash string must be 40 characters.",
+                      "type": "string"
+                    },
+                    "memberMacAddress": {
+                      "description": "Peer device mobility MAC Address.  Allowed formats are:0a0b.0c01.0211, 0a0b0c010211, 0a:0b:0c:01:02:11",
+                      "type": "string"
+                    },
+                    "mobilityGroupName": {
+                      "description": "Peer device mobility group Name. Must be alphanumeric without {!,<,space,?/'} and maximum of 31 characters.",
+                      "type": "string"
+                    },
+                    "peerIp": {
+                      "description": "This indicates public IP address.",
+                      "type": "string"
+                    },
+                    "peerNetworkDeviceId": {
+                      "description": "Peer device Id. The possible values are UNKNOWN or valid UUID of Network device ID. UNKNOWN represents out of band device which is not managed internally. Valid UUID represents WLC network device ID.",
+                      "type": "string"
+                    },
+                    "privateIpAddress": {
+                      "description": "This indicates private/management IP address.",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "Possible values are - Control and Data Path Down, Data Path Down, Control Path Down, UP.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "networkDeviceId": {
+                "description": "Obtain the network device ID value by using the API call GET: /dna/intent/api/v1/network-device/ip-address/${ipAddress}.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Response version.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,99 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "parentTaskId": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device-config/task",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns a config task result details by specified id",
+    "name": "api_getConfigTaskDetails",
+    "parameters": {
+      "properties": {
+        "parentTaskId": {
+          "description": "task Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "parentTaskId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response object.",
+          "items": {
+            "properties": {
+              "completionTime": {
+                "description": "Timestamp when the task was completed.",
+                "type": "integer"
+              },
+              "detailMessage": {
+                "description": "Details of the task, if available.",
+                "type": "string"
+              },
+              "deviceId": {
+                "description": "UUID of the device.",
+                "type": "string"
+              },
+              "deviceIpAddress": {
+                "description": "IP address of the device.",
+                "type": "string"
+              },
+              "errorCode": {
+                "description": "Error code if the task failed.",
+                "type": "string"
+              },
+              "failureMessage": {
+                "description": "Failure message, if the task failed.",
+                "type": "string"
+              },
+              "hostName": {
+                "description": "Host name of the device.",
+                "type": "string"
+              },
+              "parentTaskId": {
+                "description": "UUID of the parent task.",
+                "type": "string"
+              },
+              "startTime": {
+                "description": "Timestamp when the task started.",
+                "type": "integer"
+              },
+              "taskId": {
+                "description": "UUID of the task.",
+                "type": "string"
+              },
+              "taskStatus": {
+                "description": "Status of the task.",
+                "type": "string"
+              },
+              "taskType": {
+                "description": "Task type can be 0,1,2 etc(ARCHIVE_RUNNING(0),ARCHIVE_STARTUP(1),ARCHIVE_VLAN(2),DEPLOY_RUNNING(3),DEPLOY_STARTUP(4),DEPLOY_VLAN(5),COPY_RUNNING_TO_STARTUP(6)) ",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version of the API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

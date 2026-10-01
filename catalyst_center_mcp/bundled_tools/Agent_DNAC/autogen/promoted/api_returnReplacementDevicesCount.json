@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "family": "query",
+        "faultyDeviceName": "query",
+        "faultyDevicePlatform": "query",
+        "faultyDeviceSerialNumber": "query",
+        "replacementDevicePlatform": "query",
+        "replacementDeviceSerialNumber": "query",
+        "replacementStatus": "query"
+      },
+      "uri": "/dna/intent/api/v1/device-replacement/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get replacement devices count",
+    "name": "api_returnReplacementDevicesCount",
+    "parameters": {
+      "properties": {
+        "family": {
+          "description": "List of families [Routers, Switches and Hubs, AP]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "faultyDeviceName": {
+          "description": "Faulty Device Name",
+          "type": "string"
+        },
+        "faultyDevicePlatform": {
+          "description": "Faulty Device Platform",
+          "type": "string"
+        },
+        "faultyDeviceSerialNumber": {
+          "description": "Faulty Device Serial Number",
+          "type": "string"
+        },
+        "replacementDevicePlatform": {
+          "description": "Replacement Device Platform",
+          "type": "string"
+        },
+        "replacementDeviceSerialNumber": {
+          "description": "Replacement Device Serial Number",
+          "type": "string"
+        },
+        "replacementStatus": {
+          "description": "Device Replacement status filter. Accepts both hyphen and underscore formats (e.g. READY-FOR-REPLACEMENT or READY_FOR_REPLACEMENT). Available values: READY-FOR-REPLACEMENT, REPLACEMENT-IN-PROGRESS, REPLACEMENT-SCHEDULED, REPLACED, ERROR, NETWORK_READINESS_REQUESTED, NETWORK_READINESS_FAILED. Note: MARKED_FOR_REPLACEMENT is a transient internal state not available as a filter. Devices 'marked for replacement' immediately transition to READY-FOR-REPLACEMENT (or NETWORK_READINESS_REQUESTED for fabric devices). To count devices that were marked for replacement, query READY-FOR-REPLACEMENT and NETWORK_READINESS_REQUESTED.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "integer"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

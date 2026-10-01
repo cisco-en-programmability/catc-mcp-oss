@@ -1,0 +1,60 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "policyId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/{policyId}/rules/count",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves the count (number) of rules within a specific rule-based compliance (RBC) policy (path param `policyId`). Use this when the user asks how many rules are in a compliance/RBC policy. Resolve `policyId` from the policy name using api_getCompliancePolicies first.\n\nPartial filters: this tool counts the rules of ONE policy and has no filter beyond `policyId`. If the user asks for a rule count narrowed by something else, such as rule severity or a rule name, return the count for the policy and say plainly that the remaining part of the request could not be applied because the count API has no parameter for it. If the user asks for a total across all policies, do not loop over every policy; explain that rule counts are reported per policy and offer to give the count for the policies they name. Never fabricate a filtered number and never approximate it by listing rules and tallying them, because the list tool is paginated.",
+    "name": "api_getComplianceRuleCountWithinPolicy",
+    "parameters": {
+      "properties": {
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policyId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "description": "An object containing the response.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "example": 15,
+              "type": "integer"
+            }
+          },
+          "title": "CountResponse_response",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "Count Response",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

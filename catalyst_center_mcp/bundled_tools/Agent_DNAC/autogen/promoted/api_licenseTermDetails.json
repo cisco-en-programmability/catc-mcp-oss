@@ -1,0 +1,87 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "device_type": "query",
+        "smart_account_id": "path",
+        "virtual_account_name": "path"
+      },
+      "uri": "/dna/intent/api/v1/licenses/term/smartAccount/{smart_account_id}/virtualAccount/{virtual_account_name}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve **license term details** only (expiry/term metadata).\n\n**DO NOT USE** for license usage/consumption/availability counts.\n- Device-type license usage questions like \"How many available licenses are there for ISE?\" MUST use `api_getLicenseUsage` with productFamily (e.g., ISE).\n- System-level licensing/compliance questions like \"Is my system compliant?\" or \"How many licenses are consumed by my system?\" MUST use `api_systemLicensingStatus`.\n\nUse this tool only when the user explicitly asks about license **terms** or **expiry details**.",
+    "name": "api_licenseTermDetails",
+    "parameters": {
+      "properties": {
+        "device_type": {
+          "description": "Type of device like router, switch, wireless or ise",
+          "type": "string"
+        },
+        "smart_account_id": {
+          "description": "Id of smart account",
+          "type": "string"
+        },
+        "virtual_account_name": {
+          "description": "Name of virtual account. Putting \"All\" will give license term detail for all virtual accounts.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "smart_account_id",
+        "virtual_account_name",
+        "device_type"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "license_details": {
+          "description": "License term details",
+          "items": {
+            "properties": {
+              "dna_level": {
+                "description": "Cisco DNA license level",
+                "type": "string"
+              },
+              "is_license_expired": {
+                "description": "Is license expired",
+                "type": "string"
+              },
+              "license_term_end_date": {
+                "description": "End date of license term",
+                "type": "string"
+              },
+              "license_term_start_date": {
+                "description": "Start date of license term",
+                "type": "string"
+              },
+              "model": {
+                "description": "Model of device",
+                "type": "string"
+              },
+              "purchased_dna_license_count": {
+                "description": "Number of purchased DNA licenses",
+                "type": "string"
+              },
+              "virtual_account_name": {
+                "description": "Name of virtual account",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

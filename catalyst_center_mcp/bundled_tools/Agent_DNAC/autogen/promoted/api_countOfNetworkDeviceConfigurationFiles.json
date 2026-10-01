@@ -1,0 +1,60 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "fileType": "query",
+        "id": "query",
+        "networkDeviceId": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceConfigFiles/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Internal diagnostic counter. Returns a raw integer count of stored records, optionally filtered by owning device id and file type. Intended only for back-end housekeeping pipelines. Not used to answer user-facing questions; for any user question about a device, route to a device-level or assurance-level tool instead.",
+    "name": "api_countOfNetworkDeviceConfigurationFiles",
+    "parameters": {
+      "properties": {
+        "fileType": {
+          "description": "Internal enum filter. Allowed values: RUNNINGCONFIG, STARTUPCONFIG, VLAN.",
+          "type": "string"
+        },
+        "id": {
+          "description": "UUID of a single record to filter on.",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "Optional UUID filter for the owning device. Maximum 5 values.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

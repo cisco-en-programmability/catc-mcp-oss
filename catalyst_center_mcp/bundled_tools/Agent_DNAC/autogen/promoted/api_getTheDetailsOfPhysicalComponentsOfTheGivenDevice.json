@@ -1,0 +1,88 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceUuid": "path",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{deviceUuid}/equipment",
+      "version": "2.3.7.9"
+    },
+    "description": "Return all types of equipment details like PowerSupply, Fan, Chassis, Backplane, Module, PROCESSOR, Other and SFP for the Given device.",
+    "name": "api_getTheDetailsOfPhysicalComponentsOfTheGivenDevice",
+    "parameters": {
+      "properties": {
+        "deviceUuid": {
+          "description": "DeviceUuid",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type value can be PowerSupply, Fan, Chassis, Backplane, Module, PROCESSOR, Other, SFP. If no type is mentioned, All equipments are fetched for the device.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "",
+                "type": "string"
+              },
+              "manufacturer": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "operationalStateCode": {
+                "description": "",
+                "type": "string"
+              },
+              "productId": {
+                "description": "",
+                "type": "string"
+              },
+              "serialNumber": {
+                "description": "",
+                "type": "string"
+              },
+              "vendorEquipmentType": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

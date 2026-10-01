@@ -1,0 +1,76 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/dnac-release",
+      "version": "2.3.7.9"
+    },
+    "description": "Provides information such as API version, mandatory core packages for installation or upgrade, optional packages, Cisco Catalyst Center name and version, supported direct updates, and tenant ID. ",
+    "name": "api_ciscoCatalystCenterReleaseSummary",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "corePackages": {
+              "description": "The set of packages that are mandatory to be installed/upgraded with the release",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "installedVersion": {
+              "description": " The installed Cisco Catalyst Center version",
+              "type": "string"
+            },
+            "name": {
+              "description": "Name of the release (example \"dnac\")",
+              "type": "string"
+            },
+            "packages": {
+              "description": "The set of packages upgrades available with this release that will not be upgraded unless selected for upgrade",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "supportedDirectUpdates": {
+              "description": "The list of earlier releases that can upgrade directly to the current release. If the supportedDirectUpdates value is empty, then no direct upgrades to the current release are allowed.",
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "systemVersion": {
+              "description": "The MAGLEV-SYSTEM version",
+              "type": "string"
+            },
+            "tenantId": {
+              "description": "Tenant ID (for multi tenant Cisco Catalyst Center)",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The MAGLEV-API version (this field is for internal development purpose)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

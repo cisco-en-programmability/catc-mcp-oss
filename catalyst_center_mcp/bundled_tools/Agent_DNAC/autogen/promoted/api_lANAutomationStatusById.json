@@ -1,0 +1,200 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/lan-automation/status/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Invoke this API to get the LAN Automation session status for a specific session by its ID. Returns the session details including discovered devices list, seed device details, IP pools, multicast settings, and session status. Use this when the user asks about devices discovered in a specific LAN Automation session or LAN Automation session details by ID. This is NOT related to the generic Network Discovery feature.",
+    "name": "api_lANAutomationStatusById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "LAN Automation session identifier.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "action": {
+                "description": "State (START/STOP) of the LAN Automation session. ",
+                "type": "string"
+              },
+              "creationTime": {
+                "description": "LAN Automation session creation time.",
+                "type": "string"
+              },
+              "discoveredDeviceList": {
+                "description": "List of discovered devices.",
+                "items": {
+                  "properties": {
+                    "ipAddressInUseList": {
+                      "description": "List of IP address used by the device.",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "description": "Name of the device.",
+                      "type": "string"
+                    },
+                    "serialNumber": {
+                      "description": "Serial number of the device.",
+                      "type": "string"
+                    },
+                    "state": {
+                      "description": "State of the device (Added to inventory/Deleted from inventory).",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "discoveredDeviceSiteNameHierarchy": {
+                "description": "Discovered device site name.",
+                "type": "string"
+              },
+              "discoveryDevices": {
+                "description": "Specific devices that will be LAN Automated in this session. Any other device discovered via DHCP will be attempted for a reset and reload to bring it back to the PnP agent state at the end of the LAN Automation process before process completion. The maximum supported devices that can be provided for a session is 50.",
+                "items": {
+                  "properties": {
+                    "deviceHostName": {
+                      "description": "Hostname of the device",
+                      "type": "string"
+                    },
+                    "deviceManagementIPAddress": {
+                      "description": "Management IP Address of the device",
+                      "type": "string"
+                    },
+                    "deviceSerialNumber": {
+                      "description": "Serial number of the device",
+                      "type": "string"
+                    },
+                    "deviceSiteId": {
+                      "description": "Site UUID of the device",
+                      "type": "string"
+                    },
+                    "deviceSiteNameHierarchy": {
+                      "description": "Site name hierarchy of the device",
+                      "type": "string"
+                    },
+                    "isDeviceDiscovered": {
+                      "description": "Discovery status of the device",
+                      "type": "boolean"
+                    },
+                    "isIPAllocated": {
+                      "description": "IP Allocation status of the device",
+                      "type": "boolean"
+                    },
+                    "isIPAssigned": {
+                      "description": "IP Assignment status of the device",
+                      "type": "boolean"
+                    },
+                    "pnpDeviceId": {
+                      "description": "PnP device ID",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "discoveryLevel": {
+                "description": "Level below primary seed device upto which the new devices will be LAN Automated by this session, level + seed = tier. Supported range for level is [1-5], default level is 2.",
+                "type": "integer"
+              },
+              "discoveryTimeout": {
+                "description": "Discovery timeout in minutes. Until this time, the stop processing will not be triggered. Any device contacting after the provided discovery timeout will not be processed, and a device reset and reload will be attempted to bring it back to the PnP agent state before process completion. The supported timeout range is in minutes [20-10080].",
+                "type": "integer"
+              },
+              "hostNameFileId": {
+                "description": "File ID for the uploaded file in the nw_orch namespace",
+                "type": "string"
+              },
+              "hostNamePrefix": {
+                "description": "Hostname prefix of the discovered devices",
+                "type": "string"
+              },
+              "id": {
+                "description": "LAN Automation session id.",
+                "type": "string"
+              },
+              "ipPools": {
+                "description": "The list of IP pools with its name and role.",
+                "items": {
+                  "properties": {
+                    "ipPoolName": {
+                      "description": "Name of the IP pool.",
+                      "type": "string"
+                    },
+                    "ipPoolRole": {
+                      "description": "Role of the IP pool. Supported roles are: MAIN_POOL and PHYSICAL_LINK_POOL.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "multicastEnabled": {
+                "description": "Shows whether underlay multicast is enabled or not. ",
+                "type": "boolean"
+              },
+              "peerDeviceManagmentIPAddress": {
+                "description": "Peer seed device management IP address.",
+                "type": "string"
+              },
+              "primaryDeviceInterfaceNames": {
+                "description": "The list of interfaces on primary seed via which the discovered devices are connected.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "primaryDeviceManagmentIPAddress": {
+                "description": "Primary seed device management IP address.",
+                "type": "string"
+              },
+              "redistributeIsisToBgp": {
+                "description": "Shows whether advertise LAN Automation summary route into BGP is enabled or not.",
+                "type": "boolean"
+              },
+              "status": {
+                "description": "Status of the LAN Automation session along with the number of discovered devices. ",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

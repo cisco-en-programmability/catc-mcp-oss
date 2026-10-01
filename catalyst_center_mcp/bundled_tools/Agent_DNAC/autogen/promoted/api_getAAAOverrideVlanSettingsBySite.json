@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{siteId}/wirelessSettings/flexConnectAaaOverride",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get all Flex Connect AAA Override VLAN settings at the given site",
+    "name": "api_getAAAOverrideVlanSettingsBySite",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "siteId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "inheritedSiteNameHierarchy": {
+                "description": "The Inherited Site Name Hierarchy specifies the name hierarchy of a parent site from which AAA Override VLAN is inherited.",
+                "type": "string"
+              },
+              "inheritedSiteUUID": {
+                "description": "The Inherited Site UUID specifies the unique identifier of a parent site from which AAA Override VLAN is inherited",
+                "type": "string"
+              },
+              "vlanId": {
+                "description": "The VLAN ID is a identifier used to uniquely distinguish a Virtual Local Area Network (VLAN) within a network.",
+                "type": "integer"
+              },
+              "vlanName": {
+                "description": "The VLAN NAME is a label assigned to a Virtual Local Area Network (VLAN) to identify and differentiate it within a network.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,125 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceCount": "query",
+        "id": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "severity": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/bugs",
+      "version": "2.3.7.9"
+    },
+    "description": "Get detected network bugs affecting devices in the network. Use this list tool for questions that ask which network bugs exist, which bugs are detected, which severe/moderate/catastrophic bugs affect the network, or which bugs affect devices. For any in-my-network, detected, or severity-specific network bug list question, explicitly pass deviceCount: 0 so the list includes only bugs with at least one affected device. Examples: 'List all network bugs detected' -> deviceCount: 0 and limit: 10; 'Show severe network bugs' -> severity: SEVERE, deviceCount: 0, and limit: 10. Do not omit deviceCount, because omitting it may return all known bug records including bugs with no affected devices.",
+    "name": "api_getNetworkBugs",
+    "parameters": {
+      "properties": {
+        "deviceCount": {
+          "default": 0,
+          "description": "Return network bugs with affected deviceCount greater than this deviceCount. Use deviceCount: 0 for detected or in-network bug lists so only bugs affecting at least one device are returned.",
+          "type": "number"
+        },
+        "id": {
+          "description": "The id of the network bug",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Return network bugs with this severity. Available values : CATASTROPHIC, SEVERE, MODERATE",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Network bug details",
+          "items": {
+            "properties": {
+              "affectedVersions": {
+                "description": "Versions that are affected by the network bug",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "deviceCount": {
+                "description": "Number of devices affected by this network bug.",
+                "type": "integer"
+              },
+              "hasWorkaround": {
+                "description": "Indicates if the network bug has a workaround",
+                "type": "boolean"
+              },
+              "headline": {
+                "description": "Title of the network bug",
+                "type": "string"
+              },
+              "id": {
+                "description": "Id of the network bug",
+                "type": "string"
+              },
+              "integratedReleases": {
+                "description": "Versions that have the fix for the network bug",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "publicationUrl": {
+                "description": "Url for getting network bug details on cisco website",
+                "type": "string"
+              },
+              "severity": {
+                "description": "'CATASTROPHIC' - Reasonably common circumstances cause the entire system to fail, or a major subsystem to stop working. 'SEVERE' - Important functions are unusable. 'MODERATE' - Failures occur in unusual circumstances, or minor features do not work at all.",
+                "type": "string"
+              },
+              "workaround": {
+                "description": "Workaround if any that exists for the network bug",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

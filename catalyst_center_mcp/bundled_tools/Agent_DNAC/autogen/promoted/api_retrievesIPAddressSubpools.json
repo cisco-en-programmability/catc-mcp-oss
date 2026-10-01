@@ -1,0 +1,211 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "siteId": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/ipam/siteIpAddressPools",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves IP address subpools.\n\nPRECEDENCE\nApply sections in order. Higher sections override lower sections when they conflict.\n\nS0 Scope and hard boundaries (highest priority)\nS0.1 This tool is for subpool intents.\nS0.2 If user asks for LAN pools, filter subpools by poolType == 'LAN'.\nS0.3 Do not display UUIDs in user output.\n\nS1 Intent disambiguation and tool selection\nS1.1 If user explicitly asks for subpool(s), do not retrieve global pools unless explicitly asked for both.\nS1.2 If user says 'pool' or 'pools' without specifying global vs subpool, ALWAYS call both api_retrievesGlobalIPAddressPools and api_retrievesIPAddressSubpools before answering, even if global already matches.\nS1.3 For ambiguous 'pool(s)' answers, ALWAYS return two distinct sections in this exact order:\n  (1) Global pools section\n  (2) Subpools section\nDo not merge sections, schemas, or counts.\nS1.4 Explicit subpool identifier resolution:\n  - UUID: use api_retrievesAnIPAddressSubpool.\n  - Non-UUID name: use api_retrievesIPAddressSubpools and exact-name client-side filtering.\nS1.5 If site is specified, match by exact siteId only (no parent/child expansion unless explicitly requested).\nS1.6 Name filter strictness: subpool-name filtering must be exact match only after normalization (trim surrounding whitespace). Do not use contains/startsWith/endsWith/fuzzy matching.\n\nS2 API usage and limits\nS2.1 Pure browse/list with no filtering/computation: use limit=10.\nS2.2 Filtering/computation/name-resolution: use limit=500.\nS2.3 If filtering/computation may require more than 500 records and server-side filtering is insufficient, paginate with limit=500 and offsets 1, 501, 1001, ... until page size < 500, then aggregate and filter.\nS2.4 For pure subpool count queries ('how many'), use api_countsIPAddressSubpools.\nS2.5 For detail/list/filter/configuration queries, use retrieval APIs.\nS2.6 For DHCP/DNS/gateway value matching on pools, use pool retrieval APIs and filter by value. Do not call get_dhcp_services unless user explicitly asks about DHCP services themselves.\nS2.7 If query is list/browse/sorted/paginated for subpools, ALWAYS call api_countsIPAddressSubpools exactly once before final response.\n\nS3 Count requirements and quantity wording\nS3.1 ALWAYS call api_countsIPAddressSubpools to get total subpool count for subpool list/browse/filter outputs.\nS3.2 Browse/list wording (no computed filtering):\n  - Default: 'Showing 10 out of {total} results.'\n  - If offset used: 'Showing {offset}-{end} out of {total} results.'\nS3.3 Filtered/computed wording:\n  - Compute exact filtered total N.\n  - If N > 10: 'Showing first 10 of {N} matching results.'\n  - Else: 'Showing all {N} matching results.'\nS3.4 Never use vague quantity terms (many/several/numerous).\nS3.5 Offset-specific mandatory wording: If offset is provided in list/browse mode, ALWAYS render count line as 'Showing {offset}-{min(offset+shown-1,total)} out of {total} results.' Never use 'Showing {shown} out of {total}' when offset is present. Define shown as the number of rows actually displayed (max 10).\nS3.6 Count-line wording is mandatory for multi-row list outputs: if offset is present, use 'Showing {offset}-{min(offset+shown-1,total)} out of {total} results.'; if offset is absent, use 'Showing 10 out of {total} results.'; shown is number of displayed rows (max 10).\n\nS4 Computation semantics (must compute directly from payload)\nS4.1 Do not use execute_python_code or process_cached_data for exhausted/free/used/utilization/filter/sort calculations.\nS4.2 Prefer ipV4AddressSpace; if missing use ipV6AddressSpace. Use exact keys totalAddresses, unassignableAddresses, assignedAddresses, defaultAssignedAddresses.\nS4.3 'available' or 'free' = totalAddresses - (unassignableAddresses + assignedAddresses + defaultAssignedAddresses).\nS4.4 'used' = assignedAddresses + defaultAssignedAddresses.\nS4.5 'used percentage' or 'utilization' = ((unassignableAddresses + assignedAddresses + defaultAssignedAddresses) / totalAddresses) * 100.\nS4.6 'free/available X addresses' means AT LEAST X unless user explicitly asks for exact.\nS4.7 'exhausted' means totalAddresses == (unassignableAddresses + assignedAddresses + defaultAssignedAddresses).\nS4.8 'nearly exhausted' means assignedAddresses is at least 80% of totalAddresses.\nS4.9 Subpool is unused if assignedAddresses == 0 for all present address spaces.\nS4.10 Netmask guidance: a netmask defines network bits; convert netmask to slash prefix by counting 1-bits; present subnet+mask as CIDR when both exist.\n\nS5 Output format and templates\nS5.1 Hard row cap: NEVER display more than 10 rows in any table.\nS5.2 Any Table must be immediately preceded by Markdown intro. Never start with a Table.\nS5.3 For two-table outputs, required sequence is [Markdown, Table, Markdown with count, Table, Markdown with count].\nS5.4 Subpool table schema is mandatory for multi-row subpool list outputs. Exact column order and names:\n  Name, Type, CIDR, Total Addresses, Assigned, Gateway, Site.\nDo not add extra columns unless user explicitly requests.\nS5.5 If exactly one subpool is displayed, do not use a Table; use Markdown details.\nS5.6 Single subpool Markdown template (exact field order; missing values must be 'N/A'):\n  Subpool details\n  Name:\n  Pool type:\n  IP address space:\n  Gateway IP:\n  DHCP servers:\n  DNS servers:\n  Total addresses:\n  Unassignable addresses:\n  Assigned addresses:\n  Default assigned addresses:\n  Overlapping status:\n  Associated site:\nS5.7 If asked for in-use addresses, include: total IP addresses in use, assigned addresses, default assigned addresses, and free addresses.\nS5.8 If API call is sorted and order is not specified, use order=asc.\nS5.9 Do not reuse columns across global/subpool tables.\n\nS6 Ambiguous pools rendering details\nS6.1 In ambiguous 'pool(s)' responses, each section must have its own intro, its own table/schema, and its own count line.\nS6.2 If one section has zero matches, still render that section with Markdown 'No matching <type> pools found.' and include that section's count line.\n\nS5.10 For every multi-row list response for this tool, output shape is mandatory: [Markdown intro, Table, Markdown count line]. Table-only output is invalid.\nS5.11 Render-time truncation is mandatory: before rendering any Table, compute shown_rows = filtered_rows[:10] and render from shown_rows only. Never render from unbounded/filtered_rows directly. Applies to browse and computed/filter results.\nS5.12 Pre-send validation gate: if any table has more than 10 rows, trim to 10 rows and regenerate the count line before final answer.\nS5.13 Mandatory schema applies to ALL multi-row subpool tables, including computed/filtered results (unused/exhausted/free/at-least/sorted), not only browse lists.\nS5.14 Subpool multi-row table headers MUST be exactly: Name, Type, CIDR, Total Addresses, Assigned, Gateway, Site.\nS5.15 Do not rename subpool headers (forbidden examples: Subpool name, Subnet).\nS5.16 Pre-send schema gate: if subpool table headers do not exactly match required schema, rebuild table with required headers before final answer.\nS5.19 Single-subpool completeness rule: for any single-subpool response (including existence checks like 'Is there a subpool ...' and detail questions), ALWAYS use the full single-subpool template and ALWAYS include Name.\nS5.20 Single-subpool pre-send gate: if a single-subpool response does not contain 'Name:', regenerate once using the mandatory single-subpool template before final answer.\nS4.11 Deterministic computation path: compute free/used/exhausted/utilization and sorting directly in assistant reasoning from retrieval API payloads; do not delegate these computations to execute_python_code.\nS4.12 Variable contract for computations: use retrieval payload aliases only: global_pools = api_retrievesGlobalIPAddressPools.response and subpools = api_retrievesIPAddressSubpools.response. Never reference _tool_responses, functions_* variables, or multi_tool_use.* variable names.\nS4.13 If computation for a required table fails, do not emit ad-hoc narrative fallback. Retry once using the deterministic payload aliases and required formulas.\nS5.17 Output gate for computed ordering queries (for example 'fewest free'): final output must be [Markdown, Table, Markdown count line]. If this shape is not met, regenerate before final answer.\nS4.14 Display-calculation consistency rule: when displaying 'Assigned addresses' and 'Percent used', ALWAYS compute both from the same used_total = assignedAddresses + defaultAssignedAddresses (and include unassignableAddresses only when the query definition explicitly requires it). Never compute percent from assignedAddresses alone.\nS4.15 Compute-before-conclusion gate: for queries containing exhausted/unused/nearly exhausted/fewest free, do not conclude 'none found' unless deterministic filtering has been executed over retrieved payloads and produced zero matches.\nS5.18 Computed-filter proof requirement: for computed-filter queries, response must include either (a) a table of matches, or (b) explicit computed match count line: 'Found 0 matching pools after computation.'\nS4.16 Mandatory retry-on-compute-failure: if computed/filter logic fails (including missing binding/variable errors), rebind from retrieval payload aliases and recompute once before any fallback/error response.\nS4.17 Hard ban for computed/filter flows: do not use execute_python_code or process_cached_data for these intents; perform filtering/sorting/counting directly in the same reasoning pass from retrieval payload fields.\nS4.21 Absolute prohibition for computed/filter intents: for free/available/used/utilization/exhausted/near-exhausted/fewest/most queries, MUST NOT call execute_python_code or process_cached_data under any circumstance; all calculations must be performed directly from retrieval API payload fields in the same reasoning pass.\nS4.22 Runtime variable binding rule (if a compute-helper path is ever attempted): the only valid retrieval payload variables are functions_api_retrievesGlobalIPAddressPools_response and functions_api_retrievesIPAddressSubpools_response. Do not use _tool_responses, global_pools/subpools unless explicitly assigned from these variables, and do not use dotted cache names like functions.api_retrievesGlobalIPAddressPools.response or functions.api_retrievesIPAddressSubpools.response.\nS5.21 Final validation gate for computed/filter flows: do not return fallback/error text unless the mandatory recompute retry (S4.16) has been attempted and failed; final response must include either (a) result table/list or (b) explicit computed zero-match line.\nS5.22 Mandatory pre-answer checklist for computed/filter intents: before final response, verify all of the following are true: (a) free/used/exhausted calculations used the canonical formulas; (b) if user said 'pool(s)' without type, both global and subpool datasets were evaluated; (c) exact match count N was computed; (d) output includes either result rows/tables or an explicit computed zero-match line. If any check fails, regenerate once before final answer.\nS4.18 Exhaustion criteria unification (Q23/Q24-class intents): compute used_total = assignedAddresses + defaultAssignedAddresses + unassignableAddresses for each pool/subpool.\nS4.19 Near-exhausted threshold (Q23-class intents): near_exhausted when used_total / totalAddresses >= 0.80.\nS4.20 Exhausted threshold (Q24-class intents): exhausted when used_total == totalAddresses.\nS1.7 Cross-type computed pass requirement for exhausted/near-exhausted intents: ALWAYS evaluate both global pools and subpools in the same computed pass before answering; do not early-exit after evaluating only one type.\nS1.8 Treat requests mentioning 'with SLAAC', 'without SLAAC', 'SLAAC enabled', 'SLAAC disabled', 'IPv4 only', 'IPv6 only', or 'dual stack' as subpool-only classification intents. For these intents, call only api_retrievesIPAddressSubpools, never call api_retrievesGlobalIPAddressPools. These are filtering based requests so always use limit 500 NEVER use limit 10. \nS1.9 Never include subpools that have no ipv6 address space to answer 'ipv6 only' or 'slaac' questions\nS1.10 Never include subpools that have no ipv4 address space to answer 'ipv4 only' questions.\nS1.11 If the user requests multiple classification categories in one question, compute each requested category separately from the retrieved subpool payloads before answering.\nS4.23 Classification presence flags:\n For subpools: has_ipv4 if ipV4AddressSpace.subnet exists, has_ipv6 if ipV6AddressSpace.subnet exists.\nS4.24 IP-mode classification:\n  - IPv4 only = has_ipv4 and not has_ipv6\n  - IPv6 only = has_ipv6 and not has_ipv4\n  - Dual stack = has_ipv4 and has_ipv6\nS4.25 SLAAC classification:\n  - Enabled if any present address space has slaacSupport == true.\n  - Disabled if an IPv6 address space is present and all present slaacSupport values are false.\n  - Not configured if no present address space exposes slaacSupport.\nS4.26 Filter semantics:\n  - 'with SLAAC' and 'SLAAC enabled' => SLAAC status == Enabled\n  - 'without SLAAC' and 'SLAAC disabled' => SLAAC status != Enabled\n  - 'IPv4 only', 'IPv6 only', and 'dual stack' => exact computed IP-mode match\nS4.27 For classification queries, compute filters directly from retrieved payloads. Use exact-name matching only when the user supplies a specific pool name.\nS4.28 For a single exact pool resolved during a classification query, compute SLAAC status and IP mode, and provide those values to the single-subpool detail output defined in S5.6, as extended by S5.28.\nS5.33 Pre-send gate for SLAAC/IP-mode classification intents: if tool_history contains api_retrievesGlobalIPAddressPools or the draft response mentions global pools, discard the global content and regenerate using only subpool results.\nS5.34 For SLAAC/IP-mode classification intents, final output must contain subpool results only. Do not render a global pools section, global-pool table, or global-pool narrative, even if global pool data is present in context.\nS5.23 For multi-row classification results, keep the existing per-section separation rules. Within each section, render one table per requested classification category that has matches.\nS5.24 Classification-table schema exception: retain the mandatory base subpool table schema from S5.4/S5.14 exactly as-is, and append only the relevant classification column(s): SLAAC and/or IP Mode.\nS5.25 Use clear table titles matching the category, for example 'Pools with SLAAC enabled', 'Pools without SLAAC', 'IPv4-only pools', 'IPv6-only pools', and 'Dual-stack pools'.\nS5.26 If a requested classification category has zero matches in a section, use the existing no-match style for that section. If all requested categories across all evaluated sections have zero matches, return 'No matching pools found for the requested criteria.'\nS5.27 Existing count-line wording and 10-row truncation rules apply independently to every classification table.\nS5.28 For a single exact pool classification response, do not stop at yes/no; include the computed classification fields in the single-pool detail output.\nS1.10 Treat questions containing subnet wildcard/prefix patterns such as '10.1.1.x', '10.1.1.*', 'starts with 10.1.1', or 'prefix 10.1.1' as subnet-prefix search intents, not name-search intents.\nS1.11 For subnet-prefix search intents, the exact-name-only rule does not apply; match by computed network prefix from the pool address space.\nS4.29 Wildcard normalization:\n  - Normalize trailing '.x' to '.*'.\n  - Normalize phrases like 'starts with A.B.C' and 'prefix A.B.C' to prefix token 'A.B.C'.\n  - For IPv4 wildcard searches, compare against the textual subnet prefix of the relevant address space before '/prefixLength' is appended.\nS4.30 Prefix-match semantics:\n  - A pool matches if its subnet string begins with the normalized prefix token.\n  - For this tool, evaluate both ipV4AddressSpace.subnet and ipV6AddressSpace.subnet when present.\n  - If the user asked for 'pool(s)' ambiguously, both global and subpool datasets must be evaluated using their respective subnet fields.\nS4.31 DNS-status classification for wildcard subnet searches:\n  - DNS configured if the matched address space has dnsServers and its length > 0.\n  - DNS not configured otherwise.\n  - Apply 'with DNS' and 'without DNS' filters after prefix matching.\nS4.32 If both IPv4 and IPv6 address spaces are present, evaluate wildcard subnet matching independently per address space and treat a match in either address space as a pool match.\nS4.33 For wildcard subnet searches with one exact computed match in this tool section, answer using the single-subpool detail format defined in S5.6, as enforced by S5.19, rather than a table.\nS5.29 For multi-row wildcard subnet results in this tool section, retain the mandatory subpool table schema defined in S5.4/S5.14 exactly as-is, and append DNS Status only if the user explicitly asked about DNS configuration.\nS5.30 Use section intro/description text that states the normalized wildcard or prefix that was matched.\nS5.31 If there are zero matches in this tool section for a wildcard subnet search, use the existing no-match section style. If all evaluated sections have zero matches, return 'No matching subpools found for wildcard {original_pattern}.' for explicit subpool requests, otherwise use the existing generic ambiguous-pools no-match behavior.\nS5.32 Existing count-line wording and 10-row truncation rules apply to wildcard subnet outputs exactly as they do to other filtered results.\nS5.33 Do not remove, rename, or reorder base schema columns for wildcard/DNS outputs.\n",
+    "name": "api_retrievesIPAddressSubpools",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The `id` of the site for which to retrieve IP address subpools. Only subpools whose `siteId` exactly matches will be fetched, parent or child site matches will not be included.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "The UUID for this reserve IP pool (subpool).",
+                "type": "string"
+              },
+              "ipV4AddressSpace": {
+                "description": "",
+                "properties": {
+                  "assignedAddresses": {
+                    "description": "The number of addresses assigned from the pool. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  },
+                  "defaultAssignedAddresses": {
+                    "description": "The number of addresses that are assigned from the pool by default. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  },
+                  "dhcpServers": {
+                    "description": "The DHCP server(s) for this subnet.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "dnsServers": {
+                    "description": "The DNS server(s) for this subnet.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "gatewayIpAddress": {
+                    "description": "The gateway IP address for this subnet.",
+                    "type": "string"
+                  },
+                  "globalPoolId": {
+                    "description": "The non-tunnel global pool for this reserve pool (which matches this IP address type). Once added this value cannot be changed.",
+                    "type": "string"
+                  },
+                  "prefixLength": {
+                    "description": "The network mask component, as a decimal, for the CIDR notation of this subnet.",
+                    "type": "number"
+                  },
+                  "slaacSupport": {
+                    "description": "If the prefixLength is 64, this option may be enabled. Stateless Address Auto-configuration (SLAAC) allows network devices to select their IP address without the use of DHCP servers.",
+                    "type": "boolean"
+                  },
+                  "subnet": {
+                    "description": "The IP address component of the CIDR notation for this subnet.",
+                    "type": "string"
+                  },
+                  "totalAddresses": {
+                    "description": "The total number of addresses in the pool. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  },
+                  "unassignableAddresses": {
+                    "description": "The number of addresses in the pool that cannot be assigned. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "ipV6AddressSpace": {
+                "description": "",
+                "properties": {
+                  "assignedAddresses": {
+                    "description": "The number of addresses assigned from the pool. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  },
+                  "defaultAssignedAddresses": {
+                    "description": "The number of addresses that are assigned from the pool by default. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  },
+                  "dhcpServers": {
+                    "description": "The DHCP server(s) for this subnet.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "dnsServers": {
+                    "description": "The DNS server(s) for this subnet.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "gatewayIpAddress": {
+                    "description": "The gateway IP address for this subnet.",
+                    "type": "string"
+                  },
+                  "globalPoolId": {
+                    "description": "The non-tunnel global pool for this reserve pool (which matches this IP address type). Once added this value cannot be changed.",
+                    "type": "string"
+                  },
+                  "prefixLength": {
+                    "description": "The network mask component, as a decimal, for the CIDR notation of this subnet.",
+                    "type": "number"
+                  },
+                  "slaacSupport": {
+                    "description": "If the prefixLength is 64, this option may be enabled. Stateless Address Auto-configuration (SLAAC) allows network devices to select their IP address without the use of DHCP servers.",
+                    "type": "boolean"
+                  },
+                  "subnet": {
+                    "description": "The IP address component of the CIDR notation for this subnet.",
+                    "type": "string"
+                  },
+                  "totalAddresses": {
+                    "description": "The total number of addresses in the pool. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  },
+                  "unassignableAddresses": {
+                    "description": "The number of addresses in the pool that cannot be assigned. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "name": {
+                "description": "The name for this reserve IP pool. Only letters, numbers, '-' (hyphen), '_' (underscore), '.' (period), and '/' (forward slash) are allowed.",
+                "type": "string"
+              },
+              "poolType": {
+                "description": "Once created, a subpool type cannot be changed.  LAN: Assigns IP addresses to LAN interfaces of applicable VNFs and underlay LAN automation.  Management: Assigns IP addresses to management interfaces. A management network is a dedicated network connected to VNFs for VNF management.  Service: Assigns IP addresses to service interfaces. Service networks are used for communication within VNFs.  WAN: Assigns IP addresses to NFVIS for UCS-E provisioning.  Generic: used for all other network types.",
+                "enum": [
+                  "Generic",
+                  "LAN",
+                  "Management",
+                  "Service",
+                  "WAN"
+                ],
+                "type": "string"
+              },
+              "siteId": {
+                "description": "The `id` of the site that this subpool belongs to. This must be the `id` of a non-Global site.",
+                "type": "string"
+              },
+              "siteName": {
+                "description": "The name of the site that this subpool belongs to.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,384 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "SMO_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "query": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/system/api/v1/backups",
+      "version": "1.0.0-oas3"
+    },
+    "description": "**Pick this tool for backup INVENTORY and backup HISTORY questions.**\n\nThis tool lists backups available in the configured Catalyst Center backup storage with optional filtering, sorting, and pagination. It returns backup identifiers plus summary fields such as status, dates, size, scope, storage, compatibility, and availability.\n\n**Use this tool when the user asks:**\n- to show all backups or available backups\n- whether there are failed backups\n- which backups are available for restore\n- for backup history or recent backups\n- for backups created by a specific user, status, or time period\n- for a list of backups before drilling into one backup in detail\n\n**Pick this tool for questions like:**\n- \"Show me all backups\"\n- \"List available backups\"\n- \"Are there any failed backups?\"\n- \"What backups can be restored?\"\n- \"Show the latest backups\"\n- \"Show backups created by system\"\n- \"List backups from the last week\"\n\n**Do NOT use this tool for:**\n- current backup configuration/settings\n- mounted backup storage capacity questions\n- configured NFS server health\n- detailed diagnostics for one backup execution\n\nWhen the user wants full package, version, or compatibility details for a single backup, first call this tool to get the backup `id`, then call `api_getBackupById`.",
+    "name": "api_getAllBackup",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Optional maximum number of backup records to return. Valid range is 1-500. Use a smaller limit when the user wants a compact page of results.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Optional 1-based starting offset for pagination. Use 1 for the first page, then increase it to page through additional or older backups.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Optional sort direction. Use `desc` for newest-first or latest-first views and `asc` for oldest-first or alphabetical order.",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "type": "string"
+        },
+        "query": {
+          "description": "Optional free-text filter for backup records, useful for narrowing by backup name, status, creator, scope, or other searchable backup fields.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Optional backup response field to sort by, such as `createdDate`, `endDate`, `name`, or `status`.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Contains the information about backup details.",
+      "properties": {
+        "filter": {
+          "description": "Records are filtered based on the fields",
+          "type": "object"
+        },
+        "page": {
+          "allOf": [
+            {
+              "description": "Contains pagination information.",
+              "properties": {
+                "count": {
+                  "description": "Total number of records that can be returned for this request",
+                  "example": 5,
+                  "type": "integer"
+                },
+                "limit": {
+                  "description": "Number of records to be returned in response",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "offset": {
+                  "description": "Starting offset of data to fetch and returned",
+                  "example": 10,
+                  "type": "integer"
+                },
+                "sortBy": {
+                  "description": "List of sort objects",
+                  "items": {
+                    "description": "Contains sort by information.",
+                    "properties": {
+                      "name": {
+                        "description": "Records are sorted based on the field specified.",
+                        "example": "startDate",
+                        "type": "string"
+                      },
+                      "order": {
+                        "description": "Sort order. 'asc' for ascending and 'desc' for descending",
+                        "example": "asc",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Contains pagination information.",
+          "type": "object"
+        },
+        "response": {
+          "description": "Contains information about backups.",
+          "items": {
+            "description": "Contains the information about backup details..",
+            "properties": {
+              "compatibilityError": {
+                "description": "The backup compatibility error",
+                "items": {
+                  "description": "Contains the information about backup compatibility.",
+                  "properties": {
+                    "endDate": {
+                      "description": "Backup compatibility end date",
+                      "example": "2022-04-30T02:21:22.000Z",
+                      "type": "string"
+                    },
+                    "namespace": {
+                      "description": "The namespace of the service",
+                      "example": "sys-ops",
+                      "type": "string"
+                    },
+                    "response": {
+                      "additionalProperties": true,
+                      "description": "Response received from the service during compatibility check",
+                      "type": "object"
+                    },
+                    "serviceName": {
+                      "description": "The service name on which the compatibility check executed",
+                      "example": "admin-service",
+                      "type": "string"
+                    },
+                    "startDate": {
+                      "description": "Backup compatibility start date",
+                      "example": "2022-04-30T02:21:22.000Z",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "context": {
+                "allOf": [
+                  {
+                    "description": "Contains the information about backup context..",
+                    "properties": {
+                      "schedule": {
+                        "description": "Schedule time",
+                        "example": "2022-04-30T02:21:22.000Z",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "This states whether the backup is created based on schedule or on-demand",
+                        "enum": [
+                          "ONDEMAND",
+                          "SCHEDULE"
+                        ],
+                        "example": "ONDEMAND",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "description": "This field states whether the backup is on-demand or schedule based",
+                "type": "object"
+              },
+              "createdBy": {
+                "description": "This field represents the user who triggered this backup",
+                "example": "2022-04-30T02:21:22.000Z",
+                "type": "string"
+              },
+              "createdDate": {
+                "description": "This field represents the backup creation date",
+                "example": "2022-04-30T02:21:22.000Z",
+                "type": "string"
+              },
+              "duration": {
+                "description": "Total time taken to create this backup",
+                "example": 12345,
+                "type": "integer"
+              },
+              "endDate": {
+                "description": "This field represents the backup end date",
+                "example": "2022-04-30T02:21:22.000Z",
+                "type": "string"
+              },
+              "fipsEnabled": {
+                "description": "This states whether FIPS is enabled or not",
+                "example": true,
+                "type": "boolean"
+              },
+              "id": {
+                "description": "The UUID for this backup",
+                "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+                "type": "string"
+              },
+              "installedPackages": {
+                "description": "List of packages installed",
+                "items": {
+                  "description": "Contains the information about installed packages during backup creation.",
+                  "properties": {
+                    "displayName": {
+                      "description": "The package display name",
+                      "example": "Cisco DNAC Platform Events",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The package name",
+                      "example": "dnacaap-events",
+                      "type": "string"
+                    },
+                    "version": {
+                      "description": "The package version",
+                      "example": "1.1.1",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "internetProtocolVersion": {
+                "description": "The network protocol",
+                "enum": [
+                  "ipv4",
+                  "ipv6"
+                ],
+                "example": "ipv4",
+                "type": "string"
+              },
+              "isBackupAvailable": {
+                "description": "This field represents whether the backup is available in the configured storage",
+                "example": true,
+                "type": "boolean"
+              },
+              "isCompatible": {
+                "description": "This field represents whether the backup is compatible to restore",
+                "example": true,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "The backup name",
+                "example": "System Backup",
+                "type": "string"
+              },
+              "numberOfNodes": {
+                "description": "Total number of nodes",
+                "example": 1,
+                "type": "integer"
+              },
+              "productType": {
+                "description": "Installed product type",
+                "example": "dnac",
+                "type": "string"
+              },
+              "productVersion": {
+                "description": "The product version",
+                "example": "1.2.32",
+                "type": "string"
+              },
+              "releaseDisplayName": {
+                "description": "The release display name of the product installed",
+                "example": "Bristol release 1.1.1",
+                "type": "string"
+              },
+              "releaseDisplayVersion": {
+                "description": "The release display version of the product installed",
+                "example": "1.1.0",
+                "type": "string"
+              },
+              "releaseName": {
+                "description": "The release name of the product installed",
+                "example": "bristol-release-1.1.1",
+                "type": "string"
+              },
+              "releaseVersion": {
+                "description": "The release version of the product installed",
+                "example": "1.1.1",
+                "type": "string"
+              },
+              "scope": {
+                "description": "The backup scope states whether the backup is with assurance or without assurance data",
+                "enum": [
+                  "CISCO_DNA_DATA_WITH_ASSURANCE",
+                  "CISCO_DNA_DATA_WITHOUT_ASSURANCE"
+                ],
+                "example": "CISCO_DNA_DATA_WITH_ASSURANCE",
+                "type": "string"
+              },
+              "size": {
+                "description": "The total backup size",
+                "example": 323233,
+                "type": "integer"
+              },
+              "status": {
+                "description": "Status of the backup",
+                "example": "IN_PROGRESS",
+                "type": "string"
+              },
+              "storage": {
+                "allOf": [
+                  {
+                    "description": "Contains backup storage information.",
+                    "properties": {
+                      "host": {
+                        "description": "The host of the storage",
+                        "example": "10.12.1.12",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "The UUID of the storage",
+                        "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+                        "type": "string"
+                      },
+                      "mountPath": {
+                        "description": "The mount path of the storage",
+                        "example": "/sda1/",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "The name of the storage",
+                        "example": "NFS Host 1",
+                        "type": "string"
+                      },
+                      "serverPath": {
+                        "description": "The server path of the storage",
+                        "example": "/root/backup/",
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "The type pf storage",
+                        "enum": [
+                          "PHYSICAL_DISK",
+                          "NFS"
+                        ],
+                        "example": "NFS",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "description": "The storage detail of the backup",
+                "type": "object"
+              },
+              "versions": {
+                "description": "List of packages available while creating the backup",
+                "example": [
+                  "1.1.1",
+                  "1.1.2"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

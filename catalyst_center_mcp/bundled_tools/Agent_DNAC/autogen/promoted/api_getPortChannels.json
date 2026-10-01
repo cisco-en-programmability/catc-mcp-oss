@@ -1,0 +1,120 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "device1ManagementIPAddress": "query",
+        "device1Uuid": "query",
+        "device2ManagementIPAddress": "query",
+        "device2Uuid": "query",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/lanAutomation/portChannels",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns a list of Port Channel between the LAN Automation associated devices.",
+    "name": "api_getPortChannels",
+    "parameters": {
+      "properties": {
+        "device1ManagementIPAddress": {
+          "description": "The management IP address of the device1.",
+          "type": "string"
+        },
+        "device1Uuid": {
+          "description": "Unique identifier for the network device1",
+          "type": "string"
+        },
+        "device2ManagementIPAddress": {
+          "description": "The management IP address of the device2.",
+          "type": "string"
+        },
+        "device2Uuid": {
+          "description": "Unique identifier for the network device2",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Port channel get response body (Maximum number of records to return in each response is 500)..",
+      "properties": {
+        "response": {
+          "description": "Port channel get response body.",
+          "items": {
+            "properties": {
+              "allowedVlanRanges": {
+                "description": "Allowed VLAN of the port channel, this option is only applicable to TRUNK connectedDeviceType. (VLAN must be between 1 and 4094 (Ex 100,200,300-400) or 'all'. In cases value not set when connectedDeviceType is TRUNK, default value will be 'all').",
+                "type": "string"
+              },
+              "connectedDeviceType": {
+                "description": "Connected device type of the port channel.",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the port channel.",
+                "type": "string"
+              },
+              "fabricId": {
+                "description": "ID of the fabric the device is assigned to.",
+                "type": "string"
+              },
+              "id": {
+                "description": "ID of the port channel.",
+                "type": "string"
+              },
+              "interfaceNames": {
+                "description": "Interface names of this port channel.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "nativeVlanId": {
+                "description": "Native VLAN of the port channel, this option is only applicable to TRUNK connectedDeviceType. (VLAN must be between 1 and 4094. In cases value not set when connectedDeviceType is TRUNK, default value will be 1).",
+                "type": "integer"
+              },
+              "networkDeviceId": {
+                "description": "ID of the network device.",
+                "type": "string"
+              },
+              "portChannelName": {
+                "description": "Name of the port channel.",
+                "type": "string"
+              },
+              "protocol": {
+                "description": "Protocol of the port channel.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

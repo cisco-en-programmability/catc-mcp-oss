@@ -1,0 +1,82 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "applicationName": "query",
+        "businessRelevance": "query",
+        "endTime": "query",
+        "siteId": "query",
+        "ssid": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/data/api/v1/networkApplications/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the number of network applications by applying basic filtering. If startTime and endTime are not provided, the API defaults to the last 24 hours. `siteId` is mandatory. `siteId` must be a site UUID of a building. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-NetworkApplications-1.0.0-resolved.yaml",
+    "name": "api_retrievesTheTotalCountOfNetworkApplicationsByApplyi_72ae1f9d",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "applicationName": {
+          "description": "Name of the application for which the experience data is intended.\n\nExamples:\n\n`applicationName=webex` (single applicationName requested)\n\n`applicationName=webex&applicationName=teams` (multiple applicationName requested)\n",
+          "type": "string"
+        },
+        "businessRelevance": {
+          "description": "The application can be chosen to be categorized as business-relevant, irrelevant, or default (neutral). By doing so, the assurance application prioritizes the monitoring and analysis of business-relevant data, ensuring critical insights are captured. Applications marked as irrelevant or default are selectively excluded from certain data sets, streamlining focus on what's most important for business outcomes.\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "siteId": {
+          "description": "The site UUID without the top level hierarchy. `siteId` is mandatory. `siteId` must be a site UUID of a building. (Ex.\"buildingUuid\") Examples:\n`siteId=buildingUuid` (single siteId requested)\n`siteId=buildingUuid1&siteId=buildingUuid2` (multiple siteId requested)",
+          "type": "string"
+        },
+        "ssid": {
+          "description": "In the context of a network application, SSID refers to the name of the wireless network to which the client connects.\n\nExamples:\n\n`ssid=Alpha` (single ssid requested)\n\n`ssid=Alpha&ssid=Guest` (multiple ssid requested)\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        }
+      },
+      "required": [
+        "siteId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

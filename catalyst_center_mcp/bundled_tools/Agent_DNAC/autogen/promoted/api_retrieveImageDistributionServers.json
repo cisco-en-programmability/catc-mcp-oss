@@ -1,0 +1,62 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/images/distributionServerSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve the list of remote image distribution servers. There can be up to two remote servers.Product always acts as local distribution server, and it is not part of this API response.",
+    "name": "api_retrieveImageDistributionServers",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Collection of remote image distribution servers",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Unique identifier for the server",
+                "type": "string"
+              },
+              "portNumber": {
+                "description": "Port number",
+                "type": "number"
+              },
+              "rootLocation": {
+                "description": "Server root location",
+                "type": "string"
+              },
+              "serverAddress": {
+                "description": "FQDN or IP address of the server",
+                "type": "string"
+              },
+              "username": {
+                "description": "Server username",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Response version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

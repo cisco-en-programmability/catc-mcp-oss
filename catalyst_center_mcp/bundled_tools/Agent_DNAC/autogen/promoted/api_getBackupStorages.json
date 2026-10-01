@@ -1,0 +1,104 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "SMO_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "storageType": "query"
+      },
+      "uri": "/dna/system/api/v1/backupStorages",
+      "version": "1.0.0-oas3"
+    },
+    "description": "**Pick this tool for mounted BACKUP STORAGE CAPACITY and backup disk usage questions.**\n\nThis tool retrieves mounted backup storage information such as mount point, filesystem details, total capacity, used capacity, and usage percentage for a specific storage type.\n\n**Use this tool when the user asks:**\n- how much backup space is available\n- how full the backup disk or backup storage is\n- what mount point is used for backup storage\n- what mounted storage backend is used for backups\n- for NFS, physical disk, or remote server backup storage capacity details\n\n**Pick this tool for questions like:**\n- \"How much backup space is available?\"\n- \"Show backup storage usage\"\n- \"How full is the backup disk?\"\n- \"What backup storage is mounted?\"\n- \"Show NFS backup storage capacity\"\n- \"What is the free space on backup storage?\"\n\n**Do NOT use this tool for:**\n- backup configuration settings like retention policy\n- listing available backups\n- backup or restore execution history\n- configured NFS server definitions or unhealthy nodes\n\nIf the user asks generally about backup storage and does not specify a type, default to `NFS`. Use `api_getNfsConfigurations` instead when the question is about configured NFS servers and their health rather than mounted storage capacity.",
+    "name": "api_getBackupStorages",
+    "parameters": {
+      "properties": {
+        "storageType": {
+          "description": "Required backup storage type, sent as the `storageType` query parameter. Valid values are `NFS`, `PHYSICAL_DISK`, and `REMOTE_SERVER`. If the user does not specify a type, prefer `NFS` as the default.",
+          "enum": [
+            "NFS",
+            "PHYSICAL_DISK",
+            "REMOTE_SERVER"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "storageType"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Contains the information about backup storage details.",
+      "properties": {
+        "response": {
+          "description": "Contains information about backup storages.",
+          "items": {
+            "description": "Contains the information about backup storage details.",
+            "properties": {
+              "diskName": {
+                "description": "Mounted disk name",
+                "example": "sdc",
+                "type": "string"
+              },
+              "fstype": {
+                "description": "Mounted disk fstype",
+                "example": "ext4",
+                "type": "string"
+              },
+              "label": {
+                "description": "The mounted volume label",
+                "example": "mks-managed-8-1",
+                "type": "string"
+              },
+              "mountPoint": {
+                "description": "Mount path",
+                "example": "/backup-restore",
+                "type": "string"
+              },
+              "partitionName": {
+                "description": "Mounted disk partitionName",
+                "example": "/dev/sdc1",
+                "type": "string"
+              },
+              "percentUsage": {
+                "description": "Used percentage",
+                "example": 1.8,
+                "type": "number"
+              },
+              "sizeUnit": {
+                "description": "Size representation",
+                "example": "Bytes",
+                "type": "string"
+              },
+              "totalSize": {
+                "description": "Total size of the disk in bytes",
+                "example": 210239463424,
+                "type": "integer"
+              },
+              "usedSize": {
+                "description": "Used size of the disk in bytes",
+                "example": 3579166720,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,108 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "offset": "query",
+        "order": "query",
+        "scanStatus": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/fieldNotices/results/notices/{id}/networkDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "Get network devices for a specific field notice. Use this tool when the user asks which devices are affected by a specific field notice id. User-facing answers must not show raw networkDeviceId values.\n\nMANDATORY POST-PROCESSING: The returned networkDeviceId is an internal device UUID for backend lookup only. For every device row that will be included in the final answer, call get_device_details with device_id set to that exact networkDeviceId value. A get_device_details call without device_id is invalid for this workflow because it returns an unrelated generic device list. Never join field-notice rows to device details by row order, offset, time range, or first returned device. If get_device_details does not return a matching device whose id equals the field-notice networkDeviceId, do not include that row in the main device table and do not infer or fabricate the device name or management IP.",
+    "name": "api_getFieldNoticeNetworkDevicesForTheNotice",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Id of the field notice",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc.",
+          "type": "string"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Field notice device details",
+          "items": {
+            "properties": {
+              "comments": {
+                "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure",
+                "type": "string"
+              },
+              "lastScanTime": {
+                "description": "Time at which the device was scanned",
+                "type": "integer"
+              },
+              "networkDeviceId": {
+                "description": "Internal device UUID for backend lookup only. Do not present this raw value in user-facing output. Use get_device_details with device_id set to this exact UUID to resolve device name and management IP.",
+                "type": "string"
+              },
+              "noticeCount": {
+                "description": "Number of confirmed field notices to which the network device is vulnerable.",
+                "type": "integer"
+              },
+              "potentialNoticeCount": {
+                "description": "Number of potential field notices to which the network device may be vulnerable. Do not include this value in final answers unless the user explicitly asks for potential field notices.",
+                "type": "integer"
+              },
+              "scanStatus": {
+                "description": "'NOT_SCANNED' - the device was not scanned. 'IN_PROGRESS' - a scan is in progress for the device. 'SUCCESS' - device scan was successful. 'FAILED' - device scan failed",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

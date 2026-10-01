@@ -1,0 +1,330 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "attribute": "query",
+        "endTime": "query",
+        "id": "path",
+        "startTime": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/interfaces/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the interface data for the given interface instance Uuid along with the statistics data. The latest interface data in the specified start and end time range will be returned. When there is no start and end time specified returns the latest available data for the given interface Id. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-interfaces-2.0.0-resolved.yaml",
+    "name": "api_getTheInterfaceDataForTheGivenInterfaceId_instanceU_0b78da7f",
+    "parameters": {
+      "properties": {
+        "attribute": {
+          "description": "The following list of attributes can be provided in the attribute field          [id,adminStatus, description,duplexConfig,duplexOper,interfaceIfIndex,interfaceType,ipv4Address,ipv6AddressList,isL3Interface,isWan,macAddress,mediaType,name,operStatus,peerStackMember,peerStackPort, portChannelId,portMode, portType,rxDiscards,rxError,rxRate,rxUtilization,speed,stackPortType,timestamp,txDiscards,txError,txRate,txUtilization,vlanId,networkDeviceId,networkDeviceIpAddress,networkDeviceMacAddress,siteName,siteHierarchy,siteHierarchyId,poeAdminStatus,poeOperStatus,chassisId,moduleId,pdClassSignal,pdClassSpare,pdDeviceType,pdDeviceModel,pdPowerAdminMaxInWatt,pdPowerBudgetInWatt,pdPowerConsumedInWatt,pdPowerRemainingInWatt,pdMaxPowerDrawn,pdConnectedDeviceList,poeOperPriority,fastPoEEnabled,perpetualPoEEnabled,policingPoEEnabled,upoePlusEnabled,fourPairEnabled,poeDataTimestamp,pdLocation,pdDeviceName,pdConnectedSwitch,connectedSwitchUuid,ieeeCompliant,connectedSwitchType]          If length of attribute list is too long, please use 'views' param instead.          Examples:          attributes=name (single attribute requested)          attributes=name&description&duplexOper (multiple attributes with comma separator)",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "The interface Uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to current time.\n",
+          "type": "number"
+        },
+        "view": {
+          "description": "Interface data model views",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "adminStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "chassisId": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectedSwitchType": {
+              "description": "",
+              "type": "string"
+            },
+            "connectedSwitchUuid": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "duplexConfig": {
+              "description": "",
+              "type": "string"
+            },
+            "duplexOper": {
+              "description": "",
+              "type": "string"
+            },
+            "fastPoEEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "fourPairEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "ieeeCompliant": {
+              "description": "",
+              "type": "boolean"
+            },
+            "interfaceIfIndex": {
+              "description": "",
+              "type": "integer"
+            },
+            "interfaceType": {
+              "description": "",
+              "type": "string"
+            },
+            "ipv4Address": {
+              "description": "",
+              "type": "string"
+            },
+            "ipv6AddressList": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "isL3Interface": {
+              "description": "",
+              "type": "boolean"
+            },
+            "isWan": {
+              "description": "",
+              "type": "boolean"
+            },
+            "macAddr": {
+              "description": "",
+              "type": "string"
+            },
+            "mediaType": {
+              "description": "",
+              "type": "string"
+            },
+            "moduleId": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "networkDeviceId": {
+              "description": "",
+              "type": "string"
+            },
+            "networkDeviceIpAddress": {
+              "description": "",
+              "type": "string"
+            },
+            "networkDeviceMacAddress": {
+              "description": "",
+              "type": "string"
+            },
+            "operStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "pdClassSignal": {
+              "description": "",
+              "type": "string"
+            },
+            "pdClassSpare": {
+              "description": "",
+              "type": "string"
+            },
+            "pdConnectedDeviceList": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "pdConnectedSwitch": {
+              "description": "",
+              "type": "string"
+            },
+            "pdDeviceModel": {
+              "description": "",
+              "type": "string"
+            },
+            "pdDeviceName": {
+              "description": "",
+              "type": "string"
+            },
+            "pdDeviceType": {
+              "description": "",
+              "type": "string"
+            },
+            "pdLocation": {
+              "description": "",
+              "type": "string"
+            },
+            "pdMaxPowerDrawn": {
+              "description": "",
+              "type": "string"
+            },
+            "pdPowerAdminMaxInWatt": {
+              "description": "",
+              "type": "string"
+            },
+            "pdPowerBudgetInWatt": {
+              "description": "",
+              "type": "string"
+            },
+            "pdPowerConsumedInWatt": {
+              "description": "",
+              "type": "string"
+            },
+            "pdPowerRemainingInWatt": {
+              "description": "",
+              "type": "string"
+            },
+            "peerStackMember": {
+              "description": "",
+              "type": "integer"
+            },
+            "peerStackPort": {
+              "description": "",
+              "type": "string"
+            },
+            "perpetualPoEEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "poeAdminStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "poeDataTimestamp": {
+              "description": "",
+              "type": "integer"
+            },
+            "poeOperPriority": {
+              "description": "",
+              "type": "string"
+            },
+            "poeOperStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "policingPoEEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "portChannelId": {
+              "description": "",
+              "type": "string"
+            },
+            "portMode": {
+              "description": "",
+              "type": "string"
+            },
+            "portType": {
+              "description": "",
+              "type": "string"
+            },
+            "rxDiscards": {
+              "description": "",
+              "type": "number"
+            },
+            "rxError": {
+              "description": "",
+              "type": "integer"
+            },
+            "rxRate": {
+              "description": "",
+              "type": "number"
+            },
+            "rxUtilization": {
+              "description": "",
+              "type": "number"
+            },
+            "siteHierarchy": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchyId": {
+              "description": "",
+              "type": "string"
+            },
+            "speed": {
+              "description": "",
+              "type": "string"
+            },
+            "stackPortType": {
+              "description": "",
+              "type": "string"
+            },
+            "timestamp": {
+              "description": "",
+              "type": "integer"
+            },
+            "txDiscards": {
+              "description": "",
+              "type": "number"
+            },
+            "txError": {
+              "description": "",
+              "type": "integer"
+            },
+            "txRate": {
+              "description": "",
+              "type": "number"
+            },
+            "txUtilization": {
+              "description": "",
+              "type": "number"
+            },
+            "upoePlusEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "vlanId": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

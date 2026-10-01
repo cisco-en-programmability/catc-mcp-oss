@@ -1,0 +1,176 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/cleanAirConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific Clean Air configuration feature template by ID.",
+    "name": "api_getCleanAirConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Clean Air Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "CleanAir Configuration Response",
+          "properties": {
+            "designName": {
+              "description": "The feature template design name. `Note:` The following characters are not allowed % & < > [ ] ' /",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "CleanAir Configuration Feature Attributes",
+              "properties": {
+                "cleanAir": {
+                  "description": "Clean Air",
+                  "type": "boolean"
+                },
+                "cleanAirDeviceReporting": {
+                  "description": "CleanAir Device Reporting",
+                  "type": "boolean"
+                },
+                "description": {
+                  "description": "CleanAir Description",
+                  "type": "string"
+                },
+                "interferersFeatures": {
+                  "description": "Interferers Features",
+                  "properties": {
+                    "bleBeacon": {
+                      "description": "BLE Beacon is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    },
+                    "bluetoothPagingInquiry": {
+                      "description": "Bluetooth Paging Inquiry is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    },
+                    "bluetoothScoAcl": {
+                      "description": "Bluetooth SCO ACL is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    },
+                    "continuousTransmitter": {
+                      "description": "Continuous Transmitter is applicable for Radio Bands 2_4GHZ, 5GHZ, 6GHZ.",
+                      "type": "boolean"
+                    },
+                    "genericDect": {
+                      "description": "Generic DECT is only applicable for Radio Bands 2_4GHZ, 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "genericTdd": {
+                      "description": "Generic TDD is only applicable for Radio Band 2_4GHZ, 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "jammer": {
+                      "description": "Jammer is only applicable for Radio Band 2_4GHZ, 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "microwaveOven": {
+                      "description": "Microwave Oven is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    },
+                    "motorolaCanopy": {
+                      "description": "Motorola Canopy is only applicable for Radio Band 2_4GHZ, 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "siFhss": {
+                      "description": "SI FHSS is only applicable for Radio Band 2_4GHZ, 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "spectrum80211Fh": {
+                      "description": "Spectrum 802.11 FH is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    },
+                    "spectrum80211NonStandardChannel": {
+                      "description": "Spectrum 802.11 Non STD Channel is only applicable for Radio Band 2_4GHZ and 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "spectrum802154": {
+                      "description": "Spectrum 802.15.4 is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    },
+                    "spectrumInverted": {
+                      "description": "Spectrum Inverted is only applicable for Radio Band 2_4GHZ and 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "superAg": {
+                      "description": "Super AG is only applicable for Radio Band 2_4GHZ and 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "videoCamera": {
+                      "description": "Video Camera is only applicable for Radio Band 2_4GHZ and 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "wimaxFixed": {
+                      "description": "WiMAX Fixed is only applicable for Radio Band 2_4GHZ and 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "wimaxMobile": {
+                      "description": "WiMAX Mobile is only applicable for Radio Band 2_4GHZ and 5GHZ.",
+                      "type": "boolean"
+                    },
+                    "xbox": {
+                      "description": "Xbox is only applicable for Radio Band 2_4GHZ.",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "persistentDevicePropagation": {
+                  "description": "Persistent Device Propagation",
+                  "type": "boolean"
+                },
+                "radioBand": {
+                  "description": "Radio Band",
+                  "enum": [
+                    "2_4GHZ",
+                    "5GHZ",
+                    "6GHZ"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "id of the Clean Air configuration feature template",
+              "type": "string"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

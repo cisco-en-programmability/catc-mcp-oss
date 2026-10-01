@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/dot11beProfiles/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get 802.11be Profile by ID",
+    "name": "api_get802_11beProfileByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "802.11be Profile ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "default": {
+              "description": "Is 802.11be Profile marked as default in System . (Read only field)",
+              "type": "boolean"
+            },
+            "id": {
+              "description": "802.11be Profile ID",
+              "type": "string"
+            },
+            "muMimoDownLink": {
+              "description": "MU-MIMO Downlink",
+              "type": "boolean"
+            },
+            "muMimoUpLink": {
+              "description": "MU-MIMO Uplink",
+              "type": "boolean"
+            },
+            "ofdmaDownLink": {
+              "description": "OFDMA Downlink",
+              "type": "boolean"
+            },
+            "ofdmaMultiRu": {
+              "description": "OFDMA Multi-RU",
+              "type": "boolean"
+            },
+            "ofdmaUpLink": {
+              "description": "OFDMA Uplink",
+              "type": "boolean"
+            },
+            "profileName": {
+              "description": "802.11be Profile Name",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

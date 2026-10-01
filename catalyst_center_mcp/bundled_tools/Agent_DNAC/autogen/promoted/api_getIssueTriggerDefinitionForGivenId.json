@@ -1,0 +1,109 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/systemIssueDefinitions/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get system issue defintion for the given id. Definition includes all properties from IssueTriggerDefinition schema by default. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-issueAndHealthDefinitions-1.0.0-resolved.yaml",
+    "name": "api_getIssueTriggerDefinitionForGivenId",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "Issue trigger definition id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "categoryName": {
+              "description": "",
+              "type": "string"
+            },
+            "defaultPriority": {
+              "description": "",
+              "type": "string"
+            },
+            "definitionStatus": {
+              "description": "",
+              "type": "string"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceType": {
+              "description": "",
+              "type": "string"
+            },
+            "displayName": {
+              "description": "",
+              "type": "string"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "issueEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "lastModified": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "priority": {
+              "description": "",
+              "type": "string"
+            },
+            "profileId": {
+              "description": "",
+              "type": "string"
+            },
+            "synchronizeToHealthThreshold": {
+              "description": "",
+              "type": "boolean"
+            },
+            "thresholdValue": {
+              "description": "",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,64 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "attributeName": "query",
+        "name": "query",
+        "nameSpace": "query",
+        "size": "query",
+        "systemTag": "query"
+      },
+      "uri": "/dna/intent/api/v1/tag/count",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG PHRASE EXCLUSION:**\n- If the user asks how many/count/total/number of devices, network devices, ports, or interfaces are `tagged`, `with <value> tag`, `under tag <value>`, or `in tag <value>`, do not use this tool. The value is a tag name for a member-count workflow, not a tag-definition count filter.\n- Use `api_getTag` followed by `api_getTagMemberCount` for named-tag member counts, even when the tag name looks like a switch, device, site, port, interface, or operational state.\n\n\"How many tag definitions exist?\" \"Count user-created tags\" \"How many system tags are there?\" \u2014 USE THIS API only for counting TAG DEFINITIONS.\n\nThis API returns the count of tag definitions. It does NOT return the number of devices, ports, or interfaces inside a tag.\n\n**MANDATORY \u2014 USE THIS API FOR:**\n- total tag count\n- count of user-created or system-created tags\n- how many tag definitions match a given name\n- questions about whether duplicate tag definitions exist\n\n**DO NOT USE THIS API FOR:**\n- \"How many devices are tagged with <tag name>?\"\n- \"What's the count of devices with <tag name> tag?\"\n- \"How many ports are tagged with <tag name>?\"\n- \"How many interfaces are tagged with <tag name>?\"\n- \"How many ports/interfaces are tagged with <tag name>?\"\n- \"List devices in tag <tag name>\"\n- \"Show interfaces in tag <tag name>\"\n- Any named-tag membership question\n\n**NEGATIVE FEW-SHOT EXAMPLES:**\n- User: \"What's the count of devices with <tag name> tag?\" -> do NOT use `api_getTagCount`; use `api_getTag` -> `api_getTagMemberCount`\n- User: \"How many ports are tagged with <tag name>?\" -> do NOT use `api_getTagCount`; use `api_getTag` -> `api_getTagMemberCount`\n\nFor named-tag member counts, the correct route is:\n1. `api_getTag(name=<tag_name>)`\n2. extract the UUID\n3. `api_getTagMemberCount(id=<UUID>, memberType=<networkdevice_or_interface>)`\n\n**WRONG ROUTING TO AVOID:**\n- Never use `api_getTagCount` just because the question contains \"count\", \"how many\", or \"total\".\n- Never use `api_getTagCount` for device-count or interface-count questions inside a tag.\n- STOP and switch to `api_getTag` -> `api_getTagMemberCount` when the question is about members of a named tag.",
+    "name": "api_getTagCount",
+    "parameters": {
+      "properties": {
+        "attributeName": {
+          "description": "attributeName",
+          "type": "string"
+        },
+        "name": {
+          "description": "Filter by tag name. Returns how many tag definitions match this name \u2014 NOT how many devices, ports, interfaces, or other members are in that tag. Only use when the user wants to know whether a tag definition exists or how many tag definitions share the same name.",
+          "type": "string"
+        },
+        "nameSpace": {
+          "description": "nameSpace",
+          "type": "string"
+        },
+        "size": {
+          "description": "size in kilobytes(KB)",
+          "type": "string"
+        },
+        "systemTag": {
+          "description": "Filter by system tag. Set to true to count only system-created tags, or false to count only user-created tags. Omit to count all tags.",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "integer"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

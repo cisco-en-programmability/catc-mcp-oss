@@ -1,0 +1,57 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "memberAssociationType": "query",
+        "memberType": "query"
+      },
+      "uri": "/dna/intent/api/v1/tag/{id}/member/count",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG MEMBER COUNT TOOL (counts only):**\n- Select this tool together with `api_getTag` when the user asks how many / count / total / number of devices, network devices, ports, or interfaces are tagged as / tagged with / members of a named tag. This tool returns the total member count Z for a named tag; it does NOT return the member list.\n- It is ALSO the required pre-step for member LIST/SHOW requests, but only to obtain Z: after this tool returns Z you MUST immediately call `api_getTagMembersById` to produce the actual list. This tool never lists members itself.\n- Execute this tool after `api_getTag` returns the tag UUID. This tool requires a UUID in `id`; never pass the tag name as `id`.\n- Call this tool AT MOST ONCE per request. After it returns Z, do NOT call it again - proceed to `api_getTagMembersById` (for a list) or state the count directly (for a how-many question).\n- Use `memberType=\"networkdevice\"` when counting devices.\n- Use `memberType=\"interface\"` when counting ports or interfaces.\n**TAG NAME DISAMBIGUATION:**\n- If the request uses `tag`, `tagged`, `tagged as`, `tagged with`, `with <value> tag`, `under tag`, or `in tag` and asks how many/count/total/number of devices, network devices, ports, or interfaces belong to that value, select this tool with `api_getTag`.\n- The value introduced by the tag phrase remains a tag name even if it contains words like switch, device, site, port, interface, up, or down. Do not route it to site, device, interface, inventory count, or tag-definition count tools.\n- For device members inside the tag, use `memberType=\"networkdevice\"`. For port or interface members inside the tag, use `memberType=\"interface\"`.\n\n**REQUIRED WORKFLOW - MEMBER COUNT question (how many / total / number):**\n1. `api_getTag(name=<tag_name>)`\n2. Extract the returned tag UUID.\n3. `api_getTagMemberCount(id=<UUID>, memberType=<networkdevice_or_interface>)` and report the number. Do not list members.\n\n**REQUIRED WORKFLOW - MEMBER LIST question (list / show / which devices or ports tagged as <tag>):**\n1. `api_getTag(name=<tag_name>)`\n2. Extract the returned tag UUID.\n3. `api_getTagMemberCount(id=<UUID>, memberType=<networkdevice_or_interface>)` ONCE to obtain the total member count Z.\n4. `api_getTagMembersById(id=<UUID>, memberType=<networkdevice_or_interface>, offset=1, limit=10)` to actually list the members. Do NOT stop after the count, and do NOT re-call the count tool.\n\n**DO NOT SUBSTITUTE:**\n- Do not use `api_getTagCount`; that counts tag definitions, not members inside one tag.\n- Do not use generic device counts, onboarding counts, compliance counts, or field-notice counts for named-tag member counts.\n- Do not use inverse tag-association tools or generic inventory tools to reconstruct a count indirectly.\n- Do not keep calling `api_getTag` repeatedly after the UUID has already been resolved, and do not call this count tool more than once per request.\n- Do not treat this tool as the member-list tool: for list/show requests it only supplies Z, and `api_getTagMembersById` returns the members. Never refuse a list request by claiming a member-list tool is unavailable - call `api_getTagMembersById`.\n- Do not fall back to generic KB guidance for live named-tag count questions.",
+    "name": "api_getTagMemberCount",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The tag UUID \u2014 must match the pattern [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} (e.g., '178a3ae2-7e1c-4813-8745-dfcd4cb34b6b'). Do NOT pass a tag name or any other non-UUID string \u2014 it will fail. You must first call api_getTag with the tag name to retrieve its UUID, then pass that UUID here.",
+          "type": "string"
+        },
+        "memberAssociationType": {
+          "description": "memberAssociationType",
+          "type": "string"
+        },
+        "memberType": {
+          "description": "Member type to count: use 'networkdevice' when the user asks about devices, or 'interface' when the user asks about interfaces or ports.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "memberType"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "integer"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

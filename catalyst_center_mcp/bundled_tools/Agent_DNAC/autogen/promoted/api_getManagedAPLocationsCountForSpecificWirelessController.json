@@ -1,0 +1,61 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_JUN_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/{networkDeviceId}/managedApLocations/count",
+      "version": "2.3.7.9"
+    },
+    "description": "For Managed AP location count queries, always return the requested category counts and an explicit combined total. For \"primary and secondary\" queries, return Primary count, Secondary count, and Total (Primary+Secondary). Include Anchor count only when explicitly requested or when the query is for all managed location count categories. For runtime managed-site count controller/WLC queries, if hostname/IP/serial is provided instead of networkDeviceId, resolve the controller first with get_device_details and pass the returned canonical networkDeviceId. For controller serial-number managed-site count-style queries, do not use api_getPnP*",
+    "name": "api_getManagedAPLocationsCountForSpecificWirelessController",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Obtain the network device ID value by using the API call GET: /dna/intent/api/v1/network-device/ip-address/${ipAddress}.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "anchorManagedApLocationsCount": {
+              "description": "The count of the Anchor managed ap  locations.",
+              "type": "integer"
+            },
+            "primaryManagedApLocationsCount": {
+              "description": "The count of the Primary managed ap locations.",
+              "type": "integer"
+            },
+            "secondaryManagedApLocationsCount": {
+              "description": "The count of the Secondary managed ap locations.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

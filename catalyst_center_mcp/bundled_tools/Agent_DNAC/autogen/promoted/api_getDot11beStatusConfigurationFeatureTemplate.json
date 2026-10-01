@@ -1,0 +1,82 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/dot11beStatusConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific Dot11be status configuration feature template by ID.",
+    "name": "api_getDot11beStatusConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Dot11be Status Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Dot11be Status Configuration Response",
+          "properties": {
+            "designName": {
+              "description": "The feature template design name",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "Dot11be Status Configuration Feature Attributes",
+              "properties": {
+                "dot11beStatus": {
+                  "description": "Dot11be Status is supported only on Cisco IOS-XE based Wireless Controllers running 17.15.1 and above",
+                  "type": "boolean"
+                },
+                "radioBand": {
+                  "description": "Configuring 802.11be Status will result in loss of connectivity of clients",
+                  "enum": [
+                    "2_4GHZ",
+                    "5GHZ",
+                    "6GHZ"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "ID of the dot11be status configuration feature template",
+              "type": "string"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

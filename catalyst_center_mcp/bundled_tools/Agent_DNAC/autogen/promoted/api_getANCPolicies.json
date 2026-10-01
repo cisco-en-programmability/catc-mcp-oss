@@ -1,0 +1,36 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/endpoint-analytics/anc-policies",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetches the list of ANC policies available in ISE.",
+    "name": "api_getANCPolicies",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "name": {
+            "description": "Name of the ANC policy.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

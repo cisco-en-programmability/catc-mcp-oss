@@ -1,0 +1,141 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "context": "query",
+        "description": "query",
+        "deviceId": "query",
+        "domain": "query",
+        "endTime": "query",
+        "eventHierarchy": "query",
+        "eventId": "query",
+        "instanceId": "query",
+        "isParentOnly": "query",
+        "isSystemEvents": "query",
+        "name": "query",
+        "parentInstanceId": "query",
+        "severity": "query",
+        "siteId": "query",
+        "source": "query",
+        "startTime": "query",
+        "subDomain": "query",
+        "userId": "query"
+      },
+      "uri": "/dna/data/api/v1/event/event-series/audit-log/summary",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the aggregate count and timestamp range for Catalyst Center audit logs matching the supplied filters. Use this tool when the user asks for an audit-log summary, audit-event count, or the period covered by matching audit logs. When filtering by time, always provide startTime and endTime together. Respond in plain English: report the matching count and convert minTimestamp and maxTimestamp from epoch milliseconds into readable dates and times, using the user's timezone when known and UTC otherwise. If the count is zero, say that no matching audit logs were found. If timestamps are absent, report the count without inventing a time range. Do not claim which actions occurred, who performed them, or how events are categorized because this summary response does not contain individual records. Use api_getAuditLogRecords instead when the user asks what happened or requests individual audit-log entries. Do not show raw JSON unless the user explicitly asks for it.",
+    "name": "api_getAuditLogSummary",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "Audit Log notification's event category. Supported values: INFO, WARN, ERROR, ALERT, TASK_PROGRESS, TASK_FAILURE, TASK_COMPLETE, COMMAND, QUERY, CONVERSATION",
+          "type": "string"
+        },
+        "context": {
+          "description": "Audit Log notification's event correlationId.",
+          "type": "string"
+        },
+        "description": {
+          "description": "String full/partial search - (Provided input string is case insensitively matched for records).",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Audit Log notification's deviceId.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "Audit Log notification's event domain.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End Time in milliseconds since Epoch Eg. 1597961437211 (when provided startTime is mandatory)",
+          "type": "number"
+        },
+        "eventHierarchy": {
+          "description": "Audit Log notification's event eventHierarchy. Example: \"US.CA.San Jose\" OR \"US.CA\" OR \"CA.San Jose\" - Delimiter for hierarchy separation is \".\".",
+          "type": "string"
+        },
+        "eventId": {
+          "description": "Audit Log notification's event ID. ",
+          "type": "string"
+        },
+        "instanceId": {
+          "description": "InstanceID of the Audit Log.",
+          "type": "string"
+        },
+        "isParentOnly": {
+          "description": "Parameter to filter parent only audit-logs.",
+          "type": "boolean"
+        },
+        "isSystemEvents": {
+          "description": "Parameter to filter system generated audit-logs.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Audit Log notification event name.",
+          "type": "string"
+        },
+        "parentInstanceId": {
+          "description": "Parent Audit Log record's instanceID.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Audit Log notification's event severity. Supported values: 1, 2, 3, 4, 5.",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Audit Log notification's siteId.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Audit Log notification's event source.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start Time in milliseconds since Epoch Eg. 1597950637211 (when provided endTime is mandatory)",
+          "type": "number"
+        },
+        "subDomain": {
+          "description": "Audit Log notification's event sub-domain.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "Audit Log notification's event userId.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "count": {
+            "description": "",
+            "type": "integer"
+          },
+          "maxTimestamp": {
+            "description": "",
+            "type": "integer"
+          },
+          "minTimestamp": {
+            "description": "",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,241 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "policyId": "path",
+        "ruleId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/{policyId}/rules/{ruleId}/variables",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves the list of variables defined in a rule (`ruleId`) of a rule-based compliance (RBC) policy (`policyId`). Resolve `policyId` via api_getCompliancePolicies and `ruleId` via api_getComplianceRules first.",
+    "name": "api_getComplianceVariables",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        },
+        "ruleId": {
+          "description": "The `id` of the rule within the compliance policy.",
+          "example": "e8eef5e2-1eab-426c-be77-97ee81dcba06",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policyId",
+        "ruleId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "properties": {
+        "response": {
+          "items": {
+            "allOf": [
+              {
+                "description": "Payload for updating a variable.",
+                "properties": {
+                  "dataType": {
+                    "description": "The data type of the variable. \n\nIP mask is supported in IP address form (e.g., 255.255.255.0) only. Interface names must be provided in their full form, such as GigabitEthernet1/0/1. \n",
+                    "enum": [
+                      "STRING",
+                      "INTEGER",
+                      "BOOLEAN",
+                      "IP_ADDRESS",
+                      "INTERFACE_NAME",
+                      "IP_MASK"
+                    ],
+                    "example": "STRING",
+                    "type": "string"
+                  },
+                  "defaultValue": {
+                    "description": "The default value for the variable. This is applicable when `inputType` is `SINGLE_TEXT` or `MULTI_TEXT`.\n\nEnsure that any type of data is formatted as a string, but it must match the required format for the data type and adhere to any provided constraints.\n",
+                    "example": "default",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "A brief description of the variable.",
+                    "example": "This is a sample variable description.",
+                    "maxLength": 2000,
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "The `id` of the variable.",
+                    "example": "7f825ee6-877f-46f8-9aee-d395eefaa1b2",
+                    "format": "uuid",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "inputType": {
+                    "description": "The input type of the variable. \n\n- `SINGLE_SELECT`:  The variable allows for the selection of a single value from a predefined list of options specified in the `selectionList`. It is applicable only when the `dataType` is `STRING`, `INTEGER`, or `BOOLEAN`.\n- `MULTI_SELECT`: The variable permits the selection of multiple values from a predefined list of options specified in the `selectionList`. It is applicable only when the `dataType` is `STRING` or `INTEGER`.\n- `SINGLE_TEXT`: The variable accepts a single text input from the user after policy assignment.\n- `MULTI_TEXT`: The variable allows the user to enter multiple text inputs after policy assignment. It is not applicable when the `dataType` is `BOOLEAN`.\n",
+                    "enum": [
+                      "SINGLE_SELECT",
+                      "MULTI_SELECT",
+                      "SINGLE_TEXT",
+                      "MULTI_TEXT"
+                    ],
+                    "example": "SINGLE_SELECT",
+                    "type": "string"
+                  },
+                  "mandatory": {
+                    "default": false,
+                    "description": "Indicates if the variable is mandatory.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "maxLength": {
+                    "description": "The maximum length constraint for the `STRING` values. This is only applicable when the `inputType` is `SINGLE_TEXT` or `MULTI_TEXT`. \n",
+                    "example": 100,
+                    "maximum": 255,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "maxValue": {
+                    "description": "The maximum value constraint for the `INTEGER` variable. This is only applicable when the `inputType` is `SINGLE_TEXT` or `MULTI_TEXT`. \n",
+                    "example": 100,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "minValue": {
+                    "description": "The minimum value constraint for the `INTEGER` variable. This is only applicable when the `inputType` is `SINGLE_TEXT` or `MULTI_TEXT`. \n",
+                    "example": 10,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "This is the name of the variable. It should be a concise and descriptive title that clearly identifies the variable. The name must be unique within the specified rule.\n",
+                    "example": "Access list",
+                    "maxLength": 50,
+                    "pattern": "^[\\w\\ \\-\\(\\)]+$",
+                    "type": "string"
+                  },
+                  "selectionList": {
+                    "description": "A list of selection options from which to choose a value. \n\nThis is applicable when the `dataType` is `STRING`, `INTEGER`, or `BOOLEAN`, and it is required when the `inputType` is either `SINGLE_SELECT` or `MULTI_SELECT`.\n",
+                    "items": {
+                      "properties": {
+                        "default": {
+                          "default": false,
+                          "description": "Indicates whether this selection option is the default. Depending on the `inputType`, either only one or multiple selection options can be set as default.\n",
+                          "example": false,
+                          "type": "boolean"
+                        },
+                        "key": {
+                          "description": "The key for the selection option, which uniquely identifies the value.\n",
+                          "example": "SNMP Community for APAC",
+                          "maxLength": 255,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "value": {
+                          "description": "This is the value for the selection option. \n\nEnsure that any type of data is formatted as a string, but it must match the required format for the data type and adhere to any provided constraints.\n",
+                          "example": "snmpCommApac#@44",
+                          "maxLength": 255,
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "key",
+                        "value"
+                      ],
+                      "title": "VariableUpdatePayload_selectionList",
+                      "type": "object"
+                    },
+                    "maxItems": 25,
+                    "type": "array"
+                  },
+                  "sequenceNumber": {
+                    "description": "The sequence number of the variable that determines the display order, helping to provide values in a structured manner.\n",
+                    "example": 1,
+                    "readOnly": true,
+                    "type": "integer"
+                  },
+                  "validationRegex": {
+                    "description": "A regular expression pattern for constraining `STRING` values. This is only applicable when the `inputType` is `SINGLE_TEXT` or `MULTI_TEXT`. \n",
+                    "example": "^\\d+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "dataType",
+                  "id",
+                  "inputType",
+                  "name",
+                  "sequenceNumber"
+                ],
+                "title": "VariableUpdatePayload",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "identifier": {
+                    "description": "This is the identifier of the variable. Variables are referenced using the identifier enclosed in angle brackets.\n\nUpdate operation cannot be used to change the identifier.\n",
+                    "example": "_Access_list",
+                    "maxLength": 51,
+                    "pattern": "^_[\\w]+$",
+                    "type": "string"
+                  },
+                  "usedByConditions": {
+                    "description": "An array of condition IDs that are using this variable.",
+                    "example": [
+                      "123e4567-e89b-12d3-a456-426614174000",
+                      "987e6543-e21b-45d3-b678-123456789abc"
+                    ],
+                    "items": {
+                      "example": "123e4567-e89b-12d3-a456-426614174000",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "identifier",
+                  "usedByConditions"
+                ],
+                "type": "object"
+              }
+            ],
+            "description": "Defines the structure of a variable.",
+            "title": "Variable"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_6",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

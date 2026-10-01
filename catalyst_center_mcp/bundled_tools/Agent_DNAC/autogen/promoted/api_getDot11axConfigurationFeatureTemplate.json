@@ -1,0 +1,102 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/dot11axConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific Dot11ax configuration feature template by ID.",
+    "name": "api_getDot11axConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Dot11ax Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Dot11ax Configuration Response",
+          "properties": {
+            "designName": {
+              "description": "The feature template design name",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "Dot11ax Configuration Feature Attributes",
+              "properties": {
+                "bssColor": {
+                  "description": "BSS (Basic Service Set) Color is supported on Cisco IOS-XE based Wireless Controllers running 17.1 and above.",
+                  "type": "boolean"
+                },
+                "multipleBssid": {
+                  "description": "Multiple Basic service set identifiers (BSSID) is supported only on Cisco IOS-XE based Wireless Controllers running 17.7.1 and above. `Note:` Multiple Bssid is only supported for radioBand 6GHZ.",
+                  "type": "boolean"
+                },
+                "nonSRGObssPdMaxThreshold": {
+                  "description": "Non SRG Obss Pd Max Threshold is supported only on Cisco IOS-XE based Wireless Controllers running 17.4 and above. `Note:` Non SRG Obss Pd Max Threshold is only supported for radioBand 2_4GHZ and 5GHZ.",
+                  "type": "integer"
+                },
+                "obssPd": {
+                  "description": "Overlapping BSS Packet Detect (obssPd) is supported only on Cisco IOS-XE based Wireless Controllers running 17.4 and above. `Note:` Obss Pd is only supported for radioBand 2_4GHZ and 5GHZ.",
+                  "type": "boolean"
+                },
+                "radioBand": {
+                  "description": "6 GHz radioBand is supported only on Cisco IOS-XE based Wireless Controllers running 17.7.1 and above.",
+                  "enum": [
+                    "2_4GHZ",
+                    "5GHZ",
+                    "6GHZ"
+                  ],
+                  "type": "string"
+                },
+                "targetWakeUpTime11ax": {
+                  "description": "Target Wake Up Time 11ax is supported on Cisco IOS-XE based Wireless Controllers running 17.1 and above.",
+                  "type": "boolean"
+                },
+                "targetWaketimeBroadcast": {
+                  "description": "Target Wake Time Broadcast is supported on Cisco IOS-XE based Wireless Controllers running 17.3.1 and above.",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "ID of the dot11ax configuration feature template",
+              "type": "string"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

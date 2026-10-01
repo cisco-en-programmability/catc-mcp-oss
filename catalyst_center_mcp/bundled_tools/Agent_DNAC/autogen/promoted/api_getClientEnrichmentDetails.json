@@ -1,0 +1,653 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "__persistbapioutput": "header",
+        "entity_type": "header",
+        "entity_value": "header",
+        "issueCategory": "header"
+      },
+      "uri": "/dna/intent/api/v1/client-enrichment-details",
+      "version": "2.3.7.9"
+    },
+    "description": "Enriches a given network End User context (a network user-id or end user\u2019s device Mac Address) with details about the user, the devices that the user is connected to and the assurance issues that the user is impacted by",
+    "name": "api_getClientEnrichmentDetails",
+    "parameters": {
+      "properties": {
+        "entity_type": {
+          "description": "Client enrichment details can be fetched based on either User ID or Client MAC address. This parameter value must either be network_user_id/mac_address",
+          "type": "string"
+        },
+        "entity_value": {
+          "description": "Contains the actual value for the entity type that has been defined",
+          "type": "string"
+        },
+        "issueCategory": {
+          "description": "The category of the DNA event based on which the underlying issues need to be fetched",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_type",
+        "entity_value"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "connectedDevice": {
+            "description": "",
+            "items": {
+              "properties": {
+                "deviceDetails": {
+                  "description": "",
+                  "properties": {
+                    "apManagerInterfaceIp": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "associatedWlcIp": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "bootDateTime": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "cisco360view": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "collectionInterval": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "collectionStatus": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "errorCode": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "errorDescription": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "family": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "hostname": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "instanceUuid": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "interfaceCount": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "inventoryStatusDetail": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "lastUpdateTime": {
+                      "description": "",
+                      "type": "integer"
+                    },
+                    "lastUpdated": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "lineCardCount": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "lineCardId": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "location": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "locationName": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "macAddress": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "managementIpAddress": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "memorySize": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "neighborTopology": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "links": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "id": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "label": {
+                                  "description": "",
+                                  "items": {
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "linkStatus": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "portUtilization": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "source": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "target": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "nodes": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "clients": {
+                                  "description": "",
+                                  "type": "number"
+                                },
+                                "count": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "description": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "deviceType": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "fabricGroup": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "family": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "healthScore": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "id": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "ip": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "level": {
+                                  "description": "",
+                                  "type": "number"
+                                },
+                                "name": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "nodeType": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "platformId": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "radioFrequency": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "role": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "softwareVersion": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                },
+                                "userId": {
+                                  "description": "",
+                                  "properties": {},
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "platformId": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "reachabilityFailureReason": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "reachabilityStatus": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "role": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "roleSource": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "serialNumber": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "series": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "snmpContact": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "snmpLocation": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "softwareVersion": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "tagCount": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "tunnelUdpPort": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "upTime": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "waasDeviceMode": {
+                      "description": "",
+                      "properties": {},
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "issueDetails": {
+            "description": "",
+            "properties": {
+              "issue": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "impactedHosts": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "connectedInterface": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "failedAttempts": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "hostName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "hostOs": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "hostType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "location": {
+                            "description": "",
+                            "properties": {
+                              "apsImpacted": {
+                                "description": "",
+                                "items": {
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "area": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "building": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "floor": {
+                                "description": "",
+                                "properties": {},
+                                "type": "object"
+                              },
+                              "siteId": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "siteType": {
+                                "description": "",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "macAddress": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "ssid": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "timestamp": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "issueCategory": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueDescription": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueEntity": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueEntityValue": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueId": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueName": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issuePriority": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueSeverity": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueSource": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueSummary": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "issueTimestamp": {
+                      "description": "",
+                      "type": "integer"
+                    },
+                    "suggestedActions": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "message": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "steps": {
+                            "description": "",
+                            "items": {
+                              "type": "object"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "userDetails": {
+            "description": "",
+            "properties": {
+              "authType": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "clientConnection": {
+                "description": "",
+                "type": "string"
+              },
+              "connectedDevice": {
+                "description": "",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "connectionStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "dataRate": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "healthScore": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "healthType": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "reason": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "score": {
+                      "description": "",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "hostIpV4": {
+                "description": "",
+                "type": "string"
+              },
+              "hostIpV6": {
+                "description": "",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "hostMac": {
+                "description": "",
+                "type": "string"
+              },
+              "hostName": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "hostOs": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "hostType": {
+                "description": "",
+                "type": "string"
+              },
+              "hostVersion": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "issueCount": {
+                "description": "",
+                "type": "number"
+              },
+              "lastUpdated": {
+                "description": "",
+                "type": "integer"
+              },
+              "location": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "port": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "rssi": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "snr": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "ssid": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "subType": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "userId": {
+                "description": "",
+                "type": "string"
+              },
+              "vlanId": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

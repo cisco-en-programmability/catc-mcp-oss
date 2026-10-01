@@ -1,0 +1,41 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/wirelessControllers/anchorCapableDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get Anchor capable devices",
+    "name": "api_getAnchorCapableDevices",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Managed Anchor List",
+      "properties": {
+        "deviceIp": {
+          "description": "Anchor Controller Ip",
+          "type": "string"
+        },
+        "deviceName": {
+          "description": "Anchor Controller host name",
+          "type": "string"
+        },
+        "wirelessMgmtIP": {
+          "description": "Wireless management Ip Address",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

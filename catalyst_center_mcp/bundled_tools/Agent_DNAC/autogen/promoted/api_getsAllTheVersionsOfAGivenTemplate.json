@@ -1,0 +1,94 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "templateId": "path"
+      },
+      "uri": "/dna/intent/api/v1/template-programmer/template/version/{templateId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get all the versions of template by its id",
+    "name": "api_getsAllTheVersionsOfAGivenTemplate",
+    "parameters": {
+      "properties": {
+        "templateId": {
+          "description": "templateId(UUID) to get list of versioned templates",
+          "type": "string"
+        }
+      },
+      "required": [
+        "templateId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "composite": {
+            "description": "Is it composite template",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name of template",
+            "type": "string"
+          },
+          "projectId": {
+            "description": "UUID of project",
+            "type": "string"
+          },
+          "projectName": {
+            "description": "Name of project",
+            "type": "string"
+          },
+          "templateId": {
+            "description": "UUID of template",
+            "type": "string"
+          },
+          "versionsInfo": {
+            "description": "List of versioned templates information",
+            "items": {
+              "properties": {
+                "author": {
+                  "description": "Author of version template",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of template",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "UUID of template",
+                  "type": "string"
+                },
+                "version": {
+                  "description": "Current version of template",
+                  "type": "string"
+                },
+                "versionComment": {
+                  "description": "Version comment",
+                  "type": "string"
+                },
+                "versionTime": {
+                  "description": "Template version time",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

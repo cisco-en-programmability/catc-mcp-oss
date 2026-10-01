@@ -1,0 +1,227 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "deviceId": "query",
+        "deviceName": "query",
+        "deviceSiteHierarchyId": "query",
+        "endTime": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "serverIp": "query",
+        "siteHierarchy": "query",
+        "siteId": "query",
+        "sortBy": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/data/api/v1/aaaServices",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the list of AAA Services and offers basic filtering and sorting capabilities. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AAAServices-1.0.0-resolved.yaml",
+    "name": "api_retrievesTheListOfAAAServicesForGivenParameters",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "The device UUID.\n\n Examples:\n `deviceId=6bef213c-19ca-4170-8375-b694e251101c` (single deviceId is requested)\n `deviceId=6bef213c-19ca-4170-8375-b694e251101c&deviceId=32219612-819e-4b5e-a96b-cf22aca13dd9 (multiple networkDeviceIds with & separator)\n",
+          "type": "string"
+        },
+        "deviceName": {
+          "description": "Name of the device. This parameter supports wildcard (`*`) character -based search. Example: `wnbu-sjc*` or `*wnbu-sjc*` or `*wnbu-sjc`\nExamples: deviceName=wnbu-sjc24.cisco.com (single device name is requested) deviceName=wnbu-sjc24.cisco.com&deviceName=wnbu-sjc22.cisco.com (multiple device names are requested)        \n",
+          "type": "string"
+        },
+        "deviceSiteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*uuid*, *uuid, uuid*`\n\nExamples:\n\n`?deviceSiteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?deviceSiteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&deviceSiteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "serverIp": {
+          "description": "IP Address of the AAA Server. This parameter supports wildcard (`*`) character -based search. Example: `10.76.81.*` or `*56.78*` or `*50.28`\nExamples: serverIp=10.42.3.31 (single IP Address is requested) serverIp=10.42.3.31&serverIp=name2&fabricVnName=name3 (multiple IP Addresses are requested)\n",
+          "type": "string"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*/San*, */San, /San*`\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Field name on which sorting needs to be done",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to current time.\n",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "sortBy": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "order": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "deviceFamily": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceId": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceName": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceSiteHierarchy": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceSiteHierarchyId": {
+                "description": "",
+                "type": "string"
+              },
+              "deviceSiteId": {
+                "description": "",
+                "type": "string"
+              },
+              "eapFailedTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "eapLatency": {
+                "description": "",
+                "type": "integer"
+              },
+              "eapSuccessfulTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "eapTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "failedTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "latency": {
+                "description": "",
+                "type": "integer"
+              },
+              "mabFailedTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "mabLatency": {
+                "description": "",
+                "type": "integer"
+              },
+              "mabSuccessfulTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "mabTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "serverIp": {
+                "description": "",
+                "type": "string"
+              },
+              "successfulTransactions": {
+                "description": "",
+                "type": "integer"
+              },
+              "transactions": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

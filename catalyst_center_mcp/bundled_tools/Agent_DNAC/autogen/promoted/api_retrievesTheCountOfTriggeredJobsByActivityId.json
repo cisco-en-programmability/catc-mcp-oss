@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "activityId": "path"
+      },
+      "uri": "/dna/intent/api/v1/activities/{activityId}/triggeredJobs/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the count of triggered jobs by activity id.",
+    "name": "api_retrievesTheCountOfTriggeredJobsByActivityId",
+    "parameters": {
+      "properties": {
+        "activityId": {
+          "description": "The id of the activity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "activityId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

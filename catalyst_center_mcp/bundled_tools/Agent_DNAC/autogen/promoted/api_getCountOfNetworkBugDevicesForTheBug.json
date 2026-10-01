@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "networkDeviceId": "query",
+        "scanMode": "query",
+        "scanStatus": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/bugs/{id}/networkDevices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of network devices affected or impacted by a specific network bug ID. Use this tool for questions like 'how many devices are impacted by CSCwd12345?' or 'count devices affected by bug CSCwr77118'. A CSC ID in a bug-impact count question is a network bug ID, not a security advisory ID. Do not use security advisory count tools for CSC network bug device-impact questions unless the user explicitly says security advisory, PSIRT, Cisco advisory, or CVE.",
+    "name": "api_getCountOfNetworkBugDevicesForTheBug",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Network bug ID, usually a CSC identifier such as CSCwd12345.",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "scanMode": {
+          "description": "Mode or the criteria using which the network device was scanned. Available values : ESSENTIALS, ADVANTAGE, CX_CLOUD, NOT_AVAILABLE",
+          "type": "string"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED, FALL_BACK",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "Count of network devices affected by the specified network bug.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

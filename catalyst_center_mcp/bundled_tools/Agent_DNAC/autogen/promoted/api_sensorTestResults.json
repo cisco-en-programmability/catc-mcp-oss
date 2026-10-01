@@ -1,0 +1,286 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "siteId": "query",
+        "startTime": "query",
+        "testFailureBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/AssuranceGetSensorTestResults",
+      "version": "2.3.7.9"
+    },
+    "description": "Intent API to get SENSOR test result summary",
+    "name": "api_sensorTestResults",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "The epoch time in milliseconds",
+          "type": "number"
+        },
+        "siteId": {
+          "description": "Assurance site UUID",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The epoch time in milliseconds",
+          "type": "number"
+        },
+        "testFailureBy": {
+          "description": "Obtain failure statistics group by \"area\", \"building\", or \"floor\" (case insensitive)",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "failureStats": {
+              "description": "Failure reason by test type",
+              "items": {
+                "properties": {
+                  "errorCode": {
+                    "description": "The error code",
+                    "type": "integer"
+                  },
+                  "errorTitle": {
+                    "description": "The error title",
+                    "type": "string"
+                  },
+                  "testCategory": {
+                    "description": "The test category",
+                    "type": "string"
+                  },
+                  "testType": {
+                    "description": "The test type",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "summary": {
+              "description": "Overall passed/failed test count of each category",
+              "properties": {
+                "APP_CONNECTIVITY": {
+                  "description": "",
+                  "properties": {
+                    "FILETRANSFER": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "HOST_REACHABILITY": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "number"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "WEBSERVER": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "EMAIL": {
+                  "description": "",
+                  "properties": {
+                    "MAILSERVER": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "NETWORK_SERVICES": {
+                  "description": "",
+                  "properties": {
+                    "DNS": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "number"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "ONBOARDING": {
+                  "description": "",
+                  "properties": {
+                    "ASSOC": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "AUTH": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "DHCP": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "number"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "PERFORMANCE": {
+                  "description": "",
+                  "properties": {
+                    "IPSLASENDER": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "RF_ASSESSMENT": {
+                  "description": "",
+                  "properties": {
+                    "DATA_RATE": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "integer"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "SNR": {
+                      "description": "",
+                      "properties": {
+                        "failCount": {
+                          "description": "Total failed test count",
+                          "type": "number"
+                        },
+                        "passCount": {
+                          "description": "Total passed test count",
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "totalTestCount": {
+                  "description": "Total test count",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

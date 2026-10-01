@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "cvssBaseScore": "query",
+        "id": "query",
+        "networkDeviceId": "path",
+        "securityImpactRating": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/networkDevices/{networkDeviceId}/advisories/count",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: CRITICAL**\n\nThis tool retrieves the COUNT of security advisories, PSIRTs, and vulnerabilities affecting a specific network device. It can be called in two ways:\n\n1. **With networkDeviceId only**: Returns the total count of ALL security advisories affecting the device\n2. **With networkDeviceId AND security advisory id**: Returns whether the device is affected by a SPECIFIC advisory (acts as a filter)\n\n**REQUIRED PRE-REQUISITE:**\nYou MUST call `get_device_details` BEFORE calling `api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevice`. This is non-negotiable.\n\n**Step-by-step process:**\n\n1. First, invoke `get_device_details` with the device name or IP address to resolve the device UUID\n2. Extract the UUID from the `get_device_details` response\n3. Then, invoke `api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevice` with:\n   - `networkDeviceId` parameter set to the resolved UUID (REQUIRED)\n   - `id` parameter set to specific advisory ID if you want to filter for a particular advisory (OPTIONAL)\n\n**Exception:**\nIf the user explicitly provides a valid device UUID in their request, you may skip step 1 and use the provided UUID directly in `api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevice`.\n\n**Use Cases - Pick this tool for questions like:**\n- \"How many security advisories affecting device 50.40.1.45?\" (networkDeviceId only)\n- \"How many security advisories affecting device core-router?\" (networkDeviceId only)\n- \"How many CVEs affect the device core-router?\" (networkDeviceId only)\n- \"Is device core-router affected by advisory cisco-sa-20160525-ipv6?\" (networkDeviceId + id)\n- \"Is device 192.168.1.100 affected by advisory cisco-sa-20160525-ipv6?\" (networkDeviceId + id)\n- \"Is device affected by advisory cisco-sa-20160525-ipv6?\" (networkDeviceId + id)\n- \"Is device 192.168.1.100 affected by any security advisories?\" (networkDeviceId only)\n- \"Is device edge-router-01 affected by any security advisories?\" (networkDeviceId only)\n- \"How many vulnerabilities affect the device?\" (networkDeviceId only)\"",
+    "name": "api_getCountOfSecurityAdvisoriesAffectingTheNetworkDevice",
+    "parameters": {
+      "properties": {
+        "cvssBaseScore": {
+          "description": "Return advisories with cvssBaseScore greater than this cvssBaseScore. E.g. : 8.5",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID of the security advisory (e.g., CVE or Cisco advisory ID such as cisco-sa-20160525-ipv6). Use this to filter results for a specific advisory affecting the device.",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "Device UUID. This can be obtained using the get_device_details tool if you only have the device name or IP.",
+          "type": "string"
+        },
+        "securityImpactRating": {
+          "description": "Return advisories with this securityImpactRating. Available values : CRITICAL, HIGH.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

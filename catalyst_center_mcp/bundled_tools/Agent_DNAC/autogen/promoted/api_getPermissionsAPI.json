@@ -1,0 +1,60 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/role/permissions",
+      "version": "2.3.7.9"
+    },
+    "description": "Get permissions for a role in the system.",
+    "name": "api_getPermissionsAPI",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "resource-types": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "defaultPermission": {
+                    "description": "Default permission",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

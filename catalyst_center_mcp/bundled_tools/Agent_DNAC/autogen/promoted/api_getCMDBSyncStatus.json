@@ -1,0 +1,81 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "date": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/cmdb-sync/detail",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows to retrieve the detail of CMDB sync status.It accepts two query parameter \"status\",\"date\".The supported values for status field are \"Success\",\"Failed\",\"Unknown\" and date field should be in \"YYYY-MM-DD\" format. By default all the cmdb sync status will be send as response and based on the query parameter filtered detail will be send as response.",
+    "name": "api_getCMDBSyncStatus",
+    "parameters": {
+      "properties": {
+        "date": {
+          "description": "Provide date in \"YYYY-MM-DD\" format",
+          "type": "string"
+        },
+        "status": {
+          "description": "Supported values are \"Success\",\"Failed\" and \"Unknown\". Providing other values will result in all the available sync job status.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "devices": {
+            "description": "Device list",
+            "items": {
+              "properties": {
+                "deviceId": {
+                  "description": "Device Id",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "Status \"Success\" or \"Failed\"",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "failureCount": {
+            "description": "Failed device count",
+            "type": "string"
+          },
+          "message": {
+            "description": "Message",
+            "type": "string"
+          },
+          "successCount": {
+            "description": "Successfully synchronized device count",
+            "type": "string"
+          },
+          "syncTime": {
+            "description": "Synchronization Time",
+            "type": "string"
+          },
+          "unknownErrorCount": {
+            "description": "Unknown error count",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

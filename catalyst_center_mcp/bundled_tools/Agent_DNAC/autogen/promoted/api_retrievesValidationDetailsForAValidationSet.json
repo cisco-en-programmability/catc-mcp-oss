@@ -1,0 +1,102 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/diagnosticValidationSets/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves validation details for the given validation set id\n",
+    "name": "api_retrievesValidationDetailsForAValidationSet",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Validation set id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Validation set details",
+          "properties": {
+            "description": {
+              "description": "Description of the validation set",
+              "type": "string"
+            },
+            "id": {
+              "description": "Validation set id",
+              "type": "string"
+            },
+            "name": {
+              "description": "Name of the validation set",
+              "type": "string"
+            },
+            "validationGroups": {
+              "description": "List of validation groups",
+              "items": {
+                "properties": {
+                  "description": {
+                    "description": "Description of the validation group",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Validation group id",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the validation group",
+                    "type": "string"
+                  },
+                  "validations": {
+                    "description": "List of validations",
+                    "items": {
+                      "properties": {
+                        "id": {
+                          "description": "Validation id",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the validation",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "version": {
+              "description": "Version of validation set",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,184 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/onboarding/pnp-workflow/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns a workflow specified by id",
+    "name": "api_getWorkflowById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "_id": {
+          "description": "",
+          "type": "string"
+        },
+        "addToInventory": {
+          "description": "",
+          "type": "boolean"
+        },
+        "addedOn": {
+          "description": "",
+          "type": "number"
+        },
+        "configId": {
+          "description": "",
+          "type": "string"
+        },
+        "currTaskIdx": {
+          "description": "",
+          "type": "number"
+        },
+        "description": {
+          "description": "",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "",
+          "type": "number"
+        },
+        "execTime": {
+          "description": "",
+          "type": "number"
+        },
+        "imageId": {
+          "description": "",
+          "type": "string"
+        },
+        "instanceType": {
+          "description": "",
+          "type": "string"
+        },
+        "lastupdateOn": {
+          "description": "",
+          "type": "number"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "",
+          "type": "number"
+        },
+        "state": {
+          "description": "",
+          "type": "string"
+        },
+        "tasks": {
+          "description": "",
+          "items": {
+            "properties": {
+              "currWorkItemIdx": {
+                "description": "",
+                "type": "number"
+              },
+              "endTime": {
+                "description": "",
+                "type": "number"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "startTime": {
+                "description": "",
+                "type": "number"
+              },
+              "state": {
+                "description": "",
+                "type": "string"
+              },
+              "taskSeqNo": {
+                "description": "",
+                "type": "number"
+              },
+              "timeTaken": {
+                "description": "",
+                "type": "number"
+              },
+              "type": {
+                "description": "",
+                "type": "string"
+              },
+              "workItemList": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "command": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "endTime": {
+                      "description": "",
+                      "type": "number"
+                    },
+                    "outputStr": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "startTime": {
+                      "description": "",
+                      "type": "number"
+                    },
+                    "state": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "timeTaken": {
+                      "description": "",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "tenantId": {
+          "description": "",
+          "type": "string"
+        },
+        "type": {
+          "description": "",
+          "type": "string"
+        },
+        "useState": {
+          "description": "",
+          "type": "string"
+        },
+        "version": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

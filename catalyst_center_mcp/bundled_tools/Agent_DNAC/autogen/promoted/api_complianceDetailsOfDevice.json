@@ -1,0 +1,271 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "complianceType": "query",
+        "deviceUuid": "path",
+        "diffList": "query",
+        "remediationSupported": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliance/{deviceUuid}/detail",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: CRITICAL**\n\nThis tool retrieves DETAILED compliance report information for a SPECIFIC device. Use this tool only when the user asks for compliance DETAILS, a compliance breakdown, a full compliance report, compliance by type, remediation information, severity, sourceInfoList, ackStatus, or message for a device.\n\nDo not use this tool when the user asks for the compliance status/state of a device and does not request details or a breakdown. For \"compliance state\", \"compliance status\", or \"get device compliance state/status\" questions, use `api_getComplianceStatus` instead.\n\n**REQUIRED PRE-REQUISITE:**\nYou MUST call `get_device_details` BEFORE calling `api_complianceDetailsOfDevice`. This is non-negotiable.\n\n**Step-by-step process:**\n\n1. First, invoke `get_device_details` with the device name or IP address to resolve the device UUID\n2. Extract the UUID from the `get_device_details` response\n3. Then, invoke `api_complianceDetailsOfDevice` with the `deviceUuid` parameter set to the resolved UUID\n\n**Exception:**\nIf the user explicitly provides a valid device UUID in their request, you may skip step 1 and use the provided UUID directly in `api_complianceDetailsOfDevice`.\n\n**Use Cases - Pick this tool for questions like:**\n- \"Get compliance details of device 50.40.1.45\"\n- \"Show me detailed compliance information for device core-router\"\n- \"What are the compliance details of device 192.168.1.100\"\n- \"Get full compliance report for the device\"\n- \"Show compliance breakdown for device xyz\"\n\n**VIOLATION TERMINOLOGY (device-scoped) \u2014 route here:** Treat \"violation\", \"violations\", \"compliance violation(s)\", \"what is violating compliance\", \"why is device non-compliant\", \"what is making device non-compliant\", \"reasons device is non-compliant\", and device-scoped \"compliance issues\" as requests for device compliance DETAILS \u2014 use this tool (after `get_device_details`). This includes type- or template-qualified device violations such as syslog violations, template/config violations (e.g., template ACL-config), network-profile (wireless) violations, and network-settings violations for a SPECIFIC device, plus acknowledged/open violation filters. A device referenced by IP address or hostname is a NETWORK DEVICE \u2014 resolve it with `get_device_details`; do NOT ask the user to clarify whether it is a network device or a client. These compliance violations are NOT Assurance health issues \u2014 do NOT use `get_issues`/`understand_issues`.\n\n**DEFAULT (general violations / details) \u2014 call with deviceUuid ONLY; do NOT over-filter:** For a general request for a device's violations or compliance details that does NOT name a specific compliance type and does NOT ask for an intended-vs-actual / config diff \u2014 e.g. \"what are the violations for device X\", \"give me the violations, give me details\", \"show compliance details / breakdown\", \"why is the device non-compliant\" \u2014 call this tool with ONLY the deviceUuid. The category, complianceType, status, remediationSupported and diffList parameters are ALL OPTIONAL filters; leave them UNSET by default. Setting any of them narrows the result to a single type/status and will HIDE violations of other types \u2014 for example scoping to complianceType/category RUNNING_CONFIG hides NETWORK_SETTINGS (and other) violations and makes the device look like it has \"no violations\". Set complianceType/category ONLY when the user explicitly names a compliance type (e.g. \"network settings\", \"image\", \"PSIRT\", \"running config\"); set status ONLY when the user explicitly filters by a status; set remediationSupported ONLY when the user explicitly asks about remediation support. NEVER default complianceType or category to RUNNING_CONFIG. \"Give me details\" / \"details\" means the normal detailed report \u2014 it does NOT by itself mean a config diff, so do NOT set diffList=true for it.\n\n**COMPLIANCE TYPE & CATEGORY MAPPING \u2014 use this to pick the CORRECT complianceType/category when the user names a specific concern; do NOT reflexively choose RUNNING_CONFIG:** The word \"config\" alone does NOT mean RUNNING_CONFIG. RUNNING_CONFIG means ONLY a startup-vs-running configuration mismatch (config drift). Templates, CLI/feature templates, network profiles, fabric, AVC, workflow, syslog/network-settings, image, PSIRT and EOX are all DIFFERENT compliance types. Only set complianceType/category when the user explicitly names such a concern (for a plain \"violations/details\" request leave them UNSET per the DEFAULT rule).\n\nCategory -> complianceType(s):\n- INTENT: NETWORK_PROFILE, FABRIC, APPLICATION_VISIBILITY (a.k.a. AVC), WORKFLOW (all design/intent compliance)\n- RUNNING_CONFIG: RUNNING_CONFIG (a.k.a. startup vs running config mismatch / config drift)\n- IMAGE: IMAGE (a.k.a. standard / golden image compliance; for full image details use the SWIM APIs \u2014 compliance stores only limited detail)\n- PSIRT: PSIRT (a.k.a. critical security advisories; for full advisory details use the PSIRT APIs \u2014 compliance stores only limited detail)\n- EOX: EOX (a.k.a. end-of-life / end-of-support; for full EOX details use the EOX APIs \u2014 compliance stores only limited detail)\n- NETWORK_SETTINGS: NETWORK_SETTINGS\n\ncomplianceType -> sub-types / apps (IMPORTANT: these sub-type names are NOT accepted by the API \u2014 they exist ONLY to help you choose the parent complianceType. Always pass the PARENT complianceType value, e.g. NETWORK_PROFILE, and NEVER a sub-type such as CLI_TEMPLATE):\n- RUNNING_CONFIG: RUNNING_CONFIG\n- PSIRT: PSIRT\n- IMAGE: IMAGE\n- NETWORK_RULES: NETWORK_RULES\n- FABRIC: FABRIC_ROLE, SEGMENT, MULTICAST, AUTHENTICATION_PROFILE, ACCESS_CONTROL_LIST, PORT_CHANNEL, VIRTUAL_NETWORK, WIRELESS\n- APPLICATION_VISIBILITY (AVC): CBAR_CONFIGURATION, CBAR_CONFIGURATION_CONTROLLER, CBAR_CONFIGURATION_PROTOCOL_DISCOVERY\n- NETWORK_SETTINGS: GENERAL, WIRELESS\n- NETWORK_PROFILE: WIRELESS, ROUTING, CLI_TEMPLATE, FEATURE_TEMPLATE\n- WORKFLOW: UMBRELLA, SITE_TO_SITE_VPN\n- EOX: SOFTWARE, HARDWARE, MODULE\n\nMapping user wording -> complianceType (always pass the PARENT type): \"CLI template\" / \"config template\" / \"feature template\" / \"ACL-config template\" / \"template <name> violation\" -> NETWORK_PROFILE (sub-type CLI_TEMPLATE or FEATURE_TEMPLATE), NOT RUNNING_CONFIG; \"syslog\" / \"network settings\" / \"general settings\" -> NETWORK_SETTINGS; \"fabric\" / \"segment\" / \"SGT\" / \"virtual network\" / \"port channel\" / \"access control list\" -> FABRIC; \"AVC\" / \"application visibility\" / \"CBAR\" -> APPLICATION_VISIBILITY; \"Umbrella\" / \"site-to-site VPN\" -> WORKFLOW; \"startup vs running\" / \"config drift\" / \"running config\" -> RUNNING_CONFIG; \"golden image\" / \"image\" -> IMAGE; \"security advisory\" / \"PSIRT\" -> PSIRT; \"end of life\" / \"end of support\" / \"EOX\" -> EOX. If the user names a sub-type/app, filter by its PARENT complianceType and then identify the specific sub-type from the returned violations.\n\n**CONFIG DIFF \u2014 set diffList=true ONLY for explicit intended-vs-actual questions:** Do NOT set diffList=true (and do NOT add a complianceType) for a plain \"violations\" or \"details\" request \u2014 see the DEFAULT rule above. The DEFAULT response (diffList omitted or false) lists violations but does NOT contain the per-attribute intended (expected / should-be) versus configured (actual / present) values. To answer ANY question about what SHOULD have been configured versus what IS configured now \u2014 e.g. \"what should have been configured and what is present now\", \"intended vs actual configuration\", \"expected vs current config\", \"show the config diff / difference\", \"side-by-side comparison\", \"what changed\", \"what is missing\", or the exact configuration of a specific violation instance (such as a telemetry subscription id or a feature) \u2014 you MUST call this tool with diffList=true together with the relevant complianceType (e.g. RUNNING_CONFIG for startup-vs-running / config drift, or NETWORK_SETTINGS). Only diffList=true returns the diffList array, where each entry has an op (add/remove/update) plus the intended value and the configured value. NEVER answer such questions from the default (non-diff) response, NEVER invent intended/current values, and NEVER claim the API cannot provide the diff or that the user must use the compliance dashboard \u2014 set diffList=true and read the diffList.\n\n**CLI TEMPLATE (config template) VIOLATIONS \u2014 actual content is NOT available here:** Even with diffList=true, the response does NOT include the actual CLI template violation content (the specific configuration lines/commands), because that content can be extremely large. For CLI template compliance you may report THAT the device is non-compliant for the template/config type and name the affected complianceType, but you CANNOT list, enumerate, or reconstruct the exact violating CLI lines from this tool, and you must NEVER fabricate them. When the user specifically asks for an in-depth analysis or the actual line-by-line details of CLI template violations, tell them to try Deep Reasoning mode, which provides detailed CLI template violation analysis. Do not surface this suggestion for ordinary compliance questions \u2014 only when the user asks for the actual CLI template violation content or an in-depth template analysis.",
+    "name": "api_complianceDetailsOfDevice",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "OPTIONAL filter. Leave UNSET unless the user explicitly names a compliance category. Setting it narrows results to that category and HIDES others, so for a general \"violations / details\" request omit it entirely and NEVER default it to RUNNING_CONFIG. See the COMPLIANCE TYPE & CATEGORY MAPPING in the tool description (category INTENT covers complianceType NETWORK_PROFILE / FABRIC / APPLICATION_VISIBILITY / WORKFLOW). Allowed values: 'INTENT', 'RUNNING_CONFIG', 'IMAGE', 'PSIRT', 'DESIGN_OOD', 'EOX', 'NETWORK_SETTINGS'.",
+          "type": "string"
+        },
+        "complianceType": {
+          "description": "OPTIONAL filter. Leave UNSET unless the user explicitly names one or more compliance types (comma-separated). Setting it narrows results to those type(s) and HIDES violations of all other types, so for a general \"violations / details\" request omit it entirely and NEVER default it to RUNNING_CONFIG \u2014 the word \"config\" in a request (e.g. \"ACL-config template\", \"config template\") does NOT mean RUNNING_CONFIG; RUNNING_CONFIG is ONLY a startup-vs-running config mismatch. Use the COMPLIANCE TYPE & CATEGORY MAPPING in the tool description to translate the user's wording/sub-type to the correct PARENT type (e.g. CLI/config/feature template -> NETWORK_PROFILE, syslog -> NETWORK_SETTINGS, CBAR -> APPLICATION_VISIBILITY); sub-type names such as CLI_TEMPLATE are NOT valid values. Allowed values: 'APPLICATION_VISIBILITY', 'EOX', 'FABRIC', 'IMAGE', 'NETWORK_PROFILE', 'NETWORK_RULES', 'NETWORK_SETTINGS', 'PSIRT', 'RUNNING_CONFIG', 'WORKFLOW'.",
+          "type": "string"
+        },
+        "deviceUuid": {
+          "description": "Device UUID. Use the get_device_details tool to retrieve the device UUID if you only have the device name or IP.",
+          "type": "string"
+        },
+        "diffList": {
+          "description": "OPTIONAL \u2014 leave UNSET for general violations/details requests (setting diffList, or a complianceType, can hide other violation types). Set to true ONLY for explicit intended-vs-actual questions. Pass true to fetch the configuration DIFF (the diffList). The default response (diffList omitted or false) does NOT include the intended-versus-configured values, so set diffList=true whenever the user asks what should have been configured vs what is present now, intended vs actual / expected vs current config, a config difference / diff, a side-by-side comparison, what changed, what is missing, or the exact configuration of a specific violation instance (e.g. a telemetry subscription id or a feature). When true, each diffList entry provides an op (add/remove/update) plus the intended value and the configured value; combine with the relevant complianceType to scope the diff. NOTE: diffList does NOT include the actual CLI template (config template) violation content even when true \u2014 that content can be huge; for in-depth CLI template violation analysis, recommend Deep Reasoning mode.",
+          "type": "boolean"
+        },
+        "remediationSupported": {
+          "description": "OPTIONAL filter ('true' or 'false'). Leave UNSET unless the user explicitly asks to filter by remediation support; when unset, the result includes both remediation-supported and unsupported violations.",
+          "type": "boolean"
+        },
+        "status": {
+          "description": "OPTIONAL filter. Leave UNSET unless the user explicitly filters by a compliance status; when unset, violations of all statuses are returned. Allowed values: 'COMPLIANT', 'NON_COMPLIANT', 'ERROR', 'IN_PROGRESS', 'NOT_APPLICABLE', 'NOT_AVAILABLE', 'WARNING', 'REMEDIATION_IN_PROGRESS'.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "deviceUuid": {
+          "description": "UUID of the device.",
+          "type": "string"
+        },
+        "response": {
+          "description": "Response object, one entry per compliance type and per device.",
+          "items": {
+            "properties": {
+              "ackStatus": {
+                "description": "Acknowledgment status of the compliance type. UNACKNOWLEDGED if none of the violations under the compliance type are acknowledged. Otherwise it will be ACKNOWLEDGED.",
+                "type": "string"
+              },
+              "complianceType": {
+                "description": "Compliance type corresponds to a tile on the UI that will be one of NETWORK_PROFILE, IMAGE, APPLICATION_VISIBILITY, FABRIC, PSIRT, RUNNING_CONFIG, NETWORK_SETTINGS, WORKFLOW, or EOX.  ",
+                "type": "string"
+              },
+              "deviceUuid": {
+                "description": "UUID of the device.",
+                "type": "string"
+              },
+              "lastSyncTime": {
+                "description": "Timestamp when the status changed from a different value to the current value.",
+                "type": "number"
+              },
+              "lastUpdateTime": {
+                "description": "Timestamp of the latest compliance check that was run.",
+                "type": "number"
+              },
+              "remediationSupported": {
+                "description": "Indicates whether remediation is supported for this compliance type or not.",
+                "type": "boolean"
+              },
+              "sourceInfoList": {
+                "description": "List of violation details. Only valid for NON_COMPLIANT and COMPLIANT_WARNING statuses. One entry per name per instance.",
+                "items": {
+                  "properties": {
+                    "ackStatus": {
+                      "description": "Acknowledgment status of violations. UNACKNOWLEDGED if none of the violations are acknowledged. Otherwise it will be ACKNOWLEDGED.",
+                      "type": "string"
+                    },
+                    "appName": {
+                      "description": "Application name that is used to club the violations.",
+                      "type": "string"
+                    },
+                    "businessKey": {
+                      "description": "Object of unique identifier of the configuration instance.",
+                      "properties": {
+                        "businessKeyAttributes": {
+                          "description": "Attributes that together uniquely identify the configuration instance.",
+                          "properties": {},
+                          "type": "object"
+                        },
+                        "otherAttributes": {
+                          "description": "Data used by graphical user interface. Not applicable for all violations.",
+                          "properties": {
+                            "cfsAttributes": {
+                              "description": "",
+                              "properties": {
+                                "appName": {
+                                  "description": "Same as appName above.",
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "description": "Description for the configuration, if available.",
+                                  "type": "string"
+                                },
+                                "displayName": {
+                                  "description": " User friendly name for the configuration.",
+                                  "type": "string"
+                                },
+                                "source": {
+                                  "description": "Will be same as compliance type.",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "description": "The type of this attribute (for example, type can be Intent).",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "name": {
+                              "description": "Name of the attributes.",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "resourceName": {
+                          "description": "Name of the top level resource. Same as name above.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "count": {
+                      "description": "Number of violations present.",
+                      "type": "number"
+                    },
+                    "diffList": {
+                      "description": "List of individual violations, under the top-level configuration instance. ",
+                      "items": {
+                        "properties": {
+                          "ackStatus": {
+                            "description": "Acknowledgment status of the violation. ACKNOWLEDGED if the violation is acknowledged or at the top-level configuration. Otherwise it will be UNACKNOWLEDGED.",
+                            "type": "string"
+                          },
+                          "businessKey": {
+                            "description": "The Unique key of the individual violation does not change after every compliance check, as long as the deployment data doesn't change.",
+                            "type": "string"
+                          },
+                          "configuredValue": {
+                            "description": "Configured value i.e. running / current value. It will be empty for the template violations due to potentially large size of the template. Use a dedicated API to get the template data. ",
+                            "type": "string"
+                          },
+                          "displayName": {
+                            "description": "Display name for attribute in ui .If business key is null or of type owning entity type.",
+                            "type": "string"
+                          },
+                          "extendedAttributes": {
+                            "description": "Extra attribute to customize in ui . ",
+                            "properties": {
+                              "attributeDisplayName": {
+                                "description": "Display name for attribute in ui .if business key is null or only owning entity type.",
+                                "type": "string"
+                              },
+                              "dataConverter": {
+                                "description": "Name of the converter used to display configurations in user-friendly format, if available.",
+                                "type": "string"
+                              },
+                              "path": {
+                                "description": "Path to be displayed on the UI, instead of the above path, if available.",
+                                "type": "string"
+                              },
+                              "type": {
+                                "description": "Type of this attribute.(example type can be Intent)",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "instanceUUID": {
+                            "description": "UUID of the individual violation. Changes after every compliance check.",
+                            "type": "string"
+                          },
+                          "intendedValue": {
+                            "description": "Enable\", Intended value. It will be empty for the template violations due to potentially large size of the template. Use a dedicated API to get the template data.  ",
+                            "type": "string"
+                          },
+                          "moveFromPath": {
+                            "description": "Additional URI to fetch more details, if available.",
+                            "type": "string"
+                          },
+                          "op": {
+                            "description": "Type of change (add, remove, or update).",
+                            "type": "string"
+                          },
+                          "path": {
+                            "description": "Path of the configuration relative to the top-level configuration. Use it along with a name to identify certain set of violations.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "displayName": {
+                      "description": "Model display name.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of the type of top level configuration.",
+                      "type": "string"
+                    },
+                    "nameWithBusinessKey": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "sourceEnum": {
+                      "description": "Will be same as compliance type. ",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of the top level configuration.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "state": {
+                "description": "State of the compliance check for the compliance type, will be one of SUCCESS, FAILED, or IN_PROGRESS. ",
+                "type": "string"
+              },
+              "status": {
+                "description": "Status of compliance for the compliance type, will be one of COMPLIANT, NON_COMPLIANT, ERROR, IN_PROGRESS, NOT_APPLICABLE, NOT_AVAILABLE, WARNING, REMEDIATION_IN_PROGRESS can be the value of the compliance status parameter. [COMPLIANT: Device currently meets the compliance requirements.  NON_COMPLIANT: One of the compliance requirements like Software Image, PSIRT, Network Profile, Startup vs Running, etc. are not met. ERROR: Compliance is unable to compute status due to underlying errors. IN_PROGRESS: Compliance check is in progress for the device. NOT_APPLICABLE: Device is not supported for compliance, or minimum license requirement is not met. NOT_AVAILABLE: Compliance is not available for the device. COMPLIANT_WARNING: The device is compliant with warning if the last date of support is nearing. REMEDIATION_IN_PROGRESS: Compliance remediation is in progress for the device.]",
+                "type": "string"
+              },
+              "version": {
+                "description": "Version of the API.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

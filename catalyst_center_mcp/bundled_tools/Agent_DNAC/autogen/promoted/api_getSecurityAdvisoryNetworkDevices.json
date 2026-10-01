@@ -1,0 +1,115 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "useCodeAct": true
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "advisoryCount": "query",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "offset": "query",
+        "order": "query",
+        "scanMode": "query",
+        "scanStatus": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/networkDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the list of network devices affected by security advisories, PSIRTs, or vulnerabilities. Use this API to answer questions like 'Which devices are affected by the security advisories?' or 'List all devices impacted by vulnerabilities.' The response includes device identifiers, advisory IDs, CVE IDs, and other relevant details for each affected device. This tool provides a mapping of devices to the advisories impacting them, enabling detailed analysis of device vulnerability exposure.",
+    "name": "api_getSecurityAdvisoryNetworkDevices",
+    "parameters": {
+      "properties": {
+        "advisoryCount": {
+          "description": "Return network devices with advisoryCount greater than this advisoryCount",
+          "type": "string"
+        },
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc.",
+          "type": "string"
+        },
+        "scanMode": {
+          "description": "Mode or the criteria using which the network device was scanned. Available values : ESSENTIALS, ADVANTAGE, CX_CLOUD, NOT_AVAILABLE",
+          "type": "string"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED, FALL_BACK.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Security advisory network device details",
+          "items": {
+            "properties": {
+              "advisoryCount": {
+                "description": "Number of advisories to which the network device is vulnerable",
+                "type": "integer"
+              },
+              "comments": {
+                "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure",
+                "type": "string"
+              },
+              "lastScanTime": {
+                "description": "Time at which the device was scanned",
+                "type": "integer"
+              },
+              "networkDeviceId": {
+                "description": "Id of the device",
+                "type": "string"
+              },
+              "scanMode": {
+                "description": "'ESSENTIALS' - the device was scanned using a version based match criteria. 'ADVANTAGE' - the device was scanned using a version based match and user provided config match criteria. 'CX_CLOUD' - the device was scanned using CX cloud engine which uses advanced matching criteria which eliminates false positives.  \u2018NOT_AVAILABLE\u2019 - scan mode is not available. e.g. when the device is not scanned",
+                "type": "string"
+              },
+              "scanStatus": {
+                "description": "'NOT_SCANNED' - the device was not scanned. 'IN_PROGRESS' - a scan is in progress for the device. 'SUCCESS' - device scan was successful. 'FAILED' - device scan failed. 'FALL_BACK' - the device was supposed to be scanned using CX_CLOUD but because of connectivity issues fell back to a ESSENTIALS or ADVANTAGE scan",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

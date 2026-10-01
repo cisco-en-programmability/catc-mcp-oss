@@ -1,0 +1,58 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/ciscoImcs",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves the configurations of the Cisco Integrated Management Controller (IMC) that have been added to the Catalyst Center nodes.\n\nThe Cisco IMC configuration APIs enable the management of connections between Cisco IMC and Cisco Catalyst Center. By providing the Cisco IMC IP address and credentials to Catalyst Center, Catalyst Center can access and report the health status of hardware components within the Cisco appliance.\n    \nMore data about the Cisco IMC can be retrieved using the APIs exposed directly by Cisco IMC. Details are available in the Cisco IMC documentation - https://www.cisco.com/c/en/us/support/servers-unified-computing/ucs-c-series-integrated-management-controller/series.html#~tab-documents\n    \nThe Cisco IMC configuration is relevant only for Catalyst Center deployments based on UCS appliances. In cases where Cisco IMC configuration is not supported by the deployment, these APIs will respond with a `404 Not Found` status code.",
+    "name": "api_retrievesCiscoIMCConfigurationsForCatalystCenterNodes",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of Cisco IMC configurations added to Catalyst Center nodes. The list will be empty if no configurations have been added to any node.",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "The unique identifier for this Cisco IMC configuration",
+                "type": "string"
+              },
+              "ipAddress": {
+                "description": "IP address of the Cisco IMC",
+                "type": "string"
+              },
+              "nodeId": {
+                "description": "The UUID that represents the Catalyst Center node. Its value can be obtained from the `id` attribute of the response of the `/dna/intent/api/v1/nodes-config` API.",
+                "type": "string"
+              },
+              "username": {
+                "description": "Username of the Cisco IMC",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

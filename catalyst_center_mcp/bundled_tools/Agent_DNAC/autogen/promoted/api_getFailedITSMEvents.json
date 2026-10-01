@@ -1,0 +1,106 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "instanceId": "query"
+      },
+      "uri": "/dna/intent/api/v1/integration/events",
+      "version": "2.3.7.9"
+    },
+    "description": "Used to retrieve the list of integration events that failed to create tickets in ITSM",
+    "name": "api_getFailedITSMEvents",
+    "parameters": {
+      "properties": {
+        "instanceId": {
+          "description": "Instance Id of the failed event as in the Runtime Dashboard",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "category": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "domain": {
+            "description": "",
+            "type": "string"
+          },
+          "enrichmentInfo": {
+            "description": "",
+            "properties": {
+              "errorCode": {
+                "description": "",
+                "type": "string"
+              },
+              "errorDescription": {
+                "description": "",
+                "type": "string"
+              },
+              "eventStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "responseReceivedFromITSMSystem": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "eventId": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceId": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "severity": {
+            "description": "",
+            "type": "string"
+          },
+          "source": {
+            "description": "",
+            "type": "string"
+          },
+          "subDomain": {
+            "description": "",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "",
+            "type": "integer"
+          },
+          "type": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,252 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "serialNumber": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/serial-number/{serialNumber}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the network device with given serial number",
+    "name": "api_getDeviceBySerialNumber",
+    "parameters": {
+      "properties": {
+        "serialNumber": {
+          "description": "Device serial number",
+          "type": "string"
+        }
+      },
+      "required": [
+        "serialNumber"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "apEthernetMacAddress": {
+              "description": "AccessPoint Ethernet MacAddress of AP device",
+              "type": "string"
+            },
+            "apManagerInterfaceIp": {
+              "description": "IP address of WLC on AP manager interface",
+              "type": "string"
+            },
+            "associatedWlcIp": {
+              "description": "Associated Wlc Ip address of the AP device",
+              "type": "string"
+            },
+            "bootDateTime": {
+              "description": "Device boot time",
+              "type": "string"
+            },
+            "collectionInterval": {
+              "description": "Re sync Interval of the device",
+              "type": "string"
+            },
+            "collectionStatus": {
+              "description": "Collection status as Synchronizing, Could not synchronize, Not manageable, Managed, Partial Collection Failure, Incomplete, Unreachable, Wrong credential, Reachable, In Progress",
+              "type": "string"
+            },
+            "description": {
+              "description": "System description",
+              "type": "string"
+            },
+            "deviceSupportLevel": {
+              "description": "Support level of the device",
+              "type": "string"
+            },
+            "dnsResolvedManagementAddress": {
+              "description": "Specifies the resolved ip address of dns name",
+              "type": "string"
+            },
+            "errorCode": {
+              "description": "Inventory status error code",
+              "type": "string"
+            },
+            "errorDescription": {
+              "description": "Inventory status description",
+              "type": "string"
+            },
+            "family": {
+              "description": "Family of device as switch, router, wireless lan controller, accesspoints",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "Device name",
+              "type": "string"
+            },
+            "id": {
+              "description": "Instance Uuid of the device",
+              "type": "string"
+            },
+            "instanceTenantId": {
+              "description": "Instance Tenant Id of the device",
+              "type": "string"
+            },
+            "instanceUuid": {
+              "description": "Instance Uuid of the device",
+              "type": "string"
+            },
+            "interfaceCount": {
+              "description": "Number of interfaces on the device",
+              "type": "string"
+            },
+            "inventoryStatusDetail": {
+              "description": "Status detail of inventory sync",
+              "type": "string"
+            },
+            "lastDeviceResyncStartTime": {
+              "description": "Start time for last/ongoing sync",
+              "type": "string"
+            },
+            "lastUpdateTime": {
+              "description": "Time in epoch when the network device info last got updated",
+              "type": "number"
+            },
+            "lastUpdated": {
+              "description": "Time when the network device info last got updated",
+              "type": "string"
+            },
+            "lineCardCount": {
+              "description": "Number of linecards on the device",
+              "type": "string"
+            },
+            "lineCardId": {
+              "description": "IDs of linecards of the device",
+              "type": "string"
+            },
+            "location": {
+              "description": "[Deprecated] Location ID that is associated with the device",
+              "type": "string"
+            },
+            "locationName": {
+              "description": "[Deprecated] Name of the associated location",
+              "type": "string"
+            },
+            "macAddress": {
+              "description": "MAC address of device",
+              "type": "string"
+            },
+            "managedAtleastOnce": {
+              "description": "Indicates if device went into Managed state atleast once",
+              "type": "boolean"
+            },
+            "managementIpAddress": {
+              "description": "IP address of the device",
+              "type": "string"
+            },
+            "managementState": {
+              "description": "Represents the current management state of the network element: managed, unmanaged, under maintenance, and so on.",
+              "type": "string"
+            },
+            "memorySize": {
+              "description": "Processor memory size",
+              "type": "string"
+            },
+            "pendingSyncRequestsCount": {
+              "description": "Count of pending sync requests , if any",
+              "type": "string"
+            },
+            "platformId": {
+              "description": "Platform ID of device",
+              "type": "string"
+            },
+            "reachabilityFailureReason": {
+              "description": "Failure reason for unreachable devices",
+              "type": "string"
+            },
+            "reachabilityStatus": {
+              "description": "Device reachability status as Reachable / Unreachable",
+              "type": "string"
+            },
+            "reasonsForDeviceResync": {
+              "description": "Reason for last/ongoing sync",
+              "type": "string"
+            },
+            "reasonsForPendingSyncRequests": {
+              "description": "Reasons for pending sync requests , if any",
+              "type": "string"
+            },
+            "role": {
+              "description": "Role of device as access, distribution, border router, core",
+              "type": "string"
+            },
+            "roleSource": {
+              "description": "Role source as manual / auto",
+              "type": "string"
+            },
+            "serialNumber": {
+              "description": "Serial number of device",
+              "type": "string"
+            },
+            "series": {
+              "description": "Device series",
+              "type": "string"
+            },
+            "snmpContact": {
+              "description": "SNMP contact on device",
+              "type": "string"
+            },
+            "snmpLocation": {
+              "description": "SNMP location on device",
+              "type": "string"
+            },
+            "softwareType": {
+              "description": "Software type on the device",
+              "type": "string"
+            },
+            "softwareVersion": {
+              "description": "Software version on the device",
+              "type": "string"
+            },
+            "tagCount": {
+              "description": "Number of tags associated with the device",
+              "type": "string"
+            },
+            "tunnelUdpPort": {
+              "description": "Mobility protocol port is stored as tunneludpport for WLC",
+              "type": "string"
+            },
+            "type": {
+              "description": "Type of device as switch, router, wireless lan controller, accesspoints",
+              "type": "string"
+            },
+            "upTime": {
+              "description": "Time that shows for how long the device has been up",
+              "type": "string"
+            },
+            "uptimeSeconds": {
+              "description": "Uptime in Seconds",
+              "type": "number"
+            },
+            "vendor": {
+              "description": "Vendor details",
+              "type": "string"
+            },
+            "waasDeviceMode": {
+              "description": "WAAS device mode",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

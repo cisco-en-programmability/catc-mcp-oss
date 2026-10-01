@@ -1,0 +1,345 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "endTime": "query",
+        "id": "path",
+        "startTime": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/virtualNetworkHealthSummaries/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get health summary for a specific Virtual Network by providing the unique virtual networks id in the url path. L2 Virtual Networks are only included in health reporting for EVPN protocol deployments. The special Layer 3 VN called \u2018INFRA_VN\u2019 is also not included for user access through Assurance virtualNetworkHealthSummaries APIS. Please find INFRA_VN related health metrics under /data/api/v1/fabricSiteHealthSummaries (Ex: attributes \u2018pubsubInfraVnGoodHealthPercentage\u2019 and \u2018bgpPeerInfraVnScoreGoodHealthPercentage\u2019).\n\nThis API provides the latest health data until the given `endTime`. If data is not ready for the provided endTime, the request will fail with error code `400 Bad Request`, and the error message will indicate the recommended endTime to use to retrieve a complete data set. This behavior may occur if the provided endTime=currentTime, since we are not a real time system. When `endTime` is not provided, the API returns the latest data.\n\nFor detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-virtualNetworkHealthSummaries-1.0.1-resolved.yaml\n\n",
+    "name": "api_readVirtualNetworkWithItsHealthSummaryFromId",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "The interested fields in the request. For valid attributes, verify the documentation. ",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "unique virtual networks id",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "view": {
+          "description": "The specific summary view being requested. This is an optional parameter which can be passed to get one or more of the specific health data summaries associated with virtual networks.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "associatedL3Vn": {
+              "description": "",
+              "type": "string"
+            },
+            "bgpPeerFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "bgpPeerNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "fairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "goodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "goodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "internetAvailFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "internetAvailNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "internetAvailTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "layer": {
+              "description": "",
+              "type": "string"
+            },
+            "multiCastFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "multiCastGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "multiCastGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "multiCastPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "multiCastTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "networkProtocol": {
+              "description": "",
+              "type": "string"
+            },
+            "noHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "poorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubSessionFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubSessionGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubSessionGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "pubsubSessionNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubSessionPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubSessionTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "totalEndpoints": {
+              "description": "",
+              "type": "integer"
+            },
+            "totalFabricSites": {
+              "description": "",
+              "type": "integer"
+            },
+            "totalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vlan": {
+              "description": "",
+              "type": "string"
+            },
+            "vnExitFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnExitGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnExitHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "vnExitNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnExitPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnExitTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnFabricControlPlaneFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnFabricControlPlaneGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnFabricControlPlaneGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "vnFabricControlPlaneNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnFabricControlPlanePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnFabricControlPlaneTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnServicesFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnServicesGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnServicesHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "vnServicesNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnServicesPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnServicesTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnStatusFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnStatusGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnStatusHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "vnStatusNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnStatusPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnStatusTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vniFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vniGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vniGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "vniNoHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vniPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vniTotalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "vnid": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

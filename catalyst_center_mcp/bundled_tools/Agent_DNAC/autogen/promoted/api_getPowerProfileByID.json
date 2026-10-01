@@ -1,0 +1,123 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/powerProfiles/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get a Power Profile by Power Profile ID that captured in wireless settings design",
+    "name": "api_getPowerProfileByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Power Profile ID ",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "The description of the Power Profile.",
+              "type": "string"
+            },
+            "id": {
+              "description": "Unique Identifier of the power profile.",
+              "type": "string"
+            },
+            "profileName": {
+              "description": "The Name of the Power Profile.",
+              "type": "string"
+            },
+            "rules": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "interfaceId": {
+                    "description": "Interface Id for the rule.",
+                    "enum": [
+                      "GIGABITETHERNET0",
+                      "GIGABITETHERNET1",
+                      "LAN1",
+                      "LAN2",
+                      "LAN3",
+                      "6GHZ",
+                      "5GHZ",
+                      "SECONDARY_5GHZ",
+                      "2_4GHZ",
+                      "USB0"
+                    ],
+                    "type": "string"
+                  },
+                  "interfaceType": {
+                    "description": "Interface Type for the rule.",
+                    "enum": [
+                      "ETHERNET",
+                      "RADIO",
+                      "USB"
+                    ],
+                    "type": "string"
+                  },
+                  "parameterType": {
+                    "description": "Parameter Type for the rule.",
+                    "enum": [
+                      "STATE",
+                      "SPEED",
+                      "SPATIALSTREAM"
+                    ],
+                    "type": "string"
+                  },
+                  "parameterValue": {
+                    "description": "Parameter Value for the rule.",
+                    "enum": [
+                      "5000MBPS",
+                      "2500MBPS",
+                      "1000MBPS",
+                      "100MBPS",
+                      "EIGHT_BY_EIGHT",
+                      "FOUR_BY_FOUR",
+                      "THREE_BY_THREE",
+                      "TWO_BY_TWO",
+                      "ONE_BY_ONE",
+                      "DISABLE"
+                    ],
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "description": "Sequential Ordered List of rules for Power Profile.",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

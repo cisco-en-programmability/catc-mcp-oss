@@ -1,0 +1,79 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "interfaceName": "query",
+        "limit": "query",
+        "offset": "query",
+        "vlanId": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/interfaces",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG PHRASE EXCLUSION:**\n- If the user asks for ports or interfaces `tagged`, `with <value> tag`, `under tag <value>`, or `in tag <value>`, do not treat `<value>` as an interface name, port name, device name, site name, or inventory filter.\n- The value is a tag name. Use `api_getTag` followed by `api_getTagMembersById` for lists, or `api_getTagMemberCount` for counts.\n\n**NOT FOR NAMED-TAG MEMBERSHIP:**\n- Do not select this tool when the user starts from one named tag and asks which ports or interfaces belong to it.\n- Do not select this tool for counts of ports or interfaces inside one named tag.\n- This tool lists interfaces by interface/device attributes; it does not resolve a tag name to tag members.\n- For tag-to-port or tag-to-interface membership, select `api_getTag` together with `api_getTagMembersById`.\n- For tag-to-port or tag-to-interface counts, select `api_getTag` together with `api_getTagMemberCount`.\n\nThis API allows the user to get all Interfaces",
+    "name": "api_getInterfaces",
+    "parameters": {
+      "properties": {
+        "interfaceName": {
+          "description": "Interface Name",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "vlanId": {
+          "description": "Vlan Id",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Interface ID",
+                "type": "string"
+              },
+              "interfaceName": {
+                "description": "Interface Name",
+                "type": "string"
+              },
+              "vlanId": {
+                "description": "VLAN ID",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

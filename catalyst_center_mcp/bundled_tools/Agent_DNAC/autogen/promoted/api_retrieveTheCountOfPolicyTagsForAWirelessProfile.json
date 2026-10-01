@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessProfiles/{id}/policyTags/count",
+      "version": "2.3.7.9"
+    },
+    "description": "This endpoint retrieves the total count of `Policy Tags` associated with a specific `Wireless Profile`.This API requires the `id` of the `Wireless Profile` to be provided as a path parameter.",
+    "name": "api_retrieveTheCountOfPolicyTagsForAWirelessProfile",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Wireless Profile Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "properties": {
+            "count": {
+              "description": "Count of the requested resource",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

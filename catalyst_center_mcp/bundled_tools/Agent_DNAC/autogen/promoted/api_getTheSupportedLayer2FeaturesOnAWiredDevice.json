@@ -1,0 +1,49 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wired/networkDevices/{id}/configFeatures/supported/layer2",
+      "version": "2.3.7.9"
+    },
+    "description": "The API returns the supported layer 2 features on a wired device.",
+    "name": "api_getTheSupportedLayer2FeaturesOnAWiredDevice",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Network device ID of the wired device.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

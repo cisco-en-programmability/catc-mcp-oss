@@ -1,0 +1,144 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "serialNumber": "query",
+        "sort": "query",
+        "sortOrder": "query"
+      },
+      "uri": "/dna/intent/api/v1/onboarding/pnp-device/history",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns history for a specific device. Serial number is a required parameter",
+    "name": "api_getDeviceHistory",
+    "parameters": {
+      "properties": {
+        "serialNumber": {
+          "description": "Device Serial Number",
+          "type": "string"
+        },
+        "sort": {
+          "description": "Comma seperated list of fields to sort on",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sortOrder": {
+          "description": "Sort Order Ascending (asc) or Descending (des)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "serialNumber"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "details": {
+                "description": "",
+                "type": "string"
+              },
+              "errorFlag": {
+                "description": "",
+                "type": "boolean"
+              },
+              "historyTaskInfo": {
+                "description": "",
+                "properties": {
+                  "addnDetails": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "key": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "value": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "timeTaken": {
+                    "description": "",
+                    "type": "number"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "workItemList": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "command": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "endTime": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "outputStr": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "startTime": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "state": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "timeTaken": {
+                          "description": "",
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "timestamp": {
+                "description": "",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "statusCode": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

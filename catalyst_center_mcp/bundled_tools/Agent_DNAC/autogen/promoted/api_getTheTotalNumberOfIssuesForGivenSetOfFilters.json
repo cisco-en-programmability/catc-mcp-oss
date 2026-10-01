@@ -1,0 +1,197 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "aiDriven": "query",
+        "category": "query",
+        "deviceType": "query",
+        "endTime": "query",
+        "entityId": "query",
+        "entityType": "query",
+        "fabricDriven": "query",
+        "fabricSiteDriven": "query",
+        "fabricSiteId": "query",
+        "fabricTransitDriven": "query",
+        "fabricTransitSiteId": "query",
+        "fabricVnDriven": "query",
+        "fabricVnName": "query",
+        "isGlobal": "query",
+        "issueId": "query",
+        "macAddress": "query",
+        "name": "query",
+        "networkDeviceId": "query",
+        "networkDeviceIpAddress": "query",
+        "priority": "query",
+        "severity": "query",
+        "siteHierarchy": "query",
+        "siteHierarchyId": "query",
+        "siteId": "query",
+        "siteName": "query",
+        "startTime": "query",
+        "status": "query",
+        "updatedBy": "query"
+      },
+      "uri": "/dna/data/api/v1/assuranceIssues/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the total number issues for given set of filters. If there is no start and/or end time, then end time will be defaulted to current time and start time will be defaulted to 24-hours ago from end time. https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-IssuesList-1.0.0-resolved.yaml",
+    "name": "api_getTheTotalNumberOfIssuesForGivenSetOfFilters",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID can be used to trace the caller for queries executed on database. The caller id is like a optional attribute which can be added to API invocation like ui, python, postman, test-automation etc",
+          "type": "string"
+        },
+        "aiDriven": {
+          "description": "Flag whether the issue is AI driven issue",
+          "type": "boolean"
+        },
+        "category": {
+          "description": "Categories of the issue. Supports single category and multiple categories. Examples: category=availability (single status requested) category=availability&category=onboarding (multiple categories requested)\n",
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "Device Type of the device to which this issue belongs to. Supports single device type and multiple device types.\nExamples: deviceType=wireless controller (single device type requested) deviceType=wireless controller&deviceType=core (multiple device types requested)\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "entityId": {
+          "description": "Id of the entity for which this issue belongs to. For example, it\n    could be mac address of AP or UUID of Sensor\n  example: 68:ca:e4:79:3f:20 4de02167-901b-43cf-8822-cffd3caa286f\nExamples: entityId=68:ca:e4:79:3f:20 (single entity id requested) entityId=68:ca:e4:79:3f:20&entityId=864d0421-02c0-43a6-9c52-81cad45f66d8 (multiple entity ids requested)\n",
+          "type": "string"
+        },
+        "entityType": {
+          "description": "Entity type of the issue. Supports single entity type and multiple entity types. Examples: entityType=networkDevice (single entity type requested) entityType=network device&entityType=client (multiple entity types requested)\n",
+          "type": "string"
+        },
+        "fabricDriven": {
+          "description": "Flag whether the issue is related to a Fabric site, a virtual network or a transit.",
+          "type": "boolean"
+        },
+        "fabricSiteDriven": {
+          "description": "Flag whether the issue is Fabric site driven issue",
+          "type": "boolean"
+        },
+        "fabricSiteId": {
+          "description": "The UUID of the fabric site. (Ex. \"flooruuid\")\nExamples: fabricSiteId=e52aecfe-b142-4287-a587-11a16ba6dd26 (single id requested) fabricSiteId=e52aecfe-b142-4287-a587-11a16ba6dd26,864d0421-02c0-43a6-9c52-81cad45f66d8 (multiple ids requested)\n",
+          "type": "string"
+        },
+        "fabricTransitDriven": {
+          "description": "Flag whether the issue is Fabric Transit driven issue",
+          "type": "boolean"
+        },
+        "fabricTransitSiteId": {
+          "description": "The UUID of the fabric transit site. (Ex. \"flooruuid\")\nExamples: fabricTransitSiteId=e52aecfe-b142-4287-a587-11a16ba6dd26 (single id requested) fabricTransitSiteId=e52aecfe-b142-4287-a587-11a16ba6dd26&fabricTransitSiteId=864d0421-02c0-43a6-9c52-81cad45f66d8 (multiple ids requested)\n",
+          "type": "string"
+        },
+        "fabricVnDriven": {
+          "description": "Flag whether the issue is Fabric Virtual Network driven issue",
+          "type": "boolean"
+        },
+        "fabricVnName": {
+          "description": "The name of the fabric virtual network\nExamples: fabricVnName=name1 (single fabric virtual network name requested) fabricVnName=name1&fabricVnName=name2&fabricVnName=name3 (multiple fabric virtual network names requested)\n",
+          "type": "string"
+        },
+        "isGlobal": {
+          "description": "Global issues are those issues which impacts across many devices, sites. They are also displayed on Issue Dashboard in Catalyst Center UI. Non-Global issues are displayed only on Client 360 or Device 360 pages. If this flag is 'true', only global issues are returned. If it if 'false', all issues are returned.\n",
+          "type": "boolean"
+        },
+        "issueId": {
+          "description": "UUID of the issue Examples: issueId=e52aecfe-b142-4287-a587-11a16ba6dd26 (single issue id requested) issueId=e52aecfe-b142-4287-a587-11a16ba6dd26&issueId=864d0421-02c0-43a6-9c52-81cad45f66d8 (multiple issue ids requested)\n",
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "The macAddress of the network device or client\nThis field supports wildcard (`*`) character-based search. \nEx: `*AB:AB:AB*` or `AB:AB:AB*` or `*AB:AB:AB`\nExamples:\n\n`macAddress=AB:AB:AB:CD:CD:CD` (single macAddress requested)\n\n`macAddress=AB:AB:AB:CD:CD:DC&macAddress=AB:AB:AB:CD:CD:FE` (multiple macAddress requested)\n",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the issue\nExamples:\nname=ap_down (single issue name requested)\nname=ap_down&name=wlc_monitor (multiple issue names requested)\nIssue names can be retrieved using the API - /data/api/v1/assuranceIssueConfigurations\n",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "The list of Network Device Uuids. (Ex. `6bef213c-19ca-4170-8375-b694e251101c`)\n\nExamples:\n\n`networkDeviceId=6bef213c-19ca-4170-8375-b694e251101c` (single networkDeviceId requested)\n\n`networkDeviceId=6bef213c-19ca-4170-8375-b694e251101c&networkDeviceId=32219612-819e-4b5e-a96b-cf22aca13dd9&networkDeviceId=2541e9a7-b80d-4955-8aa2-79b233318ba0` (multiple networkDeviceIds with & separator)\n",
+          "type": "string"
+        },
+        "networkDeviceIpAddress": {
+          "description": "The list of Network Device management IP Address. (Ex. `121.1.1.10`)\n\nThis field supports wildcard (`*`) character-based search. \nEx: `*1.1*` or `1.1*` or `*1.1`\n\nExamples:\n\n`networkDeviceIpAddress=121.1.1.10`\n\n`networkDeviceIpAddress=121.1.1.10&networkDeviceIpAddress=172.20.1.10&networkDeviceIpAddress=10.10.20.10` (multiple networkDevice IP Address with & separator)\n",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Priority of the issue. Supports single priority and multiple priorities Examples: priority=P1 (single priority requested) priority=P1&priority=P2&priority=P3 (multiple priorities requested)\n",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of the issue. Supports single severity and multiple severities.\nExamples:\nseverity=high (single severity requested)\nseverity=high&severity=medium (multiple severities requested)\n",
+          "type": "string"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (*) character search support. E.g. */San*, */San, /San*\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (*) character search support. E.g. `*uuid*, *uuid, uuid*\n\nExamples:\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&siteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nThis field supports wildcard asterisk (*) character search support. E.g.*flooruuid*, *flooruuid, flooruuid*\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "siteName": {
+          "description": "The name of the site. (Ex. `FloorName`)\n\nThis field supports wildcard asterisk (*) character search support. E.g. *San*, *San, San*\n\nExamples:\n\n`?siteName=building1` (single siteName requested)\n\n`?siteName=building1&siteName=building2&siteName=building3` (multiple siteNames requested)\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to current time.\n",
+          "type": "number"
+        },
+        "status": {
+          "description": "Status of the issue. Supports single status and multiple statuses. Examples: status=active (single status requested) status=active&status=resolved (multiple statuses requested)\n",
+          "type": "string"
+        },
+        "updatedBy": {
+          "description": "The user who last updated this issue. Examples: updatedBy=admin (single updatedBy requested) updatedBy=admin&updatedBy=john (multiple updatedBy requested)\n",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "filters": {
+          "description": "",
+          "items": {
+            "properties": {
+              "key": {
+                "description": "",
+                "type": "string"
+              },
+              "operator": {
+                "description": "",
+                "type": "string"
+              },
+              "value": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

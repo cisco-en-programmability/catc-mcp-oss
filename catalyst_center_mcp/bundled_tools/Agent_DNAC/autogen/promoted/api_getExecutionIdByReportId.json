@@ -1,0 +1,103 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "Content-Type": "header",
+        "reportId": "path"
+      },
+      "uri": "/dna/data/api/v1/flexible-report/report/{reportId}/executions",
+      "version": "2.3.7.9"
+    },
+    "description": "Get Execution Id by Report Id",
+    "name": "api_getExecutionIdByReportId",
+    "parameters": {
+      "properties": {
+        "Content-Type": {
+          "description": "Request body content type",
+          "type": "string"
+        },
+        "reportId": {
+          "description": "Id of the report",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Content-Type",
+        "reportId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "executionCount": {
+          "description": "Total number of report executions",
+          "type": "integer"
+        },
+        "executions": {
+          "description": "Report execution details",
+          "items": {
+            "properties": {
+              "endTime": {
+                "description": "Report execution end time (Represent the specified number of milliseconds since the epoch time)",
+                "type": "number"
+              },
+              "errors": {
+                "description": "Errors associated with the report execution",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "executionId": {
+                "description": "Report ExecutionId (Unique UUID)",
+                "type": "string"
+              },
+              "processStatus": {
+                "description": "Report execution status",
+                "type": "string"
+              },
+              "requestStatus": {
+                "description": "Report request status",
+                "type": "string"
+              },
+              "startTime": {
+                "description": "Report execution start time (Represent the specified number of milliseconds since the epoch time)",
+                "type": "integer"
+              },
+              "warnings": {
+                "description": "Warnings associated with the report execution",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "reportId": {
+          "description": "Report Id (Unique UUID)",
+          "type": "string"
+        },
+        "reportName": {
+          "description": "Name of the report",
+          "type": "string"
+        },
+        "reportWasExecuted": {
+          "description": "Report execution status flag (true if execution is started, false if the execution is not started)",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

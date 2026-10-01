@@ -1,0 +1,68 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "globalIpAddressPoolId": "path",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/ipam/globalIpAddressPools/{globalIpAddressPoolId}/subpools",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the IDs of all IP address subpools under a specific global IP address pool (globalIpAddressPoolId). Use when the user asks for subpools within a given global pool and you need child subpool IDs (often followed by detail calls per subpool). If the user provides a global pool name (not a UUID), resolve it via api_retrievesGlobalIPAddressPools, then call this tool with the resolved UUID. If the user explicitly mentions \"global pool\", do not retrieve unrelated subpools or other global pools. If there are more than 10 matching results, clearly state that additional results exist beyond those shown. RULE1: If fetching subpool details, for any multi-row subpool Table output, ALWAYS use this exact column order and names: Name, Type, CIDR (combine subnet/prefix to get CIDR), Total Addresses, Assigned, Gateway, Site. Don't add any other columns unless user specifically requests. RULE2: ONLY display 10 rows. RULE3: ALWAYS display 'Showing [number} out of {total} results.' after the table. RULE4: Never mix subpool and global pools in teh same table, use separate tables. Tool Dependency: CRITICAL. REQUIRED PRE-REQUISITE: globalIpAddressPoolId must be a valid UUID. Step-by-step process: (1) if user provides UUID, call this tool directly; (2) if user provides global pool name, resolve exact-name id via api_retrievesGlobalIPAddressPools; (3) call this tool with resolved globalIpAddressPoolId. Strong negative boundaries: DO NOT pass non-UUID name strings to globalIpAddressPoolId. Count vs detail boundary: use this tool to enumerate child subpool IDs (relationship lookup), not for direct count-only output formatting.",
+    "name": "api_retrievesSubpoolsIDsOfAGlobalIPAddressPool",
+    "parameters": {
+      "properties": {
+        "globalIpAddressPoolId": {
+          "description": "The `id` of the global IP address pool for which to retrieve subpool IDs.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "globalIpAddressPoolId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "ID of the subpool",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

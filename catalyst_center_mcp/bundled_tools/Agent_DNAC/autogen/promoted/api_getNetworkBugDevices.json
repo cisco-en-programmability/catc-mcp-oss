@@ -1,0 +1,112 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "bugCount": "query",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "offset": "query",
+        "order": "query",
+        "scanMode": "query",
+        "scanStatus": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/networkDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "Get network devices that have network bugs detected by the network bug scan. Use this list tool for requests like 'what devices have bugs?', 'show all devices with network bugs', 'devices with failed bug scans', or 'devices scanned by CX Cloud'. For unqualified devices-with-bugs questions, call this tool with bugCount: 0 and limit: 10 so only devices with at least one detected bug are returned. If you need device names, IPs, models, or site details after this tool returns, call get_device_details only for the returned networkDeviceId values: use device_id for one returned ID, or filters: [{\"field\":\"id\",\"operator\":\"in\",\"value\":[...returned networkDeviceId values...]}] for multiple IDs. Never call get_device_details without a device_id or id filter for this flow, because that widens the result set to devices that do not have network bugs. The final answer must include only devices returned by api_getNetworkBugDevices. Do not use this tool for 'how many devices have bugs?' count questions; use api_getCountOfNetworkBugDevices with bugCount: 0 for counts.",
+    "name": "api_getNetworkBugDevices",
+    "parameters": {
+      "properties": {
+        "bugCount": {
+          "default": 0,
+          "description": "Return network devices with bugCount greater than this value. Use bugCount: 0 for devices-with-bugs list requests so only devices with at least one detected bug are returned.",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc",
+          "type": "string"
+        },
+        "scanMode": {
+          "description": "Mode or the criteria using which the network device was scanned. Available values : ESSENTIALS, ADVANTAGE, CX_CLOUD, NOT_AVAILABLE",
+          "type": "string"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED, FALL_BACK",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Network bug device details",
+      "properties": {
+        "response": {
+          "description": "Network bug device details",
+          "items": {
+            "properties": {
+              "bugCount": {
+                "description": "Number of bugs to which the network device is vulnerable",
+                "type": "integer"
+              },
+              "comments": {
+                "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure",
+                "type": "string"
+              },
+              "lastScanTime": {
+                "description": "Time at which the device was scanned",
+                "type": "integer"
+              },
+              "networkDeviceId": {
+                "description": "Id of a device returned by the network bug scan. Use only these networkDeviceId values for any follow-up get_device_details lookup, and include only these devices in the final answer.",
+                "type": "string"
+              },
+              "scanMode": {
+                "description": "'ESSENTIALS' - the device was scanned using a version based match criteria. 'CX_CLOUD' - the device was scanned using CX cloud engine which uses advanced matching criteria which eliminates false positives. 'ADVANTAGE' - the device was scanned using a version based match and user provided config match criteria. \u2018NOT_AVAILABLE\u2019 - scan mode is not available. e.g. when the device is not scanned",
+                "type": "string"
+              },
+              "scanStatus": {
+                "description": "'NOT_SCANNED' - the device was not scanned. 'IN_PROGRESS' - a scan is in progress for the device. 'SUCCESS' - device scan was successful. 'FAILED' - device scan failed. 'FALL_BACK' - the device was supposed to be scanned using CX_CLOUD but because of connectivity issues fell back to a ESSENTIALS scan",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

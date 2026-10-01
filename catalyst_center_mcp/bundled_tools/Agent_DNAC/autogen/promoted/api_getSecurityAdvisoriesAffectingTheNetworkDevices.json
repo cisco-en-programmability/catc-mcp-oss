@@ -1,0 +1,142 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "useCodeAct": true
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "cvssBaseScore": "query",
+        "deviceCount": "query",
+        "id": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "securityImpactRating": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/advisories",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the list of security advisories, PSIRTs, and vulnerabilities affecting all devices in the network. Use this API to answer questions like 'Which security advisories are affecting the devices?' or 'List all vulnerabilities impacting the network devices.' This tool provides detailed advisory information for all devices, not just a count.",
+    "name": "api_getSecurityAdvisoriesAffectingTheNetworkDevices",
+    "parameters": {
+      "properties": {
+        "cvssBaseScore": {
+          "description": "Return advisories with cvssBaseScore greater than this cvssBaseScore. E.g. : 8.5",
+          "type": "string"
+        },
+        "deviceCount": {
+          "description": "Return advisories with deviceCount greater than this deviceCount",
+          "type": "number"
+        },
+        "id": {
+          "description": "Id of the advisory",
+          "type": "string"
+        },
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of records to be fetched. If not provided, 10 records will be fetched by default",
+          "maximum": 10,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "default": "desc",
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc.",
+          "type": "string"
+        },
+        "securityImpactRating": {
+          "description": "Return advisories with this securityImpactRating. Available values : CRITICAL, HIGH.",
+          "type": "string"
+        },
+        "sortBy": {
+          "default": "securityImpactRating",
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit",
+        "sortBy",
+        "order"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Security advisory details",
+          "items": {
+            "properties": {
+              "cveIds": {
+                "description": "CVE (Common Vulnerabilities and Exposures) ID of the advisory",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "cvssBaseScore": {
+                "description": "Common Vulnerability Scoring System(CVSS) base score",
+                "type": "number"
+              },
+              "deviceCount": {
+                "description": "Number of devices which are vulnerable to this advisory",
+                "type": "integer"
+              },
+              "firstFixedVersionsList": {
+                "description": "Vulnerable version and the first fixed versions for the vulnerable version",
+                "items": {
+                  "properties": {
+                    "fixedVersions": {
+                      "description": "First versions that have the fix for the advisory",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "vulnerableVersion": {
+                      "description": "Version that is vulnerable to the advisory",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Id of the security advisory",
+                "type": "string"
+              },
+              "publicationUrl": {
+                "description": "Url for getting advisory details on cisco website",
+                "type": "string"
+              },
+              "securityImpactRating": {
+                "description": "'CRITICAL' - the advisory requires immediate mitigation. 'HIGH' - the advisory requires priority mitigation",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

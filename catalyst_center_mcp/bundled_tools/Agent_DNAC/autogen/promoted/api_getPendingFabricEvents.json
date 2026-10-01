@@ -1,0 +1,74 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "fabricId": "query",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/sda/pendingFabricEvents",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns a list of pending fabric events that match the provided query parameters.",
+    "name": "api_getPendingFabricEvents",
+    "parameters": {
+      "properties": {
+        "fabricId": {
+          "description": "ID of the fabric.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Pending Fabric Events get response root element. (Maximum number of records to return in each response is 500).",
+      "properties": {
+        "response": {
+          "description": "Response body.",
+          "items": {
+            "properties": {
+              "detail": {
+                "description": "Detail of the pending fabric event.",
+                "type": "string"
+              },
+              "fabricId": {
+                "description": "ID of the fabric.",
+                "type": "string"
+              },
+              "id": {
+                "description": "ID of the pending fabric event.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": " Version number.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,551 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "authCodeStatus": "query",
+        "authorizationStatus": "query",
+        "family": "query",
+        "id": "query",
+        "licenseMode": "query",
+        "licenseStatus": "query",
+        "licenseType": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "registrationStatus": "query",
+        "smartAccountId": "query",
+        "sortBy": "query",
+        "virtualAccountId": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceLicenses",
+      "version": "3.2.1"
+    },
+    "description": "**Tool Dependency: CONDITIONAL (Only if Account Name provided)**\\n\\n**PRIMARY TOOL for ALL License Queries.**\\nRetrieves a **detailed list** of network devices filtered by license properties. Use this tool for **ANY** query asking for devices with specific licenses, including:\\n- **License Types:** 'DNA Advantage', 'DNA Essentials', 'Network Advantage', 'Network Essentials', 'CNS Advantage', 'CNS Essentials', 'Premier', 'Advantage', 'Essentials'.\\n- **License Modes:** 'Smart License' (SL), 'Right To Use' (RTU), 'Permanent', 'Eval'.\\n- **Registration Status:** 'Registered', 'Unregistered', 'Authorized'.\\n\\n**Do NOT use `get_device_details` or `api_retrievesSummaryOfNetworkDeviceLicenses` for listing devices by license.**\\n\\n**CRITICAL INSTRUCTION: DIRECT VS ACCOUNT LOOKUP**\\n1. **Global Search (Most Common):** If the user asks \"List devices with Network Advantage\" or \"Show Right To Use devices\" (NO Smart Account name mentioned), call this tool **DIRECTLY**. Do NOT call `api_smartAccountDetails`. Omit `smartAccountId` and `virtualAccountId`.\\n\\n2. **Account-Specific Search:** ONLY if the user explicitly names a Smart Account (e.g., \"in 'BU Production Test'\"), follow this **REQUIRED STEP-BY-STEP PROCESS:**\\n   a. **Get Account IDs:** Call `api_smartAccountDetails`.\\n   b. **Handle Duplicates:** If multiple accounts have the same name (e.g., 'BU Production Test'), you **MUST** call this tool multiple times\u2014once for **EACH** account ID returned. Aggregate results.\\n   c. **Call this tool:** Pass the resolved `smartAccountId`.\\n\\n**SCENARIO MAPPING:**\\n- \"List devices with Network Advantage\" -> Call `api_readNetworkDeviceLicenses(licenseType='NETWORK_ADVANTAGE')`\\n- \"Show DNA Essentials devices\" -> Call `api_readNetworkDeviceLicenses(licenseType='DNA_ESSENTIALS')`\\n- \"Devices with Right To Use\" -> Call `api_readNetworkDeviceLicenses(licenseMode='RIGHT_TO_USE')`\\n- \"Smart Licensed devices\" -> Call `api_readNetworkDeviceLicenses(licenseMode='SMART_LICENSE')`",
+    "name": "api_readNetworkDeviceLicenses",
+    "parameters": {
+      "properties": {
+        "authCodeStatus": {
+          "description": "Status of authorization code for network device. Smart Licensing authorization code enables the use of a HSEC license on the device. It is applicable for routers only.\n| Auth Code Status | Description                                                                                   |\n|------------------|-----------------------------------------------------------------------------------------------|\n| `INSTALLED`      | If authorization code is installed on the device, the status will be INSTALLED.               |\n| `NOT_INSTALLED`  | If authorization code is not installed, the status will be NOT_INSTALLED.                     |\n| `NA`             | If authorization code is not applicable for the device, then the status will be NA.           |\n",
+          "enum": [
+            "INSTALLED",
+            "NOT_INSTALLED",
+            "NA"
+          ],
+          "type": "string"
+        },
+        "authorizationStatus": {
+          "description": "Smart License authorization status\n\n| Authorization Status                 | Description  |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `AUTHORIZED`     | Registration has been completed with a valid Smart Account and license consumption has begun. The number of licenses consumed is less than the licenses available for use. This is an indication of being in compliance. |\n| `EVALUATION_MODE`              | The network device is running in evaluation mode when it is not registered. |\n| `OUT_OF_COMPLIANCE`     | The device's license consumption has exceeded the number of licenses that were purchased. The virtual account containing the product instance has a shortage of one or more of license types used. |   \n| `EVALUATION_EXPIRED`     | The evaluation period has expired and the device will be in unlicensed state. |   \n| `AUTHORIZATION_EXPIRED`     | The authorization has expired. |\n| `NOT_AUTHORIZED`     | The authorization is not valid.  |\n| `AUTHORIZED_RESERVED`     | Registration of device has been completed using SLR/PLR with a valid Smart Account and license consumption has begun. The number of licenses consumed is less than the licenses available for use. This is an indication of being in compliance. |\n| `NA`     | The authorization is not applicable for device. 'NA' can be seen for devices having RTU mode or device for which smart licensing using policy is applicable |\n| `UNKNOWN`     | The authorization state is not known on the device. |\n",
+          "enum": [
+            "AUTHORIZED",
+            "EVALUATION_MODE",
+            "OUT_OF_COMPLIANCE",
+            "EVALUATION_EXPIRED",
+            "AUTHORIZATION_EXPIRED",
+            "NOT_AUTHORIZED",
+            "AUTHORIZED_RESERVED",
+            "NA",
+            "UNKNOWN"
+          ],
+          "example": "AUTHORIZED",
+          "type": "string"
+        },
+        "family": {
+          "description": "Product family of the network device.\n| Family | Description                              |\n|--------------|------------------------------------------|\n| `ROUTERS`         | Router product family                       |\n| `SWITCHES_AND_HUBS`        | Switches and Hubs product family                             |\n| `WIRELESS_CONTROLLER`    | Wireless controller product family   |\n| `UNIFIED_AP`    | Unified Access Point product family   |\n",
+          "enum": [
+            "ROUTERS",
+            "SWITCHES_AND_HUBS",
+            "WIRELESS_CONTROLLER",
+            "UNIFIED_AP"
+          ],
+          "example": "ROUTERS",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique ID of the license details of the network device.",
+          "example": "e910e834-e35b-4800-9401-a40e22ce09f3",
+          "format": "uuid",
+          "type": "string"
+        },
+        "licenseMode": {
+          "description": "Mode of license on the device.\n| License Mode | Description                              |\n|--------------|------------------------------------------|\n| `SMART_LICENSE`         | Smart License mode                       |\n| `RIGHT_TO_USE`        | Right to use                             |\n| `UNKNOWN`    | Mode of license on the device is not known.   |\n",
+          "enum": [
+            "SMART_LICENSE",
+            "RIGHT_TO_USE",
+            "UNKNOWN"
+          ],
+          "example": "SMART_LICENSE",
+          "type": "string"
+        },
+        "licenseStatus": {
+          "description": "Status of license on the network device.\n| License Status          | Description                                                                                  |\n|-------------------------|----------------------------------------------------------------------------------------------|\n| `IN_USE`                | A license is actively being used by a Cisco device and is currently authorized for features it enables. |\n| `NOT_IN_USE`            | A license is available on the device but is not currently being used by device. |\n| `EXPIRED_IN_USE`        | A license has expired but the device continues to use its features.                          |\n| `EXPIRED_NOT_IN_USE`    | A license has expired and its features are not currently being utilized on the device.       |\n| `USAGE_COUNT_CONSUMED`  | The allowed usage limit for the license has been fully utilized. It is only applicable for Cisco Nexus devices.                              |\n| `OUT_OF_COMPLIANCE`     | A device is using features that require licenses it does not have assigned to it, potentially leading to functionality limitations. |\n| `EVALUATION_IN_USE`     | A device is currently using a trial or evaluation license for its features.                |\n| `INACTIVE`              | A license is available on the device but is not currently being used by device. This license status is only applicable for virtual wireless controllers.                  |\n",
+          "enum": [
+            "IN_USE",
+            "NOT_IN_USE",
+            "EXPIRED_IN_USE",
+            "EXPIRED_NOT_IN_USE",
+            "USAGE_COUNT_CONSUMED",
+            "OUT_OF_COMPLIANCE",
+            "EVALUATION_IN_USE",
+            "INACTIVE"
+          ],
+          "type": "string"
+        },
+        "licenseType": {
+          "description": "Type of license available on the network device.\n| License Type          | Description                                                                                  |\n|-------------------------|----------------------------------------------------------------------------------------------|\n| `NETWORK_ESSENTIALS`                | Network Essentials license |\n| `NETWORK_ADVANTAGE`            | Network Advantage license |\n| `AIR_NETWORK_ESSENTIALS`        | Air Network Essentials license. It is applicable for wireless controllers or switches having wireless capability. |\n| `AIR_NETWORK_ADVANTAGE`    |  Air Network Advantage license. It is applicable for wireless controllers or switches having wireless capability.  |\n| `DNA_ESSENTIALS`  | DNA Essentials license |\n| `DNA_ADVANTAGE`     | DNA Advantage license |\n| `AIR_DNA_ESSENTIALS`     |   Air DNA Essentials license. It is applicable for wireless controllers or switches having wireless capability.     |\n| `AIR_DNA_ADVANTAGE`              | Air DNA  Advantage license. It is applicable for wireless controllers or switches having wireless capability                  |\n| `CNS_ESSENTIALS`                    |  Cisco Networking Subscription  Essentials license |\n| `CNS_ADVANTAGE`                    | Cisco Networking Subscription  Advantage license  |\n",
+          "enum": [
+            "NETWORK_ESSENTIALS",
+            "NETWORK_ADVANTAGE",
+            "AIR_NETWORK_ESSENTIALS",
+            "AIR_NETWORK_ADVANTAGE",
+            "DNA_ESSENTIALS",
+            "DNA_ADVANTAGE",
+            "AIR_DNA_ESSENTIALS",
+            "AIR_DNA_ADVANTAGE",
+            "CNS_ESSENTIALS",
+            "CNS_ADVANTAGE",
+            "OTHER"
+          ],
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "default": "asc",
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "type": "string"
+        },
+        "registrationStatus": {
+          "description": "Smart License registration status\n\n| Registration status                 | Description |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `REGISTERED`              | The network device instance is registered with CSSM.|\n| `UNREGISTERED`     | Smart Licensing is enabled on the network device, but the network device is not registered with CSSM. |\n| `REGISTRATION_EXPIRED`     | The registration has expired. |\n| `RESERVATION_IN_PROGRESS`     | The license reservation is in progress on the network device. |\n| `REGISTERED_SLR`     | The device has successfully completed the process of SLR and is now registered. |\n| `REGISTERED_PLR`     | The device has successfully completed the process of PLR and is now registered. |\n| `REGISTERED_SATELLITE`     | The device is successfully registered with a On Prem CSSM server for Smart Licensing. |\n| `NA`     | The registration is not applicable for device. 'NA' can be seen for devices having RTU license mode or device for which smart licensing using policy is applicable. |\n| `UNKNOWN`     | The registration state is not known on the device. |\n",
+          "enum": [
+            "REGISTERED",
+            "UNREGISTERED",
+            "REGISTRATION_EXPIRED",
+            "RESERVATION_IN_PROGRESS",
+            "REGISTERED_SLR",
+            "REGISTERED_PLR",
+            "REGISTERED_SATELLITE",
+            "NA",
+            "UNKNOWN"
+          ],
+          "example": "UNREGISTERED",
+          "type": "string"
+        },
+        "smartAccountId": {
+          "description": "**The Numeric ID of the Smart Account.**\\n\\n**CRITICAL:** Do NOT pass the Smart Account Name here. You MUST first find the ID by calling `api_smartAccountDetails` and matching the name.",
+          "example": "1034567234567",
+          "type": "string"
+        },
+        "sortBy": {
+          "default": "hostname",
+          "description": "A property within the response to sort by.",
+          "enum": [
+            "id",
+            "hostname",
+            "family",
+            "series",
+            "licenseMode",
+            "registrationStatus",
+            "authorizationStatus",
+            "smartAccountId",
+            "virtualAccountId",
+            "authCodeStatus"
+          ],
+          "example": "registrationStatus",
+          "type": "string"
+        },
+        "virtualAccountId": {
+          "description": "**The Numeric ID of the Virtual Account.**\\n\\n**CRITICAL:** Do NOT pass the Virtual Account Name here. You MUST first find the ID by calling `api_virtualAccountDetails` and matching the name.",
+          "example": "10345",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "The network device detail with license information.",
+      "properties": {
+        "response": {
+          "description": "List of network device detail with license information.",
+          "items": {
+            "description": "Details of the network devices and its licenses.",
+            "properties": {
+              "authCodeStatus": {
+                "description": "Status of authorization code for network device. Smart Licensing authorization code enables the use of a HSEC license on the device. It is applicable for routers only.\n* `INSTALLED` - If authorization code is installed on the device, status will be INSTALLED.\n* `NOT_INSTALLED` - If authorization code is not installed, status will be NOT_INSTALLED.\n* `NA` - If authorization code is not applicable for device then status will be NA.\n",
+                "enum": [
+                  "INSTALLED",
+                  "NOT_INSTALLED",
+                  "NA"
+                ],
+                "readOnly": true,
+                "type": "string"
+              },
+              "authorizationStatus": {
+                "description": "Smart License authorization status.\n\n| Authorization status                 | Description  |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `AUTHORIZED`     | Registration has been completed with a valid Smart Account and license consumption has begun. The number of licenses consumed is less than the licenses available for use. This is an indication of being in compliance. |\n| `EVALUATION_MODE`              | The network device is running in evaluation mode when it is not registered. |\n| `OUT_OF_COMPLIANCE`     | The device's license consumption has exceeded the number of licenses that were purchased. The virtual account containing the product instance has a shortage of one or more of license types used. |   \n| `EVALUATION_EXPIRED`     | The evaluation period has expired and the device will be in unlicensed state. |   \n| `AUTHORIZATION_EXPIRED`     | The authorization has expired. |\n| `NOT_AUTHORIZED`     | The authorization is not valid.  |\n| `AUTHORIZED_RESERVED`     | Registration of device has been completed using SLR/PLR with a valid Smart Account and license consumption has begun. The number of licenses consumed is less than the licenses available for use. This is an indication of being in compliance. |\n| `NA`     | The authorization is not applicable for device. Authorization is not applicable for device having RTU mode or device for which smart licensing using policy is applicable |\n| `UNKNOWN`     | The authorization state is not known on the device. |\n",
+                "enum": [
+                  "AUTHORIZED",
+                  "EVALUATION_MODE",
+                  "OUT_OF_COMPLIANCE",
+                  "EVALUATION_EXPIRED",
+                  "AUTHORIZATION_EXPIRED",
+                  "NOT_AUTHORIZED",
+                  "AUTHORIZED_RESERVED",
+                  "NA",
+                  "UNKNOWN"
+                ],
+                "example": "AUTHORIZED",
+                "readOnly": true,
+                "type": "string"
+              },
+              "changeWirelessLicense": {
+                "default": false,
+                "description": "This is only applicable to switches with wireless capabilities. It does not affect the operations performed for any other types of devices.\n\nSetting this to true will modify the wireless license on the switch, while setting it to false will modify the switching license.\n",
+                "example": false,
+                "type": "boolean",
+                "writeOnly": true
+              },
+              "customerTags": {
+                "description": "User defined tags that can be set to network devices to help identify telemetry data for a product instance.",
+                "properties": {
+                  "tag1": {
+                    "description": "First customer tag",
+                    "example": "FF101",
+                    "type": "string"
+                  },
+                  "tag2": {
+                    "description": "Second customer tag",
+                    "example": "FFF_20",
+                    "type": "string"
+                  },
+                  "tag3": {
+                    "description": "Third customer tag",
+                    "example": "FFF_3",
+                    "type": "string"
+                  },
+                  "tag4": {
+                    "description": "Fourth customer tag",
+                    "example": "FFF_4",
+                    "type": "string"
+                  }
+                },
+                "readOnly": true,
+                "type": "object"
+              },
+              "family": {
+                "description": "Product family of the network device.\n| Family | Description                              |\n|--------------|------------------------------------------|\n| `ROUTERS`         | Router product family                       |\n| `SWITCHES_AND_HUBS`        | Switches and Hubs product family                             |\n| `WIRELESS_CONTROLLER`    | Wireless controller product family   |\n| `UNIFIED_AP`    | Unified Access Point product family   |\n",
+                "enum": [
+                  "ROUTERS",
+                  "SWITCHES_AND_HUBS",
+                  "WIRELESS_CONTROLLER",
+                  "UNIFIED_AP"
+                ],
+                "example": "SWITCHES_AND_HUBS",
+                "readOnly": true,
+                "type": "string"
+              },
+              "hostname": {
+                "description": "Hostname of the network device.",
+                "example": "Switch-1",
+                "readOnly": true,
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique ID of the license details of the network device.",
+                "example": "e910e834-e35b-4800-9401-a40e22ce09f3",
+                "format": "uuid",
+                "readOnly": true,
+                "type": "string"
+              },
+              "lastSuccessfulUsageReportingTime": {
+                "allOf": [
+                  {
+                    "description": "A date and time represented as ***milliseconds*** since the Unix epoch.",
+                    "example": 1524880285900,
+                    "externalDocs": {
+                      "description": "Unix time - Wikipedia",
+                      "url": "https://en.wikipedia.org/wiki/Unix_time"
+                    },
+                    "format": "int64",
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "description": "Time in milliseconds since UNIX epoch when last successful RUM report sync happened between device and CSSM."
+                  }
+                ],
+                "example": 1722227183,
+                "readOnly": true
+              },
+              "licenseLevel": {
+                "description": "The license level to be applied on the network device. Passing the license level as `NONE` will result in one of the following outcomes:\n1. For wireless devices consuming CNS licenses, the license will be reset to the CNS Advantage license.\n2. For devices consuming DNA licenses, the DNA license will be removed, and the Network license will remain unaffected.\n\nFor more details, please refer to the \"Change license level\" section under the \"Manage Licenses\" chapter of this product's Administrator Guide.\n",
+                "enum": [
+                  "ESSENTIALS",
+                  "ADVANTAGE",
+                  "NONE"
+                ],
+                "example": "ESSENTIALS",
+                "type": "string",
+                "writeOnly": true
+              },
+              "licenseManagedBy": {
+                "description": "A unique identifier for the network device responsible for managing licenses. For example, for an AP,  licenses are managed by a WLC.",
+                "example": "e910e834-e35b-4800-9401-a40e22ce09f3",
+                "format": "uuid",
+                "readOnly": true,
+                "type": "string"
+              },
+              "licenseMode": {
+                "description": "Mode of license on the device.\n| License Mode | Description                              |\n|--------------|------------------------------------------|\n| `SMART_LICENSE`         | Smart License mode                       |\n| `RIGHT_TO_USE`        | Right to use                             |\n| `UNKNOWN`    | Mode of license on the device is not known   |\n",
+                "enum": [
+                  "SMART_LICENSE",
+                  "RIGHT_TO_USE",
+                  "UNKNOWN"
+                ],
+                "readOnly": true,
+                "type": "string"
+              },
+              "licenses": {
+                "description": "List of licenses associated with the network device.\n- For wireless controllers having access points which are consuming CNS license and DNA license both, it will have details of either `AIR_DNA_ESSENTIALS` or `AIR_DNA_ADVANTAGE`. \n- For switches having wireless capability, it will show wireless license which can be `AIR_DNA_ESSENTIALS`/`AIR_DNA_ADVANTAGE` and `AIR_NETWORK_ESSENTIALS`/`AIR_NETWORK_ADVANTAGE`.\n",
+                "items": {
+                  "description": "Other licenses available on the network device.",
+                  "properties": {
+                    "count": {
+                      "description": "Number of licenses on the device.",
+                      "example": 1,
+                      "format": "int32",
+                      "readOnly": true,
+                      "type": "integer"
+                    },
+                    "evaluationExpiryTime": {
+                      "allOf": [
+                        {
+                          "description": "A date and time represented as ***milliseconds*** since the Unix epoch.",
+                          "example": 1524880285900,
+                          "externalDocs": {
+                            "description": "Unix time - Wikipedia",
+                            "url": "https://en.wikipedia.org/wiki/Unix_time"
+                          },
+                          "format": "int64",
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        {
+                          "description": "Evaluation period expiry time in milliseconds since UNIX epoch."
+                        }
+                      ],
+                      "readOnly": true
+                    },
+                    "name": {
+                      "description": "Name of license available on the network device.",
+                      "example": "C9300-24 DNA Essentials",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "owned": {
+                      "description": "It indicates whether a license belongs to the network device or belongs to its associated devices. For example, an access point (AP) will display an air network license with owned set to true. Conversely, a wireless controller managing 10 APs will show 10 air network licenses with owned set to false.",
+                      "example": true,
+                      "readOnly": true,
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "description": "Status of license on the network device.\n| License Status          | Description                                                                                  |\n|-------------------------|----------------------------------------------------------------------------------------------|\n| `IN_USE`                | A license is actively being used by a Cisco device and is currently authorized for features it enables. |\n| `NOT_IN_USE`            | A license is available on the device but is not currently being used by device. |\n| `EXPIRED_IN_USE`        | A license has expired but the device continues to use its features.                          |\n| `EXPIRED_NOT_IN_USE`    | A license has expired and its features are not currently being utilized on the device.       |\n| `USAGE_COUNT_CONSUMED`  | The allowed usage limit for the license has been fully utilized. It is only applicable for Cisco Nexus devices.                           |\n| `OUT_OF_COMPLIANCE`     | A device is using features that require licenses it does not have assigned to it, potentially leading to functionality limitations. |\n| `EVALUATION_IN_USE`     | A device is currently using a trial or evaluation license for its features.                |\n| `INACTIVE`              | A license is available on the device but is not currently being used by device. This license status is only applicable for virtual wireless controllers.                  |\n",
+                      "enum": [
+                        "IN_USE",
+                        "NOT_IN_USE",
+                        "EXPIRED_IN_USE",
+                        "EXPIRED_NOT_IN_USE",
+                        "USAGE_COUNT_CONSUMED",
+                        "OUT_OF_COMPLIANCE",
+                        "EVALUATION_IN_USE",
+                        "INACTIVE"
+                      ],
+                      "example": "IN_USE",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of license available on the network device.\n| License Type          | Description                                                                                  |\n|-------------------------|----------------------------------------------------------------------------------------------|\n| `NETWORK_ESSENTIALS`                | Network Essentials license |\n| `NETWORK_ADVANTAGE`            | Network Advantage license |\n| `AIR_NETWORK_ESSENTIALS`        | Air Network Essentials license. It is applicable for wireless controllers or switches having wireless capability. |\n| `AIR_NETWORK_ADVANTAGE`    |  Air Network Advantage license. It is applicable for wireless controllers or switches having wireless capability.  |\n| `DNA_ESSENTIALS`  | DNA Essentials license |\n| `DNA_ADVANTAGE`     | DNA Advantage license |\n| `AIR_DNA_ESSENTIALS`     |   Air DNA Essentials license. It is applicable for wireless controllers or switches having wireless capability.     |\n| `AIR_DNA_ADVANTAGE`              | Air DNA  Advantage license. It is applicable for wireless controllers or switches having wireless capability                  |\n| `CNS_ESSENTIALS`                    |  Cisco Networking Subscription  Essentials license |\n| `CNS_ADVANTAGE`                    | Cisco Networking Subscription  Advantage license  |\n| `OTHER`                    | Other license type  |\n",
+                      "enum": [
+                        "NETWORK_ESSENTIALS",
+                        "NETWORK_ADVANTAGE",
+                        "AIR_NETWORK_ESSENTIALS",
+                        "AIR_NETWORK_ADVANTAGE",
+                        "DNA_ESSENTIALS",
+                        "DNA_ADVANTAGE",
+                        "AIR_DNA_ESSENTIALS",
+                        "AIR_DNA_ADVANTAGE",
+                        "CNS_ESSENTIALS",
+                        "CNS_ADVANTAGE",
+                        "OTHER"
+                      ],
+                      "example": "DNA_ESSENTIALS",
+                      "readOnly": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
+                },
+                "readOnly": true,
+                "type": "array"
+              },
+              "managementAddress": {
+                "allOf": [
+                  {
+                    "description": "Management address of the network device."
+                  },
+                  {
+                    "description": "Either an IP address or a fully-qualified domain name.",
+                    "oneOf": [
+                      {
+                        "description": "A fully-qualified domain name",
+                        "example": "example.cisco.com",
+                        "externalDocs": {
+                          "description": "Fully qualified domain name - Wikipedia",
+                          "url": "https://en.wikipedia.org/wiki/Fully_qualified_domain_name"
+                        },
+                        "pattern": "(?=^.{4,253}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$)",
+                        "type": "string"
+                      },
+                      {
+                        "description": "An IPv4 or IPv6 address.",
+                        "oneOf": [
+                          {
+                            "description": "An IPv4 address.",
+                            "example": "250.162.252.170",
+                            "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                            "title": "IPv4 Address",
+                            "type": "string"
+                          },
+                          {
+                            "description": "An IPv6 address.",
+                            "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                            "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                            "title": "IPv6 Address",
+                            "type": "string"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "readOnly": true
+              },
+              "networkDeviceId": {
+                "description": "A unique identifier for the network device.",
+                "example": "e910e834-e35b-4800-9401-a40e22ce09f3",
+                "format": "uuid",
+                "readOnly": true,
+                "type": "string"
+              },
+              "registrationStatus": {
+                "description": "Smart License registration status.\n\n| Registration status                 | Description |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `REGISTERED`              | The network device instance is registered with CSSM.|\n| `UNREGISTERED`     | Smart Licensing is enabled on the network device, but the network device is not registered with CSSM. |\n| `REGISTRATION_EXPIRED`     | The registration has expired. |\n| `RESERVATION_IN_PROGRESS`     | The license reservation is in progress on the network device. |\n| `REGISTERED_SLR`     | The device has successfully completed the process of SLR and is now registered. |\n| `REGISTERED_PLR`     | The device has successfully completed the process of PLR and is now registered. |\n| `REGISTERED_SATELLITE`     | The device is successfully registered with a On Prem CSSM server for Smart Licensing. |\n| `NA`     | The registration is not applicable for device. 'NA' can be seen for devices having RTU license mode or device for which smart licensing using policy is applicable. |\n| `UNKNOWN`     | The registration state is not known on the device. |\n",
+                "enum": [
+                  "REGISTERED",
+                  "UNREGISTERED",
+                  "REGISTRATION_EXPIRED",
+                  "RESERVATION_IN_PROGRESS",
+                  "REGISTERED_SLR",
+                  "REGISTERED_PLR",
+                  "REGISTERED_SATELLITE",
+                  "NA",
+                  "UNKNOWN"
+                ],
+                "example": "UNREGISTERED",
+                "readOnly": true,
+                "type": "string"
+              },
+              "series": {
+                "description": "The model range or series of the network device.",
+                "example": "Cisco 9300 Series Switches",
+                "readOnly": true,
+                "type": "string"
+              },
+              "siteHierarchy": {
+                "description": "Site associated with device.",
+                "example": "/Global/site1",
+                "readOnly": true,
+                "type": "string"
+              },
+              "smartAccountId": {
+                "description": "Smart Account id where device is registered. Use `/dna/intent/api/v1/licenses/smartAccounts` intent API to find the smart account Id.",
+                "example": "2868036219902986488",
+                "readOnly": true,
+                "type": "string"
+              },
+              "softwareVersion": {
+                "description": "Version of software running on the network device.",
+                "example": "16.12.4",
+                "readOnly": true,
+                "type": "string"
+              },
+              "throughputValue": {
+                "description": "Current throughput level of the network device. It is only applicable for routers.",
+                "example": "100M",
+                "readOnly": true,
+                "type": "string"
+              },
+              "triggerReboot": {
+                "default": true,
+                "description": "Determines if a network device is to be rebooted after the license change operation has been completed.\n",
+                "example": true,
+                "type": "boolean",
+                "writeOnly": true
+              },
+              "virtualAccountId": {
+                "description": "Virtual Account id where device is registered. Use `/dna/intent/api/v1/licenses/smartAccount/${id}/virtualAccounts` intent API to find the virtual account Id.",
+                "example": "1234",
+                "readOnly": true,
+                "type": "string"
+              },
+              "wirelessCapable": {
+                "description": "It indicates whether a switch is having wireless capability enabled. This field is present and set to `true` or `false` for switches. For other device types such as routers, wireless controllers and access points, this field is omitted.",
+                "example": false,
+                "readOnly": true,
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "licenseLevel"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "required": [
+        "response",
+        "version"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

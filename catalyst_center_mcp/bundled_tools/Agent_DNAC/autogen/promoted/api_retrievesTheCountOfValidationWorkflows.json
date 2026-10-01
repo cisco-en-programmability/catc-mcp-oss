@@ -1,0 +1,60 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "runStatus": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/diagnosticValidationWorkflows/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the count of workflows that have been successfully submitted and are currently available. \n",
+    "name": "api_retrievesTheCountOfValidationWorkflows",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "Workflows started before the given time (as milliseconds since UNIX epoch).",
+          "type": "number"
+        },
+        "runStatus": {
+          "description": "Execution status of the workflow. If the workflow is successfully submitted, runStatus is `PENDING`. If the workflow execution has started, runStatus is `IN_PROGRESS`. If the workflow executed is completed with all validations executed, runStatus is `COMPLETED`. If the workflow execution fails while running validations, runStatus is `FAILED`.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Workflows started after the given time (as milliseconds since UNIX epoch).",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Reports a count, for example, a total count of records in a given resource.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,173 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "apMac": "query",
+        "dataType": "query",
+        "endTime": "query",
+        "limit": "query",
+        "offset": "query",
+        "startTime": "query",
+        "timeSortOrder": "query"
+      },
+      "uri": "/dna/data/api/v1/icap/spectrumSensorReports",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the spectrum sensor reports sent by WLC for provided AP Mac. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-icap-1.0.0-resolved.yaml",
+    "name": "api_retrievesTheSpectrumSensorReportsSentByWLCForProvidedAPMac",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "apMac": {
+          "description": "The base ethernet macAddress of the access point\n",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "Data type reported by the sensor\n\n|Data Type | Description |\n| --- | --- |\n| `0` | Duty Cycle |\n| `1` | Max Power |\n| `2` | Average Power |\n| `3` | Max Power in dBm with adjusted base of +48 |\n| `4` | Average Power in dBm with adjusted base of +48 |\n",
+          "type": "number"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "timeSortOrder": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "apMac"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "timeSortOrder": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "apMac": {
+                "description": "",
+                "type": "string"
+              },
+              "band": {
+                "description": "",
+                "type": "string"
+              },
+              "centralFrequencyKHz": {
+                "description": "",
+                "type": "integer"
+              },
+              "channels": {
+                "description": "",
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              "data": {
+                "description": "",
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "dataAvg": {
+                "description": "",
+                "type": "number"
+              },
+              "dataMax": {
+                "description": "",
+                "type": "number"
+              },
+              "dataMin": {
+                "description": "",
+                "type": "number"
+              },
+              "dataSize": {
+                "description": "",
+                "type": "integer"
+              },
+              "dataType": {
+                "description": "",
+                "type": "integer"
+              },
+              "dataUnits": {
+                "description": "",
+                "type": "string"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "spanKHz": {
+                "description": "",
+                "type": "integer"
+              },
+              "timestamp": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

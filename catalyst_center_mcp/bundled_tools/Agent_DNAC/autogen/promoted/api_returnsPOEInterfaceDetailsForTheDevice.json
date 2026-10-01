@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceUuid": "path",
+        "interfaceNameList": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{deviceUuid}/interface/poe-detail",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns POE interface details for the device, where deviceuuid is mandatory & accepts comma seperated interface names which is optional and returns information for that particular interfaces where(operStatus = operationalStatus)",
+    "name": "api_returnsPOEInterfaceDetailsForTheDevice",
+    "parameters": {
+      "properties": {
+        "deviceUuid": {
+          "description": "uuid of the device",
+          "type": "string"
+        },
+        "interfaceNameList": {
+          "description": "comma seperated interface names",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "adminStatus": {
+                "description": "Administration Status. Possible values: AUTO, STATIC, NEVER",
+                "type": "string"
+              },
+              "allocatedPower": {
+                "description": "Power (in Watts) allocated for a given interface ",
+                "type": "string"
+              },
+              "interfaceName": {
+                "description": "Name of the interface",
+                "type": "string"
+              },
+              "maxPortPower": {
+                "description": "Maximum power (in Watts) that port can hold",
+                "type": "string"
+              },
+              "operStatus": {
+                "description": "Operational Status. Possible values: ON, OFF, FAULTY, POWER_DENY",
+                "type": "string"
+              },
+              "portPowerDrawn": {
+                "description": "Power (in Watts) that the port has drawn so far",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,78 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "name": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/projects",
+      "version": "2.3.7.9"
+    },
+    "description": "Get all matching template projects based on the filters selected.",
+    "name": "api_getTemplateProjects",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of project to be searched",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "Description of the project",
+                "type": "string"
+              },
+              "lastUpdateTime": {
+                "description": "Timestamp of when the project was updated or modified",
+                "type": "number"
+              },
+              "name": {
+                "description": "Name of the project",
+                "type": "string"
+              },
+              "projectId": {
+                "description": "UUID of the project",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Response Version e.g. : 1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

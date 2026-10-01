@@ -1,0 +1,133 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "SMO_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/backupNfsConfigurations",
+      "version": "1.0.0-oas3"
+    },
+    "description": "**Pick this tool for NFS BACKUP SERVER configuration and NFS HEALTH questions.**\n\nThis tool retrieves all configured NFS backup definitions and their health state, including NFS server host, ports, export path, mounted destination path, configuration state, and unhealthy nodes.\n\n**Use this tool when the user asks:**\n- which NFS servers are configured for backups\n- whether NFS backup storage is healthy\n- what NFS export path, destination path, port, or NFS version is configured\n- whether any nodes are unhealthy for the NFS backup mount\n- for NFS-specific connectivity or health details\n\n**Pick this tool for questions like:**\n- \"What NFS servers are configured for backup?\"\n- \"Is the NFS backup mount healthy?\"\n- \"Show NFS backup configuration\"\n- \"What export path is configured for NFS backup?\"\n- \"Are any NFS backup nodes unhealthy?\"\n- \"What NFS version is configured for backup?\"\n\n**Do NOT use this tool for:**\n- mounted storage capacity or free-space questions\n- listing available backups\n- backup configuration retention settings\n- backup or restore job history\n\nThis tool is about NFS configuration and health, not storage capacity. Use `api_getBackupStorages` for mounted backup disk usage and free space.",
+    "name": "api_getNfsConfigurations",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Contains the information about NFS configuration.",
+      "properties": {
+        "response": {
+          "description": "Contains the information about NFS configuration",
+          "items": {
+            "description": "Contains the information about NFS configuration.",
+            "properties": {
+              "id": {
+                "description": "The UUID of the NFS configuration",
+                "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+                "type": "string"
+              },
+              "spec": {
+                "allOf": [
+                  {
+                    "description": "Contains the information about NFS configurations.",
+                    "properties": {
+                      "nfsPort": {
+                        "description": "The NFS port",
+                        "example": 2089,
+                        "type": "integer"
+                      },
+                      "nfsVersion": {
+                        "description": "NFS version",
+                        "enum": [
+                          "nfs3",
+                          "nfs4"
+                        ],
+                        "example": "nfs4",
+                        "type": "string"
+                      },
+                      "portMapperPort": {
+                        "description": "NFS port mapper port",
+                        "example": 111,
+                        "type": "integer"
+                      },
+                      "server": {
+                        "description": "NFS server host",
+                        "example": "10.12.1.12",
+                        "type": "string"
+                      },
+                      "serverType": {
+                        "description": "Type of configuration",
+                        "example": "NFS",
+                        "type": "string"
+                      },
+                      "sourcePath": {
+                        "description": "NFS server path",
+                        "example": "/root/backup/",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "description": "The spec of NFS configuration",
+                "type": "object"
+              },
+              "status": {
+                "allOf": [
+                  {
+                    "description": "Contains the information about NFS configuration.",
+                    "properties": {
+                      "destinationPath": {
+                        "description": "The destination path of the NFS configuration",
+                        "example": "/root/backup/",
+                        "type": "string"
+                      },
+                      "state": {
+                        "description": "Health of the NFS configuration",
+                        "example": "Healthy",
+                        "type": "string"
+                      },
+                      "subResourceState": {
+                        "description": "Error message of the un-healthy state",
+                        "example": "10.106.172.183=NFS mount is considered as not ready due to exceeding usage threshold or failing other health checks such as reachability or active state or mount state\n10.106.172.184=NFS mount is considered as not ready due to exceeding usage threshold or failing other health checks such as reachability or active state or mount state",
+                        "type": "string"
+                      },
+                      "unhealthyNodes": {
+                        "description": "Un-healthy node details",
+                        "example": [
+                          "10.12.1.12"
+                        ],
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "description": "The status of NFS configuration",
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

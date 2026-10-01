@@ -1,0 +1,107 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "invokeSource": "header"
+      },
+      "uri": "/dna/system/api/v1/roles",
+      "version": "2.3.7.9"
+    },
+    "description": "Get all roles in the system",
+    "name": "api_getRolesAPI",
+    "parameters": {
+      "properties": {
+        "invokeSource": {
+          "description": "The source that invokes this API. The value of this header must be set to \"external\".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "invokeSource"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "roles": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "description": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "meta": {
+                    "description": "Resource type details",
+                    "properties": {
+                      "created": {
+                        "description": "The timestamp that the resource type was created",
+                        "type": "string"
+                      },
+                      "createdBy": {
+                        "description": "The user that creates the resource type",
+                        "type": "string"
+                      },
+                      "lastModified": {
+                        "description": "The latestest timestamp that the resource type was updated",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "Role name",
+                    "type": "string"
+                  },
+                  "resourceTypes": {
+                    "description": "Resource type and operations",
+                    "items": {
+                      "properties": {
+                        "operations": {
+                          "description": "",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "type": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "roleId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Role type, possible values are: \"DEFAULT\", \"SYSTEM\", \"CUSTOM\"",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

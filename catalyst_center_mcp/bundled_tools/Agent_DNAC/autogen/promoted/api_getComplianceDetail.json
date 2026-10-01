@@ -1,0 +1,114 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "useCodeAct": true
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "complianceStatus": "query",
+        "complianceType": "query",
+        "deviceUuid": "query",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliance/detail",
+      "version": "2.3.7.9"
+    },
+    "description": "LIST, SHOW, or IDENTIFY which specific devices are compliant or non-compliant. Returns detailed device compliance records including compliance type, status, state, last sync/update time, and remediation support.\n\nNOT for counting. For count/total/how-many questions, use `api_getComplianceStatusCount` (global counts) or `api_getComplianceDetailCount` (type-specific counts).\n\nUse this API ONLY when the user asks to LIST, SHOW, or IDENTIFY WHICH SPECIFIC devices are compliant or non-compliant \u2014 i.e., the user wants to see device names, IPs, or details, NOT a count. Examples: \"Which devices are compliant?\", \"List compliant devices\", \"Show non-compliant devices\", \"Show me the non-compliant devices for IMAGE\", \"List devices failing critical security advisory compliance\".\n\n**NATURAL LANGUAGE \u2192 complianceType ENUM MAPPING:** \"critical security advisory\" / \"security advisory compliance\" / \"PSIRT\" \u2192 complianceType=PSIRT (NOTE: this refers to PSIRT *compliance type* for device compliance checks, NOT the separate `api_getSecurityAdvisories*` tools which retrieve advisory details, CVEs, and fix versions). \"running config\" / \"RUNNING_CONFIG\" \u2192 RUNNING_CONFIG. \"image\" / \"IMAGE\" \u2192 IMAGE. \"end of life\" / \"EOX\" \u2192 EOX. \"network profile\" / \"NETWORK_PROFILE\" \u2192 NETWORK_PROFILE. \"network settings\" / \"NETWORK_SETTINGS\" \u2192 NETWORK_SETTINGS. \"fabric\" / \"segment\" / \"SGT\" / \"virtual network\" / \"access control list\" \u2192 FABRIC. \"application visibility\" / \"AVC\" / \"CBAR\" \u2192 APPLICATION_VISIBILITY. \"Umbrella\" / \"site-to-site VPN\" \u2192 WORKFLOW. IMPORTANT: the word \"config\" alone does NOT mean RUNNING_CONFIG \u2014 RUNNING_CONFIG is ONLY a startup-vs-running config mismatch. A CLI/config/feature TEMPLATE (e.g. \"ACL-config template\", \"CLI template violation\") maps to NETWORK_PROFILE, NOT RUNNING_CONFIG. Sub-type/app names (CLI_TEMPLATE, FEATURE_TEMPLATE, GENERAL, WIRELESS, CBAR_CONFIGURATION, FABRIC_ROLE, SEGMENT, ACCESS_CONTROL_LIST, UMBRELLA, SITE_TO_SITE_VPN, SOFTWARE, HARDWARE, MODULE, etc.) are NOT accepted by the API; pass only the PARENT complianceType (RUNNING_CONFIG, PSIRT, IMAGE, EOX, FABRIC, APPLICATION_VISIBILITY, NETWORK_SETTINGS, NETWORK_PROFILE, WORKFLOW, NETWORK_RULES). When the user provides underscore-formatted enum values (e.g., NON_COMPLIANT, RUNNING_CONFIG, NETWORK_PROFILE), map them directly to the corresponding `complianceStatus` or `complianceType` parameter.\n\nDo not use `api_getComplianceStatus` for `which/list/show devices are non-compliant` questions; that tool is for high-level device status records. Do not use `api_getComplianceDetailCount` for list/show/which-device questions; a count alone cannot identify devices.\n\nDo not pass unsupported filters such as `siteId`, `siteHierarchy`, tag name, or tag id to this API; it accepts compliance filters and `deviceUuid` only and cannot enforce site or tag scope by itself.\n\n**MANDATORY GLOBAL DEVICE-LISTING WORKFLOW:** For an unscoped list/show/identify question that does not name a site, tag, device name, IP address, or device UUID \u2014 for example, \"Show devices that are out of compliance in Catalyst Center\" \u2014 call `api_getComplianceDetail` FIRST with the requested `complianceStatus` (for this example, `NON_COMPLIANT`) and OMIT `deviceUuid`. Do NOT call `get_device_details` before this compliance call. After `api_getComplianceDetail` returns, extract the unique `response[*].deviceUuid` values and call `get_device_details` using those returned UUIDs to enrich only the matching compliance records with device names and management IP addresses. Prefer one batch `get_device_details` lookup using an `id` `in` filter instead of one call per device. The required order for global device-listing questions is `api_getComplianceDetail` \u2192 `get_device_details`.\n\nFor site-scoped compliance questions, first call `api_getSites` when needed, then call `get_device_details` with the resolved site hierarchy/name, extract device UUIDs, and call `api_getComplianceDetail` with `deviceUuid` as a comma-separated UUID list and `complianceStatus`.\n\nFor every tag-qualified compliance question, call `api_getTag(name=<tag name>)` and then `api_getTagMembersById(id=<tag UUID>, memberType=\"networkdevice\" or \"device\")` before this compliance call; calling this API before `api_getTagMembersById` is invalid for tag-qualified compliance queries, even if `get_device_details` exposes `tagNames`.\n\nCritical rule for combined site + tag questions: the tag-member lookup is required for grounding the tag, but do not pass all tag-member UUIDs directly to this API. Build the requested-site UUID set from `get_device_details(siteHierarchy=<site>, views=[\"configuration\"])`, then keep only those site records whose `tagNames` contains the requested tag; if `tagNames` is unavailable, intersect the tag-member UUID set with the site UUID set. Pass exactly and only that final intersection in `deviceUuid`. Never include same-tag devices from other sites, and never call this API with a superset and filter after the compliance call. If the final intersection has one device, `deviceUuid` must contain that one UUID only, with no comma. For user-facing answers and `build_table` calls, count or list only devices whose UUID is in the final filtered set used for the compliance call.\n\nFor device-listing questions, including when the filtered site/tag intersection has exactly one device, the compliance-detail call should use the default limit.\n\nFor site-scoped count questions such as \"How many devices are compliant in BGL 17\" or \"count compliant devices at <site>\", first resolve the site devices via `get_device_details`, then call `api_getComplianceDetail` with the scoped `deviceUuid` list and the requested `complianceStatus`, and compute the count from the returned detail records. This site-scoped pattern is acceptable because the device set is pre-filtered and bounded. This site-scoped counting workaround applies ONLY to STATUS counts (compliant/non-compliant) with NO compliance TYPE specified. If a compliance TYPE (e.g., RUNNING_CONFIG, IMAGE, PSIRT, NETWORK_SETTINGS, NETWORK_PROFILE, EOX) is specified together with a site/building/floor/area/tag for a count/how-many/number-of question (e.g., 'how many devices have running config mismatch under BGL 16'), do NOT count via get_device_details + api_getComplianceDetail; instead respond that a per-site count for that compliance type cannot be computed due to API limitations. For global (unscoped) count questions, always use `api_getComplianceStatusCount` or `api_getComplianceDetailCount` instead.\n\n**VIOLATION TERMINOLOGY (site-scoped) \u2014 route here:** Treat site-scoped \"violations\", \"compliance violations\", \"network-settings violations\", \"non-compliant findings\", and \"open/acknowledged violations under <site>\" as compliance-detail requests \u2014 first call `api_getSites` (when needed) and `get_device_details(siteHierarchy=<site>)` to resolve device UUIDs, then call this API with `deviceUuid` and `complianceStatus=NON_COMPLIANT` (add `complianceType` when a type such as NETWORK_SETTINGS/RUNNING_CONFIG/IMAGE/PSIRT is named). These compliance violations are NOT Assurance health issues \u2014 do NOT use `get_issues`/`understand_issues` for compliance violation questions.\n\n**DO NOT COUNT BY TYPE FOR A SITE VIA THIS WORKAROUND:** The site-scoped detail-count pattern described above is valid ONLY for STATUS counts (compliant/non-compliant) at a site. Do NOT use a get_device_details + api_getComplianceDetail workaround to COUNT devices by a specific compliance TYPE (e.g., RUNNING_CONFIG, IMAGE, PSIRT, NETWORK_SETTINGS, NETWORK_PROFILE, EOX) scoped to a site/building/floor/area/tag. Site-scoped compliance-TYPE counts are not supported; for such count questions (e.g., \"how many devices have running config mismatch under BGL 16\") respond that the count cannot be computed for that scope due to API limitations rather than counting from detail records. This restriction applies to COUNT/how-many questions only - LIST/show questions for a compliance type under a site remain valid.",
+    "name": "api_getComplianceDetail",
+    "parameters": {
+      "properties": {
+        "complianceStatus": {
+          "description": "Specify compliance status(es) as a comma-separated string. Possible values are COMPLIANT, NON_COMPLIANT, IN_PROGRESS, NOT_AVAILABLE, NOT_APPLICABLE, and ERROR. When the user does not provide a compliance status, use exactly this default value: COMPLIANT,NON_COMPLIANT,IN_PROGRESS,NOT_AVAILABLE,ERROR.",
+          "type": "string"
+        },
+        "complianceType": {
+          "description": "Specify \"Compliance type(s)\" in commas. The Compliance type can be 'NETWORK_PROFILE', 'IMAGE', 'FABRIC', 'APPLICATION_VISIBILITY', 'FABRIC', RUNNING_CONFIG', 'NETWORK_SETTINGS', 'WORKFLOW' , 'EOX'.",
+          "type": "string"
+        },
+        "deviceUuid": {
+          "description": "Comma-separated device UUIDs only. OMIT this parameter for global, unscoped list/show/identify compliance questions; call api_getComplianceDetail first, then use only the returned response[*].deviceUuid values in a follow-up get_device_details lookup for device names and management IP addresses. For site-scoped or tag-qualified compliance queries, resolve the scoped device list before calling this API. For combined site + tag questions, this value must be exactly the final site/tag intersection: only device IDs from get_device_details for the requested site whose tagNames contains the requested tag, or, if needed, the explicit intersection of site device UUIDs and tag member UUIDs. Never pass the full tag-member list, never pass tag members from other sites, and never call with extra UUIDs that you intend to filter out later. If only one device matches, pass only that one UUID with no comma.",
+          "type": "string"
+        },
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of device records to return. Default is 10. Must be between 1 and 500.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "default": 1,
+          "description": "Starting index for pagination. Should always start with 1 for the first page of results. If user asks for next page, increment accordingly (e.g., page 2 = offset 11 if limit=10).",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "limit",
+        "complianceStatus"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response object.",
+          "items": {
+            "properties": {
+              "category": {
+                "description": "category can have any value among 'INTENT'(mapped to compliance types: NETWORK_SETTINGS,NETWORK_PROFILE,WORKFLOW,FABRIC,APPLICATION_VISIBILITY), 'RUNNING_CONFIG' , 'IMAGE' , 'PSIRT' , 'EOX' , 'NETWORK_SETTINGS'.",
+                "type": "string"
+              },
+              "complianceType": {
+                "description": "Compliance type corresponds to a tile on the UI. Will be one of NETWORK_PROFILE, IMAGE, APPLICATION_VISIBILITY, FABRIC, PSIRT, RUNNING_CONFIG, NETWORK_SETTINGS, WORKFLOW, or EOX.",
+                "type": "string"
+              },
+              "deviceUuid": {
+                "description": "UUID of the device.",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "User friendly name for the configuration.",
+                "type": "string"
+              },
+              "lastSyncTime": {
+                "description": "Timestamp when the status changed from different value to the current value.",
+                "type": "number"
+              },
+              "lastUpdateTime": {
+                "description": "Timestamp when the latest compliance checks ran.",
+                "type": "number"
+              },
+              "remediationSupported": {
+                "description": "Indicates whether remediation is supported for this compliance type or not",
+                "type": "boolean"
+              },
+              "state": {
+                "description": "State of latest compliance check for the complianceType. Will be one of SUCCESS, FAILED, or IN_PROGRESS.",
+                "type": "string"
+              },
+              "status": {
+                "description": "Current status of compliance for the complianceType. Will be one of COMPLIANT, NON_COMPLIANT, ERROR, IN_PROGRESS, NOT_APPLICABLE, NOT_AVAILABLE, COMPLIANT_WARNING, REMEDIATION_IN_PROGRESS, or ABORTED.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version of the API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

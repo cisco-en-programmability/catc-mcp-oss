@@ -1,0 +1,48 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/event/config/connector-types",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the list of connector types",
+    "name": "api_getConnectorTypes",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "connectorType": {
+            "description": "",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "",
+            "type": "string"
+          },
+          "isCustomConnector": {
+            "description": "",
+            "type": "boolean"
+          },
+          "isDefaultSupported": {
+            "description": "",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,98 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "id": "path"
+      },
+      "uri": "/dna/data/api/v1/assuranceTasks/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "returns a task given a specific task id\nFor detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AssuranceTasks-1.0.0-resolved.yaml\n",
+    "name": "api_retrieveASpecificAssuranceTaskById",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "unique task id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "data": {
+              "description": "",
+              "properties": {},
+              "type": "object"
+            },
+            "endTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "errorCode": {
+              "description": "",
+              "type": "string"
+            },
+            "failureReason": {
+              "description": "",
+              "type": "string"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "progress": {
+              "description": "",
+              "type": "string"
+            },
+            "requestType": {
+              "description": "",
+              "type": "string"
+            },
+            "resultUrl": {
+              "description": "",
+              "type": "string"
+            },
+            "startTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "status": {
+              "description": "",
+              "type": "string"
+            },
+            "updateTime": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

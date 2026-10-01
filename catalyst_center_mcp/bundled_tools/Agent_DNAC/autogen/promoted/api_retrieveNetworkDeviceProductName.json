@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "productNameOrdinal": "path"
+      },
+      "uri": "/dna/intent/api/v1/productNames/{productNameOrdinal}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the network device product name, its ordinal, and supported PIDs.",
+    "name": "api_retrieveNetworkDeviceProductName",
+    "parameters": {
+      "properties": {
+        "productNameOrdinal": {
+          "description": "Product name ordinal is unique value for each network device product.",
+          "type": "number"
+        }
+      },
+      "required": [
+        "productNameOrdinal"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Network device product",
+          "properties": {
+            "id": {
+              "description": "Product name ordinal is unique value for each network device product",
+              "type": "string"
+            },
+            "productIds": {
+              "description": "Supported PIDs",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "productName": {
+              "description": "Network device product name",
+              "type": "string"
+            },
+            "productNameOrdinal": {
+              "description": "Product name ordinal is unique value for each network device product",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

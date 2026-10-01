@@ -1,0 +1,168 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "authCodeStatus": "query",
+        "authorizationStatus": "query",
+        "family": "query",
+        "id": "query",
+        "licenseMode": "query",
+        "licenseStatus": "query",
+        "licenseType": "query",
+        "registrationStatus": "query",
+        "smartAccountId": "query",
+        "virtualAccountId": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceLicenses/count",
+      "version": "3.2.1"
+    },
+    "description": "**Tool Dependency: CONDITIONAL (Only if Account Name provided)**\\n\\n**PRIMARY TOOL for ALL License COUNT Queries.**\\nRetrieves the **count** (total number) of network devices filtered by license properties. Use this tool for **ANY** query asking to **count** or find the **number of** devices with specific licenses.\\n- **License Types:** 'DNA Advantage', 'Network Advantage', 'CNS Essentials', etc.\\n- **License Modes:** 'Smart License' (SL), 'Right To Use' (RTU), etc.\\n\\n**CRITICAL INSTRUCTION: DIRECT vs ACCOUNT LOOKUP**\\n1. **Global Count (Most Common):** If the user asks \"Count devices with Network Advantage\" (NO Smart Account name mentioned), call this tool **DIRECTLY**. Do NOT call `api_smartAccountDetails`. Omit `smartAccountId` and `virtualAccountId`.\\n\\n2. **Account-Specific Count:** ONLY if the user explicitly names a Smart Account, follow this **REQUIRED STEP-BY-STEP PROCESS:**\\n   a. **Get Account IDs:** Call `api_smartAccountDetails`.\\n   b. **Handle Duplicates:** If multiple accounts have the same name, call this tool for **EACH** ID returned. Sum results.\\n   c. **Call this tool:** Pass the resolved `smartAccountId`.\\n\\n**SCENARIO MAPPING:**\\n- \"Count devices with Network Advantage\" -> Call `api_readNetworkDeviceLicensesCount(licenseType='NETWORK_ADVANTAGE')`\\n- \"How many devices have CNS Essentials\" -> Call `api_readNetworkDeviceLicensesCount(licenseType='CNS_ESSENTIALS')`\\n- \"Number of Right To Use devices\" -> Call `api_readNetworkDeviceLicensesCount(licenseMode='RIGHT_TO_USE')`\\n\\n**MANDATORY SCOPE CLARIFICATION:**\\n- This API counts **devices** that match license filters; it does NOT return purchased/used/available license totals.\\n- Do NOT use this API for product-family license usage totals (for example routers/switches/WLC license usage counts).\\n- For queries like \"How many used licenses do I have for routers?\", \"How many purchased licenses for switches?\", or \"How many used licenses for WLC/wireless?\", use `api_getLicenseUsage` with productFamily (ROUTER/SWITCH/UNIFIED_AP).\\n- For WLC/wireless license usage queries, map to `api_getLicenseUsage(productFamily='UNIFIED_AP')` because APs represent the consumption aggregation.",
+    "name": "api_readNetworkDeviceLicensesCount",
+    "parameters": {
+      "properties": {
+        "authCodeStatus": {
+          "description": "Status of authorization code for network device. Smart Licensing authorization code enables the use of a HSEC license on the device. It is applicable for routers only.\n| Auth Code Status | Description                                                                                   |\n|------------------|-----------------------------------------------------------------------------------------------|\n| `INSTALLED`      | If authorization code is installed on the device, the status will be INSTALLED.               |\n| `NOT_INSTALLED`  | If authorization code is not installed, the status will be NOT_INSTALLED.                     |\n| `NA`             | If authorization code is not applicable for the device, then the status will be NA.           |\n",
+          "enum": [
+            "INSTALLED",
+            "NOT_INSTALLED",
+            "NA"
+          ],
+          "type": "string"
+        },
+        "authorizationStatus": {
+          "description": "Smart License authorization status\n\n| Authorization Status                 | Description  |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `AUTHORIZED`     | Registration has been completed with a valid Smart Account and license consumption has begun. The number of licenses consumed is less than the licenses available for use. This is an indication of being in compliance. |\n| `EVALUATION_MODE`              | The network device is running in evaluation mode when it is not registered. |\n| `OUT_OF_COMPLIANCE`     | The device's license consumption has exceeded the number of licenses that were purchased. The virtual account containing the product instance has a shortage of one or more of license types used. |   \n| `EVALUATION_EXPIRED`     | The evaluation period has expired and the device will be in unlicensed state. |   \n| `AUTHORIZATION_EXPIRED`     | The authorization has expired. |\n| `NOT_AUTHORIZED`     | The authorization is not valid.  |\n| `AUTHORIZED_RESERVED`     | Registration of device has been completed using SLR/PLR with a valid Smart Account and license consumption has begun. The number of licenses consumed is less than the licenses available for use. This is an indication of being in compliance. |\n| `NA`     | The authorization is not applicable for device. 'NA' can be seen for devices having RTU mode or device for which smart licensing using policy is applicable |\n| `UNKNOWN`     | The authorization state is not known on the device. |\n",
+          "enum": [
+            "AUTHORIZED",
+            "EVALUATION_MODE",
+            "OUT_OF_COMPLIANCE",
+            "EVALUATION_EXPIRED",
+            "AUTHORIZATION_EXPIRED",
+            "NOT_AUTHORIZED",
+            "AUTHORIZED_RESERVED",
+            "NA",
+            "UNKNOWN"
+          ],
+          "example": "AUTHORIZED",
+          "type": "string"
+        },
+        "family": {
+          "description": "Product family of the network device.\n| Family | Description                              |\n|--------------|------------------------------------------|\n| `ROUTERS`         | Router product family                       |\n| `SWITCHES_AND_HUBS`        | Switches and Hubs product family                             |\n| `WIRELESS_CONTROLLER`    | Wireless controller product family   |\n| `UNIFIED_AP`    | Unified Access Point product family   |\n",
+          "enum": [
+            "ROUTERS",
+            "SWITCHES_AND_HUBS",
+            "WIRELESS_CONTROLLER",
+            "UNIFIED_AP"
+          ],
+          "example": "ROUTERS",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique ID of the license details of the network device.",
+          "example": "e910e834-e35b-4800-9401-a40e22ce09f3",
+          "format": "uuid",
+          "type": "string"
+        },
+        "licenseMode": {
+          "description": "Mode of license on the device.\n| License Mode | Description                              |\n|--------------|------------------------------------------|\n| `SMART_LICENSE`         | Smart License mode                       |\n| `RIGHT_TO_USE`        | Right to use                             |\n| `UNKNOWN`    | Mode of license on the device is not known.   |\n",
+          "enum": [
+            "SMART_LICENSE",
+            "RIGHT_TO_USE",
+            "UNKNOWN"
+          ],
+          "example": "SMART_LICENSE",
+          "type": "string"
+        },
+        "licenseStatus": {
+          "description": "Status of license on the network device.\n| License Status          | Description                                                                                  |\n|-------------------------|----------------------------------------------------------------------------------------------|\n| `IN_USE`                | A license is actively being used by a Cisco device and is currently authorized for features it enables. |\n| `NOT_IN_USE`            | A license is available on the device but is not currently being used by device. |\n| `EXPIRED_IN_USE`        | A license has expired but the device continues to use its features.                          |\n| `EXPIRED_NOT_IN_USE`    | A license has expired and its features are not currently being utilized on the device.       |\n| `USAGE_COUNT_CONSUMED`  | The allowed usage limit for the license has been fully utilized. It is only applicable for Cisco Nexus devices.                              |\n| `OUT_OF_COMPLIANCE`     | A device is using features that require licenses it does not have assigned to it, potentially leading to functionality limitations. |\n| `EVALUATION_IN_USE`     | A device is currently using a trial or evaluation license for its features.                |\n| `INACTIVE`              | A license is available on the device but is not currently being used by device. This license status is only applicable for virtual wireless controllers.                  |\n",
+          "enum": [
+            "IN_USE",
+            "NOT_IN_USE",
+            "EXPIRED_IN_USE",
+            "EXPIRED_NOT_IN_USE",
+            "USAGE_COUNT_CONSUMED",
+            "OUT_OF_COMPLIANCE",
+            "EVALUATION_IN_USE",
+            "INACTIVE"
+          ],
+          "type": "string"
+        },
+        "licenseType": {
+          "description": "Type of license available on the network device.\n| License Type          | Description                                                                                  |\n|-------------------------|----------------------------------------------------------------------------------------------|\n| `NETWORK_ESSENTIALS`                | Network Essentials license |\n| `NETWORK_ADVANTAGE`            | Network Advantage license |\n| `AIR_NETWORK_ESSENTIALS`        | Air Network Essentials license. It is applicable for wireless controllers or switches having wireless capability. |\n| `AIR_NETWORK_ADVANTAGE`    |  Air Network Advantage license. It is applicable for wireless controllers or switches having wireless capability.  |\n| `DNA_ESSENTIALS`  | DNA Essentials license |\n| `DNA_ADVANTAGE`     | DNA Advantage license |\n| `AIR_DNA_ESSENTIALS`     |   Air DNA Essentials license. It is applicable for wireless controllers or switches having wireless capability.     |\n| `AIR_DNA_ADVANTAGE`              | Air DNA  Advantage license. It is applicable for wireless controllers or switches having wireless capability                  |\n| `CNS_ESSENTIALS`                    |  Cisco Networking Subscription  Essentials license |\n| `CNS_ADVANTAGE`                    | Cisco Networking Subscription  Advantage license  |\n",
+          "enum": [
+            "NETWORK_ESSENTIALS",
+            "NETWORK_ADVANTAGE",
+            "AIR_NETWORK_ESSENTIALS",
+            "AIR_NETWORK_ADVANTAGE",
+            "DNA_ESSENTIALS",
+            "DNA_ADVANTAGE",
+            "AIR_DNA_ESSENTIALS",
+            "AIR_DNA_ADVANTAGE",
+            "CNS_ESSENTIALS",
+            "CNS_ADVANTAGE",
+            "OTHER"
+          ],
+          "type": "string"
+        },
+        "registrationStatus": {
+          "description": "Smart License registration status\n\n| Registration status                 | Description |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `REGISTERED`              | The network device instance is registered with CSSM.|\n| `UNREGISTERED`     | Smart Licensing is enabled on the network device, but the network device is not registered with CSSM. |\n| `REGISTRATION_EXPIRED`     | The registration has expired. |\n| `RESERVATION_IN_PROGRESS`     | The license reservation is in progress on the network device. |\n| `REGISTERED_SLR`     | The device has successfully completed the process of SLR and is now registered. |\n| `REGISTERED_PLR`     | The device has successfully completed the process of PLR and is now registered. |\n| `REGISTERED_SATELLITE`     | The device is successfully registered with a On Prem CSSM server for Smart Licensing. |\n| `NA`     | The registration is not applicable for device. 'NA' can be seen for devices having RTU license mode or device for which smart licensing using policy is applicable. |\n| `UNKNOWN`     | The registration state is not known on the device. |\n",
+          "enum": [
+            "REGISTERED",
+            "UNREGISTERED",
+            "REGISTRATION_EXPIRED",
+            "RESERVATION_IN_PROGRESS",
+            "REGISTERED_SLR",
+            "REGISTERED_PLR",
+            "REGISTERED_SATELLITE",
+            "NA",
+            "UNKNOWN"
+          ],
+          "example": "UNREGISTERED",
+          "type": "string"
+        },
+        "smartAccountId": {
+          "description": "**The Numeric ID of the Smart Account.**\\n\\n**CRITICAL:** Do NOT pass the Smart Account Name here. You MUST first find the ID by calling `api_smartAccountDetails` and matching the name.",
+          "example": "1034567234567",
+          "type": "string"
+        },
+        "virtualAccountId": {
+          "description": "**The Numeric ID of the Virtual Account.**\\n\\n**CRITICAL:** Do NOT pass the Virtual Account Name here. You MUST first find the ID by calling `api_virtualAccountDetails` and matching the name.",
+          "example": "10345",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "description": "An object containing the response.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "example": 15,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "Count Response",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

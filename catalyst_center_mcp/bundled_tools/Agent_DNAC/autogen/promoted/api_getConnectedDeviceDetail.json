@@ -1,0 +1,69 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceUuid": "path",
+        "interfaceUuid": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{deviceUuid}/interface/{interfaceUuid}/neighbor",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: IMPORTANT**\n\nThis tool retrieves neighbor device details for a SPECIFIC device and interface. Use this tool when user asks for neighbor/connected device information on a particular interface. The response includes neighborDevice, neighborPort, and capabilities - comprehensive neighbor device information.\n\n**REQUIRED PRE-REQUISITES:**\n- Device UUID: Retrieved from `get_device_details` tool\n- Interface UUID: Retrieved from `get_interface_details` tool\n\nYou MUST call `get_device_details` and `get_interface_details` BEFORE calling `api_getConnectedDeviceDetail`. This is non-negotiable.\n\n**Step-by-step process:**\n\n1. First, invoke `get_device_details` with the device name or IP address to resolve the device UUID\n2. Then, invoke `get_interface_details` with the device UUID and interface name to resolve the interface UUID\n3. Extract both UUIDs from their respective responses\n4. Finally, invoke `api_getConnectedDeviceDetail` with both the `deviceUuid` and `interfaceUuid` parameters\n\n**Exception:**\nIf the user explicitly provides valid device UUID and interface UUID in their request, you may skip steps 1-2 and use the provided UUIDs directly in `api_getConnectedDeviceDetail`.\n\n**Use Cases - Pick this tool for questions like:**\n- \"Get neighbor device details for device 50.40.1.45 on the interface GigabitEthernet1/0/14\"\n- \"Show me connected device information for device core-router on interface GigabitEthernet1/0/14\"\n- \"What devices are connected to interface GigabitEthernet1/0/14 on device 192.168.1.100\"\n- \"Get neighbor information for device xyz on interface abc\"\n- \"Show connected device details on this interface\"",
+    "name": "api_getConnectedDeviceDetail",
+    "parameters": {
+      "properties": {
+        "deviceUuid": {
+          "description": "Device UUID",
+          "type": "string"
+        },
+        "interfaceUuid": {
+          "description": "Interface UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceUuid",
+        "interfaceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "capabilities": {
+              "description": "Info about capabilities of the connected device",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "neighborDevice": {
+              "description": "Info about the devices connected to the interface",
+              "type": "string"
+            },
+            "neighborPort": {
+              "description": "Info about the connected interface",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

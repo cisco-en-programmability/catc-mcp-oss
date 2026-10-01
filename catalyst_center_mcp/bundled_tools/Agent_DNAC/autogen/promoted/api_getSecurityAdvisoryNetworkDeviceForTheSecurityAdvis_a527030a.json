@@ -1,0 +1,78 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/advisories/{id}/networkDevices/{networkDeviceId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get or check whether a specific network device is affected by a given security advisory and return its scan summary (scan mode, scan status, advisory count, last scan time). Use this when prompted with requests like \"Get device <device identifier> affected by security advisory <advisory id>\", \"Is device <device identifier> vulnerable to <advisory id>?\", or \"Show the scan status for device <device identifier> for advisory <advisory id>\".",
+    "name": "api_getSecurityAdvisoryNetworkDeviceForTheSecurityAdvis_a527030a",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Id of the security advisory",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Security advisory network device details",
+          "properties": {
+            "advisoryCount": {
+              "description": "Number of advisories to which the network device is vulnerable",
+              "type": "integer"
+            },
+            "comments": {
+              "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure",
+              "type": "string"
+            },
+            "lastScanTime": {
+              "description": "Time at which the device was scanned",
+              "type": "integer"
+            },
+            "networkDeviceId": {
+              "description": "Id of the device",
+              "type": "string"
+            },
+            "scanMode": {
+              "description": "'ESSENTIALS' - the device was scanned using a version based match criteria. 'ADVANTAGE' - the device was scanned using a version based match and user provided config match criteria. 'CX_CLOUD' - the device was scanned using CX cloud engine which uses advanced matching criteria which eliminates false positives.  \u2018NOT_AVAILABLE\u2019 - scan mode is not available. e.g. when the device is not scanned",
+              "type": "string"
+            },
+            "scanStatus": {
+              "description": "'NOT_SCANNED' - the device was not scanned. 'IN_PROGRESS' - a scan is in progress for the device. 'SUCCESS' - device scan was successful. 'FAILED' - device scan failed. 'FALL_BACK' - the device was supposed to be scanned using CX_CLOUD but because of connectivity issues fell back to a ESSENTIALS or ADVANTAGE scan",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "globalIpAddressPoolId": "path"
+      },
+      "uri": "/dna/intent/api/v1/ipam/globalIpAddressPools/{globalIpAddressPoolId}/subpools/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Counts the number of IP address subpools within a specific global IP address pool.\n\nPRECEDENCE\nApply sections in order. Higher sections override lower sections when they conflict.\n\nS0 Scope and hard boundaries\nS0.1 Count-only tool for subpools under one specific global pool.\nS0.2 Use only when user explicitly asks for number/count of subpools in a given global pool (by name or UUID).\nS0.3 Do not use this tool as a detail/list source.\n\nS1 Invocation rules\nS1.1 Required parameter: globalIpAddressPoolId must be a valid UUID.\nS1.2 If UUID is provided, call this tool directly.\nS1.3 If global pool name is provided, resolve UUID via api_retrievesGlobalIPAddressPools, then call this tool with resolved UUID.\nS1.4 If user explicitly says 'global pool' and asks for subpool count, prefer this tool path (do not retrieve subpools list).\nS1.5 If user does not specify global vs subpool, do not use this tool as primary; follow dual retrieval/disambiguation path.\n\nS2 Resolution and pairing behavior\nS2.1 Name-to-UUID resolution is mandatory when identifier is not UUID.\nS2.2 Do not ask user for UUID if name lookup can resolve it.\nS2.3 Do not call this tool with non-UUID name strings in globalIpAddressPoolId.\n\nS3 Output format\nS3.1 For count answers, return Markdown text.\nS3.2 Never use build_key_value_set.\nS3.3 Markdown-context requirement: never return widget-only output. If output includes KeyValueSet, response shape must include Markdown context as [Markdown intro, KeyValueSet, Markdown summary].\n\nS4 Prohibitions and non-goals\nS4.1 Use this tool for count results only; use retrieval APIs when user asks for subpool list/details.\nS4.2 This API is not required to determine whether a global pool is unused.\nS4.3 Unused/empty global pool definition: global pool is unused iff assignedAddresses == 0.\n",
+    "name": "api_countsSubpoolsOfAGlobalIPAddressPool",
+    "parameters": {
+      "properties": {
+        "globalIpAddressPoolId": {
+          "description": "The `id` of the global IP address pool for which to count subpools.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "globalIpAddressPoolId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

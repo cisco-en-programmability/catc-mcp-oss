@@ -1,0 +1,43 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "name": "query"
+      },
+      "uri": "/dna/intent/api/v1/onboarding/pnp-workflow/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the workflow count",
+    "name": "api_getWorkflowCount",
+    "parameters": {
+      "properties": {
+        "name": {
+          "description": "Workflow Name",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

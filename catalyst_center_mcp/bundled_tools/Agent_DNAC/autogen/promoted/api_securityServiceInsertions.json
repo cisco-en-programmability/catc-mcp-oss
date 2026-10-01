@@ -1,0 +1,130 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityServiceInsertions",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the list of configured Security Service Insertion (SSI) records for SSI-enabled fabric sites, including the virtual networks that are already configured for SSI in each site, the selected border devices for each SSI virtual network, and the layer-3 firewall handoff details. Treat SSI and Security Service Insertion as the same feature name. Use this API when the user asks for configured SSI records, all Security Service Insertions, SSI instances, SSI configuration details, configured/enabled SSI virtual networks, selected border devices, firewall handoff details, or SSI record-id discovery. This API returns the full configured SSI record shape with nested `virtualNetworks`, `devices`, and `layer3Handoffs`, rather than a rolled-up per-site summary. Prefer this API over `api_securityServiceInsertionSummary` when the user asks to list Security Service Insertions or SSIs themselves, asks for the first N Security Service Insertions, asks to sort Security Service Insertions, asks for SSI configuration records across fabric sites, or asks which virtual networks are used, configured, selected, enabled, or associated with SSI in a fabric site. The summary API only returns counts such as `virtualNetworksAssociatedCount`; it cannot answer VN-name or VN-detail questions. Do not substitute the summary API for record-list or configured-VN lookup requests unless the user explicitly asks only for a summary, roll-up, per-site counts, or node-count summary. The top-level `id` in each record is one of the most important fields because it is the SSI record id required to call `api_securityServiceInsertionById`; it is not the same as a fabric site id. Use this API as the discovery step when the user wants full details for one SSI but only knows the fabric site name, hierarchy path, or fabric site id: inspect the returned entries, find the matching record by `fabricSiteName` or `siteId`, extract the SSI record `id`, and then call `api_securityServiceInsertionById` if one-record detail is needed. This site-reference rule applies for any site reference format, including a short fabric site name such as `BGL17`, a full Catalyst Center site hierarchy path such as `Global/Bangalore/BGL17`, a fabric `siteId` such as `62a3ed51-9897-46b2-a807-e8250c4e7f3c`, or a follow-up reference such as `that site` after the site was already identified earlier in the conversation. For virtual-network questions, use this API only when the user asks which virtual networks are already configured, used, enabled, selected, or associated with configured SSI records. Apply the same site-reference rule to configured-VN questions: `BGL17`, `Global/Bangalore/BGL17`, a fabric `siteId`, and `that site` should all be treated as references to the same SSI-enabled fabric site when matching `fabricSiteName` or `siteId` in the configured SSI records. If the user asks for readiness status of virtual networks within one fabric site, candidate virtual networks, ready or not-ready virtual networks, or whether VNs can be used for SSI, prefer `api_readinessStatusForAFabricSite` instead. Prefer this API for configured SSI record listing, configured SSI virtual-network lookup, and SSI-id discovery, not for high-level summaries, not for counts, not for global or site readiness, and not for per-site VN readiness.",
+    "name": "api_securityServiceInsertions",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Filter by virtual network name (supports partial search).          For example, searching for \"virtual\" will match \"virtual-network1\", \"virtual-network2\", etc.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sorting order for the response can be specified as either ascending (asc) or descending (desc). The default order is ascending (asc).",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of configured SSI records for SSI-enabled fabric sites, including the virtual networks already configured for SSI in each site, plus nested border-device and firewall handoff details.",
+          "items": {
+            "properties": {
+              "fabricSiteName": {
+                "description": "Name of the fabric site.",
+                "type": "string"
+              },
+              "id": {
+                "description": "SSI record id. This is the identifier that must be used to call `api_securityServiceInsertionById`.",
+                "type": "string"
+              },
+              "siteId": {
+                "description": "Fabric site id.",
+                "type": "string"
+              },
+              "virtualNetworks": {
+                "description": "List of virtual networks that are already configured and used for SSI in this fabric site. For SSI VN questions, these are the authoritative SSI-configured VNs for the site.",
+                "items": {
+                  "properties": {
+                    "devices": {
+                      "description": "List of border devices used with this specific virtual network for SSI enablement.",
+                      "items": {
+                        "properties": {
+                          "hostName": {
+                            "description": "Border device hostname.",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "Inventory device id of the border device used for this SSI virtual network.",
+                            "type": "string"
+                          },
+                          "layer3Handoffs": {
+                            "description": "Layer-3 handoff details for the selected border device, including firewall IP information used for this SSI virtual network.",
+                            "items": {
+                              "properties": {
+                                "firewallIpV4AddressWithMask": {
+                                  "description": "Firewall IPv4 address with mask used for this virtual network in the SSI configuration.",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "description": "The unique identifier of the layer3 handoff.",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "id": {
+                      "description": "The unique identifier of the virtual network associated with the service insertion.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of the virtual network associated with the fabric site.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

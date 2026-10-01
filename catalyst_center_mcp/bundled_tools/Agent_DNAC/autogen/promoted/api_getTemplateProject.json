@@ -1,0 +1,64 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "projectId": "path"
+      },
+      "uri": "/dna/intent/api/v1/projects/{projectId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get a template project by the project's ID.",
+    "name": "api_getTemplateProject",
+    "parameters": {
+      "properties": {
+        "projectId": {
+          "description": "The id of the project to get, retrieveable from `GET /dna/intent/api/v1/projects`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "projectId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "Description of the project",
+              "type": "string"
+            },
+            "lastUpdateTime": {
+              "description": "Timestamp of when the project was updated or modified",
+              "type": "number"
+            },
+            "name": {
+              "description": "Name of the project",
+              "type": "string"
+            },
+            "projectId": {
+              "description": "UUID of the project",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response Version e.g. : 1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

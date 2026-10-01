@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "feature": "path",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/wired/networkDevices/{id}/configFeatures/deployed/layer2/{feature}/count",
+      "version": "2.3.7.9"
+    },
+    "description": "The API returns the number of configurations for a deployed layer 2 feature on a device.",
+    "name": "api_getNumberOfConfigurationsForADeployedLayer2FeatureOnADevice",
+    "parameters": {
+      "properties": {
+        "feature": {
+          "description": "Name of the feature to retrieve configuration for. The API /dna/intent/api/v1/networkDevices/{id}/configFeatures/supported/layer2 can be used to get the list of features supported on a device.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Network device ID of the wired device to retrieve configuration for.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "feature"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "integer"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

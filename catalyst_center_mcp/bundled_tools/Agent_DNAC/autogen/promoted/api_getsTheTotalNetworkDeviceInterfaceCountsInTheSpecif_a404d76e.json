@@ -1,0 +1,95 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "interfaceId": "query",
+        "interfaceName": "query",
+        "networkDeviceId": "query",
+        "networkDeviceIpAddress": "query",
+        "networkDeviceMacAddress": "query",
+        "siteHierarchy": "query",
+        "siteHierarchyId": "query",
+        "siteId": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/data/api/v1/interfaces/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the total Network device interface counts. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-interfaces-2.0.0-resolved.yaml",
+    "name": "api_getsTheTotalNetworkDeviceInterfaceCountsInTheSpecif_a404d76e",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "interfaceId": {
+          "description": "The list of Interface Uuids. (Ex. `6bef213c-19ca-4170-8375-b694e251101c`)\n\nExamples:\n\n`interfaceId=6bef213c-19ca-4170-8375-b694e251101c` (single interface uuid )\n\n`interfaceId=6bef213c-19ca-4170-8375-b694e251101c&32219612-819e-4b5e-a96b-cf22aca13dd9&2541e9a7-b80d-4955-8aa2-79b233318ba0` (multiple Interface uuid with & separator)\n",
+          "type": "string"
+        },
+        "interfaceName": {
+          "description": "The list of Interface name (Ex. `GigabitEthernet1/0/1`)\nThis field supports wildcard (`*`) character-based search. \nEx: `*1/0/1*` or `1/0/1*` or `*1/0/1`\n\nExamples:\n\n`interfaceNames=GigabitEthernet1/0/1` (single interface name)\n\n`interfaceNames=GigabitEthernet1/0/1&GigabitEthernet2/0/1&GigabitEthernet3/0/1` (multiple interface names with & separator)\n",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "The list of Network Device Uuids. (Ex. `6bef213c-19ca-4170-8375-b694e251101c`)\n\nExamples:\n\n`networkDeviceId=6bef213c-19ca-4170-8375-b694e251101c` (single networkDeviceId requested)\n\n`networkDeviceId=6bef213c-19ca-4170-8375-b694e251101c&networkDeviceId=32219612-819e-4b5e-a96b-cf22aca13dd9&networkDeviceId=2541e9a7-b80d-4955-8aa2-79b233318ba0` (multiple networkDeviceIds with & separator)\n",
+          "type": "string"
+        },
+        "networkDeviceIpAddress": {
+          "description": "The list of Network Device management IP Address. (Ex. `121.1.1.10`)\n\nThis field supports wildcard (`*`) character-based search. \nEx: `*1.1*` or `1.1*` or `*1.1`\n\nExamples:\n\n`networkDeviceIpAddress=121.1.1.10`\n\n`networkDeviceIpAddress=121.1.1.10&networkDeviceIpAddress=172.20.1.10&networkDeviceIpAddress=10.10.20.10` (multiple networkDevice IP Address with & separator)\n",
+          "type": "string"
+        },
+        "networkDeviceMacAddress": {
+          "description": "The list of Network Device MAC Address. (Ex. `64:f6:9d:07:9a:00`)\n\nThis field supports wildcard (`*`) character-based search. \nEx: `*AB:AB:AB*` or `AB:AB:AB*` or `*AB:AB:AB`\n\nExamples:\n\n`networkDeviceMacAddress=64:f6:9d:07:9a:00`\n\n`networkDeviceMacAddress=64:f6:9d:07:9a:00&networkDeviceMacAddress=70:56:9d:07:ac:77` (multiple networkDevice MAC addresses with & separator)\n",
+          "type": "string"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*/San*, */San, /San*`\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*uuid*, *uuid, uuid*`\n\nExamples:\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&siteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to current time.\n",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

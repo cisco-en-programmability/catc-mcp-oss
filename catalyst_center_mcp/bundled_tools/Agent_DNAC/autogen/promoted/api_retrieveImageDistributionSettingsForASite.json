@@ -1,0 +1,76 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/imageDistributionSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "**NETWORK SERVER SETTINGS** : Retrieve image distribution settings for a site. For broad queries such as what network server settings are configured at a site, invoke this tool together with the AAA, DHCP, DNS, NTP, time zone, and banner settings tools to build a complete network server settings response. Use this tool for generic site-level image distribution or SFTP image distribution server configuration queries, including the configured image distribution server UUIDs, inherited image distribution settings, and the parent site from which image distribution settings are inherited. Example queries include: Which SFTP image distribution server is configured at a site? Are image distribution settings for a site inherited? From which parent site? `null` values indicate that the setting will be inherited from the parent site; empty objects (`{}`) indicate that the setting is unset at a site. The `response.imageDistribution.servers` field contains image distribution server UUIDs only, not server details. MANDATORY FOLLOW-UP: whenever this response contains one or more server UUIDs, always call `api_retrieveImageDistributionServers` to retrieve the image distribution server details and match each UUID against the returned server `id`. Do not answer image distribution server detail questions from UUIDs alone. Use `api_retrieveImageDistributionServers` to fetch and present server address, port, username, and root location.",
+    "name": "api_retrieveImageDistributionSettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "default": true,
+          "description": "Include inherited Image distribution server settings from parent sites.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "_inherited"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "imageDistribution": {
+              "description": "",
+              "properties": {
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                },
+                "servers": {
+                  "description": "Array of UUIDs for image distribution servers assigned to this site. This field contains identifiers only and is not sufficient for user-facing server details. MANDATORY FOLLOW-UP: always call `api_retrieveImageDistributionServers` whenever this array is present or the user asks for image distribution server details, then match each UUID in this array against the returned server `id`. The detail lookup returns server address, port number, username, and root location. SFTP servers act as image distribution servers in a distributed SWIM architecture to support large-scale device software image upgrades and conserve WAN bandwidth.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

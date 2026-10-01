@@ -1,0 +1,252 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "SMO_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "backupId": "query",
+        "jobType": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "status": "query"
+      },
+      "uri": "/dna/system/api/v1/backupRestoreExecutions",
+      "version": "1.0.0-oas3"
+    },
+    "description": "**Pick this tool for backup JOB HISTORY and restore JOB HISTORY questions.**\n\nThis tool lists backup and restore execution history with optional filtering by backup, job type, status, pagination, and sorting.\n\n**Use this tool when the user asks:**\n- about backup jobs or restore jobs\n- for failed backup executions or failed restore attempts\n- whether any backup or restore job is in progress\n- for execution history for a known backup\n- for restore attempts, delete-backup jobs, or job status trends\n\n**Pick this tool for questions like:**\n- \"Show me backup jobs\"\n- \"List restore attempts\"\n- \"Are there any backups in progress?\"\n- \"Which backup jobs failed?\"\n- \"Show execution history for backup <id>\"\n- \"List failed restore jobs\"\n- \"Show recent backup executions\"\n\n**Do NOT use this tool for:**\n- listing available backups themselves\n- backup configuration/settings\n- mounted backup storage capacity\n- detailed diagnostics for one specific execution after you already have the execution ID\n\nThis is the list view for executions. When the user needs detailed diagnostics for one execution, first obtain the execution `id` here and then call `api_getBackupRestoreExecution`.",
+    "name": "api_getBackupRestoreExecutions",
+    "parameters": {
+      "properties": {
+        "backupId": {
+          "description": "Optional backup UUID used to filter execution history for a single backup. Obtain this value from the `id` field returned by `api_getAllBackup`.",
+          "type": "string"
+        },
+        "jobType": {
+          "description": "Optional execution type filter. Use `CREATE_BACKUP` for backup creation jobs, `RESTORE_BACKUP` for restore jobs, and `DELETE_BACKUP` for backup deletion jobs.",
+          "enum": [
+            "CREATE_BACKUP",
+            "RESTORE_BACKUP",
+            "DELETE_BACKUP"
+          ],
+          "type": "string"
+        },
+        "limit": {
+          "description": "Optional maximum number of execution records to return. Valid range is 1-500.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Optional 1-based starting offset for pagination. Use 1 for the first page, then increase it to page through additional execution records.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Optional sort direction. Use `desc` for latest executions first and `asc` for oldest-first ordering.",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "type": "string"
+        },
+        "sortBy": {
+          "default": "executionDate",
+          "description": "Optional execution response field to sort by. The common default is `executionDate`.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Optional execution status filter. Useful values include `IN_PROGRESS`, `SUCCESS`, `FAILED`, `TIMEOUT`, and `TERMINATED`.",
+          "enum": [
+            "IN_PROGRESS",
+            "SUCCESS",
+            "FAILED",
+            "TIMEOUT",
+            "TERMINATED"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Contains the information about backup executions..",
+      "properties": {
+        "filter": {
+          "description": "Records are filtered based on the fields",
+          "type": "object"
+        },
+        "page": {
+          "allOf": [
+            {
+              "description": "Contains pagination information.",
+              "properties": {
+                "count": {
+                  "description": "Total number of records that can be returned for this request",
+                  "example": 5,
+                  "type": "integer"
+                },
+                "limit": {
+                  "description": "Number of records to be returned in response",
+                  "example": 1,
+                  "type": "integer"
+                },
+                "offset": {
+                  "description": "Starting offset of data to fetch and returned",
+                  "example": 10,
+                  "type": "integer"
+                },
+                "sortBy": {
+                  "description": "List of sort objects",
+                  "items": {
+                    "description": "Contains sort by information.",
+                    "properties": {
+                      "name": {
+                        "description": "Records are sorted based on the field specified.",
+                        "example": "startDate",
+                        "type": "string"
+                      },
+                      "order": {
+                        "description": "Sort order. 'asc' for ascending and 'desc' for descending",
+                        "example": "asc",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Contains pagination information.",
+          "type": "object"
+        },
+        "response": {
+          "description": "Contains information about backup executions.",
+          "items": {
+            "description": "Contains the information about backup execution.",
+            "properties": {
+              "_metadata": {
+                "additionalProperties": true,
+                "description": "This field holds additional information",
+                "type": "object"
+              },
+              "backupId": {
+                "description": "The UUID of the backup",
+                "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea5",
+                "type": "string"
+              },
+              "completedPercentage": {
+                "description": "Execution completion percentage",
+                "example": 50.25,
+                "type": "number"
+              },
+              "createdBy": {
+                "description": "This field represents the user who triggered this execution",
+                "example": "John Doe",
+                "type": "string"
+              },
+              "duration": {
+                "description": "Total time taken to complete this execution process",
+                "example": 12345,
+                "type": "integer"
+              },
+              "endDate": {
+                "description": "The end data and time of the backup execution",
+                "example": "2022-04-30T02:21:22.000Z",
+                "type": "string"
+              },
+              "errorCode": {
+                "description": "Error code of the backup execution process",
+                "example": "BACKUP_ERROR",
+                "type": "string"
+              },
+              "errorMessage": {
+                "description": "Error message of this backup execution process",
+                "example": "something went wrong",
+                "type": "string"
+              },
+              "failedTaskDetail": {
+                "description": "Failed task detail of this execution",
+                "type": "object"
+              },
+              "id": {
+                "description": "The UUID of the execution process",
+                "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+                "type": "string"
+              },
+              "isForceUpdate": {
+                "description": "This states whether the execution is forcefully updated or not",
+                "example": true,
+                "type": "boolean"
+              },
+              "jobType": {
+                "description": "The backup execution job type",
+                "enum": [
+                  "CREATE_BACKUP",
+                  "DELETE_BACKUP",
+                  "RESTORE_BACKUP"
+                ],
+                "example": "CREATE_BACKUP",
+                "type": "string"
+              },
+              "scope": {
+                "description": "The backup scope states whether the backup is with assurance or without assurance data",
+                "enum": [
+                  "CISCO_DNA_DATA_WITH_ASSURANCE",
+                  "CISCO_DNA_DATA_WITHOUT_ASSURANCE"
+                ],
+                "example": "CISCO_DNA_DATA_WITH_ASSURANCE",
+                "type": "string"
+              },
+              "startDate": {
+                "description": "The start data and time of the backup execution",
+                "example": "2022-04-30T02:21:22.000Z",
+                "type": "string"
+              },
+              "status": {
+                "description": "The status of the backup execution",
+                "enum": [
+                  "IN_PROGRESS",
+                  "SUCCESS",
+                  "FAILED",
+                  "CANCELLED"
+                ],
+                "example": "SUCCESS",
+                "type": "string"
+              },
+              "systemErrorMessage": {
+                "description": "System error message of this backup execution process",
+                "example": "something went wrong",
+                "type": "string"
+              },
+              "updateMessage": {
+                "description": "Force update message",
+                "example": "Force Update",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

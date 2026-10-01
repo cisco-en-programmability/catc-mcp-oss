@@ -1,0 +1,65 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "parentTaskId": "query"
+      },
+      "uri": "/dna/intent/api/v1/device-reboot/apreboot/status",
+      "version": "2.3.7.9"
+    },
+    "description": "Users can query the access point reboot status using this intent API",
+    "name": "api_getAccessPointRebootTaskResult",
+    "parameters": {
+      "properties": {
+        "parentTaskId": {
+          "description": "task id of ap reboot request",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "apList": {
+            "description": "",
+            "items": {
+              "properties": {
+                "apName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "failureReason": {
+                  "description": "",
+                  "properties": {},
+                  "type": "object"
+                },
+                "rebootStatus": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "wlcIP": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

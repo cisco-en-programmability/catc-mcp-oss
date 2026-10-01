@@ -1,0 +1,63 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "viewGroupId": "path"
+      },
+      "uri": "/dna/intent/api/v1/data/view-groups/{viewGroupId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Gives a list of summary of all views in a viewgroup. Use \"Get all view groups\" API to get the viewGroupIds (required as a query param for this API) for available viewgroups.",
+    "name": "api_getViewsForAGivenViewGroup",
+    "parameters": {
+      "properties": {
+        "viewGroupId": {
+          "description": "viewGroupId of viewgroup.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "viewGroupId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "viewGroupId": {
+          "description": "viewgroup Id",
+          "type": "string"
+        },
+        "views": {
+          "description": "views in viewgroup",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "viewId": {
+                "description": "Unique id for a view within viewgroup",
+                "type": "string"
+              },
+              "viewName": {
+                "description": "view name",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

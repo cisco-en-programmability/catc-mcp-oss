@@ -1,0 +1,98 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "siteId": "path"
+      },
+      "uri": "/dna/intent/api/v1/securityServiceInsertion/fabricSitesReadiness/{siteId}/virtualNetworks/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets a list of switches for the specified virtual network within a fabric site, including their individual readiness status for Security Service Insertion (SSI) deployment. The result is sorted by hostName.",
+    "name": "api_readinessStatusOfSwitchesInASpecifiedVirtualNetwork_d64c1de3",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Virtual network id",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Sda fabric site id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "siteId",
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of switches in the virtual network.",
+          "items": {
+            "properties": {
+              "fabricRoles": {
+                "description": "The roles assigned to the device within the fabric.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "hostName": {
+                "description": "The hostname of the device.",
+                "type": "string"
+              },
+              "id": {
+                "description": "The unique identifier of the network device.",
+                "type": "string"
+              },
+              "ipAddress": {
+                "description": "The IP address assigned to the device.",
+                "type": "string"
+              },
+              "license": {
+                "description": "The licensing status of the device.",
+                "type": "string"
+              },
+              "reachabilityStatus": {
+                "description": "The current reachability status of the device.",
+                "enum": [
+                  "REACHABLE, NOT_REACHABLE"
+                ],
+                "type": "string"
+              },
+              "readiness": {
+                "description": "The readiness status of the device.",
+                "enum": [
+                  "READY, NOT_READY"
+                ],
+                "type": "string"
+              },
+              "version": {
+                "description": "The version of the device's software.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

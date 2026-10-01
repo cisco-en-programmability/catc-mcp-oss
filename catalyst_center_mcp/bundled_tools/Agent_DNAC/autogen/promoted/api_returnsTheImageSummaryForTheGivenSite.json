@@ -1,0 +1,81 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "notes": [
+        "This summary should follow a successful api_getSites lookup so siteId is never null."
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/siteWiseImagesSummary",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: CRITICAL**\\n\\nReturns aggregate image statistics (counts of product names, golden/non-golden, imported images, advisor recommendations) for a specific site.\\n\\n**REQUIRED PRE-REQUISITE:**\\nYou MUST call `api_getSites` BEFORE calling this tool so you can supply a real `siteId`.\\n\\n**Step-by-step process:**\\n1. Call `api_getSites` (typically with `name=\"Global\"`, unless the user specified another hierarchy)\\n2. Extract the desired site's UUID from the response\\n3. Call `api_returnsTheImageSummaryForTheGivenSite` with that `siteId`\\n\\n**Exception:**\\nIf the user explicitly provides a valid site UUID, you may reuse it directly.\\n\\n**Do NOT:**\\n- Omit the prerequisite `api_getSites` lookup\\n- Pass `None`/empty strings for `siteId`\\n- Attempt to infer or guess a UUID",
+    "name": "api_returnsTheImageSummaryForTheGivenSite",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "description": "UUID of the site whose aggregate counts should be returned. Resolve every human-readable site reference by calling `api_getSites` first\u2014even for the default global site (call it with `name=\"Global\"`). Defaults to the global site UUID when not provided. See [https://developer.cisco.com/docs/dna-center](#!get-site) for `siteId` details.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Aggregate the counts of network device product names, including both golden and non-golden tagged products, imported images, golden images tagged, and advisor information.",
+      "properties": {
+        "response": {
+          "description": "Aggregate Counts response",
+          "properties": {
+            "goldenImageCount": {
+              "description": "Count of images marked as golden",
+              "type": "number"
+            },
+            "importedImageCount": {
+              "description": "Count of images imported",
+              "type": "number"
+            },
+            "installedImageAdvisorCount": {
+              "description": "Advisor count of installed images",
+              "type": "number"
+            },
+            "installedImageCount": {
+              "description": "Count of installed images",
+              "type": "number"
+            },
+            "nonGoldenImageCount": {
+              "description": "Count of images not marked as golden",
+              "type": "number"
+            },
+            "productCount": {
+              "description": "Count of Network device product name",
+              "type": "number"
+            },
+            "productsWithGoldenCount": {
+              "description": "Count of Network device product name marked as golden",
+              "type": "number"
+            },
+            "productsWithoutGoldenCount": {
+              "description": "Count of Network device product name not marked as golden",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

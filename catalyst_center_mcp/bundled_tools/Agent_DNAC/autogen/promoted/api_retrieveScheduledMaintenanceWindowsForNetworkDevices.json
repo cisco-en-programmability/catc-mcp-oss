@@ -1,0 +1,138 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "networkDeviceIds": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceMaintenanceSchedules",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves a list of **Catalyst Center controller-side** scheduled maintenance windows for managed network devices \u2014 start/end IDs tied to DNAC Activities. It answers \"which maintenance blackout did I schedule in Catalyst Center?\" workflows.\n\n**NOT FOR** IOS-XE / NX-OS **device-local switch port schedules** (EEM applets / Kron schedules / nightly port shutdown macros). Those device-CLI schedules never appear here.\n\nUse '/dna/intent/api/v1/networkDeviceMaintenanceSchedules/count' API to get the total record count. For datasets over the page limit, page with offset.",
+    "name": "api_retrieveScheduledMaintenanceWindowsForNetworkDevices",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceIds": {
+          "description": "List of network device ids.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the maintenance schedule. Possible values are: UPCOMING, IN_PROGRESS, COMPLETED, FAILED. Refer features for more details.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "A brief narrative describing the maintenance schedule.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Id of the schedule maintenance window",
+                "type": "string"
+              },
+              "maintenanceSchedule": {
+                "description": "Contains all the details necessary to define the maintenance window and its recurrence.",
+                "properties": {
+                  "endId": {
+                    "description": "Activity id of end schedule of the maintenance window. To check the status of the end schedule, use GET /dna/intent/api/v1/activities/{id}. endId remains same for every occurrence of recurrence instance.",
+                    "type": "string"
+                  },
+                  "endTime": {
+                    "description": "End time indicates the ending of the maintenance window in Unix epoch time in milliseconds.",
+                    "type": "number"
+                  },
+                  "recurrence": {
+                    "description": "Details about the recurrence of the maintenance schedule",
+                    "properties": {
+                      "interval": {
+                        "description": "Interval for recurrence in days. The interval must be longer than the duration of the schedules. The maximum allowed interval is 365 days.",
+                        "type": "integer"
+                      },
+                      "recurrenceEndTime": {
+                        "description": "The end date for the recurrence in Unix epoch time in milliseconds. Recurrence end time should be greater than maintenance end date/time.",
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "startId": {
+                    "description": "Activity id of start schedule of the maintenance window. To check the status of the start schedule, use GET /dna/intent/api/v1/activities/{id}. startId remains same for every occurrence of recurrence instance.",
+                    "type": "string"
+                  },
+                  "startTime": {
+                    "description": "Start time indicates the beginning of the maintenance window in Unix epoch time in milliseconds.",
+                    "type": "number"
+                  },
+                  "status": {
+                    "description": "The status of the maintenance schedule.",
+                    "enum": [
+                      "UPCOMING",
+                      "IN_PROGRESS",
+                      "COMPLETED",
+                      "FAILED"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "networkDeviceIds": {
+                "description": "List of network device ids. This field is applicable only during creation of schedules; for updates, it is read-only.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

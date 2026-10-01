@@ -1,0 +1,90 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "family": "query",
+        "id": "query",
+        "managementAddress": "query",
+        "managementState": "query",
+        "reachabilityStatus": "query",
+        "role": "query",
+        "serialNumber": "query",
+        "stackDevice": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDevices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "API to fetch the count of network devices using basic filters. Use the `/dna/intent/api/v1/networkDevices/query/count` API if you need advanced filtering.\n",
+    "name": "api_countTheNumberOfNetworkDevices",
+    "parameters": {
+      "properties": {
+        "family": {
+          "description": "Product family of the network device. For example, Switches, Routers, etc.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Network device Id",
+          "type": "string"
+        },
+        "managementAddress": {
+          "description": "Management address of the network device",
+          "type": "string"
+        },
+        "managementState": {
+          "description": "The status of the network device's manageability. Available values : MANAGED, UNDER_MAINTENANCE, NEVER_MANAGED. Refer features for more details.",
+          "type": "string"
+        },
+        "reachabilityStatus": {
+          "description": "Reachability status of the network device. Available values : REACHABLE, ONLY_PING_REACHABLE, UNREACHABLE, UNKNOWN. Refer features for more details.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Role assigned to the network device. Available values : BORDER_ROUTER, CORE, DISTRIBUTION, ACCESS, UNKNOWN",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "Serial number of the network device",
+          "type": "string"
+        },
+        "stackDevice": {
+          "description": "Flag indicating if the device is a stack device",
+          "type": "string"
+        },
+        "status": {
+          "description": "Inventory related status of the network device. Available values : MANAGED, SYNC_NOT_STARTED, SYNC_INIT_FAILED, SYNC_PRECHECK_FAILED, SYNC_IN_PROGRESS, SYNC_INTERNAL_ERROR, SYNC_DISABLED, DELETING_DEVICE, UNDER_MAINTENANCE, QUARANTINED, UNASSOCIATED, UNREACHABLE, UNKNOWN. Refer features for more details.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "a total count of records in a given resource.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

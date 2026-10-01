@@ -1,0 +1,284 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "apProfileName": "query",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/apProfiles",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get AP profiles that are captured in wireless settings design.",
+    "name": "api_getAPProfiles",
+    "parameters": {
+      "properties": {
+        "apProfileName": {
+          "description": "Employ this query parameter to obtain the details of the apProfiles corresponding to the provided apProfileName.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "ApProfiles",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "apPowerProfileName": {
+                "description": "Name of the existing AP power profile.",
+                "type": "string"
+              },
+              "apProfileName": {
+                "description": "Name of the Access Point profile. Max length is 32 characters.",
+                "type": "string"
+              },
+              "awipsEnabled": {
+                "description": "Indicates if AWIPS is enabled on the AP.",
+                "type": "boolean"
+              },
+              "awipsForensicEnabled": {
+                "description": "Indicates if AWIPS forensic is enabled on the AP. Forensic Capture is supported from IOS-XE version 17.4 and above. Forensic Capture can be activated only if aWIPS is enabled.",
+                "type": "boolean"
+              },
+              "calendarPowerProfiles": {
+                "description": "Represents a calendar-based power profile setting. You can map multiple Power Profiles to different calendar schedules based on your requirement.",
+                "properties": {
+                  "duration": {
+                    "description": "",
+                    "properties": {
+                      "schedulerDate": {
+                        "description": "Start and End date of the duration setting, applicable for MONTHLY schedulers.",
+                        "type": "string"
+                      },
+                      "schedulerDay": {
+                        "description": "Applies every week on the selected days",
+                        "type": "string"
+                      },
+                      "schedulerEndTime": {
+                        "description": "End time of the duration setting.",
+                        "type": "string"
+                      },
+                      "schedulerStartTime": {
+                        "description": "Start time of the duration setting.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "powerProfileName": {
+                    "description": "Name of the existing AP power profile to be mapped to the calendar power profile. The following API is used create AP power profile. API-/intent/api/v1/wirelessSettings/powerProfiles",
+                    "type": "string"
+                  },
+                  "schedulerType": {
+                    "description": "Type of the scheduler.",
+                    "enum": [
+                      "DAILY",
+                      "WEEKLY",
+                      "MONTHLY"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "clientLimit": {
+                "description": "Number of clients. Value should be between 0-1200.",
+                "type": "integer"
+              },
+              "countryCode": {
+                "description": "",
+                "enum": [
+                  "(AF|AE|AL|AR|AT|AO|AU|BD|BA|BB|BE|BG|BH|BM|BN|BO|BR|BT|BY|CA|CD|CH|CI|CL|CM|CN|CO|CR|CU|CY|CZ|DE|DK|DO|DZ|EC|EE|EG|EL|ES|ET|FI|FJ|FR|GB|GH|GI|GE|GR|GT|HK|HN|HR|HU|ID|IE|IL|IN|IQ|IS|IT|J2|J4|JM|JO|KE|KH|KN|KW|KZ|LA|LB|LI|LK|LT|LU|LV|LY|MA|MC|MD|ME|MK|MN|MM|MO|MT|MX|MY|NG|NI|NL|NO|NP|NZ|OM|PA|PE|PH|PK|PL|PR|PT|PY|QA|RO|RS|RU|SA|SD|SE|SG|SI|SK|SM|TH|TI|TN|TR|TW|TZ|UA|US|UY|VA|VE|VN|XK|YE|ZA|ZW|MU|ZM|BI|NA|BW|GA|UG|UZ)"
+                ],
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the AP profile. Max length is 241 characters",
+                "type": "string"
+              },
+              "id": {
+                "description": "AP Profile unique ID",
+                "type": "string"
+              },
+              "managementSetting": {
+                "description": "These setting are applicable during PnP claim and for day-N authentication of AP. Changing these settings will be service impacting for the PnP onboarded APs and will need a factory-reset for those APs and Enable SSH and Telnet to add credentials for device management.",
+                "properties": {
+                  "authType": {
+                    "description": "Authentication type used in the AP profile. These setting are applicable during PnP claim and for day-N authentication of AP. Changing these settings will be service impacting for the PnP onboarded APs and will need a factory-reset for those APs.",
+                    "enum": [
+                      "NO-AUTH",
+                      "EAP-TLS",
+                      "EAP-PEAP",
+                      "EAP-FAST"
+                    ],
+                    "type": "string"
+                  },
+                  "cdpState": {
+                    "description": "Indicates if CDP is enabled on the AP. Enable CDP in order to make Cisco Access Points known to its neighboring devices and vice-versa.",
+                    "type": "boolean"
+                  },
+                  "dot1xPassword": {
+                    "description": "Password for 802.1X authentication. AP dot1x password length should not exceed 120.",
+                    "type": "string"
+                  },
+                  "dot1xUsername": {
+                    "description": "Username for 802.1X authentication. dot1xUsername must have a minimum of 1 character and a maximum of 32 characters.",
+                    "type": "string"
+                  },
+                  "managementEnablePassword": {
+                    "description": "Enable password for managing the AP. Length must be 8-120 characters.",
+                    "type": "string"
+                  },
+                  "managementPassword": {
+                    "description": "Management password for the AP. Length must be 8-120 characters.",
+                    "type": "string"
+                  },
+                  "managementUserName": {
+                    "description": "Management username must have a minimum of 1 character and a maximum of 32 characters.",
+                    "type": "string"
+                  },
+                  "sshEnabled": {
+                    "description": "Indicates if SSH is enabled on the AP. Enable SSH add credentials for device management.",
+                    "type": "boolean"
+                  },
+                  "telnetEnabled": {
+                    "description": "Indicates if Telnet is enabled on the AP. Enable Telnet to add credentials for device management.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "meshEnabled": {
+                "description": "This indicates whether mesh networking is enabled on the AP. For IOS-XE devices, when mesh networking is enabled, a custom mesh profile with the configured parameters will be created and mapped to the AP join profile on the device. When mesh networking is disabled, any existing custom mesh profile will be deleted from the device, and the AP join profile will be mapped to the default mesh profile on the device.",
+                "type": "boolean"
+              },
+              "meshSetting": {
+                "description": "Settings specific to mesh networking. MAC address of APs in mesh mode must be added to the AP Authorization list.",
+                "properties": {
+                  "backhaulClientAccess": {
+                    "description": "Indicates if backhaul client access is enabled on the AP.",
+                    "type": "boolean"
+                  },
+                  "bridgeGroupName": {
+                    "description": "Name of the bridge group for mesh settings. If not configured, 'Default' Bridge group name will be used in mesh profile.",
+                    "type": "string"
+                  },
+                  "ghz24BackhaulDataRates": {
+                    "description": "2.4GHz backhaul data rates.",
+                    "enum": [
+                      "auto",
+                      "802.11abg",
+                      "802.11ax",
+                      "802.11n"
+                    ],
+                    "type": "string"
+                  },
+                  "ghz5BackhaulDataRates": {
+                    "description": "5GHz backhaul data rates.",
+                    "enum": [
+                      "auto",
+                      "802.11abg",
+                      "802.12ac",
+                      "802.11ax",
+                      "802.11n"
+                    ],
+                    "type": "string"
+                  },
+                  "range": {
+                    "description": "Range of the mesh network. Value should be between 150-132000",
+                    "type": "integer"
+                  },
+                  "rapDownlinkBackhaul": {
+                    "description": "Type of downlink backhaul used.",
+                    "enum": [
+                      "5 GHz",
+                      "2.4 GHz"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "pmfDenialEnabled": {
+                "description": "Indicates if PMF denial is active on the AP. PMF Denial is supported from IOS-XE version 17.12 and above.",
+                "type": "boolean"
+              },
+              "remoteWorkerEnabled": {
+                "description": "Indicates if remote worker mode is enabled on the AP. Remote teleworker enabled profile cannot support security features like aWIPS,Forensic Capture Enablement, Rogue Detection and Rogue Containment.",
+                "type": "boolean"
+              },
+              "rogueDetectionSetting": {
+                "description": "Detect Access Points that have been installed on a secure network without explicit authorization from a system administrator and configure rogue general configuration parameters",
+                "properties": {
+                  "rogueDetection": {
+                    "description": "Indicates if rogue detection is enabled. Detect Access Points that have been installed on a secure network without explicit authorization from a system administrator and configure rogue general configuration parameters",
+                    "type": "boolean"
+                  },
+                  "rogueDetectionMinRssi": {
+                    "description": "Minimum RSSI for rogue detection. Value should be in range -128 decibel milliwatts and -70 decibel milliwatts",
+                    "type": "integer"
+                  },
+                  "rogueDetectionReportInterval": {
+                    "description": "Report interval for rogue detection. Value should be in range 10 and 300.",
+                    "type": "integer"
+                  },
+                  "rogueDetectionTransientInterval": {
+                    "description": "Transient interval for rogue detection. Value should be 0 or from 120 to 1800.",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "timeZone": {
+                "description": "Time zone of the AP.",
+                "enum": [
+                  "Not Configured",
+                  "Controller",
+                  "Delta from Controller"
+                ],
+                "type": "string"
+              },
+              "timeZoneOffsetHour": {
+                "description": "Hour 'Delta from Controller' for the time zone. The value should be between -12 and 14.",
+                "type": "integer"
+              },
+              "timeZoneOffsetMinutes": {
+                "description": "Minute 'Delta from Controller' for the time zone. Value should be between 0 to 59.",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

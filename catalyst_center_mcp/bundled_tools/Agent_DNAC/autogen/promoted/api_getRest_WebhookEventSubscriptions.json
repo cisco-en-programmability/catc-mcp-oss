@@ -1,0 +1,296 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "domain": "query",
+        "eventIds": "query",
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "subDomain": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/subscription/rest",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the list of Rest/Webhook Subscriptions's based on provided query params",
+    "name": "api_getRest_WebhookEventSubscriptions",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "List of subscriptions related to the respective category",
+          "type": "string"
+        },
+        "domain": {
+          "description": "List of subscriptions related to the respective domain",
+          "type": "string"
+        },
+        "eventIds": {
+          "description": "List of subscriptions related to the respective eventIds (Comma separated event ids)",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "List of subscriptions related to the respective name",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        },
+        "subDomain": {
+          "description": "List of subscriptions related to the respective sub-domain",
+          "type": "string"
+        },
+        "type": {
+          "description": "List of subscriptions related to the respective type",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "filter": {
+            "description": "",
+            "properties": {
+              "categories": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "domainsSubdomains": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "domain": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "subDomains": {
+                      "description": "",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "eventIds": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "others": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "severities": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "siteIds": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "sources": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "types": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "isPrivate": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "subscriptionEndpoints": {
+            "description": "",
+            "items": {
+              "properties": {
+                "connectorType": {
+                  "description": "",
+                  "type": "string"
+                },
+                "instanceId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "subscriptionDetails": {
+                  "description": "",
+                  "properties": {
+                    "basePath": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "body": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "connectTimeout": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "connectorType": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "headers": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "string": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "instanceId": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "method": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "pathParams": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "string": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "queryParams": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "string": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "readTimeout": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "resource": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "trustCert": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "subscriptionId": {
+            "description": "",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

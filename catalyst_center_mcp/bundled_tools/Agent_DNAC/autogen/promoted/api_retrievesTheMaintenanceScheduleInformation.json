@@ -1,0 +1,109 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceMaintenanceSchedules/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "API to retrieve the maintenance schedule information for the given id.",
+    "name": "api_retrievesTheMaintenanceScheduleInformation",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the maintenance schedule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "A brief narrative describing the maintenance schedule.",
+              "type": "string"
+            },
+            "id": {
+              "description": "Id of the schedule maintenance window",
+              "type": "string"
+            },
+            "maintenanceSchedule": {
+              "description": "Contains all the details necessary to define the maintenance window and its recurrence.",
+              "properties": {
+                "endId": {
+                  "description": "Activity id of end schedule of the maintenance window. To check the status of the end schedule, use GET /intent/api/v1/activities/{id}. endId remains same for every occurrence of recurrence instance.",
+                  "type": "string"
+                },
+                "endTime": {
+                  "description": "End time indicates the ending of the maintenance window in Unix epoch time in milliseconds.",
+                  "type": "number"
+                },
+                "recurrence": {
+                  "description": "Details about the recurrence of the maintenance schedule",
+                  "properties": {
+                    "interval": {
+                      "description": "Interval for recurrence in days. The interval must be longer than the duration of the schedules. The maximum allowed interval is 365 days.",
+                      "type": "integer"
+                    },
+                    "recurrenceEndTime": {
+                      "description": "The end date for the recurrence in Unix epoch time in milliseconds. Recurrence end time should be greater than maintenance end date/time.",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                },
+                "startId": {
+                  "description": "Activity id of start schedule of the maintenance window. To check the status of the start schedule, use GET /intent/api/v1/activities/{id}. startId remains same for every occurrence of recurrence instance.",
+                  "type": "string"
+                },
+                "startTime": {
+                  "description": "Start time indicates the beginning of the maintenance window in Unix epoch time in milliseconds.",
+                  "type": "number"
+                },
+                "status": {
+                  "description": "The status of the maintenance schedule.",
+                  "enum": [
+                    "UPCOMING",
+                    "IN_PROGRESS",
+                    "COMPLETED",
+                    "FAILED"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "networkDeviceIds": {
+              "description": "List of network device ids. This field is applicable only during creation of schedules; for updates, it is read-only.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version number of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

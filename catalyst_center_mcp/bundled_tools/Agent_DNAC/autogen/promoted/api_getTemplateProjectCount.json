@@ -1,0 +1,50 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "name": "query"
+      },
+      "uri": "/dna/intent/api/v1/projects/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of all template projects.",
+    "name": "api_getTemplateProjectCount",
+    "parameters": {
+      "properties": {
+        "name": {
+          "description": "Name of project to be searched",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response Version e.g. : 1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

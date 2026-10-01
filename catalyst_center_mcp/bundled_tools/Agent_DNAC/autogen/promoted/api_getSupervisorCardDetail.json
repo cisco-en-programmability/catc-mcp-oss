@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceUuid": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{deviceUuid}/supervisor-card",
+      "version": "2.3.7.9"
+    },
+    "description": "Get supervisor card detail for a given deviceuuid. Response will contain serial no, part no, switch no and slot no.",
+    "name": "api_getSupervisorCardDetail",
+    "parameters": {
+      "properties": {
+        "deviceUuid": {
+          "description": "instanceuuid of device",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "partno": {
+                "description": "Part number of the supervisor card",
+                "type": "string"
+              },
+              "serialno": {
+                "description": "Serial number of the supervisor card",
+                "type": "string"
+              },
+              "slotno": {
+                "description": "Slot number of supervisor card",
+                "type": "string"
+              },
+              "switchno": {
+                "description": "Switch number of the supervisor card",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

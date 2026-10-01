@@ -1,0 +1,213 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "networkDeviceId": "path",
+        "offset": "query",
+        "policyId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliance/networkDevices/{networkDeviceId}/detail/policys/{policyId}/violations",
+      "version": "3.1.6"
+    },
+    "description": "Retrieve the violation details of the compliance policy for the network device. \n",
+    "name": "api_getNetworkDeviceCompliancePolicyViolations",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "The `id` of the network device.",
+          "example": "0003e9dc-4eaf-41bc-a0e4-bcaaf78e6302",
+          "format": "uuid",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId",
+        "policyId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "The response object.",
+      "properties": {
+        "response": {
+          "description": "List of policy violation details.",
+          "items": {
+            "description": "Represents a rule violation with details about its severity and violations.",
+            "properties": {
+              "errorCount": {
+                "description": "Total number of errors in the rule violations.",
+                "example": 1,
+                "format": "int32",
+                "type": "integer"
+              },
+              "errors": {
+                "description": "List of errors associated with the rule.",
+                "items": {
+                  "description": "Details of an error within the rule.",
+                  "properties": {
+                    "conditionId": {
+                      "description": "The `id` of the condition.",
+                      "example": "7c450743-8174-40bd-8f04-a022e00fefde",
+                      "type": "string"
+                    },
+                    "errorCode": {
+                      "description": "Error code if the condition results in an error.",
+                      "example": "NCSC14029",
+                      "type": "string"
+                    },
+                    "errorMessage": {
+                      "description": "Error message if the condition results in an error.",
+                      "example": "NCSC14029: Invalid CLI 'show pssword'.",
+                      "type": "string"
+                    },
+                    "sequenceNumber": {
+                      "description": "The sequence number of the condition.",
+                      "example": 2,
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "conditionId",
+                    "sequenceNumber"
+                  ],
+                  "title": "ErrorDetails",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "maxSeverity": {
+                "allOf": [
+                  {
+                    "description": "The severity level of the violation.",
+                    "enum": [
+                      "CRITICAL",
+                      "MAJOR",
+                      "MINOR",
+                      "WARNING",
+                      "INFO"
+                    ],
+                    "example": "MAJOR",
+                    "title": "ViolationSeverity",
+                    "type": "string"
+                  },
+                  {
+                    "description": "Maximum severity level of the violations.",
+                    "type": "string"
+                  }
+                ],
+                "description": "The maximum severity level of the violations."
+              },
+              "ruleDescription": {
+                "description": "Detailed description of the rule.",
+                "example": "This rule ensures that passwords meet the required complexity.",
+                "type": "string"
+              },
+              "ruleId": {
+                "description": "The `id` of the rule within the compliance policy.",
+                "example": "e8eef5e2-1eab-426c-be77-97ee81dcba06",
+                "type": "string"
+              },
+              "ruleName": {
+                "description": "Name of the rule.",
+                "example": "Password Policy",
+                "type": "string"
+              },
+              "ruleSuggestedFix": {
+                "description": "Suggested fix for the rule violation.",
+                "example": "Update the password to meet the complexity requirements.",
+                "type": "string"
+              },
+              "violations": {
+                "description": "List of condition violations associated with the rule.",
+                "items": {
+                  "description": "Details of a violation within the rule.",
+                  "properties": {
+                    "conditionId": {
+                      "description": "The `id` of the condition.",
+                      "example": "1d78e50b-acd7-423b-bc5e-5f4c106eaa8f",
+                      "type": "string"
+                    },
+                    "sequenceNumber": {
+                      "description": "The sequence number of the condition.",
+                      "example": 1,
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "severity": {
+                      "description": "The severity level of the violation.",
+                      "enum": [
+                        "CRITICAL",
+                        "MAJOR",
+                        "MINOR",
+                        "WARNING",
+                        "INFO"
+                      ],
+                      "example": "MAJOR",
+                      "title": "ViolationSeverity",
+                      "type": "string"
+                    },
+                    "violationMessage": {
+                      "description": "Message describing the violation.",
+                      "example": "Password does not meet complexity requirements.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "conditionId",
+                    "sequenceNumber"
+                  ],
+                  "title": "ViolationDetails",
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "readOnly": true,
+            "required": [
+              "ruleId",
+              "ruleName"
+            ],
+            "title": "RuleViolationDetails",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_11",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

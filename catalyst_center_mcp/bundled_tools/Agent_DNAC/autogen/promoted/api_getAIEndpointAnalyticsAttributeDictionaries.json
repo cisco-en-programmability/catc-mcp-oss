@@ -1,0 +1,64 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "includeAttributes": "query"
+      },
+      "uri": "/dna/intent/api/v1/endpoint-analytics/dictionaries",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetches the list of attribute dictionaries.",
+    "name": "api_getAIEndpointAnalyticsAttributeDictionaries",
+    "parameters": {
+      "properties": {
+        "includeAttributes": {
+          "description": "Flag to indicate whether attribute list for each dictionary should be included in response.",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "attributes": {
+            "description": "List of attributes in the dictionary.",
+            "items": {
+              "properties": {
+                "description": {
+                  "description": "Description of the attribute.",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Name of the attribute.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "description": {
+            "description": "Description of the dictionary.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the dictionary.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,97 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/functional-capability/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns functional capability with given Id",
+    "name": "api_getFunctionalCapabilityById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Functional Capability UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "attributeInfo": {
+              "description": "Deprecated",
+              "properties": {},
+              "type": "object"
+            },
+            "functionDetails": {
+              "description": "Details of the function",
+              "items": {
+                "properties": {
+                  "attributeInfo": {
+                    "description": "Deprecated",
+                    "properties": {},
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "Deprecated",
+                    "type": "string"
+                  },
+                  "propertyName": {
+                    "description": " Property Name of the function",
+                    "type": "string"
+                  },
+                  "stringValue": {
+                    "description": "Value for the property",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "functionName": {
+              "description": "Name of the function",
+              "type": "string"
+            },
+            "functionOpState": {
+              "description": "Operational state of the function",
+              "enum": [
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "DISABLED",
+                "ENABLED"
+              ],
+              "type": "string"
+            },
+            "id": {
+              "description": "Id of the function",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

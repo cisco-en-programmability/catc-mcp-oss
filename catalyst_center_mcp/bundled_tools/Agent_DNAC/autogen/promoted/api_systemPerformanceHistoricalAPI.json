@@ -1,0 +1,127 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "kpi": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/diagnostics/system/performance/history",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the average values of cluster key performance indicators (KPIs), like CPU utilization, memory utilization or network rates grouped by time intervals within a specified time range. The data will be available from the past 24 hours.",
+    "name": "api_systemPerformanceHistoricalAPI",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "This is the epoch end time in milliseconds upto which performance indicator need to be fetched",
+          "type": "number"
+        },
+        "kpi": {
+          "description": "Fetch historical data for this kpi. Valid values: cpu,memory,network",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "This is the epoch start time in milliseconds from which performance indicator need to be fetched",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "hostName": {
+          "description": "",
+          "type": "string"
+        },
+        "kpis": {
+          "description": "Performance indicators ",
+          "properties": {
+            "cpuAvg": {
+              "description": "CPU average utilization",
+              "type": "string"
+            },
+            "data": {
+              "description": "Fetched values of given legends",
+              "properties": {
+                "t1": {
+                  "description": "Time in  'YYYY-MM-DDT00:00:00Z' format with values for legends",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "legends": {
+              "description": "",
+              "properties": {
+                "cpu": {
+                  "description": "",
+                  "properties": {
+                    "units": {
+                      "description": "Units for cpu usage",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "memory": {
+                  "description": "",
+                  "properties": {
+                    "units": {
+                      "description": "Units for memory usage",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "network rx_rate": {
+                  "description": "",
+                  "properties": {
+                    "units": {
+                      "description": "Units for network rx_rate",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "network tx_rate": {
+                  "description": "",
+                  "properties": {
+                    "units": {
+                      "description": "Units for network tx_rate",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "memoryAvg": {
+              "description": "Memory average utilization",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the API",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,305 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "agentId": "query",
+        "attribute": "query",
+        "endTime": "query",
+        "limit": "query",
+        "networkDeviceName": "query",
+        "offset": "query",
+        "order": "query",
+        "siteId": "query",
+        "sortBy": "query",
+        "startTime": "query",
+        "testId": "query",
+        "testName": "query",
+        "testType": "query"
+      },
+      "uri": "/dna/data/api/v1/thousandEyesTestResults",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the list of ThousandEyes test results along with related metrics. If `startTime` and `endTime` are not provided, the API defaults to the last 24 hours.\n\nPlease note that `siteId` filter (if used) should be using only site UUIDs of buildings.\n  For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-thousandEyesTestResults-1.0.0-resolved.yaml",
+    "name": "api_retrievesTheListOfThousandEyesTestResultsAlongWithR_c8c74987",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "agentId": {
+          "description": "Unique identifier of the ThousandEyes agent.\nExamples:\n\n`agentId=199345` (filter for single agentId)\n\n`agentId=1993458&agentId=499387` (filter for multiple agentIds)\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "List of attributes related to resource that can be requested to only be part of the response along with the required attributes.\n\nExamples:\n\n`attribute=testName` (single attribute requested)\n\n`attribute=testId&attribute=testName&attribute=averageLatency` (multiple attributes requested)\n. For valid attributes, verify the documentation.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceName": {
+          "description": "Name of the network device as per the inventory. This supports `*` wildcard, and filtering is case-insensitve.\n",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The site UUID without the top level hierarchy. `siteId` must be a site UUID of a building. The list of buildings can be fetched using API `GET /dna/intent/api/v1/sites?type=building`.\nExamples:\n\n`siteId=buildingUuid` (single siteId requested)\n\n`siteId=buildingUuid1&siteId=buildingUuid2` (multiple siteId requested)\n",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Attribute name by which the results should be sorted",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "testId": {
+          "description": "Unique identifier of the ThousandEyes test.\nExamples:\n\n`testId=2043918` (filter for single testId)\n\n`testId=2043918&testId=129440` (filter for multiple testIds)\n",
+          "type": "string"
+        },
+        "testName": {
+          "description": "Name of the ThousandEyes test. This supports `*` wildcard, and filtering is case-insensitve.\n\nExamples:\n\n`testName=Cisco Webex` (exact match)\n\n`testName=Microsoft*` (starts with given string)\n",
+          "type": "string"
+        },
+        "testType": {
+          "description": "Type of the ThousandEyes test. Please note that Catalyst Center supports only a subset of all possible ThousandEyes test types.\n",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "sortBy": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "order": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "agentId": {
+                "description": "",
+                "type": "string"
+              },
+              "agentName": {
+                "description": "",
+                "type": "string"
+              },
+              "averageJitter": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "averageLatency": {
+                "description": "",
+                "type": "integer"
+              },
+              "averageMos": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "averagePacketLoss": {
+                "description": "",
+                "type": "number"
+              },
+              "averagePdv": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "averageResponseTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "latestJitter": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "latestLatency": {
+                "description": "",
+                "type": "integer"
+              },
+              "latestMos": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "latestPacketLoss": {
+                "description": "",
+                "type": "number"
+              },
+              "latestPdv": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "latestResponseTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "maxJitter": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "maxLatency": {
+                "description": "",
+                "type": "integer"
+              },
+              "maxPacketLoss": {
+                "description": "",
+                "type": "number"
+              },
+              "maxPdv": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "maxResponseTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "minMos": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "networkDeviceName": {
+                "description": "",
+                "type": "string"
+              },
+              "networkDeviceType": {
+                "description": "",
+                "type": "string"
+              },
+              "sampleTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "siteId": {
+                "description": "",
+                "type": "string"
+              },
+              "siteName": {
+                "description": "",
+                "type": "string"
+              },
+              "testId": {
+                "description": "",
+                "type": "string"
+              },
+              "testInterval": {
+                "description": "",
+                "type": "integer"
+              },
+              "testName": {
+                "description": "",
+                "type": "string"
+              },
+              "testTarget": {
+                "description": "",
+                "type": "string"
+              },
+              "testType": {
+                "description": "",
+                "type": "string"
+              },
+              "totalActiveAlerts": {
+                "description": "",
+                "type": "integer"
+              },
+              "totalAlerts": {
+                "description": "",
+                "type": "number"
+              },
+              "totalErrorsSamplingTests": {
+                "description": "",
+                "type": "integer"
+              },
+              "totalFailureSamplingTests": {
+                "description": "",
+                "type": "integer"
+              },
+              "totalSamplingTests": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

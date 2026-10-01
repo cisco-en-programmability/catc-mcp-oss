@@ -1,0 +1,113 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/tag/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns tag specified by Id",
+    "name": "api_getTagById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Tag ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "dynamicRules": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "memberType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "rules": {
+                    "description": "",
+                    "properties": {
+                      "items": {
+                        "description": "",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "operation": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "value": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "values": {
+                        "description": "",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "instanceTenantId": {
+              "description": "",
+              "type": "string"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "systemTag": {
+              "description": "",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

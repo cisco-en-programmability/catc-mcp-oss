@@ -1,0 +1,100 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "activityId": "path",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/activities/{activityId}/triggeredJobs",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the triggered jobs by the activity with the given activity id",
+    "name": "api_getTriggeredJobsByActivityId",
+    "parameters": {
+      "properties": {
+        "activityId": {
+          "description": "The id of the activity",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "activityId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "The description of the triggered job",
+                "type": "string"
+              },
+              "id": {
+                "description": "The id of the triggered job",
+                "type": "string"
+              },
+              "status": {
+                "description": "Triggered job state:\n * 'NOT_STARTED' - job hasn't started\n * 'IN_PROGRESS' - job is running\n * 'SUCCESS' - job has completed with success\n * 'FAILURE' - job has completed with failure\n",
+                "enum": [
+                  "NOT_STARTED",
+                  "IN_PROGRESS",
+                  "SUCCESS",
+                  "FAILURE"
+                ],
+                "type": "string"
+              },
+              "taskId": {
+                "description": "The id of the task for the job that was triggered",
+                "type": "string"
+              },
+              "taskUrl": {
+                "description": "The path to the API endpoint to GET information on the task",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

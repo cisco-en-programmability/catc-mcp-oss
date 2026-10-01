@@ -1,0 +1,1076 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "feature": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/intent/api/v1/wired/networkDevices/{id}/configFeatures/intended/layer2",
+      "version": "2.3.7.9"
+    },
+    "description": "This API returns the configurations for the intended layer 2 features on a wired device. Even after the intended configurations are deployed using the API /intent/api/v1/networkDevices/{id}/configFeatures/intended/deploy, they continue to be a part of the intended features on the device.",
+    "name": "api_getConfigurationsForIntendedLayer2FeaturesOnAWiredDevice",
+    "parameters": {
+      "properties": {
+        "feature": {
+          "description": "Name of the feature to configure. The API /data/intent/api/wired/networkDevices/{id}/configFeatures/supported/layer2 can be used to get the list of features supported on a device.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Network device ID of the wired device to configure.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "feature"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "features": {
+              "description": "",
+              "properties": {
+                "cdpGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "holdTime": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "isAdvertiseV2Enabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isCdpEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isLogDuplexMismatchEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "timer": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "cdpInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isCdpEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isLogDuplexMismatchEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "dhcpSnoopingGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "databaseAgent": {
+                            "description": "",
+                            "properties": {
+                              "agentUrl": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "timeout": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "writeDelay": {
+                                "description": "",
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "isDhcpSnoopingEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isGleaningEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "proxyBridgeVlans": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "dhcpSnoopingInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isTrustedInterface": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "dot1xGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "authenticationConfigMode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isDot1xEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "dot1xInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "authenticationMode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "authenticationOrder": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "inactivityTimer": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isInactivityTimerFromServerEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isReauthEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isReauthTimerFromServerEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "maxReauthRequests": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "priority": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "reauthTimer": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "txPeriod": {
+                            "description": "",
+                            "type": "number"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "igmpSnoopingGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "igmpSnoopingVlanSettings": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "configType": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "igmpSnoopingVlanMrouters": {
+                                      "description": "",
+                                      "properties": {
+                                        "configType": {
+                                          "description": "",
+                                          "type": "string"
+                                        },
+                                        "items": {
+                                          "description": "",
+                                          "items": {
+                                            "properties": {
+                                              "configType": {
+                                                "description": "",
+                                                "type": "string"
+                                              },
+                                              "interfaceName": {
+                                                "description": "",
+                                                "type": "string"
+                                              }
+                                            },
+                                            "type": "object"
+                                          },
+                                          "type": "array"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "isIgmpSnoopingEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "isImmediateLeaveEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "isQuerierEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "querierQueryInterval": {
+                                      "description": "",
+                                      "type": "number"
+                                    },
+                                    "vlanId": {
+                                      "description": "",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "isIgmpSnoopingEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isQuerierEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "querierQueryInterval": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "querierVersion": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "lldpGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "holdTime": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "isLldpEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "reinitializationDelay": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "timer": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "lldpInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "adminStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "mabInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isMabEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "mldSnoopingGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isMldSnoopingEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isQuerierEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "mldSnoopingVlanSettings": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "configType": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "isImmediateLeaveEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "isMldSnoopingEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "isQuerierEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "mldSnoopingVlanMrouters": {
+                                      "description": "",
+                                      "properties": {
+                                        "configType": {
+                                          "description": "",
+                                          "type": "string"
+                                        },
+                                        "items": {
+                                          "description": "",
+                                          "items": {
+                                            "type": "object"
+                                          },
+                                          "type": "array"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "querierQueryInterval": {
+                                      "description": "",
+                                      "type": "number"
+                                    },
+                                    "vlanId": {
+                                      "description": "",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "querierQueryInterval": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "querierVersion": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "portchannelConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isAutoEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "lacpSystemPriority": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "loadBalancingMethod": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "portchannels": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "configType": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "isLayer2": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "memberPorts": {
+                                      "description": "",
+                                      "properties": {
+                                        "configType": {
+                                          "description": "",
+                                          "type": "string"
+                                        },
+                                        "items": {
+                                          "description": "",
+                                          "items": {
+                                            "type": "object"
+                                          },
+                                          "type": "array"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "name": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "stpGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isBackboneFastEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isBpduFilterEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isBpduGuardEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isEtherChannelGuardEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isExtendedSystemIdEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isLoggingEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isLoopGuardEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isUplinkFastEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "portFastMode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "stpInstances": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "configType": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "isStpEnabled": {
+                                      "description": "",
+                                      "type": "boolean"
+                                    },
+                                    "priority": {
+                                      "description": "",
+                                      "type": "integer"
+                                    },
+                                    "vlanId": {
+                                      "description": "",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "stpMode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "transmitHoldCount": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "uplinkFastMaxUpdateRate": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "stpInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "bpduFilter": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "bpduGuard": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "guardMode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "pathCost": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "portVlanCostSettings": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "configType": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "cost": {
+                                      "description": "",
+                                      "type": "integer"
+                                    },
+                                    "vlans": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "portVlanPrioritySettings": {
+                            "description": "",
+                            "properties": {
+                              "configType": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "items": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "configType": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "priority": {
+                                      "description": "",
+                                      "type": "integer"
+                                    },
+                                    "vlans": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "priority": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "switchportInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "accessVlan": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "adminStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "mode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "nativeVlan": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "trunkAllowedVlans": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "trunkInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isDtpNegotiationEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "isProtected": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "pruneEligibleVlans": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "vlanConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isVlanEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "vlanId": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "vtpGlobalConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "configurationFileName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isPruningEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "mode": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "sourceInterface": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "version": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "vtpInterfaceConfig": {
+                  "description": "",
+                  "properties": {
+                    "items": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "configType": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isVtpEnabled": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

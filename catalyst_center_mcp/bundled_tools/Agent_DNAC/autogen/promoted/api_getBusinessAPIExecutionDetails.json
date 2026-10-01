@@ -1,0 +1,96 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "executionId": "path"
+      },
+      "uri": "/dna/intent/api/v1/dnacaap/management/execution-status/{executionId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the execution details of a Business API",
+    "name": "api_getBusinessAPIExecutionDetails",
+    "parameters": {
+      "properties": {
+        "executionId": {
+          "description": "Execution Id of API",
+          "type": "string"
+        }
+      },
+      "required": [
+        "executionId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Business API Execution Details",
+      "properties": {
+        "bapiError": {
+          "description": " Returns the error response of the original API  as a string",
+          "type": "string"
+        },
+        "bapiExecutionId": {
+          "description": "Execution Id of the Business API (UUID)",
+          "type": "string"
+        },
+        "bapiKey": {
+          "description": "Business API Key (UUID)",
+          "type": "string"
+        },
+        "bapiName": {
+          "description": "Name of the Business API",
+          "type": "string"
+        },
+        "bapiSyncResponse": {
+          "description": "Returns the actual response of the original API as a string",
+          "type": "string"
+        },
+        "bapiSyncResponseJson": {
+          "description": "Returns the actual response of the original API  as a json",
+          "type": "object"
+        },
+        "endTime": {
+          "description": "Execution End Time of the Business API (Date Time Format)",
+          "type": "string"
+        },
+        "endTimeEpoch": {
+          "description": "Execution End Time of the Business API (Epoch Milliseconds)",
+          "type": "integer"
+        },
+        "runtimeInstanceId": {
+          "description": "Pod Id in which the Business API is executed",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Execution Start Time of the Business API (Date Time Format)",
+          "type": "string"
+        },
+        "startTimeEpoch": {
+          "description": "Execution Start Time of the Business API (Epoch Milliseconds)",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Execution status of the Business API",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "IN_PROGRESS",
+            "PENDING_FOR_EXECUTION"
+          ],
+          "type": "string"
+        },
+        "timeDuration": {
+          "description": "Time taken for Business API Execution (Milliseconds)",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}
