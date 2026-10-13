@@ -1,0 +1,311 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "views": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDevices/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "API to fetch the details of network device using the `id`. Use the `/dna/intent/api/v1/networkDevices/query` API for advanced filtering. The API supports views to fetch only the required fields. Refer features for more details.",
+    "name": "api_getDetailsOfASingleNetworkDevice",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the network device",
+          "type": "string"
+        },
+        "views": {
+          "description": "The specific views being requested. This is an optional parameter which can be passed to get one or more of the network device data. If this is not provided, then it will default to BASIC views. If multiple views are provided, the response will contain the union of the views. Available values : BASIC, RESYNC, USER_DEFINED_FIELDS",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "apEthernetMacAddress": {
+              "description": "Ethernet MAC address of the AP network device",
+              "type": "string"
+            },
+            "apManagerInterfaceIpAddress": {
+              "description": "Management IP address of the AP network device",
+              "type": "string"
+            },
+            "apWlcIpAddress": {
+              "description": "Management IP address of the WLC on which AP is associated to",
+              "type": "string"
+            },
+            "bootTime": {
+              "description": "The time at which the network device was last rebooted or powered on represented as epoch in milliseconds",
+              "type": "number"
+            },
+            "deviceSupportLevel": {
+              "description": "The level of support Catalyst Center provides for the network device.",
+              "enum": [
+                "SUPPORTED",
+                "LIMITED",
+                "THIRD_PARTY",
+                "UNSUPPORTED"
+              ],
+              "type": "string"
+            },
+            "dnsResolvedManagementIpAddress": {
+              "description": "DNS-resolved management IP address of the network device",
+              "type": "string"
+            },
+            "errorCode": {
+              "description": "Error code indicating the reason for the last resync failure",
+              "enum": [
+                "UNREACHABLE",
+                "ONLY_PING_REACHABLE",
+                "CREDENTIAL_MISSING",
+                "SNMP_TIMEOUT",
+                "SNMP_AUTH_ERROR",
+                "SNMP_UNSUPPORTED_AUTH",
+                "SNMP_UNSUPPORTED_PRIV",
+                "SNMP_DES_DEPRECATED",
+                "SNMP_UNSUPPORTED_SECURITY_LEVEL",
+                "SNMP_SPARSE_ERROR",
+                "SNMP_FAILED",
+                "CLI_TIMEOUT",
+                "CLI_CONNECTION_CLOSED",
+                "CLI_CONNECTION_ERROR",
+                "CLI_AUTH_ERROR",
+                "CLI_MISSING_ENABLE_PASSWORD",
+                "CLI_INCORRECT_ENABLE_PASSWORD",
+                "NETCONF_CONNECTION_ERROR",
+                "NETCONF_AUTH_ERROR",
+                "NETCONF_PORT_MISSING",
+                "NETCONF_ACCESS_DENIED",
+                "NETCONF_RPC_ERROR",
+                "HTTP_FAILED",
+                "QUARANTINED",
+                "SYNC_DELAYED",
+                "SYNC_CANCELLED",
+                "SYNC_DISABLED",
+                "WLAN_CONTROLLER_MISSING",
+                "SERIAL_NUMBER_CONFLICT",
+                "UNSUPPORTED_MANAGEMENT_IP",
+                "INCORRECT_THIRD_PARTY_CATEGORY",
+                "INCORRECT_NETWORK_DEVICE_CATEGORY",
+                "UNKNOWN"
+              ],
+              "type": "string"
+            },
+            "errorDescription": {
+              "description": "Additional information regarding the reason for resync failure. This is a human-readable error message and should not be expected programmatically.",
+              "type": "string"
+            },
+            "family": {
+              "description": "Product family of the network device. For example, Switches, Routers, etc",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "Hostname of the network device",
+              "type": "string"
+            },
+            "id": {
+              "description": "Unique identifier of the network device",
+              "type": "string"
+            },
+            "lastSuccessfulResyncReasons": {
+              "description": "List of reasons for the last successful resync of the device. If multiple resync requests are made before the device can start the resync, all the reasons will be captured. Possible values: ADD_DEVICE_SYNC, LINK_UP_DOWN, CONFIG_CHANGE, DEVICE_UPDATED_SYNC, AP_EVENT_BASED_SYNC, APP_REQUESTED_SYNC, PERIODIC_SYNC, UI_SYNC, CUSTOM, UNKNOWN, REFRESH_OBJECTS_FEATURE_BASED_SYNC",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "macAddress": {
+              "description": "MAC address of the network device",
+              "type": "string"
+            },
+            "managementAddress": {
+              "description": "Management address of the network device",
+              "type": "string"
+            },
+            "managementState": {
+              "description": "The status of the network device's manageability. Refer features for more details.",
+              "enum": [
+                "MANAGED",
+                "UNDER_MAINTENANCE",
+                "NEVER_MANAGED"
+              ],
+              "type": "string"
+            },
+            "pendingResyncRequestCount": {
+              "description": "Number of pending resync requests for the device",
+              "type": "integer"
+            },
+            "pendingResyncRequestReasons": {
+              "description": "List of reasons for the pending resync requests. Possible values: ADD_DEVICE_SYNC, LINK_UP_DOWN, CONFIG_CHANGE, DEVICE_UPDATED_SYNC, AP_EVENT_BASED_SYNC, APP_REQUESTED_SYNC, PERIODIC_SYNC, UI_SYNC, CUSTOM, UNKNOWN, REFRESH_OBJECTS_FEATURE_BASED_SYNC",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "platformIds": {
+              "description": "Platform identifier of the network device",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "reachabilityFailureReason": {
+              "description": "Reason for reachability failure. This message that provides more information about the reachability failure.",
+              "type": "string"
+            },
+            "reachabilityStatus": {
+              "description": "Reachability status of the network device. Refer features for more details",
+              "enum": [
+                "REACHABLE",
+                "ONLY_PING_REACHABLE",
+                "UNREACHABLE",
+                "UNKNOWN"
+              ],
+              "type": "string"
+            },
+            "resyncEndTime": {
+              "description": "End time for the last resync represented as epoch in milliseconds",
+              "type": "number"
+            },
+            "resyncIntervalMinutes": {
+              "description": "The duration in minutes between the periodic resync attempts for the device",
+              "type": "integer"
+            },
+            "resyncIntervalSource": {
+              "description": "Source of the resync interval. Note: Please refer to PUT /dna/intent/api/v1/networkDevices/resyncIntervalSettings API to update the global resync interval.",
+              "enum": [
+                "GLOBAL",
+                "CUSTOM",
+                "NA"
+              ],
+              "type": "string"
+            },
+            "resyncReasons": {
+              "description": "List of reasons for the ongoing/last resync on the device. If multiple resync requests were made before the resync could start, all the reasons will be captured as an array. Possible values: ADD_DEVICE_SYNC, LINK_UP_DOWN, CONFIG_CHANGE, DEVICE_UPDATED_SYNC, AP_EVENT_BASED_SYNC, APP_REQUESTED_SYNC, PERIODIC_SYNC, UI_SYNC, CUSTOM, UNKNOWN, REFRESH_OBJECTS_FEATURE_BASED_SYNC",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "resyncRequestedByApps": {
+              "description": "List of applications that requested the last/ongoing resync on the device",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "resyncStartTime": {
+              "description": "Start time for the last/ongoing resync represented as epoch in milliseconds",
+              "type": "number"
+            },
+            "role": {
+              "description": "Role assigned to the network device",
+              "enum": [
+                "BORDER_ROUTER",
+                "CORE",
+                "DISTRIBUTION",
+                "ACCESS",
+                "UNKNOWN"
+              ],
+              "type": "string"
+            },
+            "roleSource": {
+              "description": "Indicates whether the network device's role was assigned automatically by the software or manually by an administrator.",
+              "enum": [
+                "AUTO",
+                "MANUAL"
+              ],
+              "type": "string"
+            },
+            "serialNumbers": {
+              "description": "Serial number of the network device. In case of stack device, there will be multiple serial numbers",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "series": {
+              "description": "The model range or series of the network device",
+              "type": "string"
+            },
+            "snmpContact": {
+              "description": "SNMP contact of the network device",
+              "type": "string"
+            },
+            "snmpLocation": {
+              "description": "SNMP location of the network device",
+              "type": "string"
+            },
+            "softwareType": {
+              "description": "Type of software running on the network device. For example, IOS-XE, etc.",
+              "type": "string"
+            },
+            "softwareVersion": {
+              "description": "Version of the software running on the network device",
+              "type": "string"
+            },
+            "stackDevice": {
+              "description": "Flag indicating if the network device is a stack device",
+              "type": "boolean"
+            },
+            "status": {
+              "description": "Inventory related status of the network device. Refer features for more details",
+              "enum": [
+                "MANAGED",
+                "SYNC_NOT_STARTED",
+                "SYNC_INIT_FAILED",
+                "SYNC_PRECHECK_FAILED",
+                "SYNC_IN_PROGRESS",
+                "SYNC_INTERNAL_ERROR",
+                "SYNC_DISABLED",
+                "DELETING_DEVICE",
+                "UNDER_MAINTENANCE",
+                "QUARANTINED",
+                "UNASSOCIATED",
+                "UNREACHABLE",
+                "UNKNOWN"
+              ],
+              "type": "string"
+            },
+            "type": {
+              "description": "Type of the network device. This list of types can be obtained from the API intent/networkDeviceProductNames productName field.",
+              "type": "string"
+            },
+            "userDefinedFields": {
+              "description": "Map of all user defined fields and their values associated with the device. Refer to /dna/intent/api/v1/network-device/user-defined-field API to fetch all the user defined fields.",
+              "properties": {},
+              "type": "object"
+            },
+            "vendor": {
+              "description": "Vendor of the network device",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version number of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,793 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "latestVersion": "query",
+        "templateId": "path"
+      },
+      "uri": "/dna/intent/api/v1/template-programmer/template/{templateId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Details of the template by its id",
+    "name": "api_getsDetailsOfAGivenTemplate",
+    "parameters": {
+      "properties": {
+        "latestVersion": {
+          "description": "latestVersion flag to get the latest versioned template",
+          "type": "boolean"
+        },
+        "templateId": {
+          "description": "TemplateId(UUID) to get details of the template",
+          "type": "string"
+        }
+      },
+      "required": [
+        "templateId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "author": {
+          "description": "Author of template",
+          "type": "string"
+        },
+        "composite": {
+          "description": "Is it composite template",
+          "type": "boolean"
+        },
+        "containingTemplates": {
+          "description": "Containing templates for composite template",
+          "items": {
+            "properties": {
+              "composite": {
+                "description": "Is it composite template",
+                "type": "boolean"
+              },
+              "description": {
+                "description": "Description of template",
+                "type": "string"
+              },
+              "deviceTypes": {
+                "description": "Applicable device types",
+                "items": {
+                  "properties": {
+                    "productFamily": {
+                      "description": "Device family",
+                      "type": "string"
+                    },
+                    "productSeries": {
+                      "description": "Device series",
+                      "type": "string"
+                    },
+                    "productType": {
+                      "description": "Device type",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "UUID of template",
+                "type": "string"
+              },
+              "language": {
+                "description": "Template language (JINJA or VELOCITY)",
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of template",
+                "type": "string"
+              },
+              "projectName": {
+                "description": "Project name",
+                "type": "string"
+              },
+              "rollbackTemplateParams": {
+                "description": "Rollback template params(variables)",
+                "items": {
+                  "properties": {
+                    "binding": {
+                      "description": "Bind to source",
+                      "type": "string"
+                    },
+                    "customOrder": {
+                      "description": "CustomOrder of template param",
+                      "type": "integer"
+                    },
+                    "dataType": {
+                      "description": "Datatype of template param",
+                      "enum": [
+                        "STRING",
+                        "INTEGER",
+                        "IPADDRESS",
+                        "MACADDRESS",
+                        "SECTIONDIVIDER"
+                      ],
+                      "type": "string"
+                    },
+                    "defaultValue": {
+                      "description": "Default value of template param",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Description of template param",
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "description": "Display name of param",
+                      "type": "string"
+                    },
+                    "group": {
+                      "description": "group",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "UUID of template param",
+                      "type": "string"
+                    },
+                    "instructionText": {
+                      "description": "Instruction text for param",
+                      "type": "string"
+                    },
+                    "key": {
+                      "description": "key",
+                      "type": "string"
+                    },
+                    "notParam": {
+                      "description": "Is it not a variable",
+                      "type": "boolean"
+                    },
+                    "order": {
+                      "description": "Order of template param",
+                      "type": "integer"
+                    },
+                    "paramArray": {
+                      "description": "Is it an array",
+                      "type": "boolean"
+                    },
+                    "parameterName": {
+                      "description": "Name of template param",
+                      "type": "string"
+                    },
+                    "provider": {
+                      "description": "provider",
+                      "type": "string"
+                    },
+                    "range": {
+                      "description": "Range of param",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "description": "UUID of range",
+                            "type": "string"
+                          },
+                          "maxValue": {
+                            "description": "Max value of range",
+                            "type": "integer"
+                          },
+                          "minValue": {
+                            "description": "Min value of range",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "required": {
+                      "description": "Is param required",
+                      "type": "boolean"
+                    },
+                    "selection": {
+                      "description": "Selection of param",
+                      "properties": {
+                        "defaultSelectedValues": {
+                          "description": "Default selection values",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "description": "UUID of selection",
+                          "type": "string"
+                        },
+                        "selectionType": {
+                          "description": "Type of selection(SINGLE_SELECT or MULTI_SELECT)",
+                          "enum": [
+                            "SINGLE_SELECT",
+                            "MULTI_SELECT"
+                          ],
+                          "type": "string"
+                        },
+                        "selectionValues": {
+                          "description": "Selection values",
+                          "properties": {},
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "tags": {
+                "description": "Tag object which needs to be applied on the template",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "UUID of tag",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of tag",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "templateContent": {
+                "description": "Template content",
+                "type": "string"
+              },
+              "templateParams": {
+                "description": "Template params(variables)",
+                "items": {
+                  "properties": {
+                    "binding": {
+                      "description": "Bind to source",
+                      "type": "string"
+                    },
+                    "customOrder": {
+                      "description": "CustomOrder of template param",
+                      "type": "integer"
+                    },
+                    "dataType": {
+                      "description": "Datatype of template param",
+                      "enum": [
+                        "STRING",
+                        "INTEGER",
+                        "IPADDRESS",
+                        "MACADDRESS",
+                        "SECTIONDIVIDER"
+                      ],
+                      "type": "string"
+                    },
+                    "defaultValue": {
+                      "description": "Default value of template param",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Description of template param",
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "description": "Display name of param",
+                      "type": "string"
+                    },
+                    "group": {
+                      "description": "group",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "UUID of template param",
+                      "type": "string"
+                    },
+                    "instructionText": {
+                      "description": "Instruction text for param",
+                      "type": "string"
+                    },
+                    "key": {
+                      "description": "key",
+                      "type": "string"
+                    },
+                    "notParam": {
+                      "description": "Is it not a variable",
+                      "type": "boolean"
+                    },
+                    "order": {
+                      "description": "Order of template param",
+                      "type": "integer"
+                    },
+                    "paramArray": {
+                      "description": "Is it an array",
+                      "type": "boolean"
+                    },
+                    "parameterName": {
+                      "description": "Name of template param",
+                      "type": "string"
+                    },
+                    "provider": {
+                      "description": "provider",
+                      "type": "string"
+                    },
+                    "range": {
+                      "description": "Range of param",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "description": "UUID of range",
+                            "type": "string"
+                          },
+                          "maxValue": {
+                            "description": "Max value of range",
+                            "type": "integer"
+                          },
+                          "minValue": {
+                            "description": "Min value of range",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "required": {
+                      "description": "Is param required",
+                      "type": "boolean"
+                    },
+                    "selection": {
+                      "description": "Selection of param",
+                      "properties": {
+                        "defaultSelectedValues": {
+                          "description": "Default selection values",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "description": "UUID of selection",
+                          "type": "string"
+                        },
+                        "selectionType": {
+                          "description": "Type of selection(SINGLE_SELECT or MULTI_SELECT)",
+                          "enum": [
+                            "SINGLE_SELECT",
+                            "MULTI_SELECT"
+                          ],
+                          "type": "string"
+                        },
+                        "selectionValues": {
+                          "description": "Selection values",
+                          "properties": {},
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "version": {
+                "description": "Current version of template",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "createTime": {
+          "description": "Create time of template",
+          "type": "integer"
+        },
+        "customParamsOrder": {
+          "description": "Custom Params Order",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Description of template",
+          "type": "string"
+        },
+        "deviceTypes": {
+          "description": "Applicable device types",
+          "items": {
+            "properties": {
+              "productFamily": {
+                "description": "Device family",
+                "type": "string"
+              },
+              "productSeries": {
+                "description": "Device series",
+                "type": "string"
+              },
+              "productType": {
+                "description": "Device type",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "failurePolicy": {
+          "description": "Define failure policy if template provisioning fails",
+          "enum": [
+            "ABORT_ON_ERROR",
+            "CONTINUE_ON_ERROR",
+            "ROLLBACK_ON_ERROR",
+            "ROLLBACK_TARGET_ON_ERROR",
+            "ABORT_TARGET_ON_ERROR"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "description": "UUID of template",
+          "type": "string"
+        },
+        "language": {
+          "description": "Template language (JINJA or VELOCITY)",
+          "type": "string"
+        },
+        "lastUpdateTime": {
+          "description": "Update time of template",
+          "type": "integer"
+        },
+        "latestVersionTime": {
+          "description": "Latest versioned template time",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of template",
+          "type": "string"
+        },
+        "parentTemplateId": {
+          "description": "Parent templateID",
+          "type": "string"
+        },
+        "projectId": {
+          "description": "Project UUID",
+          "type": "string"
+        },
+        "projectName": {
+          "description": "Project name",
+          "type": "string"
+        },
+        "rollbackTemplateContent": {
+          "description": "Rollback template content",
+          "type": "string"
+        },
+        "rollbackTemplateParams": {
+          "description": "Rollback template params(variables)",
+          "items": {
+            "properties": {
+              "binding": {
+                "description": "Bind to source",
+                "type": "string"
+              },
+              "customOrder": {
+                "description": "CustomOrder of template param",
+                "type": "integer"
+              },
+              "dataType": {
+                "description": "Datatype of template param",
+                "enum": [
+                  "STRING",
+                  "INTEGER",
+                  "IPADDRESS",
+                  "MACADDRESS",
+                  "SECTIONDIVIDER"
+                ],
+                "type": "string"
+              },
+              "defaultValue": {
+                "description": "Default value of template param",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of template param",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "Display name of param",
+                "type": "string"
+              },
+              "group": {
+                "description": "group",
+                "type": "string"
+              },
+              "id": {
+                "description": "UUID of template param",
+                "type": "string"
+              },
+              "instructionText": {
+                "description": "Instruction text for param",
+                "type": "string"
+              },
+              "key": {
+                "description": "key",
+                "type": "string"
+              },
+              "notParam": {
+                "description": "Is it not a variable",
+                "type": "boolean"
+              },
+              "order": {
+                "description": "Order of template param",
+                "type": "integer"
+              },
+              "paramArray": {
+                "description": "Is it an array",
+                "type": "boolean"
+              },
+              "parameterName": {
+                "description": "Name of template param",
+                "type": "string"
+              },
+              "provider": {
+                "description": "provider",
+                "type": "string"
+              },
+              "range": {
+                "description": "Range of param",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "UUID of range",
+                      "type": "string"
+                    },
+                    "maxValue": {
+                      "description": "Max value of range",
+                      "type": "integer"
+                    },
+                    "minValue": {
+                      "description": "Min value of range",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "required": {
+                "description": "Is param required",
+                "type": "boolean"
+              },
+              "selection": {
+                "description": "Selection of param",
+                "properties": {
+                  "defaultSelectedValues": {
+                    "description": "Default selection values",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "id": {
+                    "description": "UUID of selection",
+                    "type": "string"
+                  },
+                  "selectionType": {
+                    "description": "Type of selection(SINGLE_SELECT or MULTI_SELECT)",
+                    "enum": [
+                      "SINGLE_SELECT",
+                      "MULTI_SELECT"
+                    ],
+                    "type": "string"
+                  },
+                  "selectionValues": {
+                    "description": "Selection values",
+                    "properties": {},
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "softwareType": {
+          "description": "Applicable device software type",
+          "type": "string"
+        },
+        "softwareVariant": {
+          "description": "Applicable device software variant",
+          "type": "string"
+        },
+        "softwareVersion": {
+          "description": "Applicable device software version",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag object which needs to be applied on the template",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "UUID of tag",
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of tag",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "templateContent": {
+          "description": "Template content",
+          "type": "string"
+        },
+        "templateParams": {
+          "description": "Template params(variables)",
+          "items": {
+            "properties": {
+              "binding": {
+                "description": "Bind to source",
+                "type": "string"
+              },
+              "customOrder": {
+                "description": "CustomOrder of template param",
+                "type": "integer"
+              },
+              "dataType": {
+                "description": "Datatype of template param",
+                "enum": [
+                  "STRING",
+                  "INTEGER",
+                  "IPADDRESS",
+                  "MACADDRESS",
+                  "SECTIONDIVIDER"
+                ],
+                "type": "string"
+              },
+              "defaultValue": {
+                "description": "Default value of template param",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of template param",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "Display name of param",
+                "type": "string"
+              },
+              "group": {
+                "description": "group",
+                "type": "string"
+              },
+              "id": {
+                "description": "UUID of template param",
+                "type": "string"
+              },
+              "instructionText": {
+                "description": "Instruction text for param",
+                "type": "string"
+              },
+              "key": {
+                "description": "key",
+                "type": "string"
+              },
+              "notParam": {
+                "description": "Is it not a variable",
+                "type": "boolean"
+              },
+              "order": {
+                "description": "Order of template param",
+                "type": "integer"
+              },
+              "paramArray": {
+                "description": "Is it an array",
+                "type": "boolean"
+              },
+              "parameterName": {
+                "description": "Name of template param",
+                "type": "string"
+              },
+              "provider": {
+                "description": "provider",
+                "type": "string"
+              },
+              "range": {
+                "description": "Range of param",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "UUID of range",
+                      "type": "string"
+                    },
+                    "maxValue": {
+                      "description": "Max value of range",
+                      "type": "integer"
+                    },
+                    "minValue": {
+                      "description": "Min value of range",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "required": {
+                "description": "Is param required",
+                "type": "boolean"
+              },
+              "selection": {
+                "description": "Selection of param",
+                "properties": {
+                  "defaultSelectedValues": {
+                    "description": "Default selection values",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "id": {
+                    "description": "UUID of selection",
+                    "type": "string"
+                  },
+                  "selectionType": {
+                    "description": "Type of selection(SINGLE_SELECT or MULTI_SELECT)",
+                    "enum": [
+                      "SINGLE_SELECT",
+                      "MULTI_SELECT"
+                    ],
+                    "type": "string"
+                  },
+                  "selectionValues": {
+                    "description": "Selection values",
+                    "properties": {},
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "validationErrors": {
+          "description": "Validation Errors of template content",
+          "properties": {
+            "rollbackTemplateErrors": {
+              "description": "Validation or design conflicts errors of rollback template",
+              "type": "object"
+            },
+            "templateErrors": {
+              "description": "Validation or design conflicts errors",
+              "type": "object"
+            },
+            "templateId": {
+              "description": "UUID of template",
+              "type": "string"
+            },
+            "templateVersion": {
+              "description": "Current version of template",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Current version of template",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

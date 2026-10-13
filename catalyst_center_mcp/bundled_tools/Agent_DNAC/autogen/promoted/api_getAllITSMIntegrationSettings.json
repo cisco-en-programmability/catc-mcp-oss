@@ -1,0 +1,131 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "order": "query",
+        "page": "query",
+        "page_size": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/integration-settings/itsm/instances",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetches all ITSM Integration settings instances and their configurations based on the user inputs. It can answer questions like What ITSM integrations are configured? or List all ITSM integration settings and their details.",
+    "name": "api_getAllITSMIntegrationSettings",
+    "parameters": {
+      "properties": {
+        "order": {
+          "description": "Specify the sorting order - asc for ascending or desc for descending",
+          "type": "string"
+        },
+        "page": {
+          "description": "Indicates the current page number to display.",
+          "type": "number"
+        },
+        "page_size": {
+          "description": "Specifies the number of records to display per page.",
+          "type": "number"
+        },
+        "sortBy": {
+          "description": "The field name used to sort the records.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "data": {
+          "description": "",
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "Deprecated: Should not be used and will be removed in an upcoming release",
+                "type": "string"
+              },
+              "createdBy": {
+                "description": "",
+                "type": "string"
+              },
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "dypId": {
+                "description": "",
+                "type": "string"
+              },
+              "dypMajorVersion": {
+                "description": "",
+                "type": "integer"
+              },
+              "dypName": {
+                "description": "",
+                "type": "string"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "schemaVersion": {
+                "description": "",
+                "type": "number"
+              },
+              "softwareVersionLog": {
+                "description": "",
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "uniqueKey": {
+                "description": "",
+                "type": "string"
+              },
+              "updatedBy": {
+                "description": "",
+                "type": "string"
+              },
+              "updatedDate": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "page": {
+          "description": "",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "",
+          "type": "integer"
+        },
+        "totalRecords": {
+          "description": "",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

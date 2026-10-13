@@ -1,0 +1,157 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "apMac": "query",
+        "clientMac": "query",
+        "endTime": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "startTime": "query",
+        "type": "query"
+      },
+      "uri": "/dna/data/api/v1/icap/captureFiles",
+      "version": "2.3.7.9"
+    },
+    "description": "Lists the ICAP packet capture (pcap) files matching the specified criteria. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-icap-1.0.0-resolved.yaml",
+    "name": "api_listsICAPPacketCaptureFilesMatchingSpecifiedCriteria",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "apMac": {
+          "description": "The base radio macAddress of the access point\n",
+          "type": "string"
+        },
+        "clientMac": {
+          "description": "The macAddress of client\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A field within the response to sort by.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "type": {
+          "description": "Capture Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "order": {
+              "description": "",
+              "type": "string"
+            },
+            "sortBy": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "apMac": {
+                "description": "",
+                "type": "string"
+              },
+              "clientMac": {
+                "description": "",
+                "type": "string"
+              },
+              "fileCreationTimestamp": {
+                "description": "",
+                "type": "integer"
+              },
+              "fileName": {
+                "description": "",
+                "type": "string"
+              },
+              "fileSize": {
+                "description": "",
+                "type": "integer"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "lastUpdatedTimestamp": {
+                "description": "",
+                "type": "integer"
+              },
+              "type": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,146 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_JUN_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/aaaSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve configured AAA settings for a specific site or site hierarchy, including Global. Use this API whenever the user asks for AAA, RADIUS, TACACS, TACACS+, ISE, authentication server, authorization server, or accounting server configuration for a site. If the user provides a site name or site hierarchy instead of a site ID, first resolve the site ID using api_getSites, then call this API with the resolved id. This API returns configured site AAA settings; null values indicate inheritance from the parent site, and empty objects indicate the setting is unset at the site. Prefer this API over AAA analytics tools when the user asks what AAA/RADIUS/TACACS/ISE servers are configured, defined, assigned, present, or associated with a site. Response scoping is mandatory: if the user asks for Network AAA, AAA Network, or network AAA servers, answer only from response.aaaNetwork and do not include response.aaaClient. If the user asks for Client AAA, AAA Client, or client AAA servers, answer only from response.aaaClient and do not include response.aaaNetwork. Include both aaaNetwork and aaaClient only when the user explicitly asks for all, both, or generic AAA settings without a network/client qualifier.",
+    "name": "api_retrieveAAASettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "description": "Include inherited AAA/ISE settings from parent sites.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "aaaClient": {
+              "description": "Client AAA/ISE settings for endpoint or client authentication. Use this object only for Client AAA, AAA Client, or client AAA server requests.",
+              "properties": {
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                },
+                "pan": {
+                  "description": "Administration Node. Required for ISE.",
+                  "type": "string"
+                },
+                "primaryServerIp": {
+                  "description": "The server to use as a primary.",
+                  "type": "string"
+                },
+                "protocol": {
+                  "description": "",
+                  "enum": [
+                    "RADIUS",
+                    "TACACS"
+                  ],
+                  "type": "string"
+                },
+                "secondaryServerIp": {
+                  "description": "The server to use as a secondary.",
+                  "type": "string"
+                },
+                "serverType": {
+                  "description": "",
+                  "enum": [
+                    "ISE",
+                    "AAA"
+                  ],
+                  "type": "string"
+                },
+                "sharedSecret": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "aaaNetwork": {
+              "description": "Network AAA/ISE settings for network device administration. Use this object only for Network AAA, AAA Network, or network AAA server requests.",
+              "properties": {
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                },
+                "pan": {
+                  "description": "Administration Node. Required for ISE.",
+                  "type": "string"
+                },
+                "primaryServerIp": {
+                  "description": "The server to use as a primary.",
+                  "type": "string"
+                },
+                "protocol": {
+                  "description": "",
+                  "enum": [
+                    "RADIUS",
+                    "TACACS"
+                  ],
+                  "type": "string"
+                },
+                "secondaryServerIp": {
+                  "description": "The server to use as a secondary.",
+                  "type": "string"
+                },
+                "serverType": {
+                  "description": "",
+                  "enum": [
+                    "ISE",
+                    "AAA"
+                  ],
+                  "type": "string"
+                },
+                "sharedSecret": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

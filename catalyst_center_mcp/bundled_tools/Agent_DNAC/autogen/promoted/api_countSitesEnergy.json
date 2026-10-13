@@ -1,0 +1,95 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "deviceCategory": "query",
+        "endTime": "query",
+        "siteHierarchy": "query",
+        "siteHierarchyId": "query",
+        "siteId": "query",
+        "siteName": "query",
+        "siteType": "query",
+        "startTime": "query",
+        "taskId": "query"
+      },
+      "uri": "/dna/data/api/v1/energy/sites/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the total count of sites that provide energy data, filtered according to the specified query parameters. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-sitesEnergy-1.0.1-resolved.yaml",
+    "name": "api_countSitesEnergy",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "deviceCategory": {
+          "description": "The list of device categories. Note that this filter specifies which devices will be included when calculating energy consumption values, rather than specifying the list of returned sites. \n\nExamples:\n\n`deviceCategory=Switch` (single device category requested)\n\n`deviceCategory=Switch&deviceCategory=Router` (multiple device categories with comma separator)\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `endTime` is not provided, API will default to one day after `startTime`. If `startTime` is not provided either, API will default to current time.\n",
+          "type": "number"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*/San*, */San, /San*`\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*uuid*, *uuid, uuid*`\n\nExamples:\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&siteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "siteName": {
+          "description": "The name of the site. (Ex. `FloorName`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*San*, *San, San*`\n\nExamples:\n\n`?siteName=building1` (single siteName requested)\n\n`?siteName=building1&siteName=building2&siteName=building3` (multiple siteNames requested)\n",
+          "type": "string"
+        },
+        "siteType": {
+          "description": "The type of the site. A site can be an area, building, or floor.\n\nDefault when not provided will be `[floor,building,area]`\n\nExamples:\n\n`?siteType=area` (single siteType requested)\n\n`?siteType=area&siteType=building&siteType=floor` (multiple siteTypes requested)\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to one day before `endTime`.\n",
+          "type": "number"
+        },
+        "taskId": {
+          "description": "used to retrieve asynchronously processed & stored data. When this parameter is used, the rest of the request params will be ignored.\n",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

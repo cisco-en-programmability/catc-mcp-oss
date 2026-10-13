@@ -1,0 +1,66 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/connectionModeSetting",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves Cisco Smart Software Manager (CSSM) connection mode setting. In ordinary user-facing answers, render DIRECT as 'Direct', ON_PREMISE as 'On-Prem CSSM', and SMART_PROXY as 'Smart proxy'. Do not expose raw enum values unless the user explicitly asks for the API value.",
+    "name": "api_retrievesCSSMConnectionMode",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "connectionMode": {
+              "description": "The CSSM connection mode is a machine-readable API enum. In ordinary user-facing answers, translate DIRECT to 'Direct', ON_PREMISE to 'On-Prem CSSM', and SMART_PROXY to 'Smart proxy'. Do not expose a raw enum value unless the user explicitly asks for the API value.",
+              "enum": [
+                "DIRECT",
+                "ON_PREMISE",
+                "SMART_PROXY"
+              ],
+              "type": "string"
+            },
+            "parameters": {
+              "description": "On-premise CSSM parameters",
+              "properties": {
+                "clientId": {
+                  "description": "On-premise CSSM client id",
+                  "type": "string"
+                },
+                "onPremiseHost": {
+                  "description": "On-premise host",
+                  "type": "string"
+                },
+                "smartAccountName": {
+                  "description": "On-premise CSSM local smart account name",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "API version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

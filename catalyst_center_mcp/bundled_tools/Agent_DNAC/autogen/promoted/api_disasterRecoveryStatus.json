@@ -1,0 +1,410 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/disasterrecovery/system/status",
+      "version": "2.3.7.9"
+    },
+    "description": "Detailed and Summarized status of DR components (Active, Standby and Witness system's health). ",
+    "name": "api_disasterRecoveryStatus",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "ipconfig": {
+          "description": "Disaster Recovery Global Virtual IP Address",
+          "items": {
+            "properties": {
+              "interface": {
+                "description": "Enterprise or Management interface",
+                "enum": [
+                  "enterprise",
+                  "management"
+                ],
+                "type": "string"
+              },
+              "ip": {
+                "description": "This floating virtual IP address automatically moves to and operates on the site that is currently acting as your network's active site. If the interface is enterprise, then this address manages traffic between your disaster recovery system and your Enterprise network. If the interface is management, then this address manages traffic between your disaster recovery system and your Management network.  ",
+                "type": "string"
+              },
+              "vip": {
+                "description": "Is this interface an Virtual IP address or not. This is true for Global DR VIP",
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "ipsec-tunnel": {
+          "description": "IPSec Tunnel Status between main, recovery and witness",
+          "items": {
+            "properties": {
+              "side_a": {
+                "description": "A Side of the IPSec Tunnel",
+                "type": "string"
+              },
+              "side_b": {
+                "description": "Other Side of the IPSec Tunnel ",
+                "type": "string"
+              },
+              "status": {
+                "description": "Status of this IPSec Tunnel",
+                "enum": [
+                  "up",
+                  "down"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "main": {
+          "description": "Main is the first site you configure when setting up your disaster recovery system.",
+          "properties": {
+            "ipconfig": {
+              "description": "Disaster Recovery Cluster Virtual IP Address",
+              "items": {
+                "properties": {
+                  "interface": {
+                    "description": "Enterprise or Management interface",
+                    "enum": [
+                      "enterprise",
+                      "management"
+                    ],
+                    "type": "string"
+                  },
+                  "ip": {
+                    "description": "This floating virtual IP address automatically moves to and operates on the site that is currently acting as your network's active site. If the interface is enterprise, then this address manages traffic between your disaster recovery system and your Enterprise network. If the interface is management, then this address manages traffic between your disaster recovery system and your Management network.",
+                    "type": "string"
+                  },
+                  "vip": {
+                    "description": "Is this interface an Virtual IP address or not. This is true for cluster level.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "nodes": {
+              "description": "Main Node Details. Node Details are displayed only when summary request parameter is false.",
+              "items": {
+                "properties": {
+                  "hostname": {
+                    "description": "Hostname of the node",
+                    "type": "string"
+                  },
+                  "ipaddresses": {
+                    "description": "Node Level IP Addresses",
+                    "items": {
+                      "properties": {
+                        "interface": {
+                          "description": "Enterprise or Management interface",
+                          "enum": [
+                            "enterprise",
+                            "management"
+                          ],
+                          "type": "string"
+                        },
+                        "ip": {
+                          "description": "Node IP address",
+                          "type": "string"
+                        },
+                        "vip": {
+                          "description": "Is this interface a Virtual IP address or not. This is false for node level.",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "state": {
+                    "description": "State of the node",
+                    "enum": [
+                      "up",
+                      "down",
+                      "unknown"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "state": {
+              "description": "State of the Main Site. ",
+              "enum": [
+                "Unregistered",
+                "Registering",
+                "Registered",
+                "RegisterFailed",
+                "Configuring",
+                "Active",
+                "ConfigureFailed",
+                "FailingOver",
+                "StandbyReady",
+                "FailoverFailed",
+                "Standby",
+                "Isolating",
+                "Isolated",
+                "IsolateFailed",
+                "Pausing",
+                "Paused",
+                "PauseFailed",
+                "ActiveStandAlone",
+                "StandbyStandAlone",
+                "Partitioned",
+                "Deregistering",
+                "DeregisterFailed",
+                "Up",
+                "Down"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "recovery": {
+          "description": "The second site you configure when setting up your disaster recovery system. ",
+          "properties": {
+            "ipconfig": {
+              "description": "Disaster Recovery Cluster Virtual IP Address",
+              "items": {
+                "properties": {
+                  "interface": {
+                    "description": "Enterprise or Management interface",
+                    "enum": [
+                      "enterprise",
+                      "management"
+                    ],
+                    "type": "string"
+                  },
+                  "ip": {
+                    "description": "This floating virtual IP address automatically moves to and operates on the site that is currently acting as your network's active site. If the interface is enterprise, then this address manages traffic between your disaster recovery system and your Enterprise network. If the interface is management, then this address manages traffic between your disaster recovery system and your Management network.",
+                    "type": "string"
+                  },
+                  "vip": {
+                    "description": "Is this interface an Virtual IP address or not. This is true for cluster level.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "nodes": {
+              "description": "Recovery Node Details. Node Details are displayed only when summary request parameter is false.",
+              "items": {
+                "properties": {
+                  "hostname": {
+                    "description": "Hostname of the node",
+                    "type": "string"
+                  },
+                  "ipconfig": {
+                    "description": "Node Level IP Addresses",
+                    "items": {
+                      "properties": {
+                        "interface": {
+                          "description": "Enterprise or Management interface",
+                          "enum": [
+                            "enterprise",
+                            "management"
+                          ],
+                          "type": "string"
+                        },
+                        "ip": {
+                          "description": "Node IP Address",
+                          "type": "string"
+                        },
+                        "vip": {
+                          "description": "Is this interface a Virtual IP Address or not. This is false for node level.",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "state": {
+                    "description": "State of the node",
+                    "enum": [
+                      "up",
+                      "down",
+                      "unknown"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "state": {
+              "description": "State of the Recovery site",
+              "enum": [
+                "Unregistered",
+                "Registering",
+                "Registered",
+                "RegisterFailed",
+                "Configuring",
+                "Active",
+                "ConfigureFailed",
+                "FailingOver",
+                "StandbyReady",
+                "FailoverFailed",
+                "Standby",
+                "Isolating",
+                "Isolated",
+                "IsolateFailed",
+                "Pausing",
+                "Paused",
+                "PauseFailed",
+                "ActiveStandAlone",
+                "StandbyStandAlone",
+                "Partitioned",
+                "Deregistering",
+                "DeregisterFailed",
+                "Up",
+                "Down"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "site": {
+          "description": "Site of the disaster recovery system. ",
+          "enum": [
+            "main",
+            "recovery"
+          ],
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the Disaster Recovery System.",
+          "enum": [
+            "Unconfigured",
+            "Registering",
+            "Registered",
+            "Deregistering",
+            "Deregistered",
+            "Configuring",
+            "ConfigureFailed",
+            "Up",
+            "FailingOver",
+            "FailoverFailed",
+            "Pausing",
+            "Paused",
+            "PauseFailed",
+            "Down"
+          ],
+          "type": "string"
+        },
+        "witness": {
+          "description": "The third site you configure when setting up your disaster recovery system. ",
+          "properties": {
+            "ipconfig": {
+              "description": "Disaster Recovery Cluster Virtual IP Address",
+              "items": {
+                "properties": {
+                  "interface": {
+                    "description": "Enterprise or Management interface",
+                    "type": "string"
+                  },
+                  "ip": {
+                    "description": "In case of witness, this is only an IP. ",
+                    "type": "string"
+                  },
+                  "vip": {
+                    "description": "Is this interface an Virtual IP address or not. This is false for witness.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "nodes": {
+              "description": "Witness Node Details. Node Details are displayed only when summary request parameter is false.",
+              "items": {
+                "properties": {
+                  "hostname": {
+                    "description": "Hostname of the witness node",
+                    "type": "string"
+                  },
+                  "ipconfig": {
+                    "description": "Node Level IP Addresses",
+                    "items": {
+                      "properties": {
+                        "interface": {
+                          "description": "Enterprise or Management interface",
+                          "type": "string"
+                        },
+                        "ip": {
+                          "description": "In case of witness, this is only an IP",
+                          "type": "string"
+                        },
+                        "vip": {
+                          "description": "Is this interface an Virtual IP address or not. This is false for Witness ",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "state": {
+                    "description": "State of the node",
+                    "enum": [
+                      "up",
+                      "down",
+                      "unknown"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "state": {
+              "description": "State of the Witness Site",
+              "enum": [
+                "Unregistered",
+                "Registering",
+                "Registered",
+                "RegisterFailed",
+                "Up",
+                "Down",
+                "Pausing",
+                "PauseFailed",
+                "Paused",
+                "Deregistering",
+                "DeregisterFailed"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

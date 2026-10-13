@@ -1,0 +1,81 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/bannerSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "**NETWORK SERVER SETTINGS** : Retrieve site-level device access banner settings for a site. For broad queries such as what network server settings are configured at a site, invoke this tool together with the AAA, DHCP, DNS, image distribution, NTP, and time zone settings tools to build a complete network server settings response. Use this tool for generic site-level banner configuration queries, including whether the site uses the built-in login banner, whether a custom banner is configured, the custom banner message text, inherited banner settings, and the parent site from which banner settings are inherited. Example queries include: Is a site using the built-in login banner? If using a custom banner at a site, what is the message text? Is the banner setting for a site inherited? From which parent site? This includes configured banner message content, banner type, message of the day (MOTD), login or access notice text, custom banner configuration, and inherited banner information from parent sites. Banner settings describe the text shown during access to network devices such as routers, switches, and hubs. `null` values indicate that the setting is inherited from the parent site; empty objects (`{}`) indicate that the setting is unset at the site.",
+    "name": "api_retrieveBannerSettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "default": true,
+          "description": "Include inherited banner settings from parent sites.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "_inherited"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "banner": {
+              "description": "",
+              "properties": {
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                },
+                "message": {
+                  "description": "Custom message that appears when logging into routers, switches, and hubs. Required for custom type.",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "",
+                  "enum": [
+                    "Custom",
+                    "Builtin"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

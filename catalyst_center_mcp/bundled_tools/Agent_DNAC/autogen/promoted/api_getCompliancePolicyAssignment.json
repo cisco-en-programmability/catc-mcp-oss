@@ -1,0 +1,75 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "policyId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/{policyId}/siteAssignments",
+      "version": "3.1.6"
+    },
+    "description": "Returns the raw site ids (`siteIds`) a rule-based compliance (RBC) policy is assigned to (path param `policyId`). The ids are opaque UUIDs and `api_getSites` cannot look a site up by id, so this tool alone cannot tell the user which sites a policy applies to. To answer 'which sites is this policy applied to', use `api_getCompliancePolicySiteScope` instead: it resolves the policy name, the assignments and the site names in one call, handles the Global/all-sites case, and returns ten sites per page. Only use this tool when the caller genuinely needs the raw site ids. Never try to resolve these ids by calling `api_getSites` once per id. Compliance assignments are inherited down the site hierarchy: a policy assigned to a site applies to that site and every site beneath it, so it cannot be unassigned from a child site while the parent assignment remains.",
+    "name": "api_getCompliancePolicyAssignment",
+    "parameters": {
+      "properties": {
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policyId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "The response object.",
+      "example": {
+        "response": {
+          "siteIds": [
+            "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          ]
+        },
+        "version": "1.0"
+      },
+      "properties": {
+        "response": {
+          "description": "Policy assignment details.",
+          "properties": {
+            "siteIds": {
+              "description": "An array of root site IDs linked to the policy.",
+              "items": {
+                "description": "The `id` of the policy root site.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "siteIds"
+          ],
+          "title": "PolicyAssignment",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_8",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

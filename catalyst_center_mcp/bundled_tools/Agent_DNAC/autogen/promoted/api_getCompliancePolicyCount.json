@@ -1,0 +1,78 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "name": "query",
+        "policyId": "query",
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/count",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves the count (number) of rule-based compliance (RBC) policies configured in Catalyst Center. Use this for ANY 'how many' / count / total-number question about compliance/RBC policies. ALWAYS prefer this over listing policies and counting them: the list tool (api_getCompliancePolicies) is page-size limited (defaults to 10 and rejects large limits), so counting its returned items is inaccurate whenever more than one page exists. For 'how many compliance policies apply to <site>?', resolve the site's `id` with api_getSites first and pass it as `siteId`; that count is the site's effective total and includes policies inherited from ancestor sites such as Global. The `name` filter matches POLICY names only \u2014 never pass a site name to it. This counts configured compliance policies, NOT the number of compliant/non-compliant devices.\n\nPartial filters: this tool can only narrow the count by `name` and `siteId`. If the user asks for a count narrowed by anything else \u2014 the state of a policy, the rules or conditions it contains, the device types it applies to \u2014 still return the count with the filters that ARE supported, and say plainly which part of the request could not be applied, for example \"there are N compliance policies for that site; I can't narrow that by <filter> because the count API has no parameter for it.\" Never present a partially filtered count as though the unsupported filter had been applied, and never approximate the missing filter by listing policies and tallying them, because the list tool is paginated.",
+    "name": "api_getCompliancePolicyCount",
+    "parameters": {
+      "properties": {
+        "name": {
+          "description": "Filter by compliance policy name. The match is exact and case-sensitive: the value must be the policy's complete stored name, so a partial name, an extra word, a keyword, or different capitalisation returns nothing. Pass `name` only when you already have that exact name, typically because the user quoted it. Do not assemble a value out of the user's own phrasing, and remember that a trailing 'policy' or 'compliance policy' is usually not part of the stored name. When the user describes a policy loosely, resolve it first with api_getCompliancePolicies called without `name`, then use the exact name from that listing. MANDATORY: if a call with `name` returns zero, resolve the name that way before answering. A zero count for a filtered call only means nothing matched that exact string, so never conclude from it that the policy does not exist.",
+          "example": "DNS",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "The IDs of the compliance policies.",
+          "example": [
+            "e910e834-e35b-4800-9401-a40e22ce09f3",
+            "a910e834-e35b-4800-9401-a40e22ce09f4"
+          ],
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "maxItems": 25,
+          "type": "array"
+        },
+        "siteId": {
+          "description": "The `id` of the site to which compliance policies are associated.",
+          "example": "b8eeb5e2-1eab-426c-be77-97ee81dcba07",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "description": "An object containing the response.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "example": 15,
+              "type": "integer"
+            }
+          },
+          "title": "CountResponse_response",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "Count Response",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

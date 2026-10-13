@@ -1,0 +1,99 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v2/service-provider",
+      "version": "2.3.7.9"
+    },
+    "description": "API to get Service Provider details (QoS).",
+    "name": "api_getServiceProviderDetailsV2",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "groupUuid": {
+                "description": "",
+                "type": "string"
+              },
+              "inheritedGroupName": {
+                "description": "",
+                "type": "string"
+              },
+              "inheritedGroupUuid": {
+                "description": "",
+                "type": "string"
+              },
+              "instanceType": {
+                "description": "",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "",
+                "type": "string"
+              },
+              "key": {
+                "description": "",
+                "type": "string"
+              },
+              "namespace": {
+                "description": "",
+                "type": "string"
+              },
+              "type": {
+                "description": "",
+                "type": "string"
+              },
+              "value": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "slaProfileName": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "spProfileName": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "wanProvider": {
+                      "description": "",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "version": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,90 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/bugs/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get details for one network bug by bug ID. Use this tool for CSC-style network bug IDs such as CSCwd12345 or CSCwr77118 when the user asks for general bug details, affected versions, severity, workaround, integrated releases, or whether the bug has a workaround across the network. Use this tool only when the user does not specify a particular device, device name, management IP, MAC address, serial number, or networkDeviceId. If the user asks about a bug on a specific device, such as 'details of CSCwd12345 on 50.30.1.9' or 'is device X affected by CSCwd12345', first call get_device_details to resolve the device UUID, then call api_getNetworkBugDeviceForTheBugByNetworkDeviceId with the bug id and resolved networkDeviceId. A CSC ID in a question about bugs is a network bug ID, not a security advisory ID.",
+    "name": "api_getNetworkBugById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Network bug ID, usually a CSC identifier such as CSCwd12345.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "affectedVersions": {
+              "description": "Versions that are affected by the network bug",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "deviceCount": {
+              "description": "Number of devices which are vulnerable to this network bug",
+              "type": "integer"
+            },
+            "hasWorkaround": {
+              "description": "Indicates if the network bug has a workaround",
+              "type": "boolean"
+            },
+            "headline": {
+              "description": "Title of the network bug",
+              "type": "string"
+            },
+            "id": {
+              "description": "Id of the network bug",
+              "type": "string"
+            },
+            "integratedReleases": {
+              "description": "Versions that have the fix for the network bug",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "publicationUrl": {
+              "description": "Url for getting network bug details on cisco website",
+              "type": "string"
+            },
+            "severity": {
+              "description": "'CATASTROPHIC' - Reasonably common circumstances cause the entire system to fail, or a major subsystem to stop working. 'SEVERE' - Important functions are unusable. 'MODERATE' - Failures occur in unusual circumstances, or minor features do not work at all.",
+              "type": "string"
+            },
+            "workaround": {
+              "description": "Workaround if any that exists for the network bug",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

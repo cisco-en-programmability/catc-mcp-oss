@@ -1,0 +1,88 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "interfaceType": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{id}/vlan",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns Device Interface VLANs. If parameter value is null or empty, it won't return any value in response.",
+    "name": "api_getDeviceInterfaceVLANs",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "deviceUUID",
+          "type": "string"
+        },
+        "interfaceType": {
+          "description": "Vlan associated with sub-interface. If no interfaceType mentioned it will return all types of Vlan interfaces. If interfaceType is selected but not specified then it will take default value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "interfaceName": {
+                "description": "Interface name",
+                "type": "string"
+              },
+              "ipAddress": {
+                "description": "IP address",
+                "type": "string"
+              },
+              "mask": {
+                "description": "Mask IP",
+                "type": "integer"
+              },
+              "networkAddress": {
+                "description": "Network addresses",
+                "type": "string"
+              },
+              "numberOfIPs": {
+                "description": "Number of Ip addresses",
+                "type": "integer"
+              },
+              "prefix": {
+                "description": "Prefix associated with the IP address",
+                "type": "string"
+              },
+              "vlanNumber": {
+                "description": "Vlan Number",
+                "type": "integer"
+              },
+              "vlanType": {
+                "description": "[Deprecated] Description of the interface VLAN",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

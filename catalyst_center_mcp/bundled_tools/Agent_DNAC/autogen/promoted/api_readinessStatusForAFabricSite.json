@@ -1,0 +1,103 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "order": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityServiceInsertion/fabricSitesReadiness/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Return only the virtual networks in one specific fabric site that are not already used or configured for Security Service Insertion (SSI) enablement, along with their backend readiness status and VN metadata. Configured SSI VNs are not returned by this API. Use this API when the user asks for candidate, available, unused, not-yet-configured, or not-yet-used virtual networks for SSI in one fabric site, or asks which VNs in a fabric site are ready or not ready to be used for new SSI enablement. The required `id` is the fabric site id, not an SSI record id. If the user only knows the fabric site name or hierarchy path, first resolve the fabric site id using a site-level lookup such as `api_sdaFabricSitesReadiness` or another fabric-site SSI lookup, then call this API with that site id. Treat SSI and Security Service Insertion as the same feature name. This preference rule applies for any site reference format, including a short fabric site name such as `BGL17`, a full Catalyst Center site hierarchy path such as `Global/Bangalore/BGL17`, a fabric `siteId` such as `62a3ed51-9897-46b2-a807-e8250c4e7f3c`, or a follow-up reference such as `that site` after the site was already identified earlier in the conversation. In multi-step SSI questions that first identify a site and then ask for candidate or not-yet-configured virtual networks in that site, interpret the follow-up site reference as the same resolved fabric site and prefer this API over generic SDA virtual-network inventory tools. In an SSI enablement context, prefer this API over generic SDA VN detail or VN inventory tools whenever the request is about candidate, available, unused, not-yet-configured, ready, or not-ready VNs for new SSI configuration. If the user asks for virtual networks already configured, used, selected, enabled, or associated with existing SSI records, use `api_securityServiceInsertions` or `api_securityServiceInsertionById`, because those APIs return configured SSI record details. Prefer this API for per-site candidate VN discovery and readiness of VNs before SSI enablement, not for configured SSI VNs, not for global readiness, not for top-level all-site readiness, not for one specific SSI record, and not for switch readiness inside a VN.",
+    "name": "api_readinessStatusForAFabricSite",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Required fabric site id. This is the SDA fabric site identifier for the site whose candidate virtual networks you want to inspect. Do not pass an SSI record id here.",
+          "type": "string"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of virtual networks in the specified fabric site that are not already configured for SSI, along with their VN metadata.",
+          "items": {
+            "properties": {
+              "anyCastGateway": {
+                "description": "The Anycast gateway associated with the virtual network.",
+                "type": "integer"
+              },
+              "deviceCounts": {
+                "description": "Device-count summary for this virtual network, including how many devices belong to the VN and how many of those devices are marked ready by the backend.",
+                "properties": {
+                  "readyDeviceCount": {
+                    "description": "Number of devices in this virtual network that the backend marks as ready.",
+                    "type": "integer"
+                  },
+                  "totalDeviceCount": {
+                    "description": "Total number of devices present in this virtual network.",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "extranetPolicyCounterParts": {
+                "description": "List of virtual network names that have corresponding extranet policies.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "extranetRole": {
+                "description": "",
+                "enum": [
+                  "PROVIDER, SUBSCRIBER, NONE"
+                ],
+                "type": "string"
+              },
+              "id": {
+                "description": "The unique identifier of the virtual network.",
+                "type": "string"
+              },
+              "layer3VirtualNetworkId": {
+                "description": "Layer 3 virtual network id for the candidate virtual network.",
+                "type": "integer"
+              },
+              "readiness": {
+                "description": "Backend-provided status field for the candidate virtual network entry. Do not treat this field as the primary purpose of this API.",
+                "enum": [
+                  "READY, NOT_READY"
+                ],
+                "type": "string"
+              },
+              "virtualNetworkName": {
+                "description": "Name of a virtual network in the specified fabric site that is not already configured for SSI.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

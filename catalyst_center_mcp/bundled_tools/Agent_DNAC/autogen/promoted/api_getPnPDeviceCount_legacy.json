@@ -1,0 +1,127 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "max_controller_version": "3.1.6",
+      "release_status": "Automation-India_June_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "lastContact": "query",
+        "name": "query",
+        "onbState": "query",
+        "pid": "query",
+        "projectId": "query",
+        "serialNumber": "query",
+        "smartAccountId": "query",
+        "source": "query",
+        "state": "query",
+        "svlNeighbors": "query",
+        "virtualAccountId": "query",
+        "workflowId": "query"
+      },
+      "uri": "/dna/intent/api/v1/onboarding/pnp-device/count",
+      "version": "2.3.7.11"
+    },
+    "description": "Returns the count of PnP network devices using filters such as state, onboarding state, PID, IP, and site. This legacy API does not support deviceType filters such as SWITCH, ROUTER, ACCESS_POINT, or WIRELESS_CONTROLLER. For model/family fragments, use pid with wildcards (do not use exact pid unless the user gives a full model). Examples: 9200 -> pid=*9200*; AIR-AP -> pid=AIR-AP*; Cat9k -> pid in [C9200*, C9300*, C9350*, C9404R*, C9407R*, C9410R*, C9500*, C9606R*, C9610*, C9KV*]; Cat3k -> pid in [WS-C3560*, WS-C3650*, WS-C3850*]; IE-3k -> pid=IE-3?00*; ISR 4k -> pid in [ISR4321*, ISR4331*, ISR4351*, ISR4431*, ISR4451*, ISR4461*]; ASR 1k -> pid=ASR1???*. Only map explicitly claimed-device requests to state=Planned; do not infer this state from general PnP, model-family, or count requests. For site filters: use siteNameHierarchy directly, or if you need siteId, call api_getSites first. Strict prohibition: For runtime WLAN/SSID/controller detail queries that include serial number, do not call this API. Use get_device_details to resolve canonical networkDeviceId; if unresolved, ask for hostname or management IP. This API is only for explicit PnP onboarding, claim, or history workflows.",
+    "name": "api_getPnPDeviceCount_legacy",
+    "parameters": {
+      "properties": {
+        "lastContact": {
+          "description": "Filter by whether devices have contacted the PnP server. Use true for contacted devices, false for not-contacted devices. When user asks about 'contacted' or 'not contacted' devices, map to lastContact=true or lastContact=false respectively.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "PnP device hostname filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "onbState": {
+          "description": "PnP device onboarding state filter (for example Planned, Onboarding).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pid": {
+          "description": "PnP device product ID (PID) filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "projectId": {
+          "description": "PnP device project ID filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "serialNumber": {
+          "description": "PnP device serial number filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "smartAccountId": {
+          "description": "Smart Account identifier filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "source": {
+          "description": "Filter by how the device was added to PnP. User = manually added through the UI or API, Network = device discovered the PnP server on bootup, SmartAccount = synced from Cisco Smart Account inventory.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "state": {
+          "description": "PnP device lifecycle state filter. Valid values: Unclaimed, Planned (claimed/staged for onboarding), Provisioned (completed onboarding), Error.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "svlNeighbors": {
+          "description": "Filter for StackWise-Virtual Link (SVL) claimable neighbor devices. Set true to find devices that can be paired with a neighbor to form an SVL link.",
+          "type": "boolean"
+        },
+        "virtualAccountId": {
+          "description": "Virtual Account identifier filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "workflowId": {
+          "description": "PnP device workflow ID filter.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "The count of PnP devices matching the filter criteria.",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

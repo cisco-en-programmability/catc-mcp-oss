@@ -1,0 +1,81 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "beta"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/fieldNotices/results/notices/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Return details for one specific field notice by its exact id. Use this tool whenever the user asks about one specific field notice itself. This tool returns notice metadata such as id, name, publicationUrl, deviceCount, potentialDeviceCount, type, firstPublishDate, and lastUpdatedDate.",
+    "name": "api_getFieldNoticeById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Id of the field notice",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Field notice details",
+          "properties": {
+            "deviceCount": {
+              "description": "Number of devices which are vulnerable to this field notice",
+              "type": "integer"
+            },
+            "firstPublishDate": {
+              "description": "Time at which the field notice was published",
+              "type": "integer"
+            },
+            "id": {
+              "description": "Id of the field notice",
+              "type": "string"
+            },
+            "lastUpdatedDate": {
+              "description": "Time at which the field notice was last updated",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Name of the field notice",
+              "type": "string"
+            },
+            "potentialDeviceCount": {
+              "description": "Number of devices which are potentially vulnerable to this field notice",
+              "type": "integer"
+            },
+            "publicationUrl": {
+              "description": "Url for getting field notice details on cisco website",
+              "type": "string"
+            },
+            "type": {
+              "description": "'SOFTWARE' - field notice is for the network device software. 'HARDWARE' - field notice is for the network device hardware",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

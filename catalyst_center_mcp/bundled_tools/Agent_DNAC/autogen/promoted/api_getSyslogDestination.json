@@ -1,0 +1,131 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "configId": "query",
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query",
+        "protocol": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/syslog-config",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves configured Syslog event destination instances. Use configId for a specific destination, or name or protocol when supplied. Omit pagination for the first page; the API defaults to 10 records. Use this tool for server name, host, port, and transport settings, not event subscriptions, site telemetry, or device logging configuration.",
+    "name": "api_getSyslogDestination",
+    "parameters": {
+      "properties": {
+        "configId": {
+          "description": "Config id of syslog server",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum records to return. Defaults to 10.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of syslog server",
+          "type": "string"
+        },
+        "offset": {
+          "description": "Number of matching records to skip. Omit or use 0 for the first page.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "protocol": {
+          "description": "Protocol of syslog server",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "apiStatus": {
+          "description": "Status",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "",
+          "properties": {
+            "errors": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "statusMessage": {
+          "description": "",
+          "items": {
+            "properties": {
+              "configId": {
+                "description": "UUID",
+                "type": "string"
+              },
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "host": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "port": {
+                "description": "",
+                "type": "integer"
+              },
+              "protocol": {
+                "description": "",
+                "enum": [
+                  "TCP",
+                  "UDP"
+                ],
+                "type": "string"
+              },
+              "tenantId": {
+                "description": "",
+                "type": "string"
+              },
+              "version": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

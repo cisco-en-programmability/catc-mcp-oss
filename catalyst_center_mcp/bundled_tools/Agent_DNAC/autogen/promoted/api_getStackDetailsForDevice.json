@@ -1,0 +1,304 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{deviceId}/stack",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves complete stack details for given device ID",
+    "name": "api_getStackDetailsForDevice",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "Device ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "deviceId": {
+              "description": "Device ID",
+              "type": "string"
+            },
+            "stackPortInfo": {
+              "description": "Stack Port (show switch stack-ports summary)",
+              "items": {
+                "properties": {
+                  "isSynchOk": {
+                    "description": "If link partner sends valid protocol message",
+                    "type": "string"
+                  },
+                  "linkActive": {
+                    "description": "If stack port is in same state as link partner",
+                    "type": "boolean"
+                  },
+                  "linkOk": {
+                    "description": "If link is stable",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "Name of the stack port",
+                    "type": "string"
+                  },
+                  "neighborPort": {
+                    "description": "Neighbor's member number and stack port number",
+                    "type": "string"
+                  },
+                  "nrLinkOkChanges": {
+                    "description": "Relative stability of the link",
+                    "type": "integer"
+                  },
+                  "stackCableLengthInfo": {
+                    "description": "Cable length",
+                    "enum": [
+                      "NO_CABLE",
+                      "_50_CM",
+                      "_1_M",
+                      "_3_M",
+                      "UNKNOWN"
+                    ],
+                    "type": "string"
+                  },
+                  "stackPortOperStatusInfo": {
+                    "description": "Port opearation status",
+                    "enum": [
+                      "OK",
+                      "UP",
+                      "DOWN",
+                      "FORCEDDOWN",
+                      "ABSENT",
+                      "UNKNOWN"
+                    ],
+                    "type": "string"
+                  },
+                  "switchPort": {
+                    "description": "Member number and stack port number",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "stackSwitchInfo": {
+              "description": "Stack Switch (show switch)",
+              "items": {
+                "properties": {
+                  "entPhysicalIndex": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "hwPriority": {
+                    "description": "Hardware priority of the switch",
+                    "type": "integer"
+                  },
+                  "macAddress": {
+                    "description": "Mac address of the switch",
+                    "type": "string"
+                  },
+                  "numNextReload": {
+                    "description": "Stack member number to be used in next reload",
+                    "type": "integer"
+                  },
+                  "platformId": {
+                    "description": "Platform Id",
+                    "type": "string"
+                  },
+                  "role": {
+                    "description": "Function of the switch",
+                    "enum": [
+                      "MASTER",
+                      "MEMBER",
+                      "NOTMEMBER",
+                      "STANDBY",
+                      "UNKNOWN"
+                    ],
+                    "type": "string"
+                  },
+                  "serialNumber": {
+                    "description": "Serial number",
+                    "type": "string"
+                  },
+                  "softwareImage": {
+                    "description": "Software image type running on the switch",
+                    "type": "string"
+                  },
+                  "stackMemberNumber": {
+                    "description": "Switch member number",
+                    "type": "integer"
+                  },
+                  "state": {
+                    "description": "Current state of the switch",
+                    "enum": [
+                      "WAITING",
+                      "PROGRESSING",
+                      "ADDED",
+                      "READY",
+                      "SDMMISMATCH",
+                      "VERMISMATCH",
+                      "FEATUREMISMATCH",
+                      "NEWMASTERINIT",
+                      "PROVISIONED",
+                      "INVALID",
+                      "UNKNOWN"
+                    ],
+                    "type": "string"
+                  },
+                  "switchPriority": {
+                    "description": "Priority of the switch",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "svlSwitchInfo": {
+              "description": "SVL (show stackwise-virtual)",
+              "items": {
+                "properties": {
+                  "dadProtocol": {
+                    "description": "Stackwise virtual dual active detection config",
+                    "enum": [
+                      "NONE",
+                      "PAGP",
+                      "UNKNOWN"
+                    ],
+                    "type": "string"
+                  },
+                  "dadRecoveryReloadEnabled": {
+                    "description": "If dad recovery reload enabled",
+                    "type": "boolean"
+                  },
+                  "domainNumber": {
+                    "description": "Stackwise virtual switch domain number",
+                    "type": "integer"
+                  },
+                  "inDadRecoveryMode": {
+                    "description": "If in dad recovery mode",
+                    "type": "boolean"
+                  },
+                  "swVirtualStatus": {
+                    "description": "Stackwise virtual status",
+                    "type": "string"
+                  },
+                  "switchMembers": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "bandwidth": {
+                          "description": "Bandwidth",
+                          "type": "string"
+                        },
+                        "svlMemberEndPoints": {
+                          "description": "",
+                          "items": {
+                            "properties": {
+                              "svlMemberEndPointPorts": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "svlProtocolStatus": {
+                                      "description": "Stackwise virtual protocol status",
+                                      "enum": [
+                                        "SUSPENDED",
+                                        "PENDING",
+                                        "ERROR",
+                                        "TIMEOUT",
+                                        "READY",
+                                        "UNKNOWN"
+                                      ],
+                                      "type": "string"
+                                    },
+                                    "swLocalInterface": {
+                                      "description": "Stackwise virtual local interface",
+                                      "type": "string"
+                                    },
+                                    "swRemoteInterface": {
+                                      "description": "Stackwise virtual remote interface",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "svlNumber": {
+                                "description": "Stackwise virtual link number",
+                                "type": "integer"
+                              },
+                              "svlStatus": {
+                                "description": "Stackwise virtual status",
+                                "enum": [
+                                  "UP",
+                                  "DOWN",
+                                  "UNKNOWN"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "svlMemberNumber": {
+                          "description": "Switch member number",
+                          "type": "integer"
+                        },
+                        "svlMemberPepSettings": {
+                          "description": "",
+                          "items": {
+                            "properties": {
+                              "dadEnabled": {
+                                "description": "If dadInterface is configured for dual active detection",
+                                "type": "boolean"
+                              },
+                              "dadInterfaceName": {
+                                "description": "Interface for dual active detection",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,73 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/timeZoneSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "**NETWORK SERVER SETTINGS** : Retrieve time zone settings for a site. For broad queries such as what network server settings are configured at a site, invoke this tool together with the AAA, DHCP, DNS, image distribution, NTP, and banner settings tools to build a complete network server settings response. Use this tool for generic site-level time zone configuration queries, including the configured time zone identifier, inherited time zone settings, and the parent site from which time zone settings are inherited. Example queries include: What time zone identifier is configured for a site? Is the time zone for a site inherited? From which parent site? `null` values indicate that the setting will be inherited from the parent site; empty objects (`{}`) indicate that the setting is unset at a site.",
+    "name": "api_retrieveTimeZoneSettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "default": true,
+          "description": "Include inherited Time Zone settings from parent sites.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "_inherited"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "timeZone": {
+              "description": "",
+              "properties": {
+                "identifier": {
+                  "description": "Time zone that corresponds to the site's physical location. The site time zone is used when scheduling device provisioning and updates. Example : GMT",
+                  "type": "string"
+                },
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

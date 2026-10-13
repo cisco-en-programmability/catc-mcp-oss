@@ -1,0 +1,106 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "instanceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/integration-settings/instances/itsm/{instanceId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves one ITSM integration setting instance by instanceId. Use this tool when the user asks for the configuration of a specific ITSM integration. If the user supplies a name but not an instanceId, first call api_getAllITSMIntegrationSettings with a page size of 10 to resolve the matching instance, then call this tool with its id. This tool retrieves configuration, not ITSM integration status or failed events. Never display authentication passwords or other secret values from the response; state only that credentials are configured.",
+    "name": "api_getITSMIntegrationSettingById",
+    "parameters": {
+      "properties": {
+        "instanceId": {
+          "description": "Instance Id of the Integration setting instance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instanceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "_id": {
+          "description": "",
+          "type": "string"
+        },
+        "data": {
+          "description": "",
+          "properties": {
+            "ConnectionSettings": {
+              "description": "",
+              "properties": {
+                "Auth_Password": {
+                  "description": "",
+                  "type": "string"
+                },
+                "Auth_UserName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "Url": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "description": {
+          "description": "",
+          "type": "string"
+        },
+        "dypId": {
+          "description": "",
+          "type": "string"
+        },
+        "dypMajorVersion": {
+          "description": "",
+          "type": "integer"
+        },
+        "dypName": {
+          "description": "",
+          "type": "string"
+        },
+        "id": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "",
+          "type": "string"
+        },
+        "uniqueKey": {
+          "description": "",
+          "type": "string"
+        },
+        "updatedBy": {
+          "description": "",
+          "type": "string"
+        },
+        "updatedDate": {
+          "description": "",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

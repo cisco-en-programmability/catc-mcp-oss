@@ -1,0 +1,130 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "query",
+        "functionName": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/functional-capability",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the functional-capability for given devices",
+    "name": "api_getFunctionalCapabilityForDevices",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "Accepts comma separated deviceid's and return list of functional-capabilities for the given id's. If invalid or not-found id's are provided, null entry will be returned in the list.",
+          "type": "string"
+        },
+        "functionName": {
+          "description": "functionName",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "attributeInfo": {
+                "description": "Deprecated",
+                "properties": {},
+                "type": "object"
+              },
+              "deviceId": {
+                "description": "Device Id of the device",
+                "type": "string"
+              },
+              "functionalCapability": {
+                "description": "Details of the functions handled by device",
+                "items": {
+                  "properties": {
+                    "attributeInfo": {
+                      "description": "Deprecated",
+                      "properties": {},
+                      "type": "object"
+                    },
+                    "functionDetails": {
+                      "description": "Details of the function",
+                      "items": {
+                        "properties": {
+                          "attributeInfo": {
+                            "description": "Deprecated",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Deprecated",
+                            "type": "string"
+                          },
+                          "propertyName": {
+                            "description": " Property Name of the function",
+                            "type": "string"
+                          },
+                          "stringValue": {
+                            "description": "Value for the property",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "functionName": {
+                      "description": "Name of the function",
+                      "type": "string"
+                    },
+                    "functionOpState": {
+                      "description": "Operational state of the function",
+                      "enum": [
+                        "UNKNOWN",
+                        "NOT_APPLICABLE",
+                        "DISABLED",
+                        "ENABLED"
+                      ],
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Id of the function",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Deprecated",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

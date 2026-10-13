@@ -1,0 +1,50 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/ipam/siteIpAddressPools/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the total count of IP address subpools.\n\nPRECEDENCE\nApply sections in order. Higher sections override lower sections when they conflict.\n\nS0 Scope and hard boundaries\nS0.1 Count-only tool for subpools.\nS0.2 Do not use this tool as a detail/list source.\nS0.3 If site is specified, count only subpools whose siteId exactly matches that site (no parent/child expansion unless explicitly requested).\n\nS1 Invocation rules\nS1.1 Pure count intent (for example, 'how many subpools'): call this tool directly.\nS1.2 Filter/detail/list intent: use retrieval APIs instead of this count tool as the primary source.\nS1.3 If user says 'pools' without specifying global vs subpool (or asks about both), call both api_countsGlobalIPAddressPools and api_countsIPAddressSubpools.\n\nS2 Pairing rule with retrieval\nS2.1 When rendering subpool lists from api_retrievesIPAddressSubpools, call this tool to provide total-result context.\nS2.2 Use count-line formatting consistent with retrieval rules (for example, 'Showing 10 out of {total} results.' or offset form).\n\nS3 Output format\nS3.1 For count answers, return Markdown text.\nS3.2 Never use build_key_value_set.\nS3.3 Markdown-context requirement: never return widget-only output. If output includes KeyValueSet, response shape must include Markdown context as [Markdown intro, KeyValueSet, Markdown summary].\n\nS4 Prohibitions\nS4.1 Do not call retrieval APIs when user asks only for a simple total count.\nS4.2 Do not present count output as subpool details.\n",
+    "name": "api_countsIPAddressSubpools",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "description": "The `id` of the site for which to retrieve IP address subpools. Only subpools whose `siteId` matches will be counted.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

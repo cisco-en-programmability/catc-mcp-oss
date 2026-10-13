@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/dnsSettings",
+      "version": "2.3.7.9"
+    },
+    "description": "**NETWORK SERVER SETTINGS** : Retrieve DNS settings for a site. For broad queries such as what network server settings are configured at a site, invoke this tool together with the AAA, DHCP, image distribution, NTP, time zone, and banner settings tools to build a complete network server settings response. Use this tool for generic site-level DNS configuration queries, including the configured domain name, primary DNS server, secondary DNS server, inherited DNS settings, and the parent site from which DNS settings are inherited. Example queries include: What domain name is configured in DNS settings for a site? What primary DNS server is configured for a site? What secondary DNS server is configured for a site? Are DNS settings for a site inherited? From which parent site? `null` values indicate that the setting will be inherited from the parent site; empty objects (`{}`) indicate that the setting is unset at a site.",
+    "name": "api_retrieveDNSSettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "default": true,
+          "description": "Include inherited DNS settings from parent sites.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "_inherited"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "dns": {
+              "description": "",
+              "properties": {
+                "dnsServers": {
+                  "description": "DNS servers for hostname resolution.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "domainName": {
+                  "description": "Network's domain name.",
+                  "type": "string"
+                },
+                "inheritedSiteId": {
+                  "description": "Inherited Site Id.",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "Inherited Site Name.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "productName": "query",
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/siteWiseProductNames/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the count of network device product names for a given site based on optional filters. ALWAYS call the `api_getSites` tool first to resolve the relevant site UUID\u2014even when falling back to the global site (call it with `name=\"Global\"`). Provide the resolved UUID via `siteId` unless the user already supplied one.",
+    "name": "api_returnsTheCountOfNetworkDeviceProductNamesForASite",
+    "parameters": {
+      "properties": {
+        "productName": {
+          "description": "Filter with network device product name. Supports partial case-insensitive search. A minimum of 3 characters are required for search",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "UUID of the site whose product counts should be returned. Always translate site names or hierarchies into UUIDs by calling `api_getSites` first\u2014even for the default global site (pass `name=\"Global\"`). Defaults to the global site UUID when not provided. See https://developer.cisco.com/docs/dna-center/get-site/ for `siteId`.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "properties": {
+            "count": {
+              "description": "Reports a count, for example, a total count of records in a given resource.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

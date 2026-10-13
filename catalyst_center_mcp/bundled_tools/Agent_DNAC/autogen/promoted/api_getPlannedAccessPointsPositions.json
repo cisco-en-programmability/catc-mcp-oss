@@ -1,0 +1,159 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "floorId": "path",
+        "limit": "query",
+        "macAddress": "query",
+        "name": "query",
+        "offset": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v2/floors/{floorId}/plannedAccessPointPositions",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve all Planned Access Points Positions designated for a specific floor",
+    "name": "api_getPlannedAccessPointsPositions",
+    "parameters": {
+      "properties": {
+        "floorId": {
+          "description": "Floor Id",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "macAddress": {
+          "description": "Planned Access Point mac address.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Planned Access Point name.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "description": "Planned Access Point type.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "floorId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Planned Access Point Id (readonly)",
+                "type": "string"
+              },
+              "macAddress": {
+                "description": "Planned Access Point MAC address",
+                "type": "string"
+              },
+              "name": {
+                "description": "Planned Access Point Name",
+                "type": "string"
+              },
+              "position": {
+                "description": "",
+                "properties": {
+                  "x": {
+                    "description": "Planned Access Point X coordinate in feet",
+                    "type": "number"
+                  },
+                  "y": {
+                    "description": "Planned Access Point Y coordinate in feet",
+                    "type": "number"
+                  },
+                  "z": {
+                    "description": "Planned Access Point Z coordinate in feet",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "radios": {
+                "description": "Minimum Items: 1; Maximum Items: 4",
+                "items": {
+                  "properties": {
+                    "antenna": {
+                      "description": "",
+                      "properties": {
+                        "azimuth": {
+                          "description": "Angle of the antenna, measured relative to the x axis, clockwise. The azimuth range is from 0 through 360",
+                          "type": "integer"
+                        },
+                        "elevation": {
+                          "description": "Elevation of the antenna. The elevation range is from -90 through 90",
+                          "type": "integer"
+                        },
+                        "name": {
+                          "description": "Antenna type for this Planned Access Point. Use `/dna/intent/api/v1/maps/supported-access-points` to find supported Antennas for a particualr Planned Access Point type",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "bands": {
+                      "description": "Radio frequencies in GHz (readonly). Radio frequencies are expected to be 2.4, 5, and 6. MinItems: 1; MaxItems: 3",
+                      "items": {
+                        "type": "number"
+                      },
+                      "type": "array"
+                    },
+                    "channel": {
+                      "description": "Channel to be used by the Planned Access Point. In the context of a Planned Access Point, the channel have no bearing on what the real Access Point will actually be, they are just used for Maps visualization feature set",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "Radio Id (readonly)",
+                      "type": "string"
+                    },
+                    "txPower": {
+                      "description": "Transmit power for the channel in Decibel milliwatts (dBm). In the context of a Planned Access Point, the txPower have no bearing on what the real Access Point will actually be, they are just used for Maps visualization feature set",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "Planned Access Point type. Use `dna/intent/api/v1/maps/supported-access-points` to find the supported models",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

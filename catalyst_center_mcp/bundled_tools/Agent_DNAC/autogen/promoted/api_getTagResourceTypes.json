@@ -1,0 +1,40 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/tag/member/type",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG PHRASE EXCLUSION:**\n- If the user names one tag with `tag`, `tagged`, `with <value> tag`, `under tag`, or `in tag` and asks for devices, ports, interfaces, or counts, do not use this tool. The request is about members of one tag, not taggable resource categories.\n- Use `api_getTag` followed by `api_getTagMembersById` or `api_getTagMemberCount` for named-tag membership workflows.\n\nReturns the supported resource categories that can be tagged in Cisco Catalyst Center, such as what kinds of entities are taggable. Use this tool only when the user asks about supported taggable resource types or categories.\n\n**NOT FOR TAG INVENTORY:**\n- Do not use this tool when the user asks to enumerate existing tag definitions or tag records.\n- Do not use this tool for system/default tags or user-created/custom tags.\n- Use `api_getTag` for tag-definition inventory; this tool is only for taggable resource-category capability questions.\n\nThis tool does NOT resolve a tag name, does NOT return a tag UUID, and does NOT return the members inside one named tag.\n\n**USE THIS TOOL ONLY FOR:**\n- \"What resource types can be tagged?\"\n- \"Which kinds of objects support tags?\"\n- category-level capability questions about taggable entities\n\n**DO NOT USE THIS TOOL FOR:**\n- \"Which devices have tag <tag name>?\"\n- \"List devices tagged as <tag name>\"\n- \"Get devices under tag <tag name>\"\n- \"How many devices are tagged with <tag name>?\"\n- any request about the members inside one specific named tag\n\nIf the request names one tag and asks for devices, interfaces, ports, or counts, the correct route is:\n1. `api_getTag(name=<tag_name>)`\n2. then `api_getTagMembersById` or `api_getTagMemberCount`\n\n**STOP CONDITIONS:**\n- STOP if the user provided a specific tag name and wants members or counts.\n- STOP if you are about to loop on resource-type discovery instead of resolving the tag with `api_getTag`.",
+    "name": "api_getTagResourceTypes",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

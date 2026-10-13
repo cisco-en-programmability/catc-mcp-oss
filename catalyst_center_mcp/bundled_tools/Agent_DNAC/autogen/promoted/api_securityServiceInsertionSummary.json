@@ -1,0 +1,102 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "fabricSiteName": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityServiceInsertionSummaries",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the count-only summary view of Security Service Insertion (SSI) by fabric site. Use this API only when the user wants a rolled-up SSI site summary, provisioning status summary, or aggregate counts for SSI-enabled fabric sites. This API is useful for concise per-site rollups using fields such as fabric site name, fabric site id, provision status, virtualNetworksAssociatedCount, borderNodesCount, controlPlaneNodesCount, and edgeNodesCount. The response is intentionally shallow: it has numeric count fields but no virtual-network identity fields, no virtual-network records, no selected border-device records, and no firewall handoff details. For full SSI configuration records or SSI record-id discovery, use `api_securityServiceInsertions`. When the user wants the summary for one specific fabric site by name, pass the `fabricSiteName` filter; it supports partial site-name search. The summary `id` returned by this API is aligned to this summary view and must not be treated as the SSI record `id` required by `api_securityServiceInsertionById`. Treat SSI and Security Service Insertion as the same feature name. Do not use this when the user asks to list Security Service Insertions or SSIs themselves, asks for the first N Security Service Insertions, asks to sort Security Service Insertions, or asks for configured SSI records across fabric sites; those are full-record list requests and should use `api_securityServiceInsertions`. Do not use this for SSI deployment-readiness prerequisite questions, including site prerequisite counts or flags such as edge count, VN count, border count, control-plane or map-server count, LISP PubSub, IPv6, TrustSec HTTPS download, or missing site prerequisites; use `api_sdaFabricSitesReadiness` for those site-readiness checks. Do not use this for full SSI instance details, not for configured SSI records with firewall and VN details, and not for overall system readiness, site readiness, virtual-network readiness, or switch readiness.",
+    "name": "api_securityServiceInsertionSummary",
+    "parameters": {
+      "properties": {
+        "fabricSiteName": {
+          "description": "Filter by fabric site name (supports partial search). For example, searching for \"London\" will match \"London fabric site\", etc.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sorting order for the response can be specified as either ascending (asc) or descending (desc). If no value is specified, the default order is ascending (asc).",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of per-site SSI summary entries with rolled-up counts for configured SSI usage in each fabric site.",
+          "items": {
+            "properties": {
+              "borderNodesCount": {
+                "description": "Number of border nodes used for SSI enablement in this fabric site.",
+                "type": "integer"
+              },
+              "controlPlaneNodesCount": {
+                "description": "Number of control plane or map-server devices used for SSI enablement in this fabric site.",
+                "type": "integer"
+              },
+              "edgeNodesCount": {
+                "description": "Number of edge devices used for SSI enablement in this fabric site through the associated virtual networks.",
+                "type": "integer"
+              },
+              "fabricSiteName": {
+                "description": "The name of the SDA fabric site.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Summary entry identifier for the SSI-enabled fabric site. Do not treat this as the SSI record id required by `api_securityServiceInsertionById`.",
+                "type": "string"
+              },
+              "provisionStatus": {
+                "description": "Provisioning status of SSI for the fabric site.",
+                "enum": [
+                  "PROVISIONED, NOT_PROVISIONED"
+                ],
+                "type": "string"
+              },
+              "siteId": {
+                "description": "Fabric site id.",
+                "type": "string"
+              },
+              "virtualNetworksAssociatedCount": {
+                "description": "Numeric count of SSI-associated virtual networks in this fabric site. This field is only a rollup number; the summary response has no VN identity or configured-VN record payload.",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

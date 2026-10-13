@@ -1,0 +1,37 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "templateId": "path"
+      },
+      "uri": "/dna/intent/api/v1/templates/{templateId}/networkProfilesForSites",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the list of network profiles that a CLI template is currently attached to by the template ID.\n",
+    "name": "api_retrieveTheNetworkProfilesAttachedToACLITemplate",
+    "parameters": {
+      "properties": {
+        "templateId": {
+          "description": "The `id` of the template, retrievable from `GET /intent/api/v1/templates`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "templateId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {},
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

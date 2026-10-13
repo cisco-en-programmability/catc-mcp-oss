@@ -1,0 +1,53 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "Content-Type": "header"
+      },
+      "uri": "/dna/data/api/v1/flexible-report/schedules",
+      "version": "2.3.7.9"
+    },
+    "description": "Get all flexible report schedules",
+    "name": "api_getAllFlexibleReportSchedules",
+    "parameters": {
+      "properties": {
+        "Content-Type": {
+          "description": "Request body content type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Content-Type"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "reportId": {
+            "description": "Report Id (Unique UUID)",
+            "type": "string"
+          },
+          "reportName": {
+            "description": "Name of the report",
+            "type": "string"
+          },
+          "schedule": {
+            "description": "Schedule information",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

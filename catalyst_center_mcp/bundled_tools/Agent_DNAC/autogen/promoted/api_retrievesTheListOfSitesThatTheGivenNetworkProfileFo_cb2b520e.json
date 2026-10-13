@@ -1,0 +1,68 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "profileId": "path"
+      },
+      "uri": "/dna/intent/api/v1/networkProfilesForSites/{profileId}/siteAssignments",
+      "version": "3.3.1"
+    },
+    "description": "Retrieves the list of sites that the given network profile for sites is assigned to.\n\nThe list includes the sites the profile has been directly assigned to, as well as child sites that have inherited the profile.\n",
+    "name": "api_retrievesTheListOfSitesThatTheGivenNetworkProfileFo_cb2b520e",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "profileId": {
+          "description": "The `id` of the network profile, retrievable from `GET /intent/api/v1/networkProfilesForSites`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "profileId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

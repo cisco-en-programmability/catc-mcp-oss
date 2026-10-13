@@ -1,0 +1,46 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/interface/network-device/{deviceId}/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the interface count for the given device",
+    "name": "api_getDeviceInterfaceCount",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "Device ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "integer"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

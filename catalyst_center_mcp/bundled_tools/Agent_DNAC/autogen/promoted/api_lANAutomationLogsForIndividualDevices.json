@@ -1,0 +1,91 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "logLevel": "query",
+        "serialNumber": "path"
+      },
+      "uri": "/dna/intent/api/v1/lan-automation/log/{id}/{serialNumber}",
+      "version": "2.3.7.9"
+    },
+    "description": "Invoke this API to get the LAN Automation session logs for individual devices based on the given LAN Automation session id and device serial number. ",
+    "name": "api_lANAutomationLogsForIndividualDevices",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "LAN Automation session identifier.",
+          "type": "string"
+        },
+        "logLevel": {
+          "description": "Supported levels are ERROR, INFO, WARNING, TRACE, CONFIG and ALL. Specifying ALL will display device specific logs with the exception of CONFIG logs. In order to view CONFIG logs along with the remaining logs, please leave the query parameter blank.",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "Device serial number.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "serialNumber"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "logs": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "logLevel": {
+                      "description": "Supported levels are ERROR, INFO, WARNING, TRACE, CONFIG and ALL. Specifying ALL will display device specific logs with the exception of CONFIG logs. In order to view CONFIG logs along with the remaining logs, please leave the query parameter blank.",
+                      "type": "string"
+                    },
+                    "record": {
+                      "description": "Detailed log message.",
+                      "type": "string"
+                    },
+                    "timeStamp": {
+                      "description": "Time at which the log message is created.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "nwOrchId": {
+                "description": "LAN Automation session identifier.",
+                "type": "string"
+              },
+              "serialNumber": {
+                "description": "Device serial number for which the log messages are associated.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

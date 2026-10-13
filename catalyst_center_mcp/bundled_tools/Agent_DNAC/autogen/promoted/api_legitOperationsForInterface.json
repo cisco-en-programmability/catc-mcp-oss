@@ -1,0 +1,94 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "interfaceUuid": "path"
+      },
+      "uri": "/dna/intent/api/v1/interface/{interfaceUuid}/legit-operation",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: CRITICAL**\n\nThis tool retrieves the list of all valid properties and operations for a network interface. The response includes interface properties (name, applicable status, failure reasons) and operations (name, applicable status, failure reasons) that can be performed on the interface.\n\n**REQUIRED PRE-REQUISITE:**\nYou MUST call `get_interface_details` BEFORE calling `api_legitOperationsForInterface`. This is non-negotiable.\n\n**Step-by-step process:**\n\n1. First, invoke `get_interface_details` with the interface name to retrieve the interface UUID\n2. Extract the interfaceUuid from the response\n3. Then, invoke `api_legitOperationsForInterface` with the `interfaceUuid` parameter\n\n**Exception:**\nIf the user explicitly provides a valid interfaceUuid in their request, you may skip step 1 and use the provided UUID directly in `api_legitOperationsForInterface`.\n\n**Use Cases - Pick this tool for questions like:**\n- \"List allowed operations on interface GigabitEthernet1/0/14\"\n- \"What properties can be modified on interface Ethernet1/1\"\n- \"Show valid operations for interface TenGigabitEthernet1/0/1\"\n- \"List operations available on interface Serial0/0/0\"\n- \"What are the allowed operations on interface FastEthernet1/0/48\"\n- \"Check valid properties for interface PortChannel1\"",
+    "name": "api_legitOperationsForInterface",
+    "parameters": {
+      "properties": {
+        "interfaceUuid": {
+          "description": "Interface UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "interfaceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "interfaceUuid": {
+              "description": "Id of the Interface",
+              "type": "string"
+            },
+            "operations": {
+              "description": "Operations handled by the Interface",
+              "items": {
+                "properties": {
+                  "applicable": {
+                    "description": "Checks if operation is applicable to interface",
+                    "type": "string"
+                  },
+                  "failureReason": {
+                    "description": "Failure reason of the Operation",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the Operation",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "properties": {
+              "description": "Properties of the Interface",
+              "items": {
+                "properties": {
+                  "applicable": {
+                    "description": "Checks if property is applicable to interface",
+                    "type": "string"
+                  },
+                  "failureReason": {
+                    "description": "Failure reason of the Property",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the Property",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

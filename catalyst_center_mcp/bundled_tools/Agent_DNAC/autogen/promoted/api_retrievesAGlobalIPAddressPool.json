@@ -1,0 +1,112 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/ipam/globalIpAddressPools/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves a single global IP address pool by UUID (globalIpAddressPoolId).\n\nPRECEDENCE\nApply sections in order. Higher sections override lower sections when they conflict.\n\nS0 Scope and hard boundaries\nS0.1 ID-only global-pool detail tool.\nS0.2 Use only for single global pool detail/configuration retrieval.\nS0.3 Do not use this tool for count/list questions.\nS0.4 Do not use this tool for subpool retrieval.\n\nS1 Invocation rules\nS1.1 Required precondition: globalIpAddressPoolId must be a valid UUID.\nS1.2 If identifier is UUID-shaped, call this tool directly.\nS1.3 If identifier is a name/non-UUID, resolve via api_retrievesGlobalIPAddressPools and answer from resolved result; do not call this tool with name.\nS1.4 If user explicitly asks for a global pool, do not retrieve subpools unless explicitly requested.\n\nS2 Detail semantics and calculations\nS2.1 Global pools that are not empty may contain subpools and/or directly assigned IP addresses.\nS2.2 Available addresses formula:\n  available = totalAddresses - (unassignableAddresses + assignedAddresses + defaultAssignedAddresses)\nS2.3 Netmask/CIDR guidance: a netmask defines network bits; convert netmask to slash prefix by counting 1-bits; present subnet+mask as CIDR when both exist.\n\nS3 Output format\nS3.1 Single global pool detail output must not use a Table.\nS3.2 Preferred shape for multi-field detail output: [Markdown intro, KeyValueSet, Markdown summary].\nS3.3 If KeyValueSet is used, include Markdown context (no widget-only output).\nS3.4 Single global pool detail template (mandatory field order; missing values must be 'N/A'):\n  Global pool details\n  Name:\n  Pool type:\n  IPv4 address space:\n  Gateway IP:\n  DHCP servers:\n  DNS servers:\n  Total addresses:\n  Unassignable addresses:\n  Assigned addresses:\n  Default assigned addresses:\n  Overlapping status:\n\nS4 Prohibitions\nS4.1 Do not call this tool with names/non-UUID identifiers.\nS4.2 This tool is detail-only; do not use for count questions.\n",
+    "name": "api_retrievesAGlobalIPAddressPool",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The `id` of the global IP address pool to retrieve.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "addressSpace": {
+              "description": "",
+              "properties": {
+                "assignedAddresses": {
+                  "description": "The number of addresses assigned from the pool. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                  "type": "string"
+                },
+                "defaultAssignedAddresses": {
+                  "description": "The number of addresses that are assigned from the pool by default. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                  "type": "string"
+                },
+                "dhcpServers": {
+                  "description": "The DHCP server(s) for this subnet.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "dnsServers": {
+                  "description": "The DNS server(s) for this subnet.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "gatewayIpAddress": {
+                  "description": "The gateway IP address for this subnet.",
+                  "type": "string"
+                },
+                "prefixLength": {
+                  "description": "The network mask component, as a decimal, for the CIDR notation of this subnet.",
+                  "type": "number"
+                },
+                "subnet": {
+                  "description": "The IP address component of the CIDR notation for this subnet.",
+                  "type": "string"
+                },
+                "totalAddresses": {
+                  "description": "The total number of addresses in the pool. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                  "type": "string"
+                },
+                "unassignableAddresses": {
+                  "description": "The number of addresses in the pool that cannot be assigned. This is a numeric string; since IPv6 address spaces are 128 bits in size, presume this string has a value up to 128 bits for IPv6 address spaces and 32 bits for IPv4 address spaces.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "The UUID for this global IP pool.",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name for this reserve IP pool. Only letters, numbers, '-' (hyphen), '_' (underscore), '.' (period), and '/' (forward slash) are allowed.",
+              "type": "string"
+            },
+            "poolType": {
+              "description": "Once created, a global pool type cannot be changed. Tunnel: Assigns IP addresses to site-to-site VPN for IPSec tunneling. Generic: used for all other network types.",
+              "enum": [
+                "Generic",
+                "Tunnel"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

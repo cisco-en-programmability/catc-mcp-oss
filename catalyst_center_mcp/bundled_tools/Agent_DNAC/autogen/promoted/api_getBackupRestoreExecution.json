@@ -1,0 +1,209 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "SMO_APR_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/system/api/v1/backupRestoreExecutions/{id}",
+      "version": "1.0.0-oas3"
+    },
+    "description": "**Pick this tool for ONE specific backup or restore execution when you already know the execution ID.**\n\nThis tool retrieves the full details for one backup or restore execution by execution UUID, including error diagnostics, task-level details, status, timing, and failure information.\n\n**Use this tool when the user asks:**\n- why a specific backup execution failed\n- why a specific restore execution failed\n- for detailed status of one execution\n- for task-by-task details of one execution\n- for error codes or error messages for one known execution\n\n**Pick this tool for questions like:**\n- \"Why did backup execution <id> fail?\"\n- \"Show details for restore job <id>\"\n- \"What tasks ran in execution <id>?\"\n- \"Give me the error for backup execution <id>\"\n- \"Show execution diagnostics for <id>\"\n\n**Do NOT use this tool for:**\n- listing all backup jobs or restore jobs\n- discovering execution IDs\n- listing available backups\n\nObtain the execution identifier from `api_getBackupRestoreExecutions`.",
+    "name": "api_getBackupRestoreExecution",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Required execution UUID to inspect. Obtain this value from the `id` field returned by `api_getBackupRestoreExecutions`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Contains the information about backup execution details.",
+      "properties": {
+        "response": {
+          "allOf": [
+            {
+              "description": "Contains the information about backup execution details.",
+              "properties": {
+                "_metadata": {
+                  "additionalProperties": true,
+                  "description": "This field holds additional information",
+                  "type": "object"
+                },
+                "backupId": {
+                  "description": "The UUID of the backup",
+                  "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea5",
+                  "type": "string"
+                },
+                "completedPercentage": {
+                  "description": "Execution completion percentage",
+                  "example": 50.25,
+                  "type": "number"
+                },
+                "createdBy": {
+                  "description": "This field represents the user who triggered this execution",
+                  "example": "John Doe",
+                  "type": "string"
+                },
+                "duration": {
+                  "description": "Total time taken to complete this execution process",
+                  "example": 12345,
+                  "type": "integer"
+                },
+                "endDate": {
+                  "description": "The end data and time of the backup execution",
+                  "example": "2022-04-30T02:21:22.000Z",
+                  "type": "string"
+                },
+                "errorCode": {
+                  "description": "Error code of the backup execution process",
+                  "example": "BACKUP_ERROR",
+                  "type": "string"
+                },
+                "errorMessage": {
+                  "description": "Error message of this backup execution process",
+                  "example": "something went wrong",
+                  "type": "string"
+                },
+                "failedTaskDetail": {
+                  "description": "Failed task detail of this execution",
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The UUID of the execution process",
+                  "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+                  "type": "string"
+                },
+                "isForceUpdate": {
+                  "description": "This states whether the execution is forcefully updated or not",
+                  "example": true,
+                  "type": "boolean"
+                },
+                "jobType": {
+                  "description": "The backup execution job type",
+                  "enum": [
+                    "CREATE_BACKUP",
+                    "DELETE_BACKUP",
+                    "RESTORE_BACKUP"
+                  ],
+                  "example": "CREATE_BACKUP",
+                  "type": "string"
+                },
+                "scope": {
+                  "description": "The backup scope states whether the backup is with assurance or without assurance data",
+                  "enum": [
+                    "CISCO_DNA_DATA_WITH_ASSURANCE",
+                    "CISCO_DNA_DATA_WITHOUT_ASSURANCE"
+                  ],
+                  "example": "CISCO_DNA_DATA_WITH_ASSURANCE",
+                  "type": "string"
+                },
+                "startDate": {
+                  "description": "The start data and time of the backup execution",
+                  "example": "2022-04-30T02:21:22.000Z",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "The status of the backup execution",
+                  "enum": [
+                    "IN_PROGRESS",
+                    "SUCCESS",
+                    "FAILED",
+                    "CANCELLED"
+                  ],
+                  "example": "SUCCESS",
+                  "type": "string"
+                },
+                "systemErrorMessage": {
+                  "description": "System error message of this backup execution process",
+                  "example": "something went wrong",
+                  "type": "string"
+                },
+                "tasks": {
+                  "description": "Represents a task in the backup process",
+                  "items": {
+                    "description": "Contains task information.",
+                    "properties": {
+                      "endDate": {
+                        "description": "The end date and time of the task process",
+                        "example": "2022-04-30T02:21:22.000Z",
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "description": "The error code of the task process",
+                        "example": "SMO#BAPI_INITIALIZATION",
+                        "type": "string"
+                      },
+                      "failedTaskDetail": {
+                        "description": "The failed task detail of the task process",
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "The UUID of the task",
+                        "example": "d13a6a6a-4d23-4f8e-b080-bd6cdfe4920c",
+                        "type": "string"
+                      },
+                      "message": {
+                        "description": "The error message of the task process",
+                        "example": "Not able to connect to mongo managed service",
+                        "type": "string"
+                      },
+                      "startDate": {
+                        "description": "The start date and time of the task process",
+                        "example": "2022-04-30T02:21:22.000Z",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "The task status",
+                        "example": "REVOKED",
+                        "type": "string"
+                      },
+                      "systemErrorMessage": {
+                        "description": "The system error message of the task process",
+                        "example": "Not able to connect to mongo managed service",
+                        "type": "string"
+                      },
+                      "taskName": {
+                        "description": "The task name",
+                        "example": "BACKUP.PREPARE_BACKUP",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "updateMessage": {
+                  "description": "Force update message",
+                  "example": "Force Update",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "description": "Contains information about backup execution details.",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,194 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/nodes-config",
+      "version": "2.3.7.9"
+    },
+    "description": "Provides details about the current Cisco Catalyst Center node configuration, such as API version, node name, NTP server, intracluster link, LACP mode, network static routes, DNS server, subnet mask, host IP, default gateway, and interface information. ",
+    "name": "api_ciscoCatalystCenterNodesConfigurationSummary",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "nodes": {
+              "description": " Node Info",
+              "items": {
+                "properties": {
+                  "id": {
+                    "description": "Cluster Identifier",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Node name",
+                    "type": "string"
+                  },
+                  "network": {
+                    "description": "Network info",
+                    "items": {
+                      "properties": {
+                        "inet": {
+                          "description": "IPV4 configuration",
+                          "properties": {
+                            "dns_servers": {
+                              "description": "DNS server",
+                              "items": {
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "gateway": {
+                              "description": "Default gateway",
+                              "type": "string"
+                            },
+                            "host_ip": {
+                              "description": "IP assigned",
+                              "type": "string"
+                            },
+                            "netmask": {
+                              "description": "Subnet mask",
+                              "type": "string"
+                            },
+                            "routes": {
+                              "description": "Static route",
+                              "items": {
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "inet6": {
+                          "description": "IPV6 configuration",
+                          "properties": {
+                            "host_ip": {
+                              "description": "IP assigned to the host",
+                              "type": "string"
+                            },
+                            "netmask": {
+                              "description": "Subnet mask of the host",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "interface": {
+                          "description": " Interface name",
+                          "type": "string"
+                        },
+                        "intra_cluster_link": {
+                          "description": "Flag to indicate which interface is configured as the inter-cluster link",
+                          "type": "boolean"
+                        },
+                        "lacp_mode": {
+                          "description": "LACP Mode configuration on NIC",
+                          "type": "boolean"
+                        },
+                        "lacp_supported": {
+                          "description": " LACP Support configuration on NIC",
+                          "type": "boolean"
+                        },
+                        "slave": {
+                          "description": "Physical interface name",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "ntp": {
+                    "description": "NTP clock configuration",
+                    "properties": {
+                      "servers": {
+                        "description": "NTP server",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "platform": {
+                    "description": " Platform/Chassis Info",
+                    "properties": {
+                      "product": {
+                        "description": "Product Identifier",
+                        "type": "string"
+                      },
+                      "serial": {
+                        "description": "Serial number of chassis",
+                        "type": "string"
+                      },
+                      "vendor": {
+                        "description": "Product manufacturer",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "proxy": {
+                    "description": "Proxy Info",
+                    "properties": {
+                      "http_proxy": {
+                        "description": "Not Supported",
+                        "type": "string"
+                      },
+                      "https_proxy": {
+                        "description": " Https Proxy Server",
+                        "type": "string"
+                      },
+                      "https_proxy_password": {
+                        "description": " Configured Https excrypted proxy password.",
+                        "type": "string"
+                      },
+                      "https_proxy_username": {
+                        "description": " Configured Https proxy username",
+                        "type": "string"
+                      },
+                      "no_proxy": {
+                        "description": "Servers configured to explicitly use no proxy",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The MAGLEV-API version (this field is for internal development purpose)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

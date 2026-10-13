@@ -1,0 +1,39 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "eventIds": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/subscription/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the count of event subscriptions that have been configured or created. Use this tool when the user asks about the number of active event subscriptions. It can answer questions like How many event subscriptions are configured? or Give me the count of all event subscriptions.",
+    "name": "api_countOfEventSubscriptions",
+    "parameters": {
+      "properties": {
+        "eventIds": {
+          "description": "List of subscriptions related to the respective eventIds",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

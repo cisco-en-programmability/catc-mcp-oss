@@ -1,0 +1,78 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "scanTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/resultsTrend",
+      "version": "2.3.7.9"
+    },
+    "description": "Get network bugs results trend over time. The default sort is by scan time descending.",
+    "name": "api_getNetworkBugsResultsTrendOverTime",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "scanTime": {
+          "description": "Return bugs trend with scanTime greater than this scanTime",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Network bugs trend",
+          "items": {
+            "properties": {
+              "catastrophicBugsCount": {
+                "description": "Number of network bugs which have a severity of CATASTROPHIC",
+                "type": "integer"
+              },
+              "moderateBugsCount": {
+                "description": "Number of network bugs which have a severity of MODERATE",
+                "type": "integer"
+              },
+              "scanTime": {
+                "description": "End time for the scan",
+                "type": "integer"
+              },
+              "severeBugsCount": {
+                "description": "Number of network bugs which have a severity of SEVERE",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

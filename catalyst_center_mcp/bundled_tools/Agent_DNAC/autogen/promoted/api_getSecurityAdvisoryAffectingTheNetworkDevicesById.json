@@ -1,0 +1,95 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/advisories/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Return detailed information about a specific security advisory, PSIRT, or vulnerability affecting network devices by advisory ID. The response includes: advisory ID, number of affected devices (deviceCount), CVE IDs (cveIds), publication URL (publicationUrl), CVSS base score (cvssBaseScore), security impact rating (securityImpactRating), and a list of vulnerable and first fixed versions (firstFixedVersionsList) with mappings of vulnerableVersion to fixedVersions. Use this API to answer questions like 'Get security advisory cisco-sa-20160525-ipv6 details', 'Show me details for advisory CVE-2024-1234', or 'Lookup PSIRT by advisory ID'. This tool provides full advisory details when given a unique advisory identifier.",
+    "name": "api_getSecurityAdvisoryAffectingTheNetworkDevicesById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Id of the security advisory",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Security advisory details",
+          "properties": {
+            "cveIds": {
+              "description": "CVE (Common Vulnerabilities and Exposures) ID of the advisory",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "cvssBaseScore": {
+              "description": "Common Vulnerability Scoring System(CVSS) base score",
+              "type": "number"
+            },
+            "deviceCount": {
+              "description": "Number of devices which are vulnerable to this advisory",
+              "type": "integer"
+            },
+            "firstFixedVersionsList": {
+              "description": "Vulnerable version and the first fixed versions for the vulnerable version",
+              "items": {
+                "properties": {
+                  "fixedVersions": {
+                    "description": "First versions that have the fix for the advisory",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "vulnerableVersion": {
+                    "description": "Version that is vulnerable to the advisory",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "id": {
+              "description": "Id of the security advisory",
+              "type": "string"
+            },
+            "publicationUrl": {
+              "description": "Url for getting advisory details on cisco website",
+              "type": "string"
+            },
+            "securityImpactRating": {
+              "description": "'CRITICAL' - the advisory requires immediate mitigation. 'HIGH' - the advisory requires priority mitigation",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

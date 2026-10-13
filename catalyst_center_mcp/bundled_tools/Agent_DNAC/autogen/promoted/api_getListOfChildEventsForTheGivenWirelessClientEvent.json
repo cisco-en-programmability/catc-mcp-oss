@@ -1,0 +1,100 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "id": "path"
+      },
+      "uri": "/dna/data/api/v1/assuranceEvents/{id}/childEvents",
+      "version": "2.3.7.9"
+    },
+    "description": "Wireless client event could have child events and this API can be used to fetch the same using parent event `id` as the input. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AssuranceEvents-1.0.0-resolved.yaml",
+    "name": "api_getListOfChildEventsForTheGivenWirelessClientEvent",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier for the event",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "details": {
+                "description": "",
+                "type": "string"
+              },
+              "failureCategory": {
+                "description": "",
+                "type": "string"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "reasonCode": {
+                "description": "",
+                "type": "string"
+              },
+              "reasonDescription": {
+                "description": "",
+                "type": "string"
+              },
+              "resultStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "subReasonDescription": {
+                "description": "",
+                "type": "string"
+              },
+              "subreasonCode": {
+                "description": "",
+                "type": "string"
+              },
+              "timestamp": {
+                "description": "",
+                "type": "integer"
+              },
+              "wirelessEventType": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

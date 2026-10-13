@@ -1,0 +1,899 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "macAddress": "query",
+        "timestamp": "query"
+      },
+      "uri": "/dna/intent/api/v1/client-detail",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns detailed Client information retrieved by Mac Address for any given point of time. ",
+    "name": "api_getClientDetail",
+    "parameters": {
+      "properties": {
+        "macAddress": {
+          "description": "MAC Address of the client",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Epoch time(in milliseconds) when the Client health data is required",
+          "type": "number"
+        }
+      },
+      "required": [
+        "macAddress"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "connectionInfo": {
+          "description": "",
+          "properties": {
+            "band": {
+              "description": "The band at which the host is connected. This information is present for wireless hosts only",
+              "type": "string"
+            },
+            "channel": {
+              "description": "The channel used by the host. This information is present for wireless hosts only",
+              "type": "string"
+            },
+            "channelWidth": {
+              "description": "The channel width used by the host. This information is present for wireless hosts only",
+              "type": "string"
+            },
+            "hostType": {
+              "description": "Host Type - WIRELESS or WIRED",
+              "type": "string"
+            },
+            "nwDeviceMac": {
+              "description": "Device MAC address",
+              "type": "string"
+            },
+            "nwDeviceName": {
+              "description": "Name of the network device it is connected to. In case of wireless, it would be an AccessPoint",
+              "type": "string"
+            },
+            "protocol": {
+              "description": "Connection Protocol used. This information is present for wireless hosts only",
+              "type": "string"
+            },
+            "spatialStream": {
+              "description": "The spatial stream of host. This information is present for wireless hosts only",
+              "type": "string"
+            },
+            "timestamp": {
+              "description": "Epoch/Unix time in milliseconds",
+              "type": "integer"
+            },
+            "uapsd": {
+              "description": "The UAPSD of the host. This information is present for wireless hosts only",
+              "type": "string"
+            },
+            "wmm": {
+              "description": "The wmm of the host. This information is present for wireless hosts only",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "detail": {
+          "description": "",
+          "properties": {
+            "aaaServerEAPLatency": {
+              "description": "The AAA server EAP latency",
+              "type": "number"
+            },
+            "aaaServerFailedTransaction": {
+              "description": "The number of failed AAA server transactions",
+              "type": "integer"
+            },
+            "aaaServerIp": {
+              "description": "The AAA server IP",
+              "type": "string"
+            },
+            "aaaServerLatency": {
+              "description": "The AAA server latency",
+              "type": "number"
+            },
+            "aaaServerMABLatency": {
+              "description": "The AAA server MAB latency",
+              "type": "number"
+            },
+            "aaaServerSuccessTransaction": {
+              "description": "The number of successful AAA server transactions",
+              "type": "integer"
+            },
+            "aaaServerTransaction": {
+              "description": "The number of AAA server transactions",
+              "type": "integer"
+            },
+            "apGroup": {
+              "description": "AP group to which the client belongs",
+              "type": "string"
+            },
+            "authType": {
+              "description": "Authentication mechanism of the client",
+              "type": "string"
+            },
+            "avgRssi": {
+              "description": "Average RSSI value for the client",
+              "type": "string"
+            },
+            "avgSnr": {
+              "description": "Average signal to noise ratio for a client",
+              "type": "string"
+            },
+            "bridgeVMMode": {
+              "description": "Bridge VM mode",
+              "type": "string"
+            },
+            "channel": {
+              "description": "Channel to which the client is connected",
+              "type": "string"
+            },
+            "clientConnection": {
+              "description": "AP/Switch to which the client is connected",
+              "type": "string"
+            },
+            "clientType": {
+              "description": "OLD or NEW",
+              "type": "string"
+            },
+            "connectedDevice": {
+              "description": "A list of connected devices",
+              "items": {
+                "properties": {
+                  "band": {
+                    "description": "Band of the AP",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Unique identifier of the device",
+                    "type": "string"
+                  },
+                  "ip address": {
+                    "description": "Management IP address of the connected device.  (deprecated soon in favor of 'mgmtIp')",
+                    "type": "string"
+                  },
+                  "mac": {
+                    "description": "MAC address of the access point",
+                    "type": "string"
+                  },
+                  "mgmtIp": {
+                    "description": "The IP address of the connected device",
+                    "type": "string"
+                  },
+                  "mode": {
+                    "description": "The mode of the access point",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the device",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of device (AP or SWITCH)",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "connectedUpn": {
+              "description": "connected UPN ID",
+              "type": "string"
+            },
+            "connectedUpnId": {
+              "description": "Connected UPN ID",
+              "type": "string"
+            },
+            "connectedUpnOwner": {
+              "description": "Connected UPN owner",
+              "type": "string"
+            },
+            "connectionStatus": {
+              "description": "The client is connected, connecting, or disconnected",
+              "type": "string"
+            },
+            "countryCode": {
+              "description": "The country code of the host",
+              "type": "string"
+            },
+            "dataRate": {
+              "description": "MCS data rates for a client",
+              "type": "string"
+            },
+            "deviceForm": {
+              "description": "The device form of the host (e.g. Phone/Tablet)",
+              "type": "string"
+            },
+            "deviceVendor": {
+              "description": "The device vendor string",
+              "type": "string"
+            },
+            "dhcpDeclineIp": {
+              "description": "DHCP decline IP",
+              "type": "string"
+            },
+            "dhcpNakIp": {
+              "description": "DHCP NAK IP",
+              "type": "string"
+            },
+            "dhcpServerDOLatency": {
+              "description": "The DHCP server DO latency",
+              "type": "number"
+            },
+            "dhcpServerFailedTransaction": {
+              "description": "The number of failed DHCP server transactions",
+              "type": "integer"
+            },
+            "dhcpServerIp": {
+              "description": "The DHCP server IP",
+              "type": "string"
+            },
+            "dhcpServerLatency": {
+              "description": "The DHCP server latency",
+              "type": "number"
+            },
+            "dhcpServerRALatency": {
+              "description": "The DHCP RA latency",
+              "type": "number"
+            },
+            "dhcpServerSuccessTransaction": {
+              "description": "The number of successful DHCP server transactions",
+              "type": "integer"
+            },
+            "dhcpServerTransaction": {
+              "description": "The number of DHCP server transactions",
+              "type": "integer"
+            },
+            "dnsRequest": {
+              "description": "DNS request attempts for a client",
+              "type": "string"
+            },
+            "dnsResponse": {
+              "description": "DNS response attempts for a client",
+              "type": "string"
+            },
+            "dot11Protocol": {
+              "description": "Description of dot11 protocol",
+              "type": "string"
+            },
+            "dot11ProtocolCapability": {
+              "description": "description of dot11 protocol capability",
+              "type": "string"
+            },
+            "duid": {
+              "description": "Device UID for MAC",
+              "type": "string"
+            },
+            "firmwareVersion": {
+              "description": "The firmware version of the host",
+              "type": "string"
+            },
+            "frequency": {
+              "description": "Frequency band to which the client is connected",
+              "type": "string"
+            },
+            "healthScore": {
+              "description": "A list of health score object",
+              "items": {
+                "properties": {
+                  "healthType": {
+                    "description": "Type of device health",
+                    "type": "string"
+                  },
+                  "reason": {
+                    "description": "Reason for the health score value",
+                    "type": "string"
+                  },
+                  "score": {
+                    "description": "health score of client device in the range of 1 to 10. Value 0 for a client represents an IDLE client",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "hostIpV4": {
+              "description": "IPv4 address of the interface",
+              "type": "string"
+            },
+            "hostIpV6": {
+              "description": "List of IPv6 addresses",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "hostMac": {
+              "description": "MAC address of the interface",
+              "type": "string"
+            },
+            "hostName": {
+              "description": "The hostname of the host",
+              "type": "string"
+            },
+            "hostOs": {
+              "description": "The OS of host",
+              "type": "string"
+            },
+            "hostType": {
+              "description": "WIRED or WIRELESS",
+              "enum": [
+                "wired",
+                "wireless"
+              ],
+              "type": "string"
+            },
+            "hostVersion": {
+              "description": "The version of OS of host",
+              "type": "string"
+            },
+            "hwModel": {
+              "description": "Hardware model",
+              "type": "string"
+            },
+            "id": {
+              "description": "Unique identifier representing a specific host",
+              "type": "string"
+            },
+            "identifier": {
+              "description": "The host's unique identifier, which is populated by and in order of userId, hostName, hostIpV4, hostIpV6, or hostMac",
+              "type": "string"
+            },
+            "intelCapable": {
+              "description": "Whether support Intel device analytics",
+              "type": "boolean"
+            },
+            "iosCapable": {
+              "description": "",
+              "type": "boolean"
+            },
+            "isGuestUPNEndpoint": {
+              "description": "Whether it is guest UPN endpoint",
+              "type": "boolean"
+            },
+            "issueCount": {
+              "description": "Issue count for a device",
+              "type": "integer"
+            },
+            "l2VirtualNetwork": {
+              "description": "Comma separated Level 2 virtual network names",
+              "type": "string"
+            },
+            "l3VirtualNetwork": {
+              "description": "Comma separated Level 3 virtual network names",
+              "type": "string"
+            },
+            "lastUpdated": {
+              "description": "Epoch/Unix time in milliseconds",
+              "type": "integer"
+            },
+            "latencyBe": {
+              "description": "Best-effort latency",
+              "type": "number"
+            },
+            "latencyBg": {
+              "description": "Background latency",
+              "type": "number"
+            },
+            "latencyVideo": {
+              "description": "Video latency",
+              "type": "number"
+            },
+            "latencyVoice": {
+              "description": "Voice latency",
+              "type": "number"
+            },
+            "linkSpeed": {
+              "description": "The speed of wired client",
+              "type": "number"
+            },
+            "linkThreshold": {
+              "description": "Link error threshold of wired client",
+              "type": "string"
+            },
+            "location": {
+              "description": "Site location of client",
+              "type": "string"
+            },
+            "maxRoamingDuration": {
+              "description": "Max roaming duration for a client",
+              "type": "string"
+            },
+            "modelName": {
+              "description": "System model",
+              "type": "string"
+            },
+            "onboarding": {
+              "description": "Onboarding data for the client",
+              "properties": {
+                "aaaRootcauseList": {
+                  "description": "Root cause list of AAA failure category",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "aaaServerIp": {
+                  "description": "AAA server IP for a client",
+                  "type": "string"
+                },
+                "assocDoneTime": {
+                  "description": "Epoch/Unix time in milliseconds",
+                  "type": "integer"
+                },
+                "assocRootcauseList": {
+                  "description": "Root cause list of ASSOC failure category",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "authDoneTime": {
+                  "description": "Epoch/Unix time in milliseconds",
+                  "type": "integer"
+                },
+                "averageAssocDuration": {
+                  "description": "Average association duration for a client",
+                  "type": "string"
+                },
+                "averageAuthDuration": {
+                  "description": "Average auth duration for a client",
+                  "type": "string"
+                },
+                "averageDhcpDuration": {
+                  "description": "Average DHCP duration for a client",
+                  "type": "string"
+                },
+                "averageRunDuration": {
+                  "description": "Average run Duration for a client",
+                  "type": "string"
+                },
+                "dhcpDoneTime": {
+                  "description": "Epoch/Unix time in milliseconds",
+                  "type": "integer"
+                },
+                "dhcpRootcauseList": {
+                  "description": "Root cause list of DHCP failure category",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "dhcpServerIp": {
+                  "description": "DHCP server IP for a client",
+                  "type": "string"
+                },
+                "latestRootCauseList": {
+                  "description": "Root cause list of latest root cause category",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "maxAssocDuration": {
+                  "description": "Max association duration for a client",
+                  "type": "string"
+                },
+                "maxAuthDuration": {
+                  "description": "Max auth duration for a client",
+                  "type": "string"
+                },
+                "maxDhcpDuration": {
+                  "description": "Max DHCP duration for a client",
+                  "type": "string"
+                },
+                "maxRunDuration": {
+                  "description": "Max run duration for a client",
+                  "type": "string"
+                },
+                "otherRootcauseList": {
+                  "description": "Root cause list of other failure category",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingTime": {
+              "description": "Epoch/Unix time in milliseconds",
+              "type": "integer"
+            },
+            "port": {
+              "description": "switch port for client",
+              "type": "string"
+            },
+            "portDescription": {
+              "description": "Port desctiption of wired client",
+              "type": "string"
+            },
+            "powerType": {
+              "description": "AC/DC voltage",
+              "type": "string"
+            },
+            "privateMac": {
+              "description": "",
+              "type": "boolean"
+            },
+            "remoteEndDuplexMode": {
+              "description": "The remote end duplex mode of wired client",
+              "type": "string"
+            },
+            "rssi": {
+              "description": "Min RSSI value for the client",
+              "type": "string"
+            },
+            "rssiIsInclude": {
+              "description": "RSSI include/exclude flag",
+              "type": "string"
+            },
+            "rssiThreshold": {
+              "description": "RSSI threshold",
+              "type": "string"
+            },
+            "rxBytes": {
+              "description": "Total received bytes for a client",
+              "type": "string"
+            },
+            "rxLinkError": {
+              "description": "The error of rx link",
+              "type": "number"
+            },
+            "rxRate": {
+              "description": "The rate of rx",
+              "type": "number"
+            },
+            "rxRetryPct": {
+              "description": "The retry count as percentage wrt to total rx packets",
+              "type": "string"
+            },
+            "salesCode": {
+              "description": "The Sales Code of the host",
+              "type": "string"
+            },
+            "sessionDuration": {
+              "description": "Time duration the session took from run time to delete time",
+              "type": "string"
+            },
+            "sgt": {
+              "description": "Security group tag",
+              "type": "string"
+            },
+            "slotId": {
+              "description": "Slot ID of AP which client is connected",
+              "type": "integer"
+            },
+            "snr": {
+              "description": "Min signal to noise ratio for the client",
+              "type": "string"
+            },
+            "snrIsInclude": {
+              "description": "SNR include/exclude flag",
+              "type": "string"
+            },
+            "snrThreshold": {
+              "description": "SNR threshold",
+              "type": "string"
+            },
+            "ssid": {
+              "description": "WLAN SSID to which the client is connected",
+              "type": "string"
+            },
+            "subType": {
+              "description": "The device type of host",
+              "type": "string"
+            },
+            "tracked": {
+              "description": "Tracking status of this host",
+              "type": "string"
+            },
+            "trustDetails": {
+              "description": "Trust details explaining reason for corresponding Trust score",
+              "type": "string"
+            },
+            "trustScore": {
+              "description": "Trust score of Client received from EndPoint Analytics",
+              "type": "string"
+            },
+            "txBytes": {
+              "description": "total transmitted bytes for a client",
+              "type": "string"
+            },
+            "txLinkError": {
+              "description": "The error of tx link",
+              "type": "number"
+            },
+            "txRate": {
+              "description": "The rate of tx",
+              "type": "number"
+            },
+            "upnId": {
+              "description": "Registered UPN ID of the host",
+              "type": "string"
+            },
+            "upnName": {
+              "description": "Registered UPN name of the host",
+              "type": "string"
+            },
+            "upnOwner": {
+              "description": "Owner of registered UPN name",
+              "type": "string"
+            },
+            "usage": {
+              "description": "Usage of txBytes and rxBytes of client",
+              "type": "number"
+            },
+            "userId": {
+              "description": "The user ID of this host",
+              "type": "string"
+            },
+            "versionTime": {
+              "description": "The metric modification time of the new version",
+              "type": "integer"
+            },
+            "vlanId": {
+              "description": "VLAN ID for the host",
+              "type": "integer"
+            },
+            "vnid": {
+              "description": "VNID of the host",
+              "type": "integer"
+            },
+            "wlcName": {
+              "description": "The name of the connected wireless controller",
+              "type": "string"
+            },
+            "wlcUuid": {
+              "description": "UUID of the WLC the client connected to",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "topology": {
+          "description": "",
+          "properties": {
+            "links": {
+              "description": "Links of the topology",
+              "items": {
+                "properties": {
+                  "apRadioAdminStatus": {
+                    "description": "The admin status of the radio",
+                    "type": "string"
+                  },
+                  "apRadioOperStatus": {
+                    "description": "The oper status of the radio",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Identifier of the node",
+                    "type": "string"
+                  },
+                  "interfaceDetails": {
+                    "description": "Interface detail information",
+                    "items": {
+                      "properties": {
+                        "adminStatus": {
+                          "description": "The admin status of network device interface",
+                          "type": "string"
+                        },
+                        "clientMacAddress": {
+                          "description": "The MAC address of the client device",
+                          "type": "string"
+                        },
+                        "connectedDeviceIntName": {
+                          "description": "The interface name of the network device",
+                          "type": "string"
+                        },
+                        "duplex": {
+                          "description": "The duplex info of the network device interface",
+                          "type": "string"
+                        },
+                        "portMode": {
+                          "description": "The port mode info of network device interface",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "label": {
+                    "description": "The details of the edge",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "linkStatus": {
+                    "description": "Link status of the link",
+                    "type": "string"
+                  },
+                  "portUtilization": {
+                    "description": "Port utilization",
+                    "type": "number"
+                  },
+                  "source": {
+                    "description": "Edge line starting node",
+                    "type": "string"
+                  },
+                  "sourceAdminStatus": {
+                    "description": "The admin status of the source",
+                    "type": "string"
+                  },
+                  "sourceDuplexInfo": {
+                    "description": "The duplex info of the source",
+                    "type": "string"
+                  },
+                  "sourceInterfaceName": {
+                    "description": "The interface name of the source",
+                    "type": "string"
+                  },
+                  "sourceLinkStatus": {
+                    "description": "The status of the link",
+                    "type": "string"
+                  },
+                  "sourcePortMode": {
+                    "description": "The port mode of the source",
+                    "type": "string"
+                  },
+                  "sourcePortVLANInfo": {
+                    "description": "List of VLANs configured on the source port",
+                    "type": "string"
+                  },
+                  "target": {
+                    "description": "End node of the edge line",
+                    "type": "string"
+                  },
+                  "targetAdminStatus": {
+                    "description": "The admin status of the target",
+                    "type": "string"
+                  },
+                  "targetDuplexInfo": {
+                    "description": "The duplex info of the target",
+                    "type": "string"
+                  },
+                  "targetInterfaceName": {
+                    "description": "The interface name of the target",
+                    "type": "string"
+                  },
+                  "targetLinkStatus": {
+                    "description": "The status of the link",
+                    "type": "string"
+                  },
+                  "targetPortMode": {
+                    "description": "The port mode of the target",
+                    "type": "string"
+                  },
+                  "targetPortVLANInfo": {
+                    "description": "List of VLANs configured on the target port",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "nodes": {
+              "description": "Nodes of the topology",
+              "items": {
+                "properties": {
+                  "clients": {
+                    "description": "Number of clients",
+                    "type": "number"
+                  },
+                  "connectedDevice": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "count": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "description": {
+                    "description": "Description of the topology node",
+                    "type": "string"
+                  },
+                  "deviceType": {
+                    "description": "Device type",
+                    "type": "string"
+                  },
+                  "fabricGroup": {
+                    "description": "Fabric Group",
+                    "type": "string"
+                  },
+                  "fabricRole": {
+                    "description": "Fabric Role",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "family": {
+                    "description": "Device family",
+                    "type": "string"
+                  },
+                  "healthScore": {
+                    "description": "Device health score",
+                    "type": "number"
+                  },
+                  "id": {
+                    "description": "User ID, hostname, IP address, or MAC address",
+                    "type": "string"
+                  },
+                  "ip": {
+                    "description": "Device IP",
+                    "type": "string"
+                  },
+                  "ipv6": {
+                    "description": "Device IPv6",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "level": {
+                    "description": "Level in the topology",
+                    "type": "number"
+                  },
+                  "name": {
+                    "description": "Device name",
+                    "type": "string"
+                  },
+                  "nodeType": {
+                    "description": "Node type",
+                    "type": "string"
+                  },
+                  "platformId": {
+                    "description": "Device platform ID",
+                    "type": "string"
+                  },
+                  "radioFrequency": {
+                    "description": "Radio frequency",
+                    "type": "string"
+                  },
+                  "role": {
+                    "description": "Device role",
+                    "type": "string"
+                  },
+                  "softwareVersion": {
+                    "description": "Device software version",
+                    "type": "string"
+                  },
+                  "stackType": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "userId": {
+                    "description": "User ID",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

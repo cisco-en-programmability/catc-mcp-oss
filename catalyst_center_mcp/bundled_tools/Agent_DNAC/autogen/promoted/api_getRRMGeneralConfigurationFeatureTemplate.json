@@ -1,0 +1,103 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/rrmGeneralConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific RRM General configuration feature template by ID.",
+    "name": "api_getRRMGeneralConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Multicast Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "RRM General Configuration Response",
+          "properties": {
+            "designName": {
+              "description": "The feature template design name",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "RRM General Configuration Feature Attributes",
+              "properties": {
+                "coverageHoleDetection": {
+                  "description": "Global Coverage Hole Detection.",
+                  "type": "boolean"
+                },
+                "monitoringChannels": {
+                  "description": "The monitoringChannels attribute represents the scope of monitoring channels.",
+                  "enum": [
+                    "MONITORING_CHANNELS_ALL",
+                    "MONITORING_CHANNELS_COUNTRY",
+                    "MONITORING_CHANNELS_DCA"
+                  ],
+                  "type": "string"
+                },
+                "neighborDiscoverType": {
+                  "description": "The neighborDiscoverType attribute represents the type of neighbor discovery.",
+                  "enum": [
+                    "NEIGHBOR_DISCOVER_TYPE_TRANSPARENT",
+                    "NEIGHBOR_DISCOVER_TYPE_PROTECTED"
+                  ],
+                  "type": "string"
+                },
+                "radioBand": {
+                  "description": "Radio Band 2_4GHZ is supported only on Cisco IOS-XE based Wireless Controllers running 17.9.1 and above.",
+                  "enum": [
+                    "2_4GHZ",
+                    "5GHZ",
+                    "6GHZ"
+                  ],
+                  "type": "string"
+                },
+                "throughputThreshold": {
+                  "description": "Throughput Threshold.",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "ID of the RRM FRA configuration feature template",
+              "type": "string"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

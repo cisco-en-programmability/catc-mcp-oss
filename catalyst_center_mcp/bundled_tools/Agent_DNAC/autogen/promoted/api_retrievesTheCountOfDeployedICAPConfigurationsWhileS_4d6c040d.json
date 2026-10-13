@@ -1,0 +1,66 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "apId": "query",
+        "captureStatus": "query",
+        "captureType": "query",
+        "clientMac": "query",
+        "wlcId": "query"
+      },
+      "uri": "/dna/intent/api/v1/icapSettings/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the count of deployed ICAP configurations while supporting basic filtering. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-ICAP_APIs-1.0.0-resolved.yaml",
+    "name": "api_retrievesTheCountOfDeployedICAPConfigurationsWhileS_4d6c040d",
+    "parameters": {
+      "properties": {
+        "apId": {
+          "description": "The AP device's UUID.",
+          "type": "string"
+        },
+        "captureStatus": {
+          "description": "Catalyst Center ICAP status",
+          "type": "string"
+        },
+        "captureType": {
+          "description": "Catalyst Center ICAP type",
+          "type": "string"
+        },
+        "clientMac": {
+          "description": "The client device MAC address in ICAP configuration",
+          "type": "string"
+        },
+        "wlcId": {
+          "description": "The wireless controller device's UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "captureStatus"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "number"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

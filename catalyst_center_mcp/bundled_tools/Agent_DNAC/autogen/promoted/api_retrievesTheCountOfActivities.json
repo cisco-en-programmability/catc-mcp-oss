@@ -1,0 +1,75 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "description": "query",
+        "endTime": "query",
+        "recurring": "query",
+        "startTime": "query",
+        "status": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/activities/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the count of activities",
+    "name": "api_retrievesTheCountOfActivities",
+    "parameters": {
+      "properties": {
+        "description": {
+          "description": "The description provided when creating the activity",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "This is the epoch millisecond end time upto which activities need to be fetched",
+          "type": "string"
+        },
+        "recurring": {
+          "description": "Denotes whether an activity is recurring or not",
+          "type": "boolean"
+        },
+        "startTime": {
+          "description": "This is the epoch millisecond start time from which activities need to be fetched",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the activity",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the activity",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

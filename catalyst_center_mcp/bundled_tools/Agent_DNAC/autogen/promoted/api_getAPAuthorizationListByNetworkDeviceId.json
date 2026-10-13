@@ -1,0 +1,97 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/{networkDeviceId}/apAuthorizationLists",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get an AP Authorization List details configured for the given provisioned network device Id. Obtain the network device ID value by using the API GET call '/dna/intent/api/v1/network-device/ip-address/${ipAddress}'.    ",
+    "name": "api_getAPAuthorizationListByNetworkDeviceId",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Network Device ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "apAuthorizationListName": {
+              "description": "",
+              "type": "string"
+            },
+            "localAuthorization": {
+              "description": "",
+              "properties": {
+                "apMacEntries": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "apSerialNumberEntries": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "networkDeviceId": {
+              "description": "",
+              "type": "string"
+            },
+            "remoteAuthorization": {
+              "description": "",
+              "properties": {
+                "aaaServers": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "authorizeApWithMac": {
+                  "description": "",
+                  "type": "boolean"
+                },
+                "authorizeApWithSerialNumber": {
+                  "description": "",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

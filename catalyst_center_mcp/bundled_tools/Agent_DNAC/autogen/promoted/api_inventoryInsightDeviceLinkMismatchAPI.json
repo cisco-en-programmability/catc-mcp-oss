@@ -1,0 +1,204 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "siteId": "path",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/insight/{siteId}/device-link",
+      "version": "2.3.7.9"
+    },
+    "description": "Find all devices with link mismatch (speed /  vlan)",
+    "name": "api_inventoryInsightDeviceLinkMismatchAPI",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "Links mismatch category.  Value can be speed-duplex or vlan.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Order.  Value can be asc or desc.  Default value is asc",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "siteId",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Sort By",
+          "type": "string"
+        }
+      },
+      "required": [
+        "siteId",
+        "category"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "avgUpdateFrequency": {
+                "description": "Average update frequency",
+                "type": "number"
+              },
+              "endDeviceHostName": {
+                "description": "End device hostname",
+                "type": "string"
+              },
+              "endDeviceId": {
+                "description": "End device id",
+                "type": "string"
+              },
+              "endDeviceIpAddress": {
+                "description": "End device ip address",
+                "type": "string"
+              },
+              "endPortAddress": {
+                "description": "End port address",
+                "type": "string"
+              },
+              "endPortAllowedVlanIds": {
+                "description": "End port allowed vlan ids",
+                "type": "string"
+              },
+              "endPortDuplex": {
+                "description": "End port duplex",
+                "type": "string"
+              },
+              "endPortId": {
+                "description": "End port id",
+                "type": "string"
+              },
+              "endPortMask": {
+                "description": "End port mask",
+                "type": "string"
+              },
+              "endPortName": {
+                "description": "End port name",
+                "type": "string"
+              },
+              "endPortNativeVlanId": {
+                "description": "End port native vlan id",
+                "type": "string"
+              },
+              "endPortPepId": {
+                "description": "End port pep id",
+                "type": "string"
+              },
+              "endPortSpeed": {
+                "description": "End port speed",
+                "type": "string"
+              },
+              "instanceTenantId": {
+                "description": "Instance tenant id",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "Unique instance id",
+                "type": "string"
+              },
+              "lastUpdated": {
+                "description": "Last updated",
+                "type": "string"
+              },
+              "linkStatus": {
+                "description": "Link status",
+                "type": "string"
+              },
+              "numUpdates": {
+                "description": "Number updates",
+                "type": "number"
+              },
+              "startDeviceHostName": {
+                "description": "Start device hostname",
+                "type": "string"
+              },
+              "startDeviceId": {
+                "description": "Start device id",
+                "type": "string"
+              },
+              "startDeviceIpAddress": {
+                "description": "Start device ip address",
+                "type": "string"
+              },
+              "startPortAddress": {
+                "description": "Start port address",
+                "type": "string"
+              },
+              "startPortAllowedVlanIds": {
+                "description": "Start port allowed vlan ids",
+                "type": "string"
+              },
+              "startPortDuplex": {
+                "description": "Start port duplex",
+                "type": "string"
+              },
+              "startPortId": {
+                "description": "Start port id",
+                "type": "string"
+              },
+              "startPortMask": {
+                "description": "Start port mask",
+                "type": "string"
+              },
+              "startPortName": {
+                "description": "Start port name",
+                "type": "string"
+              },
+              "startPortNativeVlanId": {
+                "description": "Start port native vlan id",
+                "type": "string"
+              },
+              "startPortPepId": {
+                "description": "Start port pep id",
+                "type": "string"
+              },
+              "startPortSpeed": {
+                "description": "Start port speed",
+                "type": "string"
+              },
+              "type": {
+                "description": "Type",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Api version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

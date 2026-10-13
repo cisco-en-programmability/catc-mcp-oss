@@ -1,0 +1,138 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "endTime": "query",
+        "id": "path",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "startTime": "query",
+        "trendInterval": "query"
+      },
+      "uri": "/dna/data/api/v1/transitNetworkHealthSummaries/{id}/trendAnalytics",
+      "version": "2.3.7.9"
+    },
+    "description": "Get health time series for a specific Transit Network by providing the unique Transit Network id in the url path.\nThe data will be grouped based on the specified trend time interval. If startTime and endTime are not provided, the API defaults to the last 24 hours.\n\nBy default:\n- the number of records returned will be 500.\n- the records will be sorted in time ascending (`asc`) order\n\nThis API provides the latest health data until the given `endTime`. If data is not ready for the provided endTime, the request will fail with error code `400 Bad Request`, and the error message will indicate the recommended endTime to use to retrieve a complete data set. This behavior may occur if the provided endTime=currentTime, since we are not a real time system. When `endTime` is not provided, the API returns the latest data.\n\nFor detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-transitNetworkHealthSummaries-1.0.1-resolved.yaml\n",
+    "name": "api_theTrendAnalyticsDataForATransitNetworkInTheSpecifi_5c01728a",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "The interested fields in the request. For valid attributes, verify the documentation.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "The unique transit network id, Ex \u201c1551156a-bc97-3c63-aeda-8a6d3765b5b9\"",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "trendInterval": {
+          "description": "The time window to aggregate the metrics. \nInterval can be 5 minutes or 10 minutes or 1 hour or 1 day or 7 days\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "trendInterval"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "timeSortOrder": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "attributes": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "name": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "timestamp": {
+                "description": "",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

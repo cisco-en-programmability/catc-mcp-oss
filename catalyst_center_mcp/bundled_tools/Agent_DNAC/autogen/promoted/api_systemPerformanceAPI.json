@@ -1,0 +1,121 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "function": "query",
+        "kpi": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/diagnostics/system/performance",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the aggregated metrics (total, average or maximum) of cluster key performance indicators (KPIs), such as CPU utilization, memory utilization or network rates recorded within a specified time period. The data will be available from the past 24 hours.",
+    "name": "api_systemPerformanceAPI",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "This is the epoch end time in milliseconds upto which performance indicator need to be fetched",
+          "type": "number"
+        },
+        "function": {
+          "description": "Valid values: sum,average,max",
+          "type": "string"
+        },
+        "kpi": {
+          "description": "Valid values: cpu,memory,network",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "This is the epoch start time in milliseconds from which performance indicator need to be fetched",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "hostName": {
+          "description": "",
+          "type": "string"
+        },
+        "kpis": {
+          "description": "Performance indicators ",
+          "properties": {
+            "cpu": {
+              "description": "",
+              "properties": {
+                "units": {
+                  "description": "Units for cpu usage",
+                  "type": "string"
+                },
+                "utilization": {
+                  "description": "cpu usage in units",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "memory": {
+              "description": "",
+              "properties": {
+                "units": {
+                  "description": "Units for memory usage",
+                  "type": "string"
+                },
+                "utilization": {
+                  "description": "Memory usage in units",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "network rx_rate": {
+              "description": "",
+              "properties": {
+                "units": {
+                  "description": "Units for network rx_rate",
+                  "type": "string"
+                },
+                "utilization": {
+                  "description": "Network rx_rate in units",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "network tx_rate": {
+              "description": "",
+              "properties": {
+                "units": {
+                  "description": "Units for network tx_rate",
+                  "type": "string"
+                },
+                "utilization": {
+                  "description": "Network tx_rate in units",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the API",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

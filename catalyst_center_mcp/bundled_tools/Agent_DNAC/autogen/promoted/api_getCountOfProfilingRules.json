@@ -1,0 +1,45 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "includeDeleted": "query",
+        "ruleType": "query"
+      },
+      "uri": "/dna/intent/api/v1/endpoint-analytics/profiling-rules/count",
+      "version": "2.3.7.9"
+    },
+    "description": "This API fetches the count of profiling rules based on the filter values provided in the query parameters. The filter parameters are same as that of 'GET /profiling-rules' API, excluding the pagination and sort parameters.\n",
+    "name": "api_getCountOfProfilingRules",
+    "parameters": {
+      "properties": {
+        "includeDeleted": {
+          "description": "Flag to indicate whether deleted rules should be part of the records fetched.",
+          "type": "boolean"
+        },
+        "ruleType": {
+          "description": "Use comma-separated list of rule types to filter the data. Defaults to 'Custom Rule'.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "count": {
+          "description": "",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,234 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "family": "query",
+        "faultyDeviceName": "query",
+        "faultyDevicePlatform": "query",
+        "faultyDeviceSerialNumber": "query",
+        "limit": "query",
+        "offset": "query",
+        "replacementDevicePlatform": "query",
+        "replacementDeviceSerialNumber": "query",
+        "replacementStatus": "query",
+        "sortBy": "query",
+        "sortOrder": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceReplacements",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve the workflow execution status of device replacements. Use this tool when the query is specifically about workflow process state. For general queries about device replacement status, device details, or listing devices by status, prefer api_returnListOfReplacementDevicesWithReplacementDetails instead. Filters can be applied based on faulty device name, faulty device platform, faulty device serial number, replacement device platform, replacement device serial number, device replacement status, device family.",
+    "name": "api_retrieveTheStatusOfAllTheDeviceReplacementWorkflows",
+    "parameters": {
+      "properties": {
+        "family": {
+          "description": "List of faulty device families. Available values: Routers, Switches and Hubs, Wireless Controller, Unified AP",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "faultyDeviceName": {
+          "description": "Faulty device name.",
+          "type": "string"
+        },
+        "faultyDevicePlatform": {
+          "description": "Faulty device platform.",
+          "type": "string"
+        },
+        "faultyDeviceSerialNumber": {
+          "description": "Faulty device serial number.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "replacementDevicePlatform": {
+          "description": "Replacement device platform.",
+          "type": "string"
+        },
+        "replacementDeviceSerialNumber": {
+          "description": "Replacement device serial number.",
+          "type": "string"
+        },
+        "replacementStatus": {
+          "description": "Device replacement status filter. Only underscore format is accepted (hyphens will be rejected by validation). Available values: READY_FOR_REPLACEMENT, REPLACEMENT_IN_PROGRESS, REPLACEMENT_SCHEDULED, REPLACED, ERROR, NETWORK_READINESS_REQUESTED, NETWORK_READINESS_FAILED. 'NETWORK_READINESS_REQUESTED' - Initiated steps to shut down neighboring device interfaces and create a DHCP server on the uplink neighbor if the faulty device is part of a fabric setup. 'NETWORK_READINESS_FAILED' - Preparation of the network failed. 'READY_FOR_REPLACEMENT' - The network is prepared for the faulty device replacement. 'REPLACEMENT_SCHEDULED' - Device replacement has been scheduled. 'REPLACEMENT_IN_PROGRESS' - Device replacement is currently in progress. 'REPLACED' - Device replacement was successful. 'ERROR' - Device replacement has failed. Note: MARKED_FOR_REPLACEMENT is a transient internal state not available as a filter. Devices 'marked for replacement' immediately transition to READY_FOR_REPLACEMENT (or NETWORK_READINESS_REQUESTED for fabric devices). To find devices that were marked for replacement, query READY_FOR_REPLACEMENT and NETWORK_READINESS_REQUESTED.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by. SortBy is mandatory when sortOrder is used. Available values: faultyDeviceName, faultyDevicePlatform, replacementDevicePlatform, faultyDeviceSerialNumber, replacementDeviceSerialNumber, replacementStatus, family",
+          "type": "string"
+        },
+        "sortOrder": {
+          "description": "Sort order for the sortBy field. Available values: ASC, DESC",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Response Body",
+      "properties": {
+        "response": {
+          "description": "List of network device replacements",
+          "items": {
+            "properties": {
+              "creationTime": {
+                "description": "Time of marking the device for replacement in Unix epoch time in milliseconds",
+                "type": "integer"
+              },
+              "family": {
+                "description": "Faulty device family",
+                "type": "string"
+              },
+              "faultyDeviceId": {
+                "description": "Faulty device id",
+                "type": "string"
+              },
+              "faultyDeviceName": {
+                "description": "Faulty device name",
+                "type": "string"
+              },
+              "faultyDevicePlatform": {
+                "description": "Faulty device platform",
+                "type": "string"
+              },
+              "faultyDeviceSerialNumber": {
+                "description": "Faulty device serial number",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier of the device replacement resource",
+                "type": "string"
+              },
+              "neighborDeviceId": {
+                "description": "Unique identifier of the neighbor device to create the DHCP server",
+                "type": "string"
+              },
+              "replacementDevicePlatform": {
+                "description": "Replacement device platform",
+                "type": "string"
+              },
+              "replacementDeviceSerialNumber": {
+                "description": "Replacement device serial number",
+                "type": "string"
+              },
+              "replacementStatus": {
+                "description": "Device Replacement status. 'MARKED_FOR_REPLACEMENT' - The faulty device has been marked for replacement. 'NETWORK_READINESS_REQUESTED' - Initiated steps to shut down neighboring device interfaces and create a DHCP server on the uplink neighbor if the faulty device is part of a fabric setup. 'NETWORK_READINESS_FAILED' - Preparation of the network failed. Neighboring device interfaces were not shut down, and the DHCP server on the uplink neighbor was not created. 'READY_FOR_REPLACEMENT' - The network is prepared for the faulty device replacement. Neighboring device interfaces are shut down, and the DHCP server on the uplink neighbor is set up. 'REPLACEMENT_SCHEDULED' - Device replacement has been scheduled. 'REPLACEMENT_IN_PROGRESS' - Device replacement is currently in progress. 'REPLACED' - Device replacement was successful. 'ERROR' - Device replacement has failed.",
+                "enum": [
+                  "MARKED_FOR_REPLACEMENT",
+                  "NETWORK_READINESS_REQUESTED",
+                  "NETWORK_READINESS_FAILED",
+                  "READY_FOR_REPLACEMENT",
+                  "REPLACEMENT_SCHEDULED",
+                  "REPLACEMENT_IN_PROGRESS",
+                  "REPLACED",
+                  "ERROR"
+                ],
+                "type": "string"
+              },
+              "replacementTime": {
+                "description": "The Unix epoch time in milliseconds at which the device was replaced successfully",
+                "type": "integer"
+              },
+              "workflow": {
+                "description": "Device replacement workflow",
+                "properties": {
+                  "endTime": {
+                    "description": "Completion time of the workflow in Unix epoch time in milliseconds",
+                    "type": "integer"
+                  },
+                  "id": {
+                    "description": "Workflow id",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the workflow",
+                    "type": "string"
+                  },
+                  "startTime": {
+                    "description": "Start time of the workflow in Unix epoch time in milliseconds",
+                    "type": "integer"
+                  },
+                  "steps": {
+                    "description": "List of steps involved in the device replacement workflow. The number of steps in the workflow depends on various parameters. Maximum number of steps in the workflow will not exceed 25.",
+                    "items": {
+                      "properties": {
+                        "endTime": {
+                          "description": "Completion time of the workflow step in Unix epoch time in milliseconds",
+                          "type": "integer"
+                        },
+                        "name": {
+                          "description": "Workflow step name",
+                          "type": "string"
+                        },
+                        "startTime": {
+                          "description": "Start time of the workflow step in Unix epoch time in milliseconds",
+                          "type": "integer"
+                        },
+                        "status": {
+                          "description": "Workflow step status. 'INIT' - Workflow step has not started execution. 'RUNNING' - Workflow step is currently in progress. 'SUCCESS' - Workflow step completed successfully. 'FAILED' - Workflow step completed with failure. 'ABORTED' - Workflow step aborted execution due to failure of the previous step. 'TIMEOUT' - Workflow step timedout to complete execution.",
+                          "enum": [
+                            "INIT",
+                            "RUNNING",
+                            "SUCCESS",
+                            "FAILED",
+                            "ABORTED",
+                            "TIMEOUT"
+                          ],
+                          "type": "string"
+                        },
+                        "statusMessage": {
+                          "description": "Detailed status message for the step",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "workflowStatus": {
+                    "description": "Workflow status. 'RUNNING' - Workflow is currently in progress. 'SUCCESS' - Workflow completed successfully. 'FAILED' - Workflow completed with failure.",
+                    "enum": [
+                      "RUNNING",
+                      "SUCCESS",
+                      "FAILED"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

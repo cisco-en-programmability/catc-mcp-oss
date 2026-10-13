@@ -1,0 +1,48 @@
+{
+  "function": {
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "name": "query"
+      },
+      "uri": "/dna/intent/api/v1/sites/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the number of sites in Catalyst Center having a given name, or the total number of sites when no site name is provided. Use this tool only for an overall site count or the number of sites with a particular name. This endpoint does not support a site-type filter. Do NOT use it for area, building, or floor counts, and do not send a type argument; use the dedicated type-filtered inventory-count capability instead. If the user does not provide a site name, do not send an empty string. The runtime should treat missing site name as null/omitted for the HTTP request.\n\nExamples:\n- User: \"How many sites do I have?\" -> Tool call: api_getSitesCount({})\n- User: \"Give me the total number of sites in Catalyst Center\" -> Tool call: api_getSitesCount({})\n- User: \"How many sites named San Jose do I have?\" -> Tool call: api_getSitesCount({\"name\": \"San Jose\"})\n- User: \"Count the sites called Building 1\" -> Tool call: api_getSitesCount({\"name\": \"Building 1\"})\n- User: \"How many building-type sites do I have?\" -> Use the dedicated type-filtered inventory-count capability with site type \"building\".",
+    "name": "api_getSitesCount",
+    "parameters": {
+      "properties": {
+        "name": {
+          "description": "Optional site name filter. If the user does not provide a site name, do not send an empty string (`\"\"`). The runtime should treat missing site name as null/omitted for the HTTP request. Example: user asks \"How many sites do I have?\" -> omit `name`. User asks \"How many sites named San Jose do I have?\" -> set `name` to `San Jose`.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "response": {
+            "description": "",
+            "properties": {
+              "count": {
+                "description": "The reported count.",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "version": {
+            "description": "The version of the response",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

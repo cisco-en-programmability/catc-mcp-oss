@@ -1,0 +1,571 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "enableRadioType6GHz": "query",
+        "enableRadioTypeA": "query",
+        "enableRadioTypeB": "query",
+        "limit": "query",
+        "offset": "query",
+        "rfProfileName": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/rfProfiles",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows the user to get all RF Profiles",
+    "name": "api_getRFProfiles",
+    "parameters": {
+      "properties": {
+        "enableRadioType6GHz": {
+          "description": "Enable Radio Type6GHz",
+          "type": "boolean"
+        },
+        "enableRadioTypeA": {
+          "description": "Enable Radio TypeA ",
+          "type": "boolean"
+        },
+        "enableRadioTypeB": {
+          "description": "Enable Radio TypeB",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "rfProfileName": {
+          "description": "RF Profile Name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "defaultRfProfile": {
+                "description": "True if RF Profile is default, else False. Maximum of only 1 RF Profile can be marked as default at any given time",
+                "type": "boolean"
+              },
+              "enableCustom": {
+                "description": "True if RF Profile is custom, else False for system RF profiles like Low, High and Medium (Typical)",
+                "type": "boolean"
+              },
+              "enableRadioType6GHz": {
+                "description": "True if 6 GHz radio band is enabled in the RF Profile, else False",
+                "type": "boolean"
+              },
+              "enableRadioTypeA": {
+                "description": "True if 5 GHz radio band is enabled in the RF Profile, else False",
+                "type": "boolean"
+              },
+              "enableRadioTypeB": {
+                "description": "True if 2.4 GHz radio band is enabled in the RF Profile, else False",
+                "type": "boolean"
+              },
+              "id": {
+                "description": "RF Profile ID",
+                "type": "string"
+              },
+              "radioType6GHzProperties": {
+                "description": "Properties of 6 GHz radio band",
+                "properties": {
+                  "broadcastProbeResponseInterval": {
+                    "description": "Broadcast Probe Response Interval of 6 GHz radio band",
+                    "type": "integer"
+                  },
+                  "coverageHoleDetectionProperties": {
+                    "description": "Configure Coverage Hole Detection Properties",
+                    "properties": {
+                      "chdClientLevel": {
+                        "description": "Coverage Hole Detection Client Level",
+                        "type": "integer"
+                      },
+                      "chdDataRssiThreshold": {
+                        "description": "Coverage Hole Detection Data Rssi Threshold",
+                        "type": "integer"
+                      },
+                      "chdExceptionLevel": {
+                        "description": "Coverage Hole Detection Exception Level(%)",
+                        "type": "integer"
+                      },
+                      "chdVoiceRssiThreshold": {
+                        "description": "Coverage Hole Detection Voice Rssi Threshold",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "customRxSopThreshold": {
+                    "description": "RX-SOP threshold custom configuration of 6 GHz radio band",
+                    "type": "integer"
+                  },
+                  "dataRates": {
+                    "description": "Data rates of 6 GHz radio band passed in comma separated format without any spaces. Permissible values: 6, 9, 12, 18, 24, 36, 48, 54",
+                    "type": "string"
+                  },
+                  "discoveryFrames6GHz": {
+                    "description": "Discovery Frames of 6 GHz radio band",
+                    "enum": [
+                      "None",
+                      "Broadcast Probe Response",
+                      "FILS Discovery"
+                    ],
+                    "type": "string"
+                  },
+                  "enableStandardPowerService": {
+                    "description": "True if Standard Power Service is enabled, else False",
+                    "type": "boolean"
+                  },
+                  "fraPropertiesC": {
+                    "description": "Configure FRA 6 GHz Properties",
+                    "properties": {
+                      "clientResetCount": {
+                        "description": "Client Reset Count of 6 GHz radio band",
+                        "type": "integer"
+                      },
+                      "clientUtilizationThreshold": {
+                        "description": "Client Utilization Threshold of 6 GHz radio band",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "mandatoryDataRates": {
+                    "description": "Mandatory data rates of 6 GHz radio band passed in comma separated format without any spaces and must be a subset of selected dataRates with maximum of 2 values. Permissible values: 6, 9, 12, 18, 24, 36, 48, 54",
+                    "type": "string"
+                  },
+                  "maxDbsWidth": {
+                    "description": "Maximum DBS Width (Permissible Values: 20,40,80,160,320)",
+                    "type": "integer"
+                  },
+                  "maxPowerLevel": {
+                    "description": "Maximum power level of 6 GHz radio band",
+                    "type": "integer"
+                  },
+                  "maxRadioClients": {
+                    "description": "Client Limit of 6 GHz radio band",
+                    "type": "integer"
+                  },
+                  "minDbsWidth": {
+                    "description": "Minimum DBS Width ( Permissible values : 20,40,80,160,320)",
+                    "type": "integer"
+                  },
+                  "minPowerLevel": {
+                    "description": "Minimum power level of 6 GHz radio band",
+                    "type": "integer"
+                  },
+                  "multiBssidProperties": {
+                    "description": "Multi BSSID Properties",
+                    "properties": {
+                      "dot11axParameters": {
+                        "description": "802.11ax Parameters",
+                        "properties": {
+                          "muMimoDownLink": {
+                            "description": "MU-MIMO Downlink",
+                            "type": "boolean"
+                          },
+                          "muMimoUpLink": {
+                            "description": "MU-MIMO Uplink",
+                            "type": "boolean"
+                          },
+                          "ofdmaDownLink": {
+                            "description": "OFDMA Downlink",
+                            "type": "boolean"
+                          },
+                          "ofdmaUpLink": {
+                            "description": "OFDMA Uplink",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "dot11beParameters": {
+                        "description": "802.11be Parameters",
+                        "properties": {
+                          "muMimoDownLink": {
+                            "description": "MU-MIMO Downlink",
+                            "type": "boolean"
+                          },
+                          "muMimoUpLink": {
+                            "description": "MU-MIMO Uplink",
+                            "type": "boolean"
+                          },
+                          "ofdmaDownLink": {
+                            "description": "OFDMA Downlink",
+                            "type": "boolean"
+                          },
+                          "ofdmaMultiRu": {
+                            "description": "OFDMA Multi-RU",
+                            "type": "boolean"
+                          },
+                          "ofdmaUpLink": {
+                            "description": "OFDMA Uplink",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "targetWakeTime": {
+                        "description": "Target Wake Time",
+                        "type": "boolean"
+                      },
+                      "twtBroadcastSupport": {
+                        "description": "TWT Broadcast Support",
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parentProfile": {
+                    "description": "Parent profile of 6 GHz radio band",
+                    "enum": [
+                      "CUSTOM"
+                    ],
+                    "type": "string"
+                  },
+                  "powerThresholdV1": {
+                    "description": "Power threshold of 6 GHz radio band",
+                    "type": "integer"
+                  },
+                  "preamblePuncture": {
+                    "description": "Enable or Disable Preamble Puncturing. This Wifi 7 configuration is applicable to wireless IOS devices supporting 17.15 and higher",
+                    "type": "boolean"
+                  },
+                  "pscEnforcingEnabled": {
+                    "description": "PSC Enforcing Enable for 6 GHz radio band",
+                    "type": "boolean"
+                  },
+                  "radioChannels": {
+                    "description": "DCA channels of 6 GHz radio band passed in comma separated format without any spaces. Permissible values: 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69, 73, 77, 81, 85, 89, 93, 97, 101, 105, 109, 113, 117, 121, 125, 129, 133, 137, 141, 145, 149, 153, 157, 161, 165, 169, 173, 177, 181, 185, 189, 193, 197, 201, 205, 209, 213, 217, 221, 225, 229, 233",
+                    "type": "string"
+                  },
+                  "rxSopThreshold": {
+                    "description": "RX-SOP threshold of 6 GHz radio band",
+                    "enum": [
+                      "HIGH",
+                      "MEDIUM",
+                      "LOW",
+                      "AUTO",
+                      "CUSTOM"
+                    ],
+                    "type": "string"
+                  },
+                  "spatialReuseProperties": {
+                    "description": "Spatial Reuse Properties.",
+                    "properties": {
+                      "dot11axNonSrgObssPacketDetect": {
+                        "description": "Dot11ax Non SRG OBSS PD",
+                        "type": "boolean"
+                      },
+                      "dot11axNonSrgObssPacketDetectMaxThreshold": {
+                        "description": "Dot11ax Non SRG OBSS PD Max Threshold",
+                        "type": "integer"
+                      },
+                      "dot11axSrgObssPacketDetect": {
+                        "description": "Dot11ax SRG OBSS PD",
+                        "type": "boolean"
+                      },
+                      "dot11axSrgObssPacketDetectMaxThreshold": {
+                        "description": "Dot11ax SRG OBSS PD Max Threshold",
+                        "type": "integer"
+                      },
+                      "dot11axSrgObssPacketDetectMinThreshold": {
+                        "description": "Dot11ax SRG OBSS PD Min Threshold",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "radioTypeAProperties": {
+                "description": "Properties of 5 GHz radio band",
+                "properties": {
+                  "channelWidth": {
+                    "description": "Channel Width",
+                    "enum": [
+                      "20",
+                      "40",
+                      "80",
+                      "160",
+                      "best"
+                    ],
+                    "type": "string"
+                  },
+                  "coverageHoleDetectionProperties": {
+                    "description": "Configure Coverage Hole Detection Properties",
+                    "properties": {
+                      "chdClientLevel": {
+                        "description": "Coverage Hole Detection Client Level",
+                        "type": "integer"
+                      },
+                      "chdDataRssiThreshold": {
+                        "description": "Coverage Hole Detection Data Rssi Threshold",
+                        "type": "integer"
+                      },
+                      "chdExceptionLevel": {
+                        "description": "Coverage Hole Detection Exception Level(%)",
+                        "type": "integer"
+                      },
+                      "chdVoiceRssiThreshold": {
+                        "description": "Coverage Hole Detection Voice Rssi Threshold",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "customRxSopThreshold": {
+                    "description": "RX-SOP threshold custom configuration of 5 GHz radio band",
+                    "type": "integer"
+                  },
+                  "dataRates": {
+                    "description": "Data rates of 5 GHz radio band passed in comma separated format without any spaces. Permissible values: 6, 9, 12, 18, 24, 36, 48, 54",
+                    "type": "string"
+                  },
+                  "fraPropertiesA": {
+                    "description": "Configure FRA 5 GHzProperties",
+                    "properties": {
+                      "clientAware": {
+                        "description": "Client Aware of 5 GHz radio band",
+                        "type": "boolean"
+                      },
+                      "clientReset": {
+                        "description": "Client Reset(%) of 5 GHz radio band",
+                        "type": "integer"
+                      },
+                      "clientSelect": {
+                        "description": "Client Select(%) of 5 GHz radio band",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "mandatoryDataRates": {
+                    "description": "Mandatory data rates of 5 GHz radio band passed in comma separated format without any spaces and must be a subset of selected dataRates with maximum of 2 values. Permissible values: 6, 9, 12, 18, 24, 36, 48, 54",
+                    "type": "string"
+                  },
+                  "maxPowerLevel": {
+                    "description": "Maximum power level of 5 GHz radio band",
+                    "type": "integer"
+                  },
+                  "maxRadioClients": {
+                    "description": "Client Limit of 5 GHz radio band",
+                    "type": "integer"
+                  },
+                  "minPowerLevel": {
+                    "description": "Minimum power level of 5 GHz radio band",
+                    "type": "integer"
+                  },
+                  "parentProfile": {
+                    "description": "Parent profile of 5 GHz radio band",
+                    "enum": [
+                      "HIGH",
+                      "TYPICAL",
+                      "LOW",
+                      "CUSTOM",
+                      "GLOBAL"
+                    ],
+                    "type": "string"
+                  },
+                  "powerThresholdV1": {
+                    "description": "Power threshold of 5 GHz radio band",
+                    "type": "integer"
+                  },
+                  "preamblePuncture": {
+                    "description": "Enable or Disable Preamble Puncturing. This Wifi 7 configuration is applicable to wireless IOS devices supporting 17.15 and higher",
+                    "type": "boolean"
+                  },
+                  "radioChannels": {
+                    "description": "DCA channels of 5 GHz radio band passed in comma separated format without any spaces. Permissible values: 36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 149, 153, 157, 161, 165, 169, 173",
+                    "type": "string"
+                  },
+                  "rxSopThreshold": {
+                    "description": "RX-SOP threshold of 5 GHz radio band",
+                    "enum": [
+                      "HIGH",
+                      "MEDIUM",
+                      "LOW",
+                      "AUTO",
+                      "CUSTOM"
+                    ],
+                    "type": "string"
+                  },
+                  "spatialReuseProperties": {
+                    "description": "Spatial Reuse Properties.",
+                    "properties": {
+                      "dot11axNonSrgObssPacketDetect": {
+                        "description": "Dot11ax Non SRG OBSS PD",
+                        "type": "boolean"
+                      },
+                      "dot11axNonSrgObssPacketDetectMaxThreshold": {
+                        "description": "Dot11ax Non SRG OBSS PD Max Threshold",
+                        "type": "integer"
+                      },
+                      "dot11axSrgObssPacketDetect": {
+                        "description": "Dot11ax SRG OBSS PD",
+                        "type": "boolean"
+                      },
+                      "dot11axSrgObssPacketDetectMaxThreshold": {
+                        "description": "Dot11ax SRG OBSS PD Max Threshold",
+                        "type": "integer"
+                      },
+                      "dot11axSrgObssPacketDetectMinThreshold": {
+                        "description": "Dot11ax SRG OBSS PD Min Threshold",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "zeroWaitDfsEnable": {
+                    "description": "Zero Wait DFS is applicable only for IOS-XE based Wireless Controllers running 17.9.1 and above versions",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "radioTypeBProperties": {
+                "description": "Properties of 2.4 GHz radio band",
+                "properties": {
+                  "coverageHoleDetectionProperties": {
+                    "description": "Configure Coverage Hole Detection Properties",
+                    "properties": {
+                      "chdClientLevel": {
+                        "description": "Coverage Hole Detection Client Level",
+                        "type": "integer"
+                      },
+                      "chdDataRssiThreshold": {
+                        "description": "Coverage Hole Detection Data Rssi Threshold",
+                        "type": "integer"
+                      },
+                      "chdExceptionLevel": {
+                        "description": "Coverage Hole Detection Exception Level(%)",
+                        "type": "integer"
+                      },
+                      "chdVoiceRssiThreshold": {
+                        "description": "Coverage Hole Detection Voice Rssi Threshold",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "customRxSopThreshold": {
+                    "description": "RX-SOP threshold custom configuration of 2.4 GHz radio band",
+                    "type": "integer"
+                  },
+                  "dataRates": {
+                    "description": "Data rates of 2.4 GHz radio band passed in comma separated format without any spaces. Permissible values: 1, 2, 5.5, 6, 9, 11, 12, 18, 24, 36, 48, 54",
+                    "type": "string"
+                  },
+                  "mandatoryDataRates": {
+                    "description": "Mandatory data rates of 2.4 GHz radio band passed in comma separated format without any spaces and must be a subset of selected dataRates with maximum of 2 values. Permissible values: 1, 2, 5.5, 6, 9, 11, 12, 18, 24, 36, 48, 54",
+                    "type": "string"
+                  },
+                  "maxPowerLevel": {
+                    "description": "Maximum power level of 2.4 GHz radio band",
+                    "type": "integer"
+                  },
+                  "maxRadioClients": {
+                    "description": "Client Limit of 2.4 GHz radio band",
+                    "type": "integer"
+                  },
+                  "minPowerLevel": {
+                    "description": "Minimum power level of 2.4 GHz radio band",
+                    "type": "integer"
+                  },
+                  "parentProfile": {
+                    "description": "Parent profile of 2.4 GHz radio band",
+                    "enum": [
+                      "HIGH",
+                      "TYPICAL",
+                      "LOW",
+                      "CUSTOM",
+                      "GLOBAL"
+                    ],
+                    "type": "string"
+                  },
+                  "powerThresholdV1": {
+                    "description": "Power threshold of 2.4 GHz radio band",
+                    "type": "integer"
+                  },
+                  "radioChannels": {
+                    "description": "DCA channels of 2.4 GHz radio band passed in comma separated format without any spaces. Permissible values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14",
+                    "type": "string"
+                  },
+                  "rxSopThreshold": {
+                    "description": "RX-SOP threshold of 2.4 GHz radio band",
+                    "enum": [
+                      "HIGH",
+                      "MEDIUM",
+                      "LOW",
+                      "AUTO",
+                      "CUSTOM"
+                    ],
+                    "type": "string"
+                  },
+                  "spatialReuseProperties": {
+                    "description": "Spatial Reuse Properties.",
+                    "properties": {
+                      "dot11axNonSrgObssPacketDetect": {
+                        "description": "Dot11ax Non SRG OBSS PD",
+                        "type": "boolean"
+                      },
+                      "dot11axNonSrgObssPacketDetectMaxThreshold": {
+                        "description": "Dot11ax Non SRG OBSS PD Max Threshold",
+                        "type": "integer"
+                      },
+                      "dot11axSrgObssPacketDetect": {
+                        "description": "Dot11ax SRG OBSS PD",
+                        "type": "boolean"
+                      },
+                      "dot11axSrgObssPacketDetectMaxThreshold": {
+                        "description": "Dot11ax SRG OBSS PD Max Threshold",
+                        "type": "integer"
+                      },
+                      "dot11axSrgObssPacketDetectMinThreshold": {
+                        "description": "Dot11ax SRG OBSS PD Min Threshold",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "rfProfileName": {
+                "description": "RF Profile Name",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

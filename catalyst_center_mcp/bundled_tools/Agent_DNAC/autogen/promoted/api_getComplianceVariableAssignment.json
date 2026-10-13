@@ -1,0 +1,134 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "policyId": "path",
+        "ruleId": "path",
+        "siteId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/{policyId}/sites/{siteId}/rules/{ruleId}/variables",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves the site-specific variable values assigned for a rule (`ruleId`) of a rule-based compliance (RBC) policy (`policyId`) at a given site (`siteId`). Use this when the user asks for the variable values assigned to a site for a compliance/RBC policy. Resolve `policyId` from the policy name (api_getCompliancePolicies), `siteId` from the site name (api_getSites), and `ruleId` from api_getComplianceRules first.\n\nVariable values are inherited. A site that has no directly assigned values uses the values of the nearest ancestor site that does, so pass `_inherited=true` whenever the user asks which values apply at a site. Omit it only when the user specifically asks whether values are set directly on that site, that is, whether the site overrides its parent.\n\nRead the response as follows:\n- `variableValues` present with no `inheritedSiteName`: the values are assigned directly on the requested site.\n- `variableValues` present together with `inheritedSiteName`: the values apply to the requested site but come from the named ancestor site. Say where they come from, for example \"inherited from Global\".\n- No `variableValues`, only `inheritedSiteId` and `inheritedSiteName`: the site has no values of its own and the call was made without `_inherited=true`. Retry with `_inherited=true` rather than telling the user that no variable values are set.\n\nAlways obtain `siteId` from api_getSites by site name, including for the Global site. Name the ancestor site in your answer using `inheritedSiteName`. `inheritedSiteId` is an internal marker rather than a resolvable site id, so never show it to the user, never pass it to api_getSites, and never reuse it as the `siteId` of a later call.",
+    "name": "api_getComplianceVariableAssignment",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "description": "Set to `true` when the user asks which variable values apply at a site, so that values inherited from an ancestor site are returned when the site has none of its own. Leave unset (default `false`) only when the user explicitly asks whether values are assigned directly at that site.",
+          "example": true,
+          "type": "boolean"
+        },
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        },
+        "ruleId": {
+          "description": "The `id` of the rule within the compliance policy.",
+          "example": "e8eef5e2-1eab-426c-be77-97ee81dcba06",
+          "format": "uuid",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The `id` of the site to which compliance policy is associated.",
+          "example": "b8eeb5e2-1eab-426c-be77-97ee81dcba07",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policyId",
+        "siteId",
+        "ruleId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "The response object.",
+      "properties": {
+        "response": {
+          "allOf": [
+            {
+              "properties": {
+                "variableValues": {
+                  "description": "An array of variable value assignments.",
+                  "items": {
+                    "description": "Variable value.",
+                    "properties": {
+                      "id": {
+                        "description": "The `id` of the variable.",
+                        "example": "7f825ee6-877f-46f8-9aee-d395eefaa1b2",
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "values": {
+                        "description": "List of variable values. The order of the list is preserved for compliance checks.",
+                        "items": {
+                          "description": "The variable value is formatted as a string. It must be a valid string representation of the data and conform to the specified type. For variables with an input type of `SINGLE_SELECT` or `MULTI_SELECT`, pass the actual value, not the key.",
+                          "example": "1000",
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "values"
+                    ],
+                    "title": "VariableValue",
+                    "type": "object"
+                  },
+                  "nullable": true,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "variableValues"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "inheritedSiteId": {
+                  "description": "The Site Id of the site that this setting is inherited from.",
+                  "example": "e298f95b-cd70-48ae-a590-b2076bfb6033",
+                  "format": "uuid",
+                  "readOnly": true,
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "The name of the site that this setting is inherited from.",
+                  "example": "Building N7",
+                  "readOnly": true,
+                  "type": "string"
+                }
+              },
+              "title": "InheritableNetworkSetting",
+              "type": "object"
+            }
+          ],
+          "description": "The payload containing variable value assignments.",
+          "title": "VariableValuesPayload"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_9",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

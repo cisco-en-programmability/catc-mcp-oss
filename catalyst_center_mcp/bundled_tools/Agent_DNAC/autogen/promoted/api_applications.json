@@ -1,0 +1,235 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "applicationHealth": "query",
+        "applicationName": "query",
+        "deviceId": "query",
+        "endTime": "query",
+        "limit": "query",
+        "macAddress": "query",
+        "offset": "query",
+        "siteId": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/application-health",
+      "version": "2.3.7.9"
+    },
+    "description": "Intent API to get a list of applications for a specific site, a device, or a client device's MAC address. For a combination of a specific application with site and/or device the API gets list of issues/devices/endpoints.",
+    "name": "api_applications",
+    "parameters": {
+      "properties": {
+        "applicationHealth": {
+          "description": "Application health category (POOR, FAIR, or GOOD.  Optionally use with siteId only)",
+          "type": "string"
+        },
+        "applicationName": {
+          "description": "The name of the application to get information on",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Assurance device UUID value (Cannot be submitted together with siteId and clientMac)",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "Ending epoch time in milliseconds of time window",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "macAddress": {
+          "description": "Client device's MAC address (Cannot be submitted together with siteId and deviceId)",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "siteId": {
+          "description": "Assurance site UUID value (Cannot be submitted together with deviceId and clientMac)",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Starting epoch time in milliseconds of time window",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "application": {
+                "description": "Issue reltaed application",
+                "type": "string"
+              },
+              "applicationServerLatency": {
+                "description": "Latency of application server",
+                "properties": {},
+                "type": "object"
+              },
+              "averageThroughput": {
+                "description": "Average throughput of application",
+                "type": "number"
+              },
+              "businessRelevance": {
+                "description": "Application's business relevance",
+                "enum": [
+                  "business-irrelevant",
+                  "business-relevant",
+                  "default"
+                ],
+                "type": "string"
+              },
+              "clientIp": {
+                "description": "Endpoint client ip",
+                "type": "string"
+              },
+              "clientMacAddress": {
+                "description": "Endpoint mac address",
+                "type": "string"
+              },
+              "clientName": {
+                "description": "Endpoint client name",
+                "type": "string"
+              },
+              "clientNetworkLatency": {
+                "description": "Latency of client network",
+                "properties": {},
+                "type": "object"
+              },
+              "deviceType": {
+                "description": "Type of device",
+                "enum": [
+                  "Wired",
+                  "Wireless"
+                ],
+                "type": "string"
+              },
+              "exporterFamily": {
+                "description": "Devices family of exporter device",
+                "type": "string"
+              },
+              "exporterIpAddress": {
+                "description": "Ip address of exporter device",
+                "type": "string"
+              },
+              "exporterName": {
+                "description": "Name of exporter device",
+                "type": "string"
+              },
+              "exporterUUID": {
+                "description": "UUID of exporter device",
+                "type": "string"
+              },
+              "health": {
+                "description": "Health score",
+                "type": "integer"
+              },
+              "issueId": {
+                "description": "Id number of issue",
+                "type": "string"
+              },
+              "issueName": {
+                "description": "Name of issue",
+                "type": "string"
+              },
+              "jitter": {
+                "description": "Jitter for application",
+                "properties": {},
+                "type": "object"
+              },
+              "location": {
+                "description": "Site location",
+                "type": "string"
+              },
+              "name": {
+                "description": "Application name",
+                "type": "string"
+              },
+              "networkLatency": {
+                "description": "Network latency for application",
+                "properties": {},
+                "type": "object"
+              },
+              "occurrences": {
+                "description": "Issue occurrences",
+                "type": "integer"
+              },
+              "operatingSystem": {
+                "description": "Endpoint's operating system",
+                "type": "string"
+              },
+              "packetLossPercent": {
+                "description": "Packet loss percentage for application",
+                "properties": {},
+                "type": "object"
+              },
+              "priority": {
+                "description": "Issue priority",
+                "type": "string"
+              },
+              "rootCause": {
+                "description": "Issue's root cause",
+                "type": "string"
+              },
+              "serverNetworkLatency": {
+                "description": "Latency of server network",
+                "properties": {},
+                "type": "object"
+              },
+              "severity": {
+                "description": "Issue severity",
+                "type": "string"
+              },
+              "summary": {
+                "description": "Issue summary",
+                "type": "string"
+              },
+              "timestamp": {
+                "description": "Issue's timestamp",
+                "type": "integer"
+              },
+              "trafficClass": {
+                "description": "Application's traffic class",
+                "type": "string"
+              },
+              "usageBytes": {
+                "description": "Usage amount in bytes",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "Count of items in response",
+          "type": "integer"
+        },
+        "version": {
+          "description": "API version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

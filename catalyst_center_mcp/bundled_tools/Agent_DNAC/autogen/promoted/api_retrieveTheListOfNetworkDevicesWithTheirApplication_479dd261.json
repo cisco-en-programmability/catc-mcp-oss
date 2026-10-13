@@ -1,0 +1,210 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "appTelemetryDeploymentStatus": "query",
+        "appTelemetryReadinessStatus": "query",
+        "applicationRegistrySyncStatus": "query",
+        "cbarDeploymentStatus": "query",
+        "cbarReadinessStatus": "query",
+        "hostname": "query",
+        "ids": "query",
+        "limit": "query",
+        "managementAddress": "query",
+        "offset": "query",
+        "order": "query",
+        "protocolPackStatus": "query",
+        "protocolPackUpdateStatus": "query",
+        "siteId": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/applicationVisibility/networkDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves the list of network devices with their application visibility status. The list can be filtered using the query parameters. Multiple filters can be applied.\n",
+    "name": "api_retrieveTheListOfNetworkDevicesWithTheirApplication_479dd261",
+    "parameters": {
+      "properties": {
+        "appTelemetryDeploymentStatus": {
+          "description": "Status of the application telemetry deployment on the network device. Available values: SCHEDULED, IN_PROGRESS, COMPLETED, FAILED, NOT_DEPLOYED.",
+          "type": "string"
+        },
+        "appTelemetryReadinessStatus": {
+          "description": "Indicates whether the network device is ready for application telemetry enablement or not. Available values: ENABLED, READY, NOT_READY, NOT_SUPPORTED",
+          "type": "string"
+        },
+        "applicationRegistrySyncStatus": {
+          "description": "Indicates whether the latest definitions from application registry have been synchronized with the network device or not. Available values: SYNCING, IN_SYNC, OUT_OF_SYNC, NOT_APPLICABLE",
+          "type": "string"
+        },
+        "cbarDeploymentStatus": {
+          "description": "Status of the CBAR deployment on the network device. Available values: SCHEDULED, IN_PROGRESS, COMPLETED, FAILED, NOT_DEPLOYED",
+          "type": "string"
+        },
+        "cbarReadinessStatus": {
+          "description": "Indicates whether the network device is ready for CBAR enablement or not. Available values: ENABLED, READY, NOT_READY, NOT_SUPPORTED",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "The host name of the network device.\n\nPartial search is supported. For example, searching for `switch` will include `edge-switch1.domain.com`, `switch25`, etc.\n",
+          "type": "string"
+        },
+        "ids": {
+          "description": "List of network devices ids. If this parameter is not provided, all network devices will be included in the response. Multiple network device IDs can be provided.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "managementAddress": {
+          "description": "The management address for the network device. This is normally IP address of the device.\nBut it could be hostname in some cases like Meraki devices.\n\nPartial search is supported. For example, searching for `25.` would include `10.25.1.1`, `25.5.10.1`, `225.225.1.0`, `10.10.10.125`, etc.\n",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values are: asc, desc. Default value is: asc",
+          "type": "string"
+        },
+        "protocolPackStatus": {
+          "description": "Indicates whether the NBAR protocol pack is up-to-date or not on the network device. Available values: LATEST, OUTDATED, UNKNOWN",
+          "type": "string"
+        },
+        "protocolPackUpdateStatus": {
+          "description": "Status of the NBAR protocol pack update on the network device. Available values: SCHEDULED, IN_PROGRESS, SUCCESS, FAILED, NONE",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The site ID where the network device is assigned.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "appTelemetryDeploymentStatus": {
+                "description": "Status of the application telemetry deployment on the network device.",
+                "enum": [
+                  "SCHEDULED",
+                  "IN_PROGRESS",
+                  "COMPLETED",
+                  "FAILED",
+                  "NOT_DEPLOYED"
+                ],
+                "type": "string"
+              },
+              "appTelemetryReadinessStatus": {
+                "description": "Indicates whether the network device is ready for application telemetry enablement or not.",
+                "enum": [
+                  "ENABLED",
+                  "READY",
+                  "NOT_READY",
+                  "NOT_SUPPORTED"
+                ],
+                "type": "string"
+              },
+              "applicationRegistrySyncStatus": {
+                "description": "Indicates whether the latest definitions from application registry have been synchronized with the network device or not.",
+                "enum": [
+                  "SYNCING",
+                  "IN_SYNC",
+                  "OUT_OF_SYNC",
+                  "NOT_APPLICABLE"
+                ],
+                "type": "string"
+              },
+              "cbarDeploymentStatus": {
+                "description": "Status of the CBAR deployment on the network device.",
+                "enum": [
+                  "SCHEDULED",
+                  "IN_PROGRESS",
+                  "COMPLETED",
+                  "FAILED",
+                  "NOT_DEPLOYED"
+                ],
+                "type": "string"
+              },
+              "cbarReadinessStatus": {
+                "description": "Indicates whether the network device is ready for CBAR enablement or not.",
+                "enum": [
+                  "ENABLED",
+                  "READY",
+                  "NOT_READY",
+                  "NOT_SUPPORTED"
+                ],
+                "type": "string"
+              },
+              "hostname": {
+                "description": "The host name of the network device",
+                "type": "string"
+              },
+              "id": {
+                "description": "The network device id",
+                "type": "string"
+              },
+              "managementAddress": {
+                "description": "The management address for the network device",
+                "type": "string"
+              },
+              "protocolPackStatus": {
+                "description": "Indicates whether the NBAR protocol pack is up-to-date or not on the network device.",
+                "enum": [
+                  "LATEST",
+                  "OUTDATED",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              },
+              "protocolPackUpdateStatus": {
+                "description": "Status of the NBAR protocol pack update on the network device.",
+                "enum": [
+                  "SCHEDULED",
+                  "IN_PROGRESS",
+                  "SUCCESS",
+                  "FAILED",
+                  "NONE"
+                ],
+                "type": "string"
+              },
+              "siteId": {
+                "description": "The site ID where the network device is assigned.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

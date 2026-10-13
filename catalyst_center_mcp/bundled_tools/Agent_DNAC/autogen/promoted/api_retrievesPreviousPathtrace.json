@@ -1,0 +1,3064 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "flowAnalysisId": "path"
+      },
+      "uri": "/dna/intent/api/v1/flow-analysis/{flowAnalysisId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns result of a previously requested flow analysis by its Flow Analysis id",
+    "name": "api_retrievesPreviousPathtrace",
+    "parameters": {
+      "properties": {
+        "flowAnalysisId": {
+          "description": "Flow analysis request id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "flowAnalysisId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "detailedStatus": {
+              "description": "",
+              "properties": {
+                "aclTraceCalculation": {
+                  "description": "",
+                  "type": "string"
+                },
+                "aclTraceCalculationFailureReason": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "lastUpdate": {
+              "description": "",
+              "type": "string"
+            },
+            "networkElements": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "accuracyList": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "percent": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "reason": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "detailedStatus": {
+                    "description": "",
+                    "properties": {
+                      "aclTraceCalculation": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "aclTraceCalculationFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "deviceStatistics": {
+                    "description": "",
+                    "properties": {
+                      "cpuStatistics": {
+                        "description": "",
+                        "properties": {
+                          "fiveMinUsageInPercentage": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "fiveSecsUsageInPercentage": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "oneMinUsageInPercentage": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "memoryStatistics": {
+                        "description": "",
+                        "properties": {
+                          "memoryUsage": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "totalMemory": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "deviceStatsCollection": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "deviceStatsCollectionFailureReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "egressPhysicalInterface": {
+                    "description": "",
+                    "properties": {
+                      "aclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatistics": {
+                        "description": "",
+                        "properties": {
+                          "adminStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "inputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueDrops": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueFlushes": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueMaxDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "operationalStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "outputDrop": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "interfaceStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "pathOverlayInfo": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "controlPlane": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dataPacketEncapsulation": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destPort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "protocol": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourceIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourcePort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "vxlanInfo": {
+                              "description": "",
+                              "properties": {
+                                "dscp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "vnid": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatistics": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "classMapName": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dropRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numBytes": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numPackets": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "offeredRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueBandwidthbps": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "queueDepth": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueNoBufferDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueTotalDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "refreshedAt": {
+                              "description": "",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "qosStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "usedVlan": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "vrfName": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "egressVirtualInterface": {
+                    "description": "",
+                    "properties": {
+                      "aclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatistics": {
+                        "description": "",
+                        "properties": {
+                          "adminStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "inputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueDrops": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueFlushes": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueMaxDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "operationalStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "outputDrop": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "interfaceStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "pathOverlayInfo": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "controlPlane": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dataPacketEncapsulation": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destPort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "protocol": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourceIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourcePort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "vxlanInfo": {
+                              "description": "",
+                              "properties": {
+                                "dscp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "vnid": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatistics": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "classMapName": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dropRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numBytes": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numPackets": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "offeredRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueBandwidthbps": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "queueDepth": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueNoBufferDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueTotalDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "refreshedAt": {
+                              "description": "",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "qosStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "usedVlan": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "vrfName": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "flexConnect": {
+                    "description": "",
+                    "properties": {
+                      "authentication": {
+                        "description": "",
+                        "enum": [
+                          "LOCAL",
+                          "CENTRAL"
+                        ],
+                        "type": "string"
+                      },
+                      "dataSwitching": {
+                        "description": "",
+                        "enum": [
+                          "LOCAL",
+                          "CENTRAL"
+                        ],
+                        "type": "string"
+                      },
+                      "egressAclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "ingressAclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "wirelessLanControllerId": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "wirelessLanControllerName": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ingressPhysicalInterface": {
+                    "description": "",
+                    "properties": {
+                      "aclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatistics": {
+                        "description": "",
+                        "properties": {
+                          "adminStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "inputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueDrops": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueFlushes": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueMaxDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "operationalStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "outputDrop": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "interfaceStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "pathOverlayInfo": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "controlPlane": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dataPacketEncapsulation": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destPort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "protocol": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourceIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourcePort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "vxlanInfo": {
+                              "description": "",
+                              "properties": {
+                                "dscp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "vnid": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatistics": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "classMapName": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dropRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numBytes": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numPackets": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "offeredRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueBandwidthbps": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "queueDepth": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueNoBufferDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueTotalDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "refreshedAt": {
+                              "description": "",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "qosStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "usedVlan": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "vrfName": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ingressVirtualInterface": {
+                    "description": "",
+                    "properties": {
+                      "aclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatistics": {
+                        "description": "",
+                        "properties": {
+                          "adminStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "inputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueDrops": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueFlushes": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputQueueMaxDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "inputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "operationalStatus": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "outputDrop": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputPackets": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueCount": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputQueueDepth": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "outputRatebps": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "interfaceStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "interfaceStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "pathOverlayInfo": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "controlPlane": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dataPacketEncapsulation": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "destPort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "protocol": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourceIp": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "sourcePort": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "vxlanInfo": {
+                              "description": "",
+                              "properties": {
+                                "dscp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "vnid": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatistics": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "classMapName": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "dropRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numBytes": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "numPackets": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "offeredRate": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueBandwidthbps": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "queueDepth": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueNoBufferDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "queueTotalDrops": {
+                              "description": "",
+                              "type": "integer"
+                            },
+                            "refreshedAt": {
+                              "description": "",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "qosStatsCollection": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "qosStatsCollectionFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "usedVlan": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "vrfName": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ip": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "linkInformationSource": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "perfMonCollection": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "perfMonCollectionFailureReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "perfMonStatistics": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "byteRate": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "destIpAddress": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "destPort": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "inputInterface": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "ipv4DSCP": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "ipv4TTL": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "outputInterface": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "packetBytes": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "packetCount": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "packetLoss": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "packetLossPercentage": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "protocol": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "refreshedAt": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "rtpJitterMax": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "rtpJitterMean": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "rtpJitterMin": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "sourceIpAddress": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "sourcePort": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "role": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ssid": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "tunnels": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "wlanId": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "networkElementsInfo": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "accuracyList": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "percent": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "reason": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "detailedStatus": {
+                    "description": "",
+                    "properties": {
+                      "aclTraceCalculation": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "aclTraceCalculationFailureReason": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "deviceStatistics": {
+                    "description": "",
+                    "properties": {
+                      "cpuStatistics": {
+                        "description": "",
+                        "properties": {
+                          "fiveMinUsageInPercentage": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "fiveSecsUsageInPercentage": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "oneMinUsageInPercentage": {
+                            "description": "",
+                            "type": "number"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "memoryStatistics": {
+                        "description": "",
+                        "properties": {
+                          "memoryUsage": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "refreshedAt": {
+                            "description": "",
+                            "type": "integer"
+                          },
+                          "totalMemory": {
+                            "description": "",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "deviceStatsCollection": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "deviceStatsCollectionFailureReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "egressInterface": {
+                    "description": "",
+                    "properties": {
+                      "physicalInterface": {
+                        "description": "",
+                        "properties": {
+                          "aclAnalysis": {
+                            "description": "",
+                            "properties": {
+                              "aclName": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "matchingAces": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "ace": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "matchingPorts": {
+                                      "description": "",
+                                      "items": {
+                                        "properties": {
+                                          "ports": {
+                                            "description": "",
+                                            "items": {
+                                              "properties": {
+                                                "destPorts": {
+                                                  "description": "",
+                                                  "items": {
+                                                    "type": "string"
+                                                  },
+                                                  "type": "array"
+                                                },
+                                                "sourcePorts": {
+                                                  "description": "",
+                                                  "items": {
+                                                    "type": "string"
+                                                  },
+                                                  "type": "array"
+                                                }
+                                              },
+                                              "type": "object"
+                                            },
+                                            "type": "array"
+                                          },
+                                          "protocol": {
+                                            "description": "",
+                                            "type": "string"
+                                          }
+                                        },
+                                        "type": "object"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "result": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "result": {
+                                "description": "",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceStatistics": {
+                            "description": "",
+                            "properties": {
+                              "adminStatus": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "inputPackets": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueCount": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueDrops": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueFlushes": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueMaxDepth": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputRatebps": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "operationalStatus": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "outputDrop": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputPackets": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputQueueCount": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputQueueDepth": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputRatebps": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "refreshedAt": {
+                                "description": "",
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "interfaceStatsCollection": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceStatsCollectionFailureReason": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "pathOverlayInfo": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "controlPlane": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "dataPacketEncapsulation": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "destIp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "destPort": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "protocol": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "sourceIp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "sourcePort": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "vxlanInfo": {
+                                  "description": "",
+                                  "properties": {
+                                    "dscp": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "vnid": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "qosStatistics": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "classMapName": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "dropRate": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "numBytes": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "numPackets": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "offeredRate": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "queueBandwidthbps": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "queueDepth": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "queueNoBufferDrops": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "queueTotalDrops": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "refreshedAt": {
+                                  "description": "",
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "qosStatsCollection": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "qosStatsCollectionFailureReason": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "usedVlan": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "vrfName": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "virtualInterface": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "aclAnalysis": {
+                              "description": "",
+                              "properties": {
+                                "aclName": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingAces": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ace": {
+                                        "description": "",
+                                        "type": "string"
+                                      },
+                                      "matchingPorts": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "ports": {
+                                              "description": "",
+                                              "items": {
+                                                "properties": {
+                                                  "destPorts": {
+                                                    "description": "",
+                                                    "items": {
+                                                      "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                  },
+                                                  "sourcePorts": {
+                                                    "description": "",
+                                                    "items": {
+                                                      "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                  }
+                                                },
+                                                "type": "object"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "protocol": {
+                                              "description": "",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "result": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "id": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "interfaceStatistics": {
+                              "description": "",
+                              "properties": {
+                                "adminStatus": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "inputPackets": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueCount": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueDrops": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueFlushes": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueMaxDepth": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputRatebps": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "operationalStatus": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "outputDrop": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputPackets": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputQueueCount": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputQueueDepth": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputRatebps": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "refreshedAt": {
+                                  "description": "",
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "interfaceStatsCollection": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "interfaceStatsCollectionFailureReason": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "pathOverlayInfo": {
+                              "description": "",
+                              "items": {
+                                "properties": {
+                                  "controlPlane": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "dataPacketEncapsulation": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "destIp": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "destPort": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "protocol": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "sourceIp": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "sourcePort": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "vxlanInfo": {
+                                    "description": "",
+                                    "properties": {
+                                      "dscp": {
+                                        "description": "",
+                                        "type": "string"
+                                      },
+                                      "vnid": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "qosStatistics": {
+                              "description": "",
+                              "items": {
+                                "properties": {
+                                  "classMapName": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "dropRate": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "numBytes": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "numPackets": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "offeredRate": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "queueBandwidthbps": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "queueDepth": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "queueNoBufferDrops": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "queueTotalDrops": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "refreshedAt": {
+                                    "description": "",
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "qosStatsCollection": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "qosStatsCollectionFailureReason": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "usedVlan": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "vrfName": {
+                              "description": "",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "flexConnect": {
+                    "description": "",
+                    "properties": {
+                      "authentication": {
+                        "description": "",
+                        "enum": [
+                          "LOCAL",
+                          "CENTRAL"
+                        ],
+                        "type": "string"
+                      },
+                      "dataSwitching": {
+                        "description": "",
+                        "enum": [
+                          "LOCAL",
+                          "CENTRAL"
+                        ],
+                        "type": "string"
+                      },
+                      "egressAclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "ingressAclAnalysis": {
+                        "description": "",
+                        "properties": {
+                          "aclName": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "matchingAces": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "ace": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingPorts": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ports": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "destPorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "sourcePorts": {
+                                              "description": "",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "type": "array"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "protocol": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "result": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "wirelessLanControllerId": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "wirelessLanControllerName": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ingressInterface": {
+                    "description": "",
+                    "properties": {
+                      "physicalInterface": {
+                        "description": "",
+                        "properties": {
+                          "aclAnalysis": {
+                            "description": "",
+                            "properties": {
+                              "aclName": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "matchingAces": {
+                                "description": "",
+                                "items": {
+                                  "properties": {
+                                    "ace": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "matchingPorts": {
+                                      "description": "",
+                                      "items": {
+                                        "properties": {
+                                          "ports": {
+                                            "description": "",
+                                            "items": {
+                                              "properties": {
+                                                "destPorts": {
+                                                  "description": "",
+                                                  "items": {
+                                                    "type": "string"
+                                                  },
+                                                  "type": "array"
+                                                },
+                                                "sourcePorts": {
+                                                  "description": "",
+                                                  "items": {
+                                                    "type": "string"
+                                                  },
+                                                  "type": "array"
+                                                }
+                                              },
+                                              "type": "object"
+                                            },
+                                            "type": "array"
+                                          },
+                                          "protocol": {
+                                            "description": "",
+                                            "type": "string"
+                                          }
+                                        },
+                                        "type": "object"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "result": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "result": {
+                                "description": "",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceStatistics": {
+                            "description": "",
+                            "properties": {
+                              "adminStatus": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "inputPackets": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueCount": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueDrops": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueFlushes": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputQueueMaxDepth": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "inputRatebps": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "operationalStatus": {
+                                "description": "",
+                                "type": "string"
+                              },
+                              "outputDrop": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputPackets": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputQueueCount": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputQueueDepth": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "outputRatebps": {
+                                "description": "",
+                                "type": "integer"
+                              },
+                              "refreshedAt": {
+                                "description": "",
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "interfaceStatsCollection": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "interfaceStatsCollectionFailureReason": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "pathOverlayInfo": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "controlPlane": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "dataPacketEncapsulation": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "destIp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "destPort": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "protocol": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "sourceIp": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "sourcePort": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "vxlanInfo": {
+                                  "description": "",
+                                  "properties": {
+                                    "dscp": {
+                                      "description": "",
+                                      "type": "string"
+                                    },
+                                    "vnid": {
+                                      "description": "",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "qosStatistics": {
+                            "description": "",
+                            "items": {
+                              "properties": {
+                                "classMapName": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "dropRate": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "numBytes": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "numPackets": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "offeredRate": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "queueBandwidthbps": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "queueDepth": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "queueNoBufferDrops": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "queueTotalDrops": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "refreshedAt": {
+                                  "description": "",
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "qosStatsCollection": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "qosStatsCollectionFailureReason": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "usedVlan": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "vrfName": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "virtualInterface": {
+                        "description": "",
+                        "items": {
+                          "properties": {
+                            "aclAnalysis": {
+                              "description": "",
+                              "properties": {
+                                "aclName": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "matchingAces": {
+                                  "description": "",
+                                  "items": {
+                                    "properties": {
+                                      "ace": {
+                                        "description": "",
+                                        "type": "string"
+                                      },
+                                      "matchingPorts": {
+                                        "description": "",
+                                        "items": {
+                                          "properties": {
+                                            "ports": {
+                                              "description": "",
+                                              "items": {
+                                                "properties": {
+                                                  "destPorts": {
+                                                    "description": "",
+                                                    "items": {
+                                                      "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                  },
+                                                  "sourcePorts": {
+                                                    "description": "",
+                                                    "items": {
+                                                      "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                  }
+                                                },
+                                                "type": "object"
+                                              },
+                                              "type": "array"
+                                            },
+                                            "protocol": {
+                                              "description": "",
+                                              "type": "string"
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      },
+                                      "result": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "description": "",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "id": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "interfaceStatistics": {
+                              "description": "",
+                              "properties": {
+                                "adminStatus": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "inputPackets": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueCount": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueDrops": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueFlushes": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputQueueMaxDepth": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "inputRatebps": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "operationalStatus": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "outputDrop": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputPackets": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputQueueCount": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputQueueDepth": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "outputRatebps": {
+                                  "description": "",
+                                  "type": "integer"
+                                },
+                                "refreshedAt": {
+                                  "description": "",
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "interfaceStatsCollection": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "interfaceStatsCollectionFailureReason": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "pathOverlayInfo": {
+                              "description": "",
+                              "items": {
+                                "properties": {
+                                  "controlPlane": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "dataPacketEncapsulation": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "destIp": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "destPort": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "protocol": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "sourceIp": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "sourcePort": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "vxlanInfo": {
+                                    "description": "",
+                                    "properties": {
+                                      "dscp": {
+                                        "description": "",
+                                        "type": "string"
+                                      },
+                                      "vnid": {
+                                        "description": "",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "qosStatistics": {
+                              "description": "",
+                              "items": {
+                                "properties": {
+                                  "classMapName": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "dropRate": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "numBytes": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "numPackets": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "offeredRate": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "queueBandwidthbps": {
+                                    "description": "",
+                                    "type": "string"
+                                  },
+                                  "queueDepth": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "queueNoBufferDrops": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "queueTotalDrops": {
+                                    "description": "",
+                                    "type": "integer"
+                                  },
+                                  "refreshedAt": {
+                                    "description": "",
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "qosStatsCollection": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "qosStatsCollectionFailureReason": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "usedVlan": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "vrfName": {
+                              "description": "",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ip": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "linkInformationSource": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "perfMonCollection": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "perfMonCollectionFailureReason": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "perfMonitorStatistics": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "byteRate": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "destIpAddress": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "destPort": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "inputInterface": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "ipv4DSCP": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "ipv4TTL": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "outputInterface": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "packetBytes": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "packetCount": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "packetLoss": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "packetLossPercentage": {
+                          "description": "",
+                          "type": "number"
+                        },
+                        "protocol": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "refreshedAt": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "rtpJitterMax": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "rtpJitterMean": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "rtpJitterMin": {
+                          "description": "",
+                          "type": "integer"
+                        },
+                        "sourceIpAddress": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "sourcePort": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "role": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "ssid": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "tunnels": {
+                    "description": "",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "wlanId": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "properties": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "request": {
+              "description": "",
+              "properties": {
+                "controlPath": {
+                  "description": "Control path tracing",
+                  "type": "boolean"
+                },
+                "createTime": {
+                  "description": "Timestamp when the Path Trace request was first received",
+                  "type": "integer"
+                },
+                "destIP": {
+                  "description": "IP Address of the destination device",
+                  "type": "string"
+                },
+                "destPort": {
+                  "description": "Port on the destination device",
+                  "type": "string"
+                },
+                "failureReason": {
+                  "description": "Reason for failure",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "Unique ID for the Path Trace request",
+                  "type": "string"
+                },
+                "inclusions": {
+                  "description": "Subset of {INTERFACE-STATS, QOS-STATS, DEVICE-STATS, PERFORMANCE-STATS, ACL-TRACE}",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "lastUpdateTime": {
+                  "description": "Last timestamp when the path trace response was updated",
+                  "type": "integer"
+                },
+                "periodicRefresh": {
+                  "description": "Re-run the Path Trace every 30 seconds",
+                  "type": "boolean"
+                },
+                "previousFlowAnalysisId": {
+                  "description": "When periodicRefresh is true, this field holds the original Path Trace request ID",
+                  "type": "string"
+                },
+                "protocol": {
+                  "description": "One of TCP/UDP or either (null)",
+                  "type": "string"
+                },
+                "sourceIP": {
+                  "description": "IP Address of the source device",
+                  "type": "string"
+                },
+                "sourcePort": {
+                  "description": "Port on the source device",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "One of {SUCCESS, INPROGRESS, FAILED, SCHEDULED, PENDING, COMPLETED}",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

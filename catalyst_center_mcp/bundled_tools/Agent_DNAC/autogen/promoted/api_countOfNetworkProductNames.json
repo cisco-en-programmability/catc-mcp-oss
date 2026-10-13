@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "productId": "query",
+        "productName": "query"
+      },
+      "uri": "/dna/intent/api/v1/productNames/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Count of product names based on filter criteria",
+    "name": "api_countOfNetworkProductNames",
+    "parameters": {
+      "properties": {
+        "productId": {
+          "description": "Filter with product ID (PID)",
+          "type": "string"
+        },
+        "productName": {
+          "description": "Filter with network device product name. Supports partial case-insensitive search. A minimum of 3 characters are required for search",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "properties": {
+            "count": {
+              "description": "Reports a count, for example, a total count of records in a given resource.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

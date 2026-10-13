@@ -1,0 +1,216 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "eventIds": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "search": "query",
+        "sortBy": "query",
+        "tags": "query"
+      },
+      "uri": "/dna/system/api/v1/event/artifact",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves registered event definitions and documentation, not emitted notifications. Use eventIds for exact IDs, tags for tag filters, or search for concise text matching an event name, description, ID, type, or category. Omit offset for the first page; offsets are zero-based. If search returns no relevant match, retry once with the primary technical term, then ask for clarification. Present only verified returned matches in plain English. Search is text-based; domain, subdomain, severity, and connector type are not direct filters. Do not use this tool for notifications, audit records, or subscriptions.",
+    "name": "api_getEventArtifacts",
+    "parameters": {
+      "properties": {
+        "eventIds": {
+          "description": "Exact registered event ID or event IDs.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum records to return. Defaults to 10.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Number of matching records to skip. Omit or use 0 for the first page.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "order": {
+          "description": "sorting order (asc/desc)",
+          "type": "string"
+        },
+        "search": {
+          "description": "Concise text matching an event name, description, event ID, type, or category.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Sort by field",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Event-artifact tags used to filter the catalog.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "artifactId": {
+            "description": "",
+            "type": "string"
+          },
+          "ciscoDNAEventLink": {
+            "description": "",
+            "type": "string"
+          },
+          "configs": {
+            "description": "",
+            "properties": {
+              "isACKnowledgeable": {
+                "description": "",
+                "type": "boolean"
+              },
+              "isAlert": {
+                "description": "",
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "deprecated": {
+            "description": "",
+            "type": "boolean"
+          },
+          "deprecationMessage": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "domain": {
+            "description": "",
+            "type": "string"
+          },
+          "eventPayload": {
+            "description": "",
+            "properties": {
+              "additionalDetails": {
+                "description": "",
+                "properties": {},
+                "type": "object"
+              },
+              "category": {
+                "description": "",
+                "type": "string"
+              },
+              "details": {
+                "description": "",
+                "properties": {
+                  "device_ip": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "eventId": {
+                "description": "",
+                "type": "string"
+              },
+              "severity": {
+                "description": "",
+                "type": "string"
+              },
+              "source": {
+                "description": "",
+                "type": "string"
+              },
+              "type": {
+                "description": "",
+                "type": "string"
+              },
+              "version": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "eventTemplates": {
+            "description": "",
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "isPrivate": {
+            "description": "",
+            "type": "boolean"
+          },
+          "isTemplateEnabled": {
+            "description": "",
+            "type": "boolean"
+          },
+          "isTenantAware": {
+            "description": "",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "",
+            "type": "string"
+          },
+          "note": {
+            "description": "",
+            "type": "string"
+          },
+          "subDomain": {
+            "description": "",
+            "type": "string"
+          },
+          "supportedConnectorTypes": {
+            "description": "",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "tags": {
+            "description": "",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "tenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

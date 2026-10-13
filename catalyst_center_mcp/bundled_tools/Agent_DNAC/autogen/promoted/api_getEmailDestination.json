@@ -1,0 +1,108 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/event/email-config",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves configured email event destination settings. Use this tool for questions about sender and recipient addresses, subjects, and primary or secondary SMTP server configuration. This tool retrieves email destination configuration, not email event subscriptions. Present the result in plain English and never display SMTP passwords or other secret values; state only that authentication is configured.",
+    "name": "api_getEmailDestination",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "emailConfigId": {
+            "description": "UUID",
+            "type": "string"
+          },
+          "fromEmail": {
+            "description": "",
+            "type": "string"
+          },
+          "primarySMTPConfig": {
+            "description": "",
+            "properties": {
+              "hostName": {
+                "description": "",
+                "type": "string"
+              },
+              "password": {
+                "description": "",
+                "type": "string"
+              },
+              "port": {
+                "description": "",
+                "type": "string"
+              },
+              "smtpType": {
+                "description": "",
+                "type": "string"
+              },
+              "userName": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "secondarySMTPConfig": {
+            "description": "",
+            "properties": {
+              "hostName": {
+                "description": "",
+                "type": "string"
+              },
+              "password": {
+                "description": "",
+                "type": "string"
+              },
+              "port": {
+                "description": "",
+                "type": "string"
+              },
+              "smtpType": {
+                "description": "",
+                "type": "string"
+              },
+              "userName": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "subject": {
+            "description": "",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "toEmail": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

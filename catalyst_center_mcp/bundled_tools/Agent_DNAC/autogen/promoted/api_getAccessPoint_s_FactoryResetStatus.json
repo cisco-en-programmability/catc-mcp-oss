@@ -1,0 +1,93 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "taskId": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessAccessPoints/factoryResetRequestStatus",
+      "version": "2.3.7.9"
+    },
+    "description": "This API returns each AP Factory Reset initiation status.",
+    "name": "api_getAccessPoint_s_FactoryResetStatus",
+    "parameters": {
+      "properties": {
+        "taskId": {
+          "description": "provide the task id which is returned in the response of ap factory reset post api",
+          "type": "string"
+        }
+      },
+      "required": [
+        "taskId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Factory Reset initiation status response",
+          "items": {
+            "properties": {
+              "apResponseInfoList": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "apFactoryResetStatus": {
+                      "description": "AP factory reset status, \"Success\" or \"Failure\" or \"In Progress\"",
+                      "enum": [
+                        "Success",
+                        "Failure",
+                        "In Progress"
+                      ],
+                      "type": "string"
+                    },
+                    "apName": {
+                      "description": "Access Point name",
+                      "type": "string"
+                    },
+                    "ethernetMacAddress": {
+                      "description": "AP Ethernet Mac Address",
+                      "type": "string"
+                    },
+                    "failureReason": {
+                      "description": "Reason for failure if the factory reset status is \"Failure\"",
+                      "type": "string"
+                    },
+                    "radioMacAddress": {
+                      "description": "AP Radio Mac Address",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "wlcIP": {
+                "description": "Wireless Controller IP address",
+                "type": "string"
+              },
+              "wlcName": {
+                "description": "Wireless Controller name",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

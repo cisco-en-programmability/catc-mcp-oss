@@ -1,0 +1,268 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "context": "query",
+        "description": "query",
+        "deviceId": "query",
+        "domain": "query",
+        "endTime": "query",
+        "eventHierarchy": "query",
+        "eventId": "query",
+        "instanceId": "query",
+        "isSystemEvents": "query",
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query",
+        "parentInstanceId": "query",
+        "severity": "query",
+        "siteId": "query",
+        "sortBy": "query",
+        "source": "query",
+        "startTime": "query",
+        "subDomain": "query",
+        "userId": "query"
+      },
+      "uri": "/dna/data/api/v1/event/event-series/audit-logs",
+      "version": "2.3.7.9"
+    },
+    "description": "Get Audit Log Event instances from the Event-Hub ",
+    "name": "api_getAuditLogRecords",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "Audit Log notification's event category. Supported values: INFO, WARN, ERROR, ALERT, TASK_PROGRESS, TASK_FAILURE, TASK_COMPLETE, COMMAND, QUERY, CONVERSATION",
+          "type": "string"
+        },
+        "context": {
+          "description": "Audit Log notification's event correlationId.",
+          "type": "string"
+        },
+        "description": {
+          "description": "String full/partial search - (Provided input string is case insensitively matched for records).",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Audit Log notification's deviceId.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "Audit Log notification's event domain.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End Time in milliseconds since Epoch Eg. 1597961437211 (when provided startTime is mandatory)",
+          "type": "number"
+        },
+        "eventHierarchy": {
+          "description": "Audit Log notification's event eventHierarchy. Example: \"US.CA.San Jose\" OR \"US.CA\" OR \"CA.San Jose\" - Delimiter for hierarchy separation is \".\".",
+          "type": "string"
+        },
+        "eventId": {
+          "description": "Audit Log notification's event ID. ",
+          "type": "string"
+        },
+        "instanceId": {
+          "description": "InstanceID of the Audit Log.",
+          "type": "string"
+        },
+        "isSystemEvents": {
+          "description": "Parameter to filter system generated audit-logs.",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Audit Log notification event name.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Order of the sorted Audit Log records. Default value is desc by timestamp. Supported values: asc, desc.",
+          "type": "string"
+        },
+        "parentInstanceId": {
+          "description": "Parent Audit Log record's instanceID.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Audit Log notification's event severity. Supported values: 1, 2, 3, 4, 5.",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Audit Log notification's siteId.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Sort the Audit Logs by certain fields. Supported values are event notification header attributes.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Audit Log notification's event source.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start Time in milliseconds since Epoch Eg. 1597950637211 (when provided endTime is mandatory)",
+          "type": "number"
+        },
+        "subDomain": {
+          "description": "Audit Log notification's event sub-domain.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "Audit Log notification's event userId.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "additionalDetails": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "category": {
+            "description": "",
+            "type": "string"
+          },
+          "childCount": {
+            "description": "",
+            "type": "number"
+          },
+          "ciscoDnaEventLink": {
+            "description": "",
+            "type": "string"
+          },
+          "context": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "details": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "domain": {
+            "description": "",
+            "type": "string"
+          },
+          "eventHierarchy": {
+            "description": "",
+            "type": "string"
+          },
+          "eventId": {
+            "description": "",
+            "type": "string"
+          },
+          "i18n": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceId": {
+            "description": "",
+            "type": "string"
+          },
+          "message": {
+            "description": "",
+            "type": "string"
+          },
+          "messageParams": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "",
+            "type": "string"
+          },
+          "network": {
+            "description": "",
+            "type": "string"
+          },
+          "note": {
+            "description": "",
+            "type": "string"
+          },
+          "parentInstanceId": {
+            "description": "",
+            "type": "string"
+          },
+          "severity": {
+            "description": "",
+            "type": "integer"
+          },
+          "source": {
+            "description": "",
+            "type": "string"
+          },
+          "subDomain": {
+            "description": "",
+            "type": "string"
+          },
+          "tags": {
+            "description": "",
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "tenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "",
+            "type": "integer"
+          },
+          "tntId": {
+            "description": "",
+            "type": "string"
+          },
+          "type": {
+            "description": "",
+            "type": "string"
+          },
+          "userId": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

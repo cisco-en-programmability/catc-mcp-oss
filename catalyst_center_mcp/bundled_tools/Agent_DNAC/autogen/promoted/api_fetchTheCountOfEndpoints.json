@@ -1,0 +1,143 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "aiSpoofingTrustLevel": "query",
+        "ancPolicy": "query",
+        "authMethod": "query",
+        "changedProfileTrustLevel": "query",
+        "concurrentMacTrustLevel": "query",
+        "deviceType": "query",
+        "hardwareManufacturer": "query",
+        "hardwareModel": "query",
+        "ip": "query",
+        "ipBlocklistDetected": "query",
+        "macAddress": "query",
+        "macAddresses": "query",
+        "natTrustLevel": "query",
+        "operatingSystem": "query",
+        "postureStatus": "query",
+        "profilingStatus": "query",
+        "randomMac": "query",
+        "registered": "query",
+        "trustScore": "query",
+        "unauthPortDetected": "query",
+        "weakCredDetected": "query"
+      },
+      "uri": "/dna/intent/api/v1/endpoint-analytics/endpoints/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Fetch the total count of endpoints that match the given filter criteria.",
+    "name": "api_fetchTheCountOfEndpoints",
+    "parameters": {
+      "properties": {
+        "aiSpoofingTrustLevel": {
+          "description": "Trust level of the endpoint due to AI spoofing. Possible values are 'low', 'medium', 'high'.",
+          "type": "string"
+        },
+        "ancPolicy": {
+          "description": "ANC policy. Only exact match will be returned.",
+          "type": "string"
+        },
+        "authMethod": {
+          "description": "Authentication method. Partial string is allowed.",
+          "type": "string"
+        },
+        "changedProfileTrustLevel": {
+          "description": "Trust level of the endpoint due to changing profile labels. Possible values are 'low', 'medium', 'high'.",
+          "type": "string"
+        },
+        "concurrentMacTrustLevel": {
+          "description": "Trust level of the endpoint due to concurrent MAC address. Possible values are 'low', 'medium', 'high'.",
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "Type of device to search for. Partial string is allowed.",
+          "type": "string"
+        },
+        "hardwareManufacturer": {
+          "description": "Hardware manufacturer to search for. Partial string is allowed.",
+          "type": "string"
+        },
+        "hardwareModel": {
+          "description": "Hardware model to search for. Partial string is allowed.",
+          "type": "string"
+        },
+        "ip": {
+          "description": "IP address to search for. Partial string is allowed.",
+          "type": "string"
+        },
+        "ipBlocklistDetected": {
+          "description": "Flag to fetch endpoints hitting IP blocklist or not.",
+          "type": "boolean"
+        },
+        "macAddress": {
+          "description": "MAC address to search for. Partial string is allowed.",
+          "type": "string"
+        },
+        "macAddresses": {
+          "description": "List of MAC addresses to filter on. Only exact matches will be returned.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "natTrustLevel": {
+          "description": "Trust level of the endpoint due to NAT access. Possible values are 'low', 'medium', 'high'.",
+          "type": "string"
+        },
+        "operatingSystem": {
+          "description": "Operating system to search for. Partial string is allowed.",
+          "type": "string"
+        },
+        "postureStatus": {
+          "description": "Posture status.",
+          "type": "string"
+        },
+        "profilingStatus": {
+          "description": "Profiling status of the endpoint. Possible values are 'profiled', 'partialProfiled', 'notProfiled'.",
+          "type": "string"
+        },
+        "randomMac": {
+          "description": "Flag to fetch endpoints having randomized MAC or not.",
+          "type": "boolean"
+        },
+        "registered": {
+          "description": "Flag to fetch manually registered or non-registered endpoints.",
+          "type": "boolean"
+        },
+        "trustScore": {
+          "description": "Overall trust score of the endpoint. It can be provided either as a number value (e.g. 5), or as a range (e.g. 3-7). Provide value as '-' if you want to search for all endpoints where trust score is not assigned.",
+          "type": "string"
+        },
+        "unauthPortDetected": {
+          "description": "Flag to fetch endpoints exposing unauthorized ports or not.",
+          "type": "boolean"
+        },
+        "weakCredDetected": {
+          "description": "Flag to fetch endpoints having weak credentials or not.",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "count": {
+          "description": "",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

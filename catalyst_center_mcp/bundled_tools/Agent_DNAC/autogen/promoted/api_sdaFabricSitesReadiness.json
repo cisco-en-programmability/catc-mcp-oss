@@ -1,0 +1,117 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "order": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityServiceInsertion/fabricSitesReadiness",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the top-level SSI readiness view for fabric sites, meaning whether each available SDA fabric site is ready to have Security Service Insertion (SSI) enabled. Use this API when the user asks which fabric sites are ready or not ready for SSI, whether SSI is enabled for a site, why a site is not ready, or what site-level prerequisites are missing before SSI can be enabled. The key result is the site-level `readiness` field, which tells whether each fabric site is `READY` or `NOT_READY` for SSI enablement. This readiness depends on site-level prerequisites such as having at least one border device, at least one control plane or map-server device, at least one edge device, at least one virtual network, required LISP PubSub enablement, required TrustSec HTTPS download enablement in the site hierarchy, and no unsupported IPv6 condition for SSI. The response also shows whether SSI is already enabled for the site, the counts of VNs and required device roles, and a `message` that explains the current blocking issue when the site is not ready. Treat SSI and Security Service Insertion as the same feature name. This preference rule applies for any site reference format, including a short fabric site name such as `BGL17`, a full Catalyst Center site hierarchy path such as `Global/Bangalore/BGL17`, a fabric `siteId`, or a follow-up reference such as `that site` when the SSI site was already identified earlier in the conversation. If the user mentions SSI or Security Service Insertion and asks whether a specific site is ready, enabled, blocked, or missing prerequisites for SSI, prefer this API even when generic SDA site-detail tools could also resolve the same site name or hierarchy path. Prefer this API for per-fabric-site SSI enablement readiness and site-level prerequisite questions, including readiness prerequisite fields such as `edgeDeviceCount`, `borderDeviceCount`, `mapServerDeviceCount`, `virtualNetworkCount`, `lispPubsub`, IPv6 state, TrustSec HTTPS download state, and the site readiness message. In an SSI readiness, SSI deployment, or SSI enablement context, use this API for prerequisite counts and flags before generic SDA fabric site detail tools or the SSI summary API. Do not use it for global system readiness, not for per-virtual-network readiness inside one site, not for switch readiness inside a virtual network, and not for configured SSI records or SSI summary inventory.",
+    "name": "api_sdaFabricSitesReadiness",
+    "parameters": {
+      "properties": {
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "number"
+        },
+        "sortBy": {
+          "description": "Sort results by the fabric site name.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of SDA fabric sites with their top-level SSI enablement readiness and related site-level prerequisite details.",
+          "items": {
+            "properties": {
+              "borderDeviceCount": {
+                "description": "Number of border devices present in the fabric site.",
+                "type": "integer"
+              },
+              "edgeDeviceCount": {
+                "description": "Number of edge devices present in the fabric site.",
+                "type": "integer"
+              },
+              "fabricSiteName": {
+                "description": "Fabric site name.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Fabric site identifier.",
+                "type": "string"
+              },
+              "ipv6Enabled": {
+                "description": "Whether IPv6 is enabled for the fabric site. SSI currently does not support IPv6 for this readiness check, so an enabled IPv6 state can make the site not ready.",
+                "enum": [
+                  "ENABLED, DISABLED"
+                ],
+                "type": "string"
+              },
+              "lispPubsub": {
+                "description": "Whether LISP PubSub is enabled for the fabric site. This is one of the site-level prerequisites for SSI enablement.",
+                "enum": [
+                  "ENABLED, DISABLED"
+                ],
+                "type": "string"
+              },
+              "mapServerDeviceCount": {
+                "description": "Number of control plane or map-server devices present in the fabric site.",
+                "type": "integer"
+              },
+              "message": {
+                "description": "Explanation of why the fabric site is currently not ready for SSI. This typically contains one blocking issue at a time and may be blank when there is no issue.",
+                "type": "string"
+              },
+              "readiness": {
+                "description": "Main SSI readiness result for the fabric site. `READY` means the site-level prerequisites required to enable SSI are satisfied. `NOT_READY` means one or more required site-level prerequisites is missing or unsupported.",
+                "enum": [
+                  "READY, NOT_READY"
+                ],
+                "type": "string"
+              },
+              "ssiEnabled": {
+                "description": "Whether SSI is already enabled for this fabric site.",
+                "enum": [
+                  "ENABLED, DISABLED"
+                ],
+                "type": "string"
+              },
+              "trustSecHttpsDownloadEnabledInSiteHierarchy": {
+                "description": "Whether the required TrustSec HTTPS download setting is enabled in the site hierarchy for this fabric site.",
+                "enum": [
+                  "ENABLED, DISABLED"
+                ],
+                "type": "string"
+              },
+              "virtualNetworkCount": {
+                "description": "Number of virtual networks present in the fabric site. At least one virtual network is required before SSI can be enabled for the site.",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

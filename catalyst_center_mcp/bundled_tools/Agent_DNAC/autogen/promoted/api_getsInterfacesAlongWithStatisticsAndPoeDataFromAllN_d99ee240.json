@@ -1,0 +1,424 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "attribute": "query",
+        "endTime": "query",
+        "interfaceId": "query",
+        "interfaceName": "query",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "networkDeviceIpAddress": "query",
+        "networkDeviceMacAddress": "query",
+        "offset": "query",
+        "order": "query",
+        "siteHierarchy": "query",
+        "siteHierarchyId": "query",
+        "siteId": "query",
+        "sortBy": "query",
+        "startTime": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/interfaces",
+      "version": "2.3.7.9"
+    },
+    "description": "        Retrieves the list of the interfaces from all network devices based on\n        the provided query parameters. The latest interfaces data in the\n        specified start and end time range will be returned. When there is no\n        start and end time specified returns the latest available data.\n        \n        \n        The elements are grouped and sorted by deviceUuid first, and are then\n        sorted by the given sort field, or by the default value: name.\n        \n\n        \n        The supported sorting options are: \n\n        name, adminStatus, description, duplexConfig, duplexOper,\n        interfaceIfIndex,interfaceType, macAddress,mediaType, operStatus,\n        portChannelId, portMode, portType,speed, vlanId\n        \n        \n\n        \n        This API can paginate up to 500,000 records, please narrow matching results with additional filters beyond that value.\nThe elements are grouped and sorted by deviceUuid first, and are then sorted by the given sort field, or by the default value: name.\n\n The supported sorting options are: name, adminStatus, description, duplexConfig, duplexOper,interfaceIfIndex,interfaceType, macAddress,mediaType, operStatus,portChannelId, portMode, portType,speed, vlanId,pdPowerAdminMaxInWatt,pdPowerBudgetInWatt,pdPowerConsumedInWatt,pdPowerRemainingInWatt,pdMaxPowerDrawn. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-interfaces-2.0.0-resolved.yaml",
+    "name": "api_getsInterfacesAlongWithStatisticsAndPoeDataFromAllN_d99ee240",
+    "parameters": {
+      "properties": {
+        "attribute": {
+          "description": "The following list of attributes can be provided in the attribute field          [id,adminStatus, description,duplexConfig,duplexOper,interfaceIfIndex,interfaceType,ipv4Address,ipv6AddressList,isL3Interface,isWan,macAddress,mediaType,name,operStatus,peerStackMember,peerStackPort, portChannelId,portMode, portType,rxDiscards,rxError,rxRate,rxUtilization,speed,stackPortType,timestamp,txDiscards,txError,txRate,txUtilization,vlanId,networkDeviceId,networkDeviceIpAddress,networkDeviceMacAddress,siteName,siteHierarchy,siteHierarchyId,poeAdminStatus,poeOperStatus,chassisId,moduleId,pdClassSignal,pdClassSpare,pdDeviceType,pdDeviceModel,pdPowerAdminMaxInWatt,pdPowerBudgetInWatt,pdPowerConsumedInWatt,pdPowerRemainingInWatt,pdMaxPowerDrawn,pdConnectedDeviceList,poeOperPriority,fastPoEEnabled,perpetualPoEEnabled,policingPoEEnabled,upoePlusEnabled,fourPairEnabled,poeDataTimestamp,pdLocation,pdDeviceName,pdConnectedSwitch,connectedSwitchUuid,ieeeCompliant,connectedSwitchType]          If length of attribute list is too long, please use 'views' param instead.          Examples:          attributes=name (single attribute requested)          attributes=name&description&duplexOper (multiple attributes with comma separator)",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "interfaceId": {
+          "description": "The list of Interface Uuids. (Ex. `6bef213c-19ca-4170-8375-b694e251101c`)\n\nExamples:\n\n`interfaceId=6bef213c-19ca-4170-8375-b694e251101c` (single interface uuid )\n\n`interfaceId=6bef213c-19ca-4170-8375-b694e251101c&32219612-819e-4b5e-a96b-cf22aca13dd9&2541e9a7-b80d-4955-8aa2-79b233318ba0` (multiple Interface uuid with & separator)\n",
+          "type": "string"
+        },
+        "interfaceName": {
+          "description": "The list of Interface name (Ex. `GigabitEthernet1/0/1`)\nThis field supports wildcard (`*`) character-based search. \nEx: `*1/0/1*` or `1/0/1*` or `*1/0/1`\n\nExamples:\n\n`interfaceNames=GigabitEthernet1/0/1` (single interface name)\n\n`interfaceNames=GigabitEthernet1/0/1&GigabitEthernet2/0/1&GigabitEthernet3/0/1` (multiple interface names with & separator)\n",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "The list of Network Device Uuids. (Ex. `6bef213c-19ca-4170-8375-b694e251101c`)\n\nExamples:\n\n`networkDeviceId=6bef213c-19ca-4170-8375-b694e251101c` (single networkDeviceId requested)\n\n`networkDeviceId=6bef213c-19ca-4170-8375-b694e251101c&networkDeviceId=32219612-819e-4b5e-a96b-cf22aca13dd9&networkDeviceId=2541e9a7-b80d-4955-8aa2-79b233318ba0` (multiple networkDeviceIds with & separator)\n",
+          "type": "string"
+        },
+        "networkDeviceIpAddress": {
+          "description": "The list of Network Device management IP Address. (Ex. `121.1.1.10`)\n\nThis field supports wildcard (`*`) character-based search. \nEx: `*1.1*` or `1.1*` or `*1.1`\n\nExamples:\n\n`networkDeviceIpAddress=121.1.1.10`\n\n`networkDeviceIpAddress=121.1.1.10&networkDeviceIpAddress=172.20.1.10&networkDeviceIpAddress=10.10.20.10` (multiple networkDevice IP Address with & separator)\n",
+          "type": "string"
+        },
+        "networkDeviceMacAddress": {
+          "description": "The list of Network Device MAC Address. (Ex. `64:f6:9d:07:9a:00`)\n\nThis field supports wildcard (`*`) character-based search. \nEx: `*AB:AB:AB*` or `AB:AB:AB*` or `*AB:AB:AB`\n\nExamples:\n\n`networkDeviceMacAddress=64:f6:9d:07:9a:00`\n\n`networkDeviceMacAddress=64:f6:9d:07:9a:00&networkDeviceMacAddress=70:56:9d:07:ac:77` (multiple networkDevice MAC addresses with & separator)\n",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*/San*, */San, /San*`\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*uuid*, *uuid, uuid*`\n\nExamples:\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&siteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A field within the response to sort by.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to current time.\n",
+          "type": "number"
+        },
+        "view": {
+          "description": "Views which are supported by this API. Each view represents a specific         data set.           ### Response data provided by each view:             1. **configuration**          [id,name,adminStatus,description,duplexConfig,duplexOper,interfaceIfIndex,interfaceType,ipv4Address,ipv6AddressList,isL3Interface,isWan,macAddress,mediaType,name,operStatus,         portChannelId,portMode,         portType,speed,timestamp,vlanId,networkDeviceId,networkDeviceIpAddress,networkDeviceMacAddress,siteName,siteHierarchy,siteHierarchyId]             2. **statistics**          [id,name,rxDiscards,rxError,rxRate,rxUtilization,txDiscards,txError,txRate,txUtilization,networkDeviceId,networkDeviceIpAddress,networkDeviceMacAddress,siteName,siteHierarchy,siteHierarchyId]            3. **stackPort**          [id,name,peerStackMember,peerStackPort,stackPortType,networkDeviceId,networkDeviceIpAddress,networkDeviceMacAddress,siteName,siteHierarchy,siteHierarchyId]                   4. **poE**              [id, name,rxDiscards,rxError,rxRate,rxUtilization,txDiscards,txError,txRate,txUtilization,networkDeviceId,networkDeviceIpAddress,networkDeviceMacAddress,siteName,siteHierarchy,siteHierarchyId]              When this query parameter is not added by default all configuration attributes will be         available in the response.     **[configuration,statistics,stackPort]**",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "sortBy": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "order": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "adminStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "chassisId": {
+                "description": "",
+                "type": "integer"
+              },
+              "connectedSwitchType": {
+                "description": "",
+                "type": "string"
+              },
+              "connectedSwitchUuid": {
+                "description": "",
+                "type": "string"
+              },
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "duplexConfig": {
+                "description": "",
+                "type": "string"
+              },
+              "duplexOper": {
+                "description": "",
+                "type": "string"
+              },
+              "fastPoEEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "fourPairEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "ieeeCompliant": {
+                "description": "",
+                "type": "boolean"
+              },
+              "interfaceIfIndex": {
+                "description": "",
+                "type": "integer"
+              },
+              "interfaceType": {
+                "description": "",
+                "type": "string"
+              },
+              "ipv4Address": {
+                "description": "",
+                "type": "string"
+              },
+              "ipv6AddressList": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "isL3Interface": {
+                "description": "",
+                "type": "boolean"
+              },
+              "isWan": {
+                "description": "",
+                "type": "boolean"
+              },
+              "macAddr": {
+                "description": "",
+                "type": "string"
+              },
+              "mediaType": {
+                "description": "",
+                "type": "string"
+              },
+              "moduleId": {
+                "description": "",
+                "type": "integer"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "networkDeviceId": {
+                "description": "",
+                "type": "string"
+              },
+              "networkDeviceIpAddress": {
+                "description": "",
+                "type": "string"
+              },
+              "networkDeviceMacAddress": {
+                "description": "",
+                "type": "string"
+              },
+              "operStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "pdClassSignal": {
+                "description": "",
+                "type": "string"
+              },
+              "pdClassSpare": {
+                "description": "",
+                "type": "string"
+              },
+              "pdConnectedDeviceList": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "pdConnectedSwitch": {
+                "description": "",
+                "type": "string"
+              },
+              "pdDeviceModel": {
+                "description": "",
+                "type": "string"
+              },
+              "pdDeviceName": {
+                "description": "",
+                "type": "string"
+              },
+              "pdDeviceType": {
+                "description": "",
+                "type": "string"
+              },
+              "pdLocation": {
+                "description": "",
+                "type": "string"
+              },
+              "pdMaxPowerDrawn": {
+                "description": "",
+                "type": "string"
+              },
+              "pdPowerAdminMaxInWatt": {
+                "description": "",
+                "type": "string"
+              },
+              "pdPowerBudgetInWatt": {
+                "description": "",
+                "type": "string"
+              },
+              "pdPowerConsumedInWatt": {
+                "description": "",
+                "type": "string"
+              },
+              "pdPowerRemainingInWatt": {
+                "description": "",
+                "type": "string"
+              },
+              "peerStackMember": {
+                "description": "",
+                "type": "integer"
+              },
+              "peerStackPort": {
+                "description": "",
+                "type": "string"
+              },
+              "perpetualPoEEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "poeAdminStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "poeDataTimestamp": {
+                "description": "",
+                "type": "integer"
+              },
+              "poeOperPriority": {
+                "description": "",
+                "type": "string"
+              },
+              "poeOperStatus": {
+                "description": "",
+                "type": "string"
+              },
+              "policingPoEEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "portChannelId": {
+                "description": "",
+                "type": "string"
+              },
+              "portMode": {
+                "description": "",
+                "type": "string"
+              },
+              "portType": {
+                "description": "",
+                "type": "string"
+              },
+              "rxDiscards": {
+                "description": "",
+                "type": "number"
+              },
+              "rxError": {
+                "description": "",
+                "type": "integer"
+              },
+              "rxRate": {
+                "description": "",
+                "type": "number"
+              },
+              "rxUtilization": {
+                "description": "",
+                "type": "number"
+              },
+              "siteHierarchy": {
+                "description": "",
+                "type": "string"
+              },
+              "siteHierarchyId": {
+                "description": "",
+                "type": "string"
+              },
+              "speed": {
+                "description": "",
+                "type": "string"
+              },
+              "stackPortType": {
+                "description": "",
+                "type": "string"
+              },
+              "timestamp": {
+                "description": "",
+                "type": "integer"
+              },
+              "txDiscards": {
+                "description": "",
+                "type": "number"
+              },
+              "txError": {
+                "description": "",
+                "type": "integer"
+              },
+              "txRate": {
+                "description": "",
+                "type": "number"
+              },
+              "txUtilization": {
+                "description": "",
+                "type": "number"
+              },
+              "upoePlusEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "vlanId": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

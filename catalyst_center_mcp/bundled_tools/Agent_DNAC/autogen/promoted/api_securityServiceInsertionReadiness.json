@@ -1,0 +1,122 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/securityServiceInsertion/systemReadiness",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the global or overall system-level readiness for Security Service Insertion (SSI), meaning whether the environment is ready to enable SSI at all, not whether one specific site is ready. Use this API when SSI and Security Service Insertion mean the same feature and the user is asking whether SSI is ready, enabled, prepared, or passes prerequisites or prechecks before configuration. The top-level `readiness` answer is derived from the required global prerequisite areas for SSI: ISE must be integrated and synchronized, security groups and SGT readiness must be in place, the access control or policy package must be installed, and at least one fabric site must exist. This API also returns the detailed prerequisite breakdown for each of those areas through `ise`, `securityGroup`, and `accessControlDetails`, including SSI-specific ISE integration status, ISE version, ISE sync status, total security groups count, who manages SGTs, access control app package status, and fabric sites count. All SSI-related ISE prerequisite questions, such as whether ISE is integrated for SSI, whether ISE is synced for SSI, or what ISE version SSI is using, should be answered with this API rather than `api_ciscoISEServerIntegrationStatus`. Always invoke this API for current global SSI readiness requests instead of answering from earlier turn context alone. Use this for overall SSI readiness and SSI prerequisite questions only, not for a specific SSI instance, not for a specific fabric site, not for virtual network readiness, not for switch readiness inside a virtual network, not for listing SSIs, and not for counts or summary-style inventory questions.",
+    "name": "api_securityServiceInsertionReadiness",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Overall SSI system readiness object that combines the top-level readiness answer with the detailed prerequisite breakdown for ISE, security groups, and access control.",
+          "properties": {
+            "accessControlDetails": {
+              "description": "Detailed SSI prerequisite information for access control or policy readiness, including whether the access control application package is installed, how many fabric sites are present, and whether the access-control prerequisite area is ready overall.",
+              "properties": {
+                "accessControlAppPkgStatus": {
+                  "description": "Whether the access control or policy application package required for SSI is installed.",
+                  "enum": [
+                    "INSTALLED, NOT_INSTALLED"
+                  ],
+                  "type": "string"
+                },
+                "fabricSitesCount": {
+                  "description": "Number of fabric sites currently present. At least one fabric site is required as part of the global SSI prerequisite readiness checks.",
+                  "type": "integer"
+                },
+                "readiness": {
+                  "description": "Overall readiness result for the access-control or policy prerequisite area within SSI readiness.",
+                  "enum": [
+                    "READY, NOT_READy"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "ise": {
+              "description": "Detailed SSI prerequisite information for Cisco ISE, including whether ISE is integrated for SSI, the ISE version in use, whether ISE is synchronized, and whether the ISE prerequisite area is ready overall.",
+              "properties": {
+                "integrationStatus": {
+                  "description": "Whether Cisco ISE is integrated for SSI. This is one of the required global prerequisites for enabling SSI.",
+                  "enum": [
+                    "INTEGRATED, NOT_INTEGRATED"
+                  ],
+                  "type": "string"
+                },
+                "readiness": {
+                  "description": "Overall readiness result for the ISE prerequisite area within SSI readiness.",
+                  "enum": [
+                    "READY, NOT_READY"
+                  ],
+                  "type": "string"
+                },
+                "syncStatus": {
+                  "description": "Whether Cisco ISE is synchronized for SSI. This is part of the global SSI prerequisite check and indicates whether the required ISE sync state is in place.",
+                  "enum": [
+                    "SYNCHRONIZED, NOT_SYNCHRONIZED"
+                  ],
+                  "type": "string"
+                },
+                "version": {
+                  "description": "The Cisco ISE version currently associated with SSI readiness evaluation.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "readiness": {
+              "description": "Overall global SSI readiness status. `READY` means the major prerequisite areas required to enable SSI are in place at the system level, including ISE integration and sync, security group readiness, access control package readiness, and at least one fabric site. `NOT_READY` means one or more of those prerequisite areas is not ready.",
+              "enum": [
+                "READY, NOT_READY"
+              ],
+              "type": "string"
+            },
+            "securityGroup": {
+              "description": "Detailed SSI prerequisite information for security groups and SGTs, including the total available security groups count, who manages the SGTs, and whether the security-group prerequisite area is ready overall.",
+              "properties": {
+                "readiness": {
+                  "description": "Overall readiness result for the security-group or SGT prerequisite area within SSI readiness.",
+                  "enum": [
+                    "READY, NOT_READY"
+                  ],
+                  "type": "string"
+                },
+                "securityGroupsCount": {
+                  "description": "Total number of available security groups or SGTs visible for SSI readiness.",
+                  "type": "integer"
+                },
+                "sgtManagedBy": {
+                  "description": "Indicates whether the Security Group Tags used for SSI are managed by Cisco ISE or by Catalyst Center.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

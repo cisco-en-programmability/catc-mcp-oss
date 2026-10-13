@@ -1,0 +1,85 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/diagnosticTasks/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves the diagnostic task identified by the specified `id`.",
+    "name": "api_retrievesDiagnosticTaskByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The `id` of the diagnostic task to be retrieved",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "An asynchronous task",
+          "properties": {
+            "endTime": {
+              "description": "An approximate time of when this task has been marked completed; as measured in Unix epoch time in milliseconds",
+              "type": "integer"
+            },
+            "id": {
+              "description": "The ID of this task",
+              "type": "string"
+            },
+            "parentId": {
+              "description": "The ID of the parent task if this happens to be a subtask. In case this task is not a subtask, then the parentId is expected to be null.  To construct a task tree, this task will be the child of the task with the ID listed here, or the root of the tree if this task has no parentId",
+              "type": "string"
+            },
+            "resultLocation": {
+              "description": "A server-relative URL indicating where additional task-specific details may be found",
+              "type": "string"
+            },
+            "rootId": {
+              "description": "The ID of the task representing the root node of the tree which this task belongs to.  In some cases, this may be the same as the ID or null, which indicates that this task is the root task",
+              "type": "string"
+            },
+            "startTime": {
+              "description": "An approximate time of when the task creation was triggered; as measured in Unix epoch time in milliseconds",
+              "type": "integer"
+            },
+            "status": {
+              "description": "Summarizes the status of a task",
+              "enum": [
+                "PENDING",
+                "FAILURE",
+                "SUCCESS"
+              ],
+              "type": "string"
+            },
+            "updatedTime": {
+              "description": "The last modification date and time of this task, expressed in Unix epoch time format to the millisecond precision. ",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

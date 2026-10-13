@@ -1,0 +1,33 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/event/artifact/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the total count of registered event artifacts. Event artifacts are event definitions or templates available in the system. It can answer questions like How many event artifacts are there? or Give me the count of all event artifacts.",
+    "name": "api_eventArtifactCount",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,64 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/tasks/{id}/detail",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the task details for the given task ID",
+    "name": "api_getTaskDetailsByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "the `id` of the task to retrieve details for",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "data": {
+              "description": "Any data associated with this task; the value may vary significantly across different tasks",
+              "type": "string"
+            },
+            "errorCode": {
+              "description": "An error code if in case this task has failed in its execution",
+              "type": "string"
+            },
+            "failureReason": {
+              "description": "A textual description indicating the reason why a task has failed",
+              "type": "string"
+            },
+            "progress": {
+              "description": "A textual representation which indicates the progress of this task; the value may vary significantly across different tasks",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

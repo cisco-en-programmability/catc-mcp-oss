@@ -1,0 +1,71 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "macaddress": "query",
+        "serialNumber": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/tenantinfo/macaddress",
+      "version": "2.3.7.9"
+    },
+    "description": "It fetches devices which are registered to receive WSA notifications. The device serial number and/or MAC address are required to be provided as query parameters.",
+    "name": "api_getDevicesRegisteredForWSANotification",
+    "parameters": {
+      "properties": {
+        "macaddress": {
+          "description": "Mac addres of the device",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "Serial number of the device",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "macAddress": {
+              "description": "MAC address of device",
+              "type": "string"
+            },
+            "modelNumber": {
+              "description": "Model number of the device",
+              "type": "string"
+            },
+            "name": {
+              "description": "Name of the device",
+              "type": "string"
+            },
+            "serialNumber": {
+              "description": "Serial Number of the device",
+              "type": "string"
+            },
+            "tenantId": {
+              "description": "Tenant Id of the device",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

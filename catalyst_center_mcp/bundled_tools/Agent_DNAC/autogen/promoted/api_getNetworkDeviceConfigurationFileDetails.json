@@ -1,0 +1,96 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "fileType": "query",
+        "id": "query",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceConfigFiles",
+      "version": "2.3.7.9"
+    },
+    "description": "Internal low-level record lookup. Returns one stored record identified by its UUID (the `id` parameter). Use only when an upstream step has already produced a specific record UUID and you need to fetch that exact row. Not used to answer user-facing questions; for any user question about a device, route to a device-level or assurance-level tool instead.",
+    "name": "api_getNetworkDeviceConfigurationFileDetails",
+    "parameters": {
+      "properties": {
+        "fileType": {
+          "description": "Internal enum filter. Allowed values: RUNNINGCONFIG, STARTUPCONFIG, VLAN.",
+          "type": "string"
+        },
+        "id": {
+          "description": "UUID of the stored record to retrieve.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Optional UUID filter for the owning device. Maximum 5 values.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "createdBy": {
+                "description": "The entity responsible for creating the configuration changes.",
+                "type": "string"
+              },
+              "createdTime": {
+                "description": "The UNIX epoch timestamp in milliseconds marking when the resource was created.",
+                "type": "integer"
+              },
+              "fileType": {
+                "description": "Type of configuration file. Config File Type can be 'RUNNINGCONFIG' or 'STARTUPCONFIG' or 'VLAN'.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier (UUID) of the configuration file.",
+                "type": "string"
+              },
+              "networkDeviceId": {
+                "description": "Unique identifier (UUID) of the network devices.",
+                "type": "string"
+              },
+              "versionId": {
+                "description": "The version unique identifier triggered after any config change.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

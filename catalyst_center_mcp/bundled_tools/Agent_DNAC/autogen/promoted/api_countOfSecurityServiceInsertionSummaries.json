@@ -1,0 +1,43 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/securityServiceInsertionSummaries/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the count of SSI-enabled sites represented by `api_securityServiceInsertionSummary`. Use this API when the user asks for the number of SSI-enabled sites, how many site summary records are available for SSI, or the count of site information that would be returned by `api_securityServiceInsertionSummary`. Treat SSI and Security Service Insertion as the same feature name. This is a count-only API and does not return site details. Prefer this API for count questions tied to the SSI summary view, not for full SSI details, not for readiness, and not for virtual-network-level or switch-level questions.",
+    "name": "api_countOfSecurityServiceInsertionSummaries",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Count response for SSI-enabled site summary records.",
+          "properties": {
+            "count": {
+              "description": "Number of SSI-enabled sites represented in the SSI summary view.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

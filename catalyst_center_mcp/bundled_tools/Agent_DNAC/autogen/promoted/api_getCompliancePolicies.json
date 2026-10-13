@@ -1,0 +1,153 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "name": "query",
+        "offset": "query",
+        "policyId": "query",
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves the list of rule-based compliance (RBC) policies configured in Catalyst Center (Configuration > Compliance). Use this for questions about which compliance/RBC policies exist, to list them, or to look a compliance policy up by name via the `name` filter (an exact, case-sensitive match on the policy's complete name \u2014 when the user describes a policy loosely rather than naming it, omit `name`, list the policies, and pick the closest match). The `name` filter matches POLICY names only \u2014 never pass a site, device, or location name to it. Because that match is exact, treat any empty result from a `name`-filtered call as a failed lookup rather than an answer: immediately call this tool again WITHOUT `name` and find the policy in that listing before you respond. Users habitually append words that are not part of the stored name, so 'the SMU verification compliance policy' means the policy called 'SMU verification'. Never tell the user that a compliance policy does not exist until you have listed the policies without a `name` filter and confirmed it is absent. For questions about which policies apply to a place, e.g. 'what RBC policies are applicable to the Bengaluru site?' or 'which compliance policies apply at <site>?', first resolve that site's `id` with api_getSites (name=<site>), then call this tool with `siteId` set to that id; the result already includes policies inherited from ancestor sites such as Global. ALSO use this to answer existence or capability questions about compliance policies, e.g. 'do I have a compliance policy to check/verify <something>?' or 'is there an RBC/compliance policy for <something>?' \u2014 list the configured RBC policies and match by name/intent, and answer from this tool's data rather than from documentation. Also use this FIRST to resolve a compliance policy's `id` from its name before calling any rule, condition, variable, or site-assignment tool. Do NOT use this tool to compute the total number of policies: its page size is limited (defaults to 10 and large limits are rejected), so counting its results is inaccurate \u2014 use api_getCompliancePolicyCount for 'how many'/count questions. Returns configured compliance POLICIES (each composed of rules); this is NOT the compliance status or violations of network devices, and NOT access-control, application, QoS, or group-based policies.",
+    "name": "api_getCompliancePolicies",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Filter by compliance policy name. The match is exact and case-sensitive: the value must be the policy's complete stored name, so a partial name, an extra word, a keyword, or different capitalisation returns nothing. Pass `name` only when you already have that exact name, typically because the user quoted it or because you read it from an earlier listing. Do not assemble a value out of the user's own phrasing: wording such as 'the SMU verification policy' or 'the ACL checking policy' describes a policy rather than naming it, and a trailing 'policy' or 'compliance policy' is usually not part of the stored name. In that situation call this tool without `name`, list the policies, pick the one matching the description, and use that policy's `id` for follow-up calls. MANDATORY: if a call with `name` returns no results, call this tool again without `name` and look for a match in that listing before you answer. An empty filtered result only means nothing matched that exact string, so never conclude from it that the policy does not exist.",
+          "example": "DNS",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "policyId": {
+          "description": "The IDs of the compliance policies.",
+          "example": [
+            "e910e834-e35b-4800-9401-a40e22ce09f3",
+            "a910e834-e35b-4800-9401-a40e22ce09f4"
+          ],
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "maxItems": 25,
+          "type": "array"
+        },
+        "siteId": {
+          "description": "The `id` of a site, to return only the compliance policies that apply to that site. Resolve the id from the site name with api_getSites first; this parameter accepts a site UUID, never a site name. The result is the site's effective policy set: it includes policies inherited from ancestor sites (for example policies assigned to Global).",
+          "example": "b8eeb5e2-1eab-426c-be77-97ee81dcba07",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "properties": {
+        "response": {
+          "items": {
+            "description": "This schema defines the structure of a policy.\n",
+            "properties": {
+              "description": {
+                "description": "An optional field for providing a detailed description of the compliance policy.",
+                "example": "All the devices within a network should be configured with a DNS server to be able to do address resolution.",
+                "maxLength": 2000,
+                "type": "string"
+              },
+              "id": {
+                "description": "The `id` of the compliance policy.",
+                "example": "7f825ee6-877f-46f8-9aee-d395eefaa1b2",
+                "format": "uuid",
+                "readOnly": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "The unique name of the compliance policy.\n",
+                "example": "Check DNS Servers are configured",
+                "maxLength": 255,
+                "type": "string"
+              },
+              "rulesCount": {
+                "description": "The total number of rules within the compliance policy.",
+                "example": 2,
+                "readOnly": true,
+                "type": "integer"
+              },
+              "sitesCount": {
+                "description": "The total count of site IDs to which the compliance policy applies.",
+                "example": 2,
+                "readOnly": true,
+                "type": "integer"
+              },
+              "source": {
+                "description": "The source of the compliance policy. Source can be:\n  - `USER`: Indicates the policy was created by the user.\n  - `SYSTEM`: Indicates the policy was automatically generated by the system.\n",
+                "enum": [
+                  "USER",
+                  "SYSTEM"
+                ],
+                "example": "USER",
+                "readOnly": true,
+                "type": "string"
+              },
+              "status": {
+                "description": "The status of the compliance policy. Status can be:\n  - `ACTIVE`: The policy is fully configured and operational.\n  - `NO_RULES_CONFIGURED`: The policy lacks defined rules.\n  - `NO_CONDITIONS_CONFIGURED`: The policy lacks conditions in all its rules.\n  - `NO_SITES_ASSIGNED`: The policy is not assigned to any sites.\n  - `SITE_VARIABLES_PENDING`: Awaiting resolution of site-specific variables.\n",
+                "enum": [
+                  "ACTIVE",
+                  "NO_RULES_CONFIGURED",
+                  "NO_CONDITIONS_CONFIGURED",
+                  "NO_SITES_ASSIGNED",
+                  "SITE_VARIABLES_PENDING"
+                ],
+                "example": "NO_CONDITIONS_CONFIGURED",
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "rulesCount",
+              "sitesCount",
+              "source",
+              "status"
+            ],
+            "title": "Policy",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "required": [
+        "response",
+        "version"
+      ],
+      "title": "inline_response_200"
+    }
+  },
+  "type": "function"
+}

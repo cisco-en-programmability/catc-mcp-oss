@@ -1,0 +1,112 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/lanAutomation/portChannels/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API retrieves Port Channel information using its ID.",
+    "name": "api_getPortChannelInformationById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "ID of the port channel.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "device1ManagementIPAddress": {
+                "description": "IP address of device 1.",
+                "type": "string"
+              },
+              "device1PortChannelNumber": {
+                "description": "Port Channel number.",
+                "type": "integer"
+              },
+              "device1PortChannelUuid": {
+                "description": "ID of the port channel.",
+                "type": "string"
+              },
+              "device1Uuid": {
+                "description": "ID of device1.",
+                "type": "string"
+              },
+              "device2ManagementIPAddress": {
+                "description": "IP address of device 2.",
+                "type": "string"
+              },
+              "device2PortChannelNumber": {
+                "description": "Port Channel number.",
+                "type": "integer"
+              },
+              "device2PortChannelUuid": {
+                "description": "ID of the port channel.",
+                "type": "string"
+              },
+              "device2Uuid": {
+                "description": "ID of device2.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique id of the port-channel link. Concatenation of both device's Port Channel UUID.  ",
+                "type": "string"
+              },
+              "portChannelMembers": {
+                "description": "List of interfaces to be part of Port Channel.",
+                "items": {
+                  "properties": {
+                    "device1Interface": {
+                      "description": "Device 1 interface.",
+                      "type": "string"
+                    },
+                    "device1InterfaceUuid": {
+                      "description": "Device 1 interface UUID.",
+                      "type": "string"
+                    },
+                    "device2Interface": {
+                      "description": "Device 2 interface name.",
+                      "type": "string"
+                    },
+                    "device2InterfaceUuid": {
+                      "description": "Device 2 interface UUID.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

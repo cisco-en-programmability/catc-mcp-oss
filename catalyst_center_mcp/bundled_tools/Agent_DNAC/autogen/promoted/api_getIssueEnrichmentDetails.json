@@ -1,0 +1,131 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "__persistbapioutput": "header",
+        "entity_type": "header",
+        "entity_value": "header"
+      },
+      "uri": "/dna/intent/api/v1/issue-enrichment-details",
+      "version": "2.3.7.9"
+    },
+    "description": "Enriches a given network issue context (an issue id or end user\u2019s Mac Address) with details about the issue(s), impacted hosts and suggested actions for remediation",
+    "name": "api_getIssueEnrichmentDetails",
+    "parameters": {
+      "properties": {
+        "entity_type": {
+          "description": "Issue enrichment details can be fetched based on either Issue ID or Client MAC address. This parameter value must either be issue_id/mac_address",
+          "type": "string"
+        },
+        "entity_value": {
+          "description": "Contains the actual value for the entity type that has been defined",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_type",
+        "entity_value"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "issueDetails": {
+          "description": "",
+          "properties": {
+            "issue": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "impactedHosts": {
+                    "description": "",
+                    "items": {
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "issueCategory": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueDescription": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueEntity": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueEntityValue": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueId": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueName": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issuePriority": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueSeverity": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueSource": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueSummary": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "issueTimestamp": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "suggestedActions": {
+                    "description": "",
+                    "items": {
+                      "properties": {
+                        "message": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "steps": {
+                          "description": "",
+                          "items": {
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}
