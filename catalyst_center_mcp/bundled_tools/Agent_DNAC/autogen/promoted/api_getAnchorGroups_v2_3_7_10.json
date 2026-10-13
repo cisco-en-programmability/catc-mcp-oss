@@ -1,0 +1,113 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "2.3.7.10"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessSettings/anchorGroups",
+      "version": "2.3.7.10"
+    },
+    "description": "Retrieve wireless settings anchor groups configured for mobility anchor design. Use this tool when the request is about anchor group names and mobility anchor peer details. Do not use this tool for AP profiles, power profiles, anchor-capable devices, or a single anchor group by ID.",
+    "name": "api_getAnchorGroups_v2_3_7_10",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of wireless anchor group records to fetch. If not provided, 500 records will be fetched by default.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "First wireless anchor group record to show for pagination. Minimum value is 1.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Individual AnchorGroup details",
+      "properties": {
+        "anchorGroupName": {
+          "description": "Anchor Group Name. Max length is 32 characters",
+          "type": "string"
+        },
+        "id": {
+          "description": "Anchor Profile unique ID ",
+          "type": "string"
+        },
+        "mobilityAnchors": {
+          "description": "MobilityAnchor Details.Maximum 24 peers are allowed",
+          "items": {
+            "properties": {
+              "anchorPriority": {
+                "description": "This indicates anchor priority.  Priority values range from 1 (high) to 3 (low). Primary, secondary or tertiary and defined priority is displayed with guest anchor. Only one priority value is allowed per anchor WLC.",
+                "enum": [
+                  "PRIMARY",
+                  "SECONDARY",
+                  "TERTIARY"
+                ],
+                "type": "string"
+              },
+              "deviceName": {
+                "description": "Peer Host Name",
+                "type": "string"
+              },
+              "ipAddress": {
+                "description": "This indicates Mobility public IP address",
+                "type": "string"
+              },
+              "macAddress": {
+                "description": " Peer Device mobility MAC address. Allowed formats are:0a0b.0c01.0211, 0a0b0c010211, 0a:0b:0c:01:02:11",
+                "type": "string"
+              },
+              "managedAnchorWlc": {
+                "description": "This indicates whether the Wireless LAN Controller supporting Anchor is managed by the Network Controller or not. True means this is managed by Network Controller.",
+                "type": "boolean"
+              },
+              "mobilityGroupName": {
+                "description": "Peer Device mobility group Name. Must be alphanumeric without {!,<,space,?/'} and maximum of 31 characters.",
+                "type": "string"
+              },
+              "peerDeviceType": {
+                "description": "Indicates peer device mobility belongs to AireOS or IOS-XE family. ",
+                "enum": [
+                  "IOS-XE",
+                  "AIREOS"
+                ],
+                "type": "string"
+              },
+              "privateIp": {
+                "description": "This indicates private management IP address",
+                "type": "string"
+              }
+            },
+            "required": [
+              "deviceName",
+              "ipAddress",
+              "anchorPriority",
+              "managedAnchorWlc"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "anchorGroupName",
+        "mobilityAnchors"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

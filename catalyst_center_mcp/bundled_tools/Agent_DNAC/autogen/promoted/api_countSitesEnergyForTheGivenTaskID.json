@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "taskId": "query"
+      },
+      "uri": "/dna/data/api/v1/energy/sites/query/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets count sites energy task result for the given task ID. For detailed information about the usage of the API, please refer to the Open API specification document -\u00a0https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-sitesEnergy-1.0.1-resolved.yaml",
+    "name": "api_countSitesEnergyForTheGivenTaskID",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "taskId": {
+          "description": "used to retrieve asynchronously processed & stored data. When this parameter is used, the rest of the request params will be ignored.\n",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

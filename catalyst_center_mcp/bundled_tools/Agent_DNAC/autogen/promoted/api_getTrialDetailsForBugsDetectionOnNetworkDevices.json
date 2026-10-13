@@ -1,0 +1,71 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/networkBugs/trials",
+      "version": "2.3.7.9"
+    },
+    "description": "Get trial details for bugs detection on network devices",
+    "name": "api_getTrialDetailsForBugsDetectionOnNetworkDevices",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Details of the security advisories trial",
+          "properties": {
+            "active": {
+              "description": "Indicates if the trial is active",
+              "type": "boolean"
+            },
+            "contractLevel": {
+              "description": "Contract level for which trial was created. this was used in older versions and exists only for compatibility.",
+              "type": "string"
+            },
+            "endTime": {
+              "description": "Trial end time; as measured in Unix epoch time in milliseconds",
+              "type": "integer"
+            },
+            "feature": {
+              "description": "Name of the feature for which trial was created. for older versions that created contract type trials, this field will be absent.",
+              "type": "string"
+            },
+            "secondsRemainingToExpiry": {
+              "description": "Seconds remaining in the trial before it expires. for expired trials this will be 0.",
+              "type": "integer"
+            },
+            "secondsSinceExpired": {
+              "description": "Seconds elapsed after the trial has expired. for active trials this will be 0.",
+              "type": "integer"
+            },
+            "startTime": {
+              "description": "Trial start time; as measured in Unix epoch time in milliseconds",
+              "type": "integer"
+            },
+            "type": {
+              "description": "Type of trial: * 'feature - the trial is of type feature. this is the currently supported type. * 'contract' - the trial is of type contract. this was used in older versions and exists only for compatibility.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

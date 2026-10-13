@@ -1,0 +1,259 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "buildingId": "path",
+        "limit": "query",
+        "offset": "query",
+        "radios": "query"
+      },
+      "uri": "/dna/intent/api/v1/buildings/{buildingId}/planned-access-points",
+      "version": "2.3.7.9"
+    },
+    "description": "Provides a list of Planned Access Points for the Building it is requested for",
+    "name": "api_getPlannedAccessPointsForBuilding",
+    "parameters": {
+      "properties": {
+        "buildingId": {
+          "description": "The instance UUID of the building hierarchy element",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "radios": {
+          "description": "Whether to include the planned radio details of the planned access points",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "buildingId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Contains all the attributes of the planned access point",
+          "items": {
+            "properties": {
+              "attributes": {
+                "description": "Attributes of the planned access point",
+                "properties": {
+                  "createDate": {
+                    "description": "Created date of the planned access point",
+                    "type": "number"
+                  },
+                  "domain": {
+                    "description": "Service domain to which the planned access point belongs",
+                    "type": "string"
+                  },
+                  "heirarchyName": {
+                    "description": "Hierarchy name of the planned access point",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Unique id of the planned access point",
+                    "type": "number"
+                  },
+                  "instanceUuid": {
+                    "description": "Instance uuid of the planned access point",
+                    "type": "string"
+                  },
+                  "macAddress": {
+                    "description": "MAC address of the planned access point",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Display name of the planned access point",
+                    "type": "string"
+                  },
+                  "source": {
+                    "description": "Source of the data used to create the planned access point",
+                    "enum": [
+                      "EKAHAU,MANUAL,UNKNOWN"
+                    ],
+                    "type": "string"
+                  },
+                  "typeString": {
+                    "description": "Type string representation of the planned access point",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "isSensor": {
+                "description": "Determines if the planned access point is sensor or not",
+                "type": "boolean"
+              },
+              "location": {
+                "description": "Location of the planned access point",
+                "properties": {
+                  "altitude": {
+                    "description": "Altitude of the planned access point's location",
+                    "type": "number"
+                  },
+                  "lattitude": {
+                    "description": "Latitude of the planned access point's location",
+                    "type": "number"
+                  },
+                  "longtitude": {
+                    "description": "Longitude of the planned access point's location",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "position": {
+                "description": "Position of the planned access point",
+                "properties": {
+                  "x": {
+                    "description": "x-coordinate of the planned access point on the map, 0,0 point being the top-left corner",
+                    "type": "number"
+                  },
+                  "y": {
+                    "description": "y-coordinate of the planned access point on the map, 0,0 point being the top-left corner",
+                    "type": "number"
+                  },
+                  "z": {
+                    "description": "z-coordinate, or height, of the planned access point on the map",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "radioCount": {
+                "description": "Number of radios of the planned access point",
+                "type": "integer"
+              },
+              "radios": {
+                "description": "Radios of the planned access point",
+                "items": {
+                  "properties": {
+                    "antenna": {
+                      "description": "Antenna of the radio ",
+                      "properties": {
+                        "azimuthAngle": {
+                          "description": "Azimuth angle of the antenna",
+                          "type": "number"
+                        },
+                        "elevationAngle": {
+                          "description": "Elevation angle of the antenna",
+                          "type": "number"
+                        },
+                        "gain": {
+                          "description": "Gain of the antenna",
+                          "type": "number"
+                        },
+                        "mode": {
+                          "description": "Mode of the antenna associated with this radio",
+                          "enum": [
+                            "sector_a, sector_b, omni, unknown"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the antenna",
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Type of the antenna associated with this radio",
+                          "enum": [
+                            " internal, external, circular, linear, unknown"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "attributes": {
+                      "description": "Attributes of the radios",
+                      "properties": {
+                        "channel": {
+                          "description": "Channel in which the radio operates",
+                          "type": "number"
+                        },
+                        "channelString": {
+                          "description": "Channel string representation",
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "Id of the radio",
+                          "type": "integer"
+                        },
+                        "ifMode": {
+                          "description": "IF mode of the radio",
+                          "enum": [
+                            "A, B, ABGN, Monitor, Sniffer, XorMonitor, Xor24, Xor5, Xor6, XorUnknown, _6GHZ, XOR56GHZ, Unknown"
+                          ],
+                          "type": "string"
+                        },
+                        "ifTypeString": {
+                          "description": "String representation of native band",
+                          "type": "string"
+                        },
+                        "ifTypeSubband": {
+                          "description": "Sub band type of the radio",
+                          "enum": [
+                            "A, B, ABGN, _6GHZ, _XOR_5_6GHZ, Unknown"
+                          ],
+                          "type": "string"
+                        },
+                        "instanceUuid": {
+                          "description": "Instance Uuid of the radio",
+                          "type": "string"
+                        },
+                        "slotId": {
+                          "description": "Slot number in which the radio resides in the parent access point",
+                          "type": "number"
+                        },
+                        "txPowerLevel": {
+                          "description": "Tx Power at which this radio operates (in dBm)",
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "isSensor": {
+                      "description": "Determines if it is sensor or not",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "total": {
+          "description": "Total number of the planned access points",
+          "type": "integer"
+        },
+        "version": {
+          "description": "Version of the api response model",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

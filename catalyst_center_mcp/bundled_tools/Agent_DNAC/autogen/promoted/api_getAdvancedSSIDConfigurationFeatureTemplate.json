@@ -1,0 +1,309 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/advancedSSIDConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific Advanced SSID configuration feature template by ID.",
+    "name": "api_getAdvancedSSIDConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Advanced SSID Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Advanced SSID Configuration Feature Template",
+          "properties": {
+            "designName": {
+              "description": "Design Name",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "Advanced SSID Configuration",
+              "properties": {
+                "advertisePCAnalyticsSupport": {
+                  "description": "Advertise PC Analytics Support",
+                  "type": "boolean"
+                },
+                "advertiseSupport": {
+                  "description": "Advertise Support",
+                  "type": "boolean"
+                },
+                "aironetIESupport": {
+                  "description": "Aironet IE Enable",
+                  "type": "boolean"
+                },
+                "callSnooping": {
+                  "description": "Call Snooping",
+                  "type": "boolean"
+                },
+                "deferPriority0": {
+                  "description": "Defer Priority0",
+                  "type": "boolean"
+                },
+                "deferPriority1": {
+                  "description": "Defer Priority1",
+                  "type": "boolean"
+                },
+                "deferPriority2": {
+                  "description": "Defer Priority2",
+                  "type": "boolean"
+                },
+                "deferPriority3": {
+                  "description": "Defer Priority3",
+                  "type": "boolean"
+                },
+                "deferPriority4": {
+                  "description": "Defer Priority4",
+                  "type": "boolean"
+                },
+                "deferPriority5": {
+                  "description": "Defer Priority5",
+                  "type": "boolean"
+                },
+                "deferPriority6": {
+                  "description": "Defer Priority6",
+                  "type": "boolean"
+                },
+                "deferPriority7": {
+                  "description": "Defer Priority7",
+                  "type": "boolean"
+                },
+                "dhcpOpt82RemoteIDSubOption": {
+                  "description": "DHCP Option82 Remote ID suboption",
+                  "type": "boolean"
+                },
+                "dhcpRequired": {
+                  "description": "Dynamic Host Configuration Protocol (DHCP) Required",
+                  "type": "boolean"
+                },
+                "dhcpServer": {
+                  "description": "Dynamic Host Configuration Protocol (DHCP) Server",
+                  "type": "string"
+                },
+                "dot11ax": {
+                  "description": "802.11ax Status",
+                  "type": "boolean"
+                },
+                "dot11vBSSMaxIdleProtected": {
+                  "description": "Dot11v Basic Service Set (Bss) Max Idle Protected",
+                  "type": "boolean"
+                },
+                "downlinkMuMimo": {
+                  "description": "Downlink multi-user, multiple input, multiple output (MU-MIMO)",
+                  "type": "boolean"
+                },
+                "downlinkOfdma": {
+                  "description": "Downlink orthogonal frequency-division multiple access (OFDMA)",
+                  "type": "boolean"
+                },
+                "dtimPeriod24GHz": {
+                  "description": "Delivery Traffic Indication Map (DTIM) Period 2.4GhZ Band (1-255)",
+                  "type": "integer"
+                },
+                "dtimPeriod5GHz": {
+                  "description": "Delivery Traffic Indication Map (DTIM) Period 5GhZ Band (1-255)",
+                  "type": "integer"
+                },
+                "dualBandNeighborList": {
+                  "description": "Neighbor List Dual Band",
+                  "type": "boolean"
+                },
+                "fastTransitionReassociationTimeout": {
+                  "description": "Reassociation Timeout time",
+                  "type": "integer"
+                },
+                "fastlaneASR": {
+                  "description": "Fastlane Advanced Scheduling Request (ASR)",
+                  "type": "boolean"
+                },
+                "flexLocalAuth": {
+                  "description": "FlexConnect Local Authentication",
+                  "type": "boolean"
+                },
+                "idleThreshold": {
+                  "description": "Idle threshold",
+                  "type": "integer"
+                },
+                "ipMacBinding": {
+                  "description": "IP Mac Binding",
+                  "type": "boolean"
+                },
+                "ipSourceGuard": {
+                  "description": "IP Source Guard",
+                  "type": "boolean"
+                },
+                "loadBalancing": {
+                  "description": "Load Balance Enable",
+                  "type": "boolean"
+                },
+                "mDNSMode": {
+                  "description": "multicast Domain Name Services (mDNS) Mode",
+                  "enum": [
+                    "MDNS_SD_BRIDGING",
+                    "MDNS_SD_DROP",
+                    "MDNS_SD_GATEWAY"
+                  ],
+                  "type": "string"
+                },
+                "maxClients": {
+                  "description": "For physical 9800 series controllers, valid ranges are:\n  - [0-5000] for 9800-L series\n  - [0-32000] for 9800-40 series\n  - [0-64000] for 9800-80 series\nFor 9800-CL series controllers, valid ranges are:\n  - [0-10000] for Small (S) VM\n  - [0-32000] for Medium (M) VM\n  - [0-64000] for Large (L) VM\nFor Embedded Wireless Controller and Mobility Express, the valid range is [0-2000].\nFor the 9300 platform, the valid range is [0-4000].\nFor the AireOS platform, valid ranges are:\n  - [0-3000] for 3500 series\n  - [0-20000] for 5500 series\n  - [0-64000] for 8500 series\n",
+                  "type": "integer"
+                },
+                "maxClientsPerAp": {
+                  "description": "Max client Per AP Per WLAN",
+                  "type": "integer"
+                },
+                "maxClientsPerRadio": {
+                  "description": "Max client Per AP radio Per WLAN",
+                  "type": "integer"
+                },
+                "mediaStreamMulticastDirect": {
+                  "description": "Media Stream Multicast Direct",
+                  "type": "boolean"
+                },
+                "muMimo11ac": {
+                  "description": "multi-user, multiple input, multiple output (Mu Mimo) 11ac",
+                  "type": "boolean"
+                },
+                "multicastBuffer": {
+                  "description": "Multicast Buffer Enabled",
+                  "type": "boolean"
+                },
+                "multicastBufferValue": {
+                  "description": "Multicast Buffer Value",
+                  "type": "integer"
+                },
+                "nacSupport": {
+                  "description": "Network Admission Control(NAC-SNMP)",
+                  "type": "boolean"
+                },
+                "opportunisticKeyCaching": {
+                  "description": "Opportunistic Key Caching",
+                  "type": "boolean"
+                },
+                "passiveClient": {
+                  "description": "Passive Client",
+                  "type": "boolean"
+                },
+                "peer2peerblocking": {
+                  "description": "Peer-to-Peer Blocking",
+                  "enum": [
+                    "DISABLE",
+                    "DROP",
+                    "FORWARD_UP",
+                    "ALLOW_PVT_GROUP"
+                  ],
+                  "type": "string"
+                },
+                "predictionOptimization": {
+                  "description": "Assisted Roaming Prediction Optimization",
+                  "type": "boolean"
+                },
+                "radiusNacState": {
+                  "description": "Network Admission Control(NAC-Radius)",
+                  "type": "boolean"
+                },
+                "scanDeferTime": {
+                  "description": "Scan Defer Time",
+                  "type": "integer"
+                },
+                "sendBeaconOnAssociation": {
+                  "description": "Client Scan Report On Association",
+                  "type": "boolean"
+                },
+                "sendBeaconOnRoam": {
+                  "description": "Client Scan Report On Roam",
+                  "type": "boolean"
+                },
+                "sendDisassociate": {
+                  "description": "Send Disassociate",
+                  "type": "boolean"
+                },
+                "sent486Busy": {
+                  "description": "Send 486 Busy",
+                  "type": "boolean"
+                },
+                "shareDataWithClient": {
+                  "description": "Share Data with Client",
+                  "type": "boolean"
+                },
+                "targetWakeupTime": {
+                  "description": "BSS Target Wake Up Time",
+                  "type": "boolean"
+                },
+                "universalAPAdmin": {
+                  "description": "Universal Admin",
+                  "type": "boolean"
+                },
+                "uplinkMuMimo": {
+                  "description": "Uplink multi-user, multiple input, multiple output (MU-MIMO)",
+                  "type": "boolean"
+                },
+                "uplinkOfdma": {
+                  "description": "Uplink orthogonal frequency-division multiple access (OFDMA)",
+                  "type": "boolean"
+                },
+                "vlanCentralSwitching": {
+                  "description": "VLAN Central Switching",
+                  "type": "boolean"
+                },
+                "wifiAllianceAgileMultiband": {
+                  "description": "Wi-Fi Alliance Agile Multiband",
+                  "type": "boolean"
+                },
+                "wifiToCellularSteering": {
+                  "description": "Wifi To Cellular Steering",
+                  "type": "boolean"
+                },
+                "wmmPolicy": {
+                  "description": "Wi-Fi Multimedia (WMM) Policy",
+                  "enum": [
+                    "DISABLED",
+                    "ALLOWED",
+                    "REQUIRED"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

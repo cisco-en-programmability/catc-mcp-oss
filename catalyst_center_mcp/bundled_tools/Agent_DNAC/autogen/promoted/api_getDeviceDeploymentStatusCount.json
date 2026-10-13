@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deployActivityId": "query",
+        "networkDeviceIds": "query"
+      },
+      "uri": "/dna/intent/api/v1/icapSettings/deviceDeployments/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the count of device deployment status(s) based on filter criteria. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-ICAP_APIs-1.0.0-resolved.yaml",
+    "name": "api_getDeviceDeploymentStatusCount",
+    "parameters": {
+      "properties": {
+        "deployActivityId": {
+          "description": "activity from the /deploy task response",
+          "type": "string"
+        },
+        "networkDeviceIds": {
+          "description": "device ids, retrievable from the id attribute in intent/api/v1/network-device",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

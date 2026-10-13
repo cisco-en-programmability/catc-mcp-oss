@@ -1,0 +1,60 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "number_days": "query",
+        "time_resolution": "query",
+        "username": "query"
+      },
+      "uri": "/dna/intent/api/v1/client-proximity",
+      "version": "2.3.7.9"
+    },
+    "description": "This intent API will provide client proximity information for a specific wireless user. Proximity is defined as presence on the same floor at the same time as the specified wireless user. The Proximity workflow requires the subscription to the following event (via the Event Notification workflow) prior to making this API call: NETWORK-CLIENTS-3-506 - Client Proximity Report.",
+    "name": "api_clientProximity",
+    "parameters": {
+      "properties": {
+        "number_days": {
+          "description": "Number of days to track proximity until current date. Defaults and maximum up to 14 days.",
+          "type": "number"
+        },
+        "time_resolution": {
+          "description": "Time interval (in minutes) to measure proximity. Defaults to 15 minutes with a minimum 5 minutes.",
+          "type": "number"
+        },
+        "username": {
+          "description": "Wireless client username for which proximity information is required",
+          "type": "string"
+        }
+      },
+      "required": [
+        "username"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "executionId": {
+          "description": "",
+          "type": "string"
+        },
+        "executionStatusUrl": {
+          "description": "",
+          "type": "string"
+        },
+        "message": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

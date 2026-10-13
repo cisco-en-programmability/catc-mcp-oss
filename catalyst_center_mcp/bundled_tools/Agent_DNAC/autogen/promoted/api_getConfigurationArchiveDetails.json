@@ -1,0 +1,181 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "createdBy": "query",
+        "createdTime": "query",
+        "deviceId": "query",
+        "fileType": "query",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device-config",
+      "version": "2.3.7.9"
+    },
+    "description": "**Use Cases - Pick this tool for ANY of these question types about a device's configuration archive / archive history / configuration changes / config drift:**\n- \"When was the last archive of device X?\" / \"latest archive timestamp\" / \"most recent archive\"\n- \"How many archives / config archives / configuration backups for device X?\"\n- \"How many config drifts / configuration drifts / drift entries / drift instances on device X?\"\n- \"Was device X changed outside Catalyst Center / outside CatC?\" / \"out-of-band (OOB) config changes\" / \"external configuration changes\"\n- \"Who made the last config change on device X?\" / \"which user last modified the configuration\"\n- \"When was the last startup config / startup-config change on device X?\"\n- \"How many devices in site Y had config changes in the last N days/hours?\"\n\nReturns the historical device configurations (running, startup, vlan) by specified criteria. The response is an array with one entry per device. Within each device entry the `versions` array is ordered chronologically OLDEST FIRST: `versions[0]` is the EARLIEST archive for that device and `versions[-1]` (the LAST element of the array) is the MOST RECENT / LATEST archive.\n\n**CRITICAL - How to find the LATEST archive. This applies IDENTICALLY to every phrasing that asks for the newest/last/most-recent archive, including 'when was my last archive done', 'when was the last archive', 'last archive', 'most recent archive', 'latest archive timestamp', 'last change', 'who made last config change', 'last startup-config change'. Treat ALL of these phrasings exactly the same.**\n\nSTEP 0 (MANDATORY): The `versions` array is sorted OLDEST-FIRST and the API returns only the FIRST `limit` versions. If you pass a small `limit` (e.g. 10) you will receive only the 10 OLDEST archives and the true latest will be missing. Therefore for ANY latest/last/most-recent/count/history question you MUST pass `limit` = 50 (the maximum supported) so the newest archives are included. NEVER pass limit=10 for these questions.\nSTEP 1: Look at every element of the `versions` array and read each element's `createdTime` (epoch ms).\nSTEP 2: The LATEST archive is the element with the NUMERICALLY GREATEST `createdTime`. Because the array is sorted oldest-first, this is ALWAYS the LAST element, `versions[-1]`.\nSTEP 3: Answer using ONLY that element. Convert and report ONLY `versions[-1].createdTime`.\n\nHARD RULE - NEVER answer with `versions[0]`. `versions[0]` is the OLDEST archive (often `createdBy == SCHEDULED_FIRST_TIME`) and is the WRONG answer for any 'latest/last/most-recent' question. If you are about to convert or report the smallest/earliest `createdTime`, STOP \u2014 you must use the largest/last one instead. When calling a timestamp-conversion helper for a 'latest/last' question, pass ONLY the single `createdTime` value taken from the LAST element `versions[-1]`. Do not pass `versions[0].createdTime`. The total archive count for a device equals the length of its `versions` array.\n\n**CONFIG DRIFT COUNT - how to answer 'how many config drifts / configuration drifts / drift entries / drift instances':** A config drift is simply an ARCHIVED VERSION. The drift count is the TOTAL NUMBER of elements in the `versions` array - i.e. `len(versions)` - counting EVERY version regardless of its `configChangeType` or `createdBy` (include baseline/scheduled snapshots such as `SCHEDULED_FIRST_TIME` and `SCHEDULED`, and every `IN_BAND`/`OUT_OF_BAND` change). Do NOT filter by `configChangeType`. Do NOT use `startupRunningStatus` to determine drift count - `startupRunningStatus` (IN_SYNC / OUT_OF_SYNC) only describes whether the running and startup configs match for a single archived version and is NOT the definition of a config drift; even when every version is `IN_SYNC`, each version still counts as a drift. To answer a drift-count question, report `len(versions)` (remember to fetch with `limit`=50 so all versions are included). COUNT EXACTLY: enumerate the `versions` array element-by-element (assign index 1 to the first element, 2 to the second, and so on) and report the index of the final element. Do NOT estimate or round; the answer must equal the precise number of `versions` entries returned by the API for that device. Each device entry has its OWN `versions` array - count only the `versions` of the requested device; never add the device record itself or entries from other devices to the count.\n\nOut-of-band (OOB) changes are versions where `configChangeType == OUT_OF_BAND`; in-band changes are `IN_BAND`. The user who made a change (when available) is in `versions[*].syslogConfigEventDto[*].userName`. For startup vs running config questions, filter by `fileType` (`RUNNINGCONFIG` or `STARTUPCONFIG`). For time-window questions ('last N days/hours'), pass `createdTime` using the STRICT format `<logicalOp>:<epochMillis>` \u2014 operator, then a COLON, then EPOCH MILLISECONDS (13-digit integer). Example: `GT:1781344279000`. NEVER use a dot separator and NEVER pass an ISO/human-readable timestamp (e.g. `GT.2026-06-14T05:46:23.063000` is WRONG). Compute the cutoff instant, convert it to epoch milliseconds, then build `GT:<epochMillis>` (or `LT`/`BT` as appropriate; only GT, LT, BT are supported; `BT` takes two comma-separated epoch-ms values).\n\n**FLEET-WIDE / 'WHICH DEVICES' TIME-WINDOW questions (e.g. 'list the devices that went through any config change in the last 12 hours', 'which devices changed in the last N days', 'how many devices had config changes recently'):** `deviceId` is OPTIONAL. For these fleet-wide questions you can call this tool with ONLY the `createdTime` filter (e.g. `createdTime='GT:<epochMillis>'`) and DO NOT pass `deviceId` unless specifically needed because of a filter. If `deviceId` filter is not provided, the API will return one entry per device that has a matching archive in that window, so a single call answers the whole question. DO NOT first fetch the device inventory / list all devices unless specific filter needs to be applied on the devices. Passing many devices makes the request URL exceed the ~2000-character safe limit and the server returns HTTP 431 'Request Header Fields Too Large' (`deviceId` is sent as a URL query parameter and is capped at 25 comma-separated UUIDs; fleet-wide queries must therefore omit it). Simply omit `deviceId` and let the time filter select the devices.\n\n**PRE-REQUISITE - ONLY for questions scoped to a SPECIFIC named device (an IP, hostname, or serial in the question):** Call `get_device_details` first to resolve that one IP/hostname to a device UUID, then pass it as `deviceId`. Exception: if the user already supplied a valid device UUID, you may skip `get_device_details`. `deviceId` is NOT mandatory - omit it entirely for fleet-wide/time-window questions as described above; never enumerate all devices to populate it.\n\n**Do NOT route 'config drift', 'archive history', 'OOB change', 'who changed', or 'last startup-config change' questions to `api_deviceComplianceStatus`, `api_complianceDetailsOfDevice`, `api_getNetworkDeviceConfigurationFileDetails`, or `api_countOfNetworkDeviceConfigurationFiles` \u2014 those tools are for different use cases.**",
+    "name": "api_getConfigurationArchiveDetails",
+    "parameters": {
+      "properties": {
+        "createdBy": {
+          "description": "Comma separated values for createdBy - SCHEDULED, USER, CONFIG_CHANGE_EVENT, SCHEDULED_FIRST_TIME, DR_CALL_BACK, PRE_DEPLOY",
+          "type": "string"
+        },
+        "createdTime": {
+          "description": "Time filter on the archive creation time. FORMAT IS STRICT: <logicalOp>:<epochMillis> \u2014 the logical operator, then a COLON ':' (NOT a dot '.'), then the time as EPOCH MILLISECONDS (a 13-digit integer). Supported logical operators: GT, LT, BT. Examples: 'GT:1781344279000' (created after this instant), 'LT:1781344279000' (created before this instant), 'BT:1781344279000,1781430679000' (between two epoch-ms values, comma-separated). DO NOT pass an ISO-8601 / human-readable timestamp and DO NOT use a dot separator. WRONG: 'GT.2026-06-14T05:46:23.063000'. CORRECT: 'GT:1781344279000'. To build the value for a relative window like 'last N days/hours', first compute the cutoff instant, convert it to epoch milliseconds (use a date/epoch conversion helper if needed to turn an ISO time into epoch ms), then prefix with the operator and a colon, e.g. 'GT:<epochMillis>'.",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "OPTIONAL. The device UUID to scope results to a single device (comma-separated UUIDs are accepted but rarely needed). If `deviceId` is OMITTED, the API returns archive details for ALL devices that match the other filters (such as `createdTime`). For fleet-wide / 'which devices changed in the last N hours/days' questions, OMIT this parameter entirely and rely on the `createdTime` time filter \u2014 do NOT fetch the device inventory and do NOT pass a list of all device UUIDs here. Only set `deviceId` when the question names a specific device (resolve its IP/hostname to a UUID via get_device_details first). HARD LIMIT: this value is sent as a URL query parameter, so pass AT MOST 25 comma-separated UUIDs in a single call. If you genuinely need more than 25 specific devices, prefer omitting `deviceId` and filtering by `createdTime` instead; only as a last resort split them into separate calls of <=25 UUIDs each or ask user to narrow down the scope of search. NEVER pass the full device inventory here.",
+          "type": "string"
+        },
+        "fileType": {
+          "description": "Config File Type can be RUNNINGCONFIG or STARTUPCONFIG",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of archive versions to fetch. Versions are returned OLDEST-FIRST, so a small limit returns only the oldest archives and omits the most recent ones. ALWAYS default this to 50 (the maximum) so the latest archives are included; only lower it if the user explicitly asks for a small number of the earliest records.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Archive data results. One entry per device.",
+      "items": {
+        "properties": {
+          "deviceId": {
+            "description": "UUID of the device.",
+            "type": "string"
+          },
+          "deviceName": {
+            "description": "Hostname of the device.",
+            "type": "string"
+          },
+          "ipAddress": {
+            "description": "IP address of the device.",
+            "type": "string"
+          },
+          "versions": {
+            "description": "List of configuration archives saved for the device.",
+            "items": {
+              "properties": {
+                "configChangeType": {
+                  "description": "Source of configuration change (OUT_OF_BAND - Change was made outside Catalyst Center, IN_BAND - Change was made from Catalyst Center, NOT_APPLICABLE - System Triggered)",
+                  "type": "string"
+                },
+                "createdBy": {
+                  "description": "Reason for archive collection (CONFIG_CHANGE_EVENT - Syslog event based colletion, SCHEDULED - Weekly scheduled collection, SCHEDULED_FIRST_TIME-First Time Managed collection,DR_CALL_BACK- Post Disaster Recovery collection, USER- On Demand Trigger, PRE_DEPLOY- Predeploy collection) ",
+                  "type": "string"
+                },
+                "createdTime": {
+                  "description": "Source of configuration change (OUT_OF_BAND - Change was made outside Catalyst Center, IN_BAND - Change was made from Catalyst Center, NOT_APPLICABLE - System Triggered)",
+                  "type": "number"
+                },
+                "files": {
+                  "description": "Individual file information in the archive.",
+                  "items": {
+                    "properties": {
+                      "downloadPath": {
+                        "description": "File download path (deprecated).",
+                        "type": "string"
+                      },
+                      "fileId": {
+                        "description": "Unique file ID.",
+                        "type": "string"
+                      },
+                      "fileType": {
+                        "description": "Type of configuration file (RUNNINGCONFIG, STARTUPCONFIG, or VLAN).",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "id": {
+                  "description": "Unique version ID.",
+                  "type": "string"
+                },
+                "lastUpdatedTime": {
+                  "description": "Latest time stamp when the collected configuration is verified to be running on the device. LastUpdatedTime and createdTime will differ when verified configs are the same.",
+                  "type": "number"
+                },
+                "startupRunningStatus": {
+                  "description": "Sync status of running and startup configurations (IN_SYNC - if both startup and running config are same excluding dynamic configurations, OUT_OF_SYNC - otherwise). ",
+                  "type": "string"
+                },
+                "syslogConfigEventDto": {
+                  "description": "Latest syslog data when archive collected due to CONFIG_CHANGE_EVENT. Otherwise this will be null.",
+                  "items": {
+                    "properties": {
+                      "configMethod": {
+                        "description": "Connection mode used to do the changes pn the device (if available in Syslog).",
+                        "type": "string"
+                      },
+                      "deviceUuid": {
+                        "description": "UUID of the device as recieved in syslog. ",
+                        "type": "string"
+                      },
+                      "loginIpAddress": {
+                        "description": "IP address from which the configuration changes were made (if available in Syslog).",
+                        "type": "string"
+                      },
+                      "outOfBand": {
+                        "description": "True if configuration changes were made from outside of the Catalist Center. False otherwise.",
+                        "type": "boolean"
+                      },
+                      "processName": {
+                        "description": "Name of the process that made configuration change (only available when configuration got changed by a program such as YANG suite )",
+                        "type": "string"
+                      },
+                      "syslogTime": {
+                        "description": "Time of configuration change as recorded in the syslog.",
+                        "type": "number"
+                      },
+                      "terminalName": {
+                        "description": "Name of the terminal used to make changes on the device (if available in Syslog).",
+                        "type": "string"
+                      },
+                      "userName": {
+                        "description": "Name of the user who made the configuration change (if available in Syslog).",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "tags": {
+                  "description": "Labels added to a configuration version.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

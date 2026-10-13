@@ -1,0 +1,61 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceCount": "query",
+        "id": "query",
+        "severity": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/bugs/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of detected network bugs affecting devices in the network. Use this count tool for questions like 'how many network bugs do I have?', 'how many bugs are detected?', 'how many total network bugs are detected?', 'count catastrophic bugs', or 'count severe bugs'. For any in-my-network, detected, or severity-specific network bug count question, explicitly pass deviceCount: 0 so the count includes only bugs with at least one affected device. Examples: 'How many network bugs do I have?' -> deviceCount: 0; 'Count severe bugs' -> severity: SEVERE and deviceCount: 0. Do not omit deviceCount, because omitting it counts all known bug records including bugs with no affected devices and can return a larger number than the UI.",
+    "name": "api_getCountOfNetworkBugs",
+    "parameters": {
+      "properties": {
+        "deviceCount": {
+          "default": 0,
+          "description": "Return network bugs with affected deviceCount greater than this deviceCount. Use deviceCount: 0 for detected or in-network bug counts so only bugs affecting at least one device are counted.",
+          "type": "number"
+        },
+        "id": {
+          "description": "Id of the network bug",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Return network bugs with this severity. Available values : CATASTROPHIC, SEVERE, MODERATE",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "Count of detected network bugs affecting at least one device when deviceCount: 0 is provided.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

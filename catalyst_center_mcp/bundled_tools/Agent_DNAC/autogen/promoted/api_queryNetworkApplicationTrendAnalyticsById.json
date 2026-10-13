@@ -1,0 +1,134 @@
+{
+  "additionalMetadata": null,
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "platform": "DNAC",
+      "release_status": "Assurance_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "POST",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "id": "path",
+        "payload": "body"
+      },
+      "uri": "/dna/data/api/v1/networkApplications/{id}/trendAnalytics",
+      "version": "3.2.1"
+    },
+    "description": "Retrieves trend analytics for one specific network application by application name/path id. Use this for application health trend questions when the user names a specific application and asks for health, latency, loss, jitter, usage, or throughput over time. The id path parameter is the network application name. The request body must include siteIds and trendInterval. For trend across all applications at a site, use api_queryNetworkApplicationsTrendAnalytics instead. This tool is available for Catalyst Center 3.2.1 and later.\n\nSpec mapping: This tool follows NetworkApplications OpenAPI spec 1.0.2 for Catalyst Center 3.2.1 and later. Pagination behavior: make exactly one tool call per user request. Never automatically follow a returned cursor or repeat an identical first-page request. If page metadata shows additional buckets, return the current page and explicitly state that more data is available; offer the next page only after an explicit user request or apply a narrower filter.",
+    "name": "api_queryNetworkApplicationTrendAnalyticsById",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "default": "unknown",
+          "description": "Caller ID used to trace the origin of API calls.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Network application name used as the path identifier. The id must be a concrete applicationName, such as a value returned by networkApplications summary/list APIs. Do not use a site name, site hierarchy, area, building, floor, Global, or siteId as this path id.",
+          "type": "string"
+        },
+        "payload": {
+          "description": "Request body for a specific network application's trend analytics. Required fields are siteIds and trendInterval. siteIds must contain building site UUIDs. trendInterval should be 5MIN or 10MIN for short windows, and 1HR or 3HR for longer windows. Use attributes or aggregateAttributes for metrics such as healthScore, usage, throughput, jitter, packetLossPercent, networkLatency, applicationServerLatency, clientNetworkLatency, and serverNetworkLatency. Do not include applicationName in filters for this by-id endpoint.",
+          "properties": {
+            "aggregateAttributes": {
+              "description": "Aggregate fields and functions to apply over the time range.",
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "attributes": {
+              "description": "Trend attributes to return, such as healthScore, usage, throughput, jitter, packetLossPercent, networkLatency, applicationServerLatency, clientNetworkLatency, serverNetworkLatency, trafficClass, ssid, and businessRelevance.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "endTime": {
+              "description": "Inclusive end time in UNIX epoch milliseconds.",
+              "format": "int64",
+              "type": "integer"
+            },
+            "filters": {
+              "description": "Complex filters for businessRelevance, ssid, healthScore, trafficClass, and related metrics. applicationName is not supported here because the application is supplied by id.",
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "groupBy": {
+              "description": "Fields used to group trend data.",
+              "items": {
+                "enum": [
+                  "businessRelevance",
+                  "exporterIpAddress",
+                  "siteId",
+                  "trafficClass",
+                  "healthScore"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "page": {
+              "description": "Pagination and time sort options. For default specific-application trends use page.limit=100 to keep the response compact. State the limit and shown bucket count in the final answer.",
+              "properties": {
+                "cursor": {
+                  "description": "Opaque cursor returned by the previous response page. Use it unchanged to fetch the next page; omit it on the first request.",
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 100,
+                  "description": "Maximum trend buckets to return. Use default limit=100; do not use 500 unless the user explicitly asks for a larger page and the backend supports it.",
+                  "maximum": 100,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "siteIds": {
+              "description": "List of building site UUIDs.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "startTime": {
+              "description": "Inclusive start time in UNIX epoch milliseconds.",
+              "format": "int64",
+              "type": "integer"
+            },
+            "trendInterval": {
+              "description": "Time bucket for trend aggregation. For this by-id network application trend endpoint, use 5MIN by default. Do not use 1HR or 3HR because this endpoint rejects those intervals.",
+              "enum": [
+                "5MIN",
+                "10MIN"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "siteIds",
+            "trendInterval"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "payload"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Specific network application trend analytics response.",
+      "type": "object"
+    }
+  }
+}

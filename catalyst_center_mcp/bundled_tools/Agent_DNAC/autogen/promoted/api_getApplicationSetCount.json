@@ -1,0 +1,46 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "scalableGroupType": "query"
+      },
+      "uri": "/dna/intent/api/v2/application-policy-application-set-count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the number of all existing application sets",
+    "name": "api_getApplicationSetCount",
+    "parameters": {
+      "properties": {
+        "scalableGroupType": {
+          "description": "Scalable group type to retrieve, valid value APPLICATION_GROUP",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scalableGroupType"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Total number of Application Set",
+          "type": "integer"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

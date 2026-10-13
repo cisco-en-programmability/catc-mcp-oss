@@ -1,0 +1,58 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/licenses/smartAccounts",
+      "version": "2.3.7.9"
+    },
+    "description": "**Licensing Smart Account Details**. Retrieve Licensing Smart Account information (name, id, domain, status).\\n\\n**Execution Policy (MANDATORY):**\\n- For Catalyst licensing queries, use this tool directly.\\n- Do NOT ask users whether they mean Licensing or PnP Smart Accounts.\\n- Treat Smart Account queries in this agent as Licensing context.\\n\\n**Use Cases:**\\n- Listing available Licensing Smart Accounts\\n- Resolving Smart Account Name -> Smart Account ID\\n- Checking Smart Account status/details\\n- Preparing IDs for dependent licensing tools such as `api_readNetworkDeviceLicenses`, `api_virtualAccountDetails`, and `api_getLicenseUsage`.\\n\\n**Dependency Guidance:**\\n- If a downstream tool requires `smartAccountId` and user provides only account name, call this tool first and pass the resolved ID.",
+    "name": "api_smartAccountDetails",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Smart account details",
+          "items": {
+            "properties": {
+              "domain": {
+                "description": "Domain of smart account",
+                "type": "string"
+              },
+              "id": {
+                "description": "Id of smart account",
+                "type": "string"
+              },
+              "is_active_smart_account": {
+                "description": "Is active smart account",
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Name of smart account",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

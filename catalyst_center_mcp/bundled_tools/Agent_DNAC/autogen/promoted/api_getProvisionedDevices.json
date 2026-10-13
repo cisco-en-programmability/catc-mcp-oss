@@ -1,0 +1,84 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "query",
+        "limit": "query",
+        "networkDeviceId": "query",
+        "offset": "query",
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/sda/provisionDevices",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the count of provisioned devices based on query parameters. For PnP devices, use api_getPnPDeviceCount(state=Provisioned) instead.",
+    "name": "api_getProvisionedDevices",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "ID of the provisioned device.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "ID of the network device.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "siteId": {
+          "description": "ID of the site hierarchy.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Provisioned Devices get response (Maximum number of records to return in each response is 500).",
+      "properties": {
+        "response": {
+          "description": "Get response body.",
+          "items": {
+            "properties": {
+              "id": {
+                "description": " ID of the provisioned device.",
+                "type": "string"
+              },
+              "networkDeviceId": {
+                "description": "ID of the network device.",
+                "type": "string"
+              },
+              "siteId": {
+                "description": "ID of the site this device is provisioned to. ",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

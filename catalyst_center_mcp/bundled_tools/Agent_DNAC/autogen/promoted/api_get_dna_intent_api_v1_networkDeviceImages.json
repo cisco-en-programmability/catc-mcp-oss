@@ -1,0 +1,385 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "always_included": true,
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "managementAddress": "query",
+        "networkDeviceImageStatus": "query",
+        "networkDeviceUpdateStatus": "query",
+        "offset": "query",
+        "order": "query",
+        "productId": "query",
+        "productName": "query",
+        "role": "query",
+        "siteId": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceImages",
+      "version": "3.2.1"
+    },
+    "description": "MANDATORY - USE THIS API FOR DEVICE-LEVEL GOLDEN/STANDARD IMAGE COMPLIANCE QUERIES:\n\n**Primary routing surface for per-device SWIM image compliance.** Every record returned is ONE NETWORK DEVICE, keyed by managementAddress. Retrieves running (installed) images, assigned golden/standard bundle images, image compliance status, and image update lifecycle status for network devices.\n\n**FIRST-ACTION RULE:** For list/detail SWIM questions in scope below, invoke this API on the first tool-calling turn after subagent transfer. For count-only questions (how many, total count, number of \u2014 no device list requested), use api_get_dna_intent_api_v1_networkDeviceImages_count instead. This applies to **Unsupported Filter Combinations** below as well: if the user asks only for a numeric total, the required first call remains api_get_dna_intent_api_v1_networkDeviceImages_count, not this list API. Use this list API for unsupported combinations only when the user asked for device records/details rather than a numeric total. Questions that ask how many / total / number remain count-only even when they mention product families, sites, OUTDATED devices, non-compliant devices, or comparisons against the assigned golden image. Otherwise, never produce a final answer or ask clarifying questions without calling the appropriate SWIM API first.\n\n**RE-INVOCATION RULE:** Each new user message in scope requires a fresh call to this API in that message's tool-calling turn. Do not rely on prior-turn tool output, cached responses, or UI formatting tools alone \u2014 always fetch current SWIM data again before answering. This holds for Unsupported Filter Combinations too \u2014 make the call, then report the limitation rather than the result.\n\n**USE THIS API WHEN the user asks about (including paraphrases and yes/no questions):**\n- Golden image, standard image, golden bundle, or assigned image compliance/state/status/report\n- Boolean checks whether a device runs its assigned golden/standard software bundle (compliant, running assigned image, on assigned bundle), and named-device status questions such as \"What is the golden image compliance status for device X?\" For these named-device questions, FIRST look up the device with this API and answer from `networkDeviceImageStatus` and, when available, `installedImages` plus `goldenImages`; do NOT use the count API and do NOT reinterpret the request as a search for any device that is currently UP_TO_DATE. If the named device returns `OUTDATED`, answer explicitly that it is NOT running the assigned golden/standard image.\n- In this SWIM context, treat non-compliant / not compliant / not on the assigned image as golden-image compliance language, not as generic configuration compliance\n- Installed vs golden/standard image details (image name, version, imageType)\n- Devices that are OUTDATED, UP_TO_DATE, UNKNOWN, CONFLICTED, or UNSUPPORTED for golden/standard images \u2014 globally, by management IP, by site with update-status only, or by product family with update-status only (NOT site/product + compliance status; see Unsupported Filter Combinations)\n- Image update/distribution/activation status (DISTRIBUTION_PENDING, DISTRIBUTION_IN_PROGRESS, ACTIVATION_PENDING, DEVICE_UP_TO_DATE, etc.) scoped by site or product family. In SWIM context, phrases like \"distribution is pending\", \"pending image distribution\", or \"devices pending image distribution\" map directly to `networkDeviceUpdateStatus=DISTRIBUTION_PENDING`; do NOT ask a clarification question when the user already supplied a valid SWIM scope such as device, site, or product family.\n- Filtering by `networkDeviceImageStatus` is supported globally or with `managementAddress`. For compliance reports covering all devices in a site, call this API using `siteId` without `networkDeviceImageStatus` and read `networkDeviceImageStatus` from every returned device record.\n- Devices running a specific installed software/image version (MUST use this list API with sortBy=installedImages.version, offset=1, limit=500, then filter to the requested version across EVERY `response[]` record and EVERY `installedImages[]` entry. Keep ALL matching devices, de-duplicate by managementAddress, and do NOT stop at the first match \u2014 never use get_device_details or generic device inventory APIs for installed image version lookups)\n- Product-family SWIM lists filtered by update lifecycle status (not by networkDeviceImageStatus \u2014 see Unsupported Filter Combinations)\n- Queries about devices **marked golden**, **golden-tagged**, or **having an assigned golden image** when you need to inspect assignment/tagging semantics from `goldenImages` rather than compliance alone\n\n**KEY RESPONSE FIELDS:**\n- networkDeviceImageStatus: compliance of running image vs assigned golden/standard bundle\n- networkDeviceUpdateStatus: distribution/activation lifecycle for golden/standard images\n- installedImages: currently running software images\n- goldenImages: assigned golden/standard bundle images\n\n**SEMANTIC DISTINCTION (BINDING):**\n- **running with golden / on the assigned golden image / compliant with golden** = compliance semantics -> `networkDeviceImageStatus=UP_TO_DATE`\n- **marked golden / golden-tagged / has a golden image assigned** = assignment/tagging semantics -> inspect `goldenImages`; this is NOT the same as `UP_TO_DATE`\n- **specific device asked by IP/hostname + golden-image wording** = resolve that exact device with this API first; do NOT ask whether it is a client or another asset type before attempting the SWIM lookup\n- **MANDATORY FALLBACK:** if a count-only request uses assignment/tagging wording and the count API returns `0`, your NEXT tool call MUST be this list API with global or otherwise matching scope so you can confirm against `goldenImages` before answering. Do not stop after explaining the ambiguity, and do not return the raw zero unless this list API also confirms no matching golden assignments.\n\n**SCOPE \u2014 WHAT THIS API RETURNS (READ BEFORE ROUTING):**\nEvery record is ONE NETWORK DEVICE. This API never returns or counts software images held in the image repository, product names, or product families. Any total derived from it is a number of devices.\n\n**OUT OF SCOPE \u2014 IMAGE REPOSITORY / INVENTORY QUESTIONS (DO NOT CALL THIS API OR THE COUNT API):**\nWhen the user asks about the contents of the image repository rather than about devices, route to the repository APIs instead:\n- How many product names / product families exist or are listed in the image repository -> api_returnsTheImageSummaryForTheGivenSite -> response.productCount\n- How many product families do or do not have a golden/standard image -> api_returnsTheImageSummaryForTheGivenSite -> response.productsWithGoldenCount / response.productsWithoutGoldenCount\n- How many images are imported or held in the repository, and how many are golden/standard tagged -> api_returnsTheImageSummaryForTheGivenSite -> response.importedImageCount / response.goldenImageCount / response.nonGoldenImageCount\n- Per-product-family image breakdown, or which images exist for a product family -> api_returnsNetworkDeviceProductNamesForASite -> response[].imageSummary\nRepository-scoped signals: \"image repo\", \"image repository\", \"in the repository\", \"imported images\", \"how many product families\", \"how many product names\", \"products with/without a golden image\", \"Images view\", \"Image Repository page\".\nNever answer a repository question from a device count even when the number looks plausible \u2014 device count and productCount can coincide on small clusters.\n\n**UNSUPPORTED FILTER COMBINATIONS (PLATFORM LIMITATION \u2014 CALL THE API, THEN REPORT THE LIMITATION):**\nWhen the user request requires **networkDeviceImageStatus** (golden/standard image compliance status, e.g. OUTDATED, UP_TO_DATE, UNKNOWN, CONFLICTED, UNSUPPORTED) **together with** either **siteId** (site-scoped) **or** **productName** (product-family scoped) \u2014 including combinations that also include networkDeviceUpdateStatus \u2014 **invoke the SWIM API for the requested scope as normal, but treat its response as unusable.** The platform returns an empty/null list response and the count API fails with HTTP 500 for these filters.\n**Response rule:** After making the call, inform the user that site-scoped or product-family-scoped queries filtered by golden/standard **image compliance status** are **not currently supported** by Catalyst Center SWIM APIs because `networkDeviceImageStatus` cannot be combined with `siteId` or `productName` for a usable result. Never present the empty or failed response as if no devices match, and do not invent device records or counts. Do NOT stop at generic wording such as \"internal error\" or \"backend failure\" alone; translate the failed result into this concrete SWIM platform limitation. Offer at least one supported alternative after reporting the limitation: an unfiltered device-image list for the same site or product family, a single-device check by management IP/hostname, or a cluster-wide compliance count/list in a supported scope.\n**Count-only variant:** if the user asked only for a numeric total for one of these unsupported combinations, the first attempted tool belongs to api_get_dna_intent_api_v1_networkDeviceImages_count, not this list API.\n**Still supported:** networkDeviceImageStatus alone (global), networkDeviceImageStatus + managementAddress (single device), siteId or productName without networkDeviceImageStatus, and siteId/productName with networkDeviceUpdateStatus only.\n\n**FILTER PARAMETERS (use as appropriate):**\n- managementAddress: single device by management IP \u2014 REQUIRED when user provides a device IP\n- siteId: devices in a site (resolve site name to siteId first \u2014 see Site Resolution below)\n- productName: filter by device product/model family. Preserve the exact specific family or model-family string when the user names one, such as `Catalyst 9300-24S-E Switch`, `Catalyst 9300-24UB Switch`, or `Catalyst 9300 Series Switches`; pass that family name with the Cisco vendor prefix if Catalyst Center expects it. Only when the user uses broad 9300 wording with no more specific family or model qualifier (for example: `9300`, `9300 switch`, `Catalyst 9300`, `Cisco Catalyst 9300`) should you normalize to the generic family `Cisco Catalyst 9300 Switch` instead of the shortened `Cisco Catalyst 9300`.\n- networkDeviceImageStatus: OUTDATED | UP_TO_DATE | UNKNOWN | CONFLICTED | UNSUPPORTED \u2014 combining with siteId or productName hits a platform limitation; still make the call when asked, but report the limitation instead of the response (see Unsupported Filter Combinations above). IMPORTANT: `UP_TO_DATE` means devices currently running the assigned golden image; it does NOT mean devices merely marked/tagged/assigned golden.\n- networkDeviceUpdateStatus: DISTRIBUTION_PENDING | DISTRIBUTION_IN_PROGRESS | DISTRIBUTION_FAILED | ACTIVATION_PENDING | ACTIVATION_IN_PROGRESS | ACTIVATION_FAILED | DEVICE_UP_TO_DATE | UNKNOWN\n- sortBy: DEFAULT `id` for single-device, site-wide compliance, and product-family queries; use `installedImages.version` ONLY for installed software version inventory\n- offset: 1\n- limit: REQUIRED pagination \u2014 use limit=10 only when the request targets one device through `managementAddress`. For every multi-device list request\u2014including global, site-scoped, product-family, compliance-status, update-status, distribution-status, activation-status, assignment/tagging confirmation, and installed-version inventory\u2014use limit=500. Never use limit=10 for `DISTRIBUTION_FAILED`, `DISTRIBUTION_PENDING`, `ACTIVATION_PENDING`, or any other status-based device list. NEVER omit limit.\n\n**PAGINATION RULES:**\n- Single-device lookup using `managementAddress`: offset=1, limit=10\n- Every request to show or list multiple devices\u2014including global, site-scoped, product-family, compliance-status, update-status, distribution-status, activation-status, assignment/tagging confirmation, and version inventory queries: offset=1, limit=500 (API maximum)\n\n**INSTALLED VERSION INVENTORY (BLOCKING):** When the user asks which devices run, are on, or have installed software/image version X, MUST call this API with sortBy=installedImages.version, offset=1, limit=500. Then inspect EVERY record in `response[]` and EVERY `installedImages[]` entry, keep ALL devices whose `installedImages.version` exactly matches the requested version, and de-duplicate per `managementAddress`. NEVER stop after the first match. NEVER call get_device_details, convert_timestamp_to_epoch_tool, calculate_time_offset_tool, or api_getsTheNetworkDeviceDetailsBasedOnTheProvidedQueryParameters for these questions.\n\n**Site-wide SWIM list responses:** A request to show or list compliance for all/every device in a site, without naming a desired compliance state, is an unfiltered site inventory request. Resolve the site, call this API with `siteId`, `sortBy=id`, `order=asc`, `offset=1`, and `limit=500`, and read `networkDeviceImageStatus` from every returned record. Do NOT add `networkDeviceImageStatus=UP_TO_DATE` or any other compliance-status filter unless the user explicitly asks for that specific state. Summarize site-scoped compliance with build_markdown (bullets). Do NOT use build_table for site-wide device inventories.\n\n**Site Resolution (BLOCKING PREREQUISITE for site-scoped queries):**\nIf the user mentions any site by name (including the root site label) and you do not yet have siteId, your NEXT tool call MUST be api_getSites \u2014 do NOT call this API until siteId is returned. This applies even when the site label is the root/Global site name; never assume Global scope without resolving siteId. After api_getSites, call this API with the resolved siteId. Never pass a site name string to this API; siteId UUID only.\n\n**CRITICAL - DO NOT USE THESE TOOLS FOR GOLDEN/STANDARD IMAGE QUESTIONS:**\n- DO NOT use get_device_details for golden/standard image compliance, installed vs golden image comparison, installed/running software version inventory, or SWIM image status \u2014 it returns assurance inventory/health, not SWIM image compliance\n- DO NOT use api_getsTheNetworkDeviceDetailsBasedOnTheProvidedQueryParameters for golden/standard image compliance OR installed software/image version inventory \u2014 use this API instead\n- DO NOT use api_getComplianceStatus or api_getComplianceDetail for golden/standard image questions \u2014 those are configuration/policy compliance, not SWIM golden/standard image compliance\n- DO NOT use api_getComplianceDetailCount for golden/standard image questions, even when the user says non-compliant or asks for a count \u2014 in this workflow, non-compliant golden/standard image language maps to SWIM image compliance and belongs to the SWIM APIs, not the generic compliance-count APIs\n- DO NOT use api_get_dna_intent_api_v1_networkDeviceImages_count when the user needs device-level image details or compliance records \u2014 use this list API\n- DO use api_get_dna_intent_api_v1_networkDeviceImages_count when the user asks ONLY for a total number (how many, total count, number of) without requesting device names, IPs, or image details\n- DO NOT treat product-family wording, site wording, outdated/non-compliant phrasing, or **marked golden** wording as a reason to equate assignment/tagging with `UP_TO_DATE`\n\n**TERMINOLOGY (BINDING):** golden and standard refer to the SAME tag. The UI may label it Standard while the APIs expose it as golden (isGoldenTagged, goldenImageCount). There is no separate \"standard\" designation and no \"standard\" field in any Catalyst Center image API. NEVER reconcile a mismatch between a value the user reports seeing and an API value by claiming that golden and standard are different concepts, or that one view reflects standard while another reflects golden. If the numbers disagree, re-check whether the question is device-scoped or repository-scoped and call the correct API. Do not invent a semantic distinction.\n\nThis API retrieves information about running images and golden/standard image bundles for network devices, including networkDeviceImageStatus, networkDeviceUpdateStatus, installedImages, goldenImages, and compatible features.",
+    "name": "api_get_dna_intent_api_v1_networkDeviceImages",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum records to return (1-500). Use limit=10 only for a single-device lookup using managementAddress. Use limit=500 for every multi-device request, including global, site, product-family, compliance-status, distribution-status, activation-status, update-status, and installed-version lists. Never use limit=10 for a multi-device list.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "managementAddress": {
+          "default": "",
+          "description": "Management IP address or DNS name of the target network device. Use for device-scoped golden/standard image compliance and installed vs golden image detail queries.",
+          "type": "string"
+        },
+        "networkDeviceImageStatus": {
+          "default": "",
+          "description": "Filter by golden/standard image compliance status: OUTDATED (not running assigned bundle), UP_TO_DATE (running assigned bundle), UNKNOWN, CONFLICTED, UNSUPPORTED. IMPORTANT: UP_TO_DATE means the device is currently running its assigned golden image; it does not mean the device is merely marked/tagged/assigned golden. PLATFORM LIMITATION: pairing this with siteId or productName fails on the platform. Still make the call when the user asks for it, then report that the combination is not currently supported instead of the returned result (see main description).",
+          "type": "string"
+        },
+        "networkDeviceUpdateStatus": {
+          "default": "",
+          "description": "Filter by golden/standard image update lifecycle status: DISTRIBUTION_PENDING, DISTRIBUTION_IN_PROGRESS, DISTRIBUTION_FAILED, ACTIVATION_PENDING, ACTIVATION_IN_PROGRESS, ACTIVATION_FAILED, DEVICE_UP_TO_DATE, UNKNOWN.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "First record index for pagination. Start with offset=1 for the initial query.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "default": "asc",
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc.",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Filter with product ID (PID)",
+          "type": "string"
+        },
+        "productName": {
+          "description": "Network device product name for product-family scoped golden/standard image queries (supports partial case-insensitive match). REQUIRED when user names a Catalyst switch family: preserve the exact specific family or model-family string when one is provided, and include the Cisco vendor prefix if Catalyst Center expects it. Examples: `Catalyst 9300-24S-E Switch`, `Catalyst 9300-24UB Switch`, `Catalyst 9300 Series Switches`, or `Cisco Catalyst 9300L`. Only when the user uses broad 9300 wording with no specific family/model qualifier should you normalize to `Cisco Catalyst 9300 Switch` (not `Cisco Catalyst 9300`). PLATFORM LIMITATION: pairing this with networkDeviceImageStatus fails on the platform. Still make the call when the user asks for it, then report that the combination is not currently supported instead of the returned result (see main description).",
+          "minLength": 3,
+          "type": "string"
+        },
+        "role": {
+          "description": "Role assigned to the network device.",
+          "enum": [
+            "BORDER_ROUTER",
+            "CORE",
+            "DISTRIBUTION",
+            "ACCESS",
+            "UNKNOWN"
+          ],
+          "example": "DISTRIBUTION",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Site UUID for site-scoped queries. BLOCKING: obtain from api_getSites first when the user provides a site name \u2014 do not call this API without a resolved siteId. PLATFORM LIMITATION: pairing this with networkDeviceImageStatus fails on the platform. Still make the call when the user asks for it, then report that the combination is not currently supported instead of the returned result (see main description).",
+          "format": "uuid",
+          "type": "string"
+        },
+        "sortBy": {
+          "default": "id",
+          "description": "Sort response attribute. DEFAULT sortBy=id for single-device queries, site-wide compliance lists, and product-family filtered lists. Use sortBy=installedImages.version ONLY for installed/running software version inventory questions. Also supports networkDeviceImageStatus, networkDeviceUpdateStatus, goldenImages.name, goldenImages.version, installedImages.name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sortBy",
+        "order",
+        "offset",
+        "limit"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "compatibleFeatures": {
+                "description": "The list of functionalities or capabilities that are supported or compatible with a particular device. For example, it determines whether ISSU, Rommon update, etc. can be enabled on the device.",
+                "items": {
+                  "properties": {
+                    "key": {
+                      "description": "Name of the compatible feature.",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "Feature that can be enabled or disabled.",
+                      "enum": [
+                        "ENABLE",
+                        "DISABLE"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "goldenImages": {
+                "description": "List of golden images.",
+                "items": {
+                  "properties": {
+                    "goldenTaggingDetails": {
+                      "description": "Golden image tagging criteria.",
+                      "properties": {
+                        "deviceRoles": {
+                          "description": "Role assigned to the network device.",
+                          "enum": [
+                            "CORE",
+                            "DISTRIBUTION",
+                            "UNKNOWN",
+                            "ACCESS",
+                            "BORDER_ROUTER"
+                          ],
+                          "type": "string"
+                        },
+                        "deviceTags": {
+                          "description": "A device tag is either user-defined or system-defined and is associated with a given network device.",
+                          "type": "string"
+                        },
+                        "isInherited": {
+                          "description": "Inherited flag is set to 'true' if the golden images are inherited from sites higher in the site hierarchy, and 'false' if they are from the native site.",
+                          "type": "boolean"
+                        },
+                        "nameHierarchy": {
+                          "description": "Hierarchichal name of a site",
+                          "example": "Global/US/Building N7",
+                          "type": "string"
+                        },
+                        "siteId": {
+                          "description": "The site id of the site from which these golden images originate.",
+                          "type": "string"
+                        },
+                        "siteName": {
+                          "description": "The name of the site from which these golden images originate.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "Software image identifier.",
+                      "type": "string"
+                    },
+                    "imageType": {
+                      "description": "",
+                      "enum": [
+                        "SYSTEM",
+                        "SMU",
+                        "PSIRT_SMU",
+                        "SUBPACKAGE",
+                        "ROMMON_SW",
+                        "APDP",
+                        "APSP"
+                      ],
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of the image.",
+                      "type": "string"
+                    },
+                    "version": {
+                      "description": "Image version.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Network device identifier.",
+                "type": "string"
+              },
+              "incompatibleAppDetails": {
+                "items": {
+                  "properties": {
+                    "appName": {
+                      "description": "Name of the application that is not compatible with the device's running or golden images.",
+                      "example": "SDA",
+                      "type": "string"
+                    },
+                    "compatibleImages": {
+                      "description": "List of image details that are compatible with the application.",
+                      "items": {
+                        "properties": {
+                          "imageName": {
+                            "description": "Name of the image compatible with the application.",
+                            "example": "image name",
+                            "type": "string"
+                          },
+                          "imageType": {
+                            "description": "Type of the image (such as SYSTEM, SMU, etc.).",
+                            "enum": [
+                              "SYSTEM",
+                              "SMU",
+                              "PSIRT_SMU",
+                              "SUBPACKAGE",
+                              "ROMMON_SW",
+                              "APDP",
+                              "APSP"
+                            ],
+                            "type": "string"
+                          },
+                          "imageVersion": {
+                            "description": "Version of the compatible image.",
+                            "example": "17.09.01",
+                            "type": "string"
+                          },
+                          "recommended": {
+                            "description": "Indicates whether this image version is the recommended version for the application.",
+                            "type": "boolean"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "incompatibleWith": {
+                      "description": "Specifies whether incompatibility is with the running images, golden images, or both.",
+                      "items": {
+                        "enum": [
+                          "RUNNING_IMAGE",
+                          "GOLDEN_IMAGE"
+                        ],
+                        "example": "RUNNING_IMAGE, GOLDEN_IMAGE",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "installedImages": {
+                "description": "Details of software images running on a network device.",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "Software image identifier.",
+                      "type": "string"
+                    },
+                    "imageType": {
+                      "description": "Image Type.",
+                      "enum": [
+                        "SYSTEM",
+                        "SMU",
+                        "PSIRT_SMU",
+                        "SUBPACKAGE",
+                        "ROMMON_SW",
+                        "APDP",
+                        "APSP"
+                      ],
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Network device running image.",
+                      "type": "string"
+                    },
+                    "version": {
+                      "description": "Image version.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "managementAddress": {
+                "description": "Either an IP address or a fully-qualified domain name.",
+                "type": "string"
+              },
+              "networkDevice": {
+                "description": "Details of the network device, such as the product name and product ordinal value.",
+                "properties": {
+                  "id": {
+                    "description": "The unique identifier for the record is the `id`. If there is no supervisor engine involved, the `id` will be the same as the `productNameOrdinal`. However, if the supervisor engine is applicable, the `id` will be in the form of `<productNameOrdinal>-<supervisorProductNameOrdinal>`.",
+                    "pattern": "(^\\d+)|(^\\d+-\\d+)",
+                    "type": "string"
+                  },
+                  "productName": {
+                    "description": "Name of the product.",
+                    "type": "string"
+                  },
+                  "productNameOrdinal": {
+                    "description": "Product name ordinal.",
+                    "type": "number"
+                  },
+                  "supervisorProductName": {
+                    "description": "Name of the Supervisor Engine Module, supported by the `productName`. Example: The `Cisco Catalyst 9404R Switch` chassis is capable of supporting different supervisor engine modules: the `Cisco Catalyst 9400 Supervisor Engine-1`, the `Cisco Catalyst 9400 Supervisor Engine-1XL`, the `Cisco Catalyst 9400 Supervisor Engine-1XL-Y`, etc.",
+                    "type": "string"
+                  },
+                  "supervisorProductNameOrdinal": {
+                    "description": "Supervisor Engine Module Ordinal, supported by the `productNameOrdinal`. Example: The `286315691` chassis ordinal is capable of supporting different supervisor engine module ordinals: `286316172`, `286316710`, `286320394` etc.",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "networkDeviceImageCompatibilityStatus": {
+                "description": "The `networkDeviceImageCompatibilityStatus` field indicates whether the running or golden images on a network device are compatible with the applications supported by Cisco Catalyst Center.",
+                "enum": [
+                  "COMPATIBLE",
+                  "IN_COMPATIBLE",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              },
+              "networkDeviceImageStatus": {
+                "description": "The network device's current status concerns golden bundle images.",
+                "enum": [
+                  "OUTDATED",
+                  "UP_TO_DATE",
+                  "UNKNOWN",
+                  "CONFLICTED",
+                  "UNSUPPORTED"
+                ],
+                "type": "string"
+              },
+              "networkDeviceUpdateStatus": {
+                "description": "The network device's current update status concerns golden images.",
+                "enum": [
+                  "DISTRIBUTION_PENDING",
+                  "DISTRIBUTION_IN_PROGRESS",
+                  "DISTRIBUTION_FAILED",
+                  "ACTIVATION_PENDING",
+                  "ACTIVATION_IN_PROGRESS",
+                  "ACTIVATION_FAILED",
+                  "DEVICE_UP_TO_DATE",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

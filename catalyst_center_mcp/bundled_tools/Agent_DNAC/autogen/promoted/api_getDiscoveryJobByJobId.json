@@ -1,0 +1,721 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "discoveryId": "path",
+        "jobId": "path"
+      },
+      "uri": "/dna/intent/api/v1/discoverys/{discoveryId}/jobs/{jobId}",
+      "version": "3.2.1"
+    },
+    "description": "This API retrieves the details of a specific discovery job using the given job id and discovery id.",
+    "name": "api_getDiscoveryJobByJobId",
+    "parameters": {
+      "properties": {
+        "discoveryId": {
+          "description": "The id of the discovery.\n",
+          "type": "string"
+        },
+        "jobId": {
+          "description": "The id of the discovery job.\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "discoveryId",
+        "jobId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Details of a discovery job by jobId.",
+      "properties": {
+        "response": {
+          "allOf": [
+            {
+              "description": "Summary of latest discovery job details.\n",
+              "properties": {
+                "discoveryTypeDetails": {
+                  "description": "Details of the discovery type.",
+                  "discriminator": {
+                    "mapping": {
+                      "CDP": "#/components/schemas/CDPDiscovery",
+                      "CIDR": "#/components/schemas/CIDRDiscovery",
+                      "LLDP": "#/components/schemas/LLDPDiscovery",
+                      "RANGE": "#/components/schemas/RangeDiscovery",
+                      "SINGLE": "#/components/schemas/SingleDiscovery"
+                    },
+                    "propertyName": "type"
+                  },
+                  "oneOf": [
+                    {
+                      "allOf": [
+                        {
+                          "description": "Schema for parent discovery.",
+                          "properties": {
+                            "type": {
+                              "description": "| Type | Description |\n|------|-------------|\n| `SINGLE` | Discovers devices and hosts using a single IP address. |\n| `CDP` | Use Cisco Discovery Protocol (CDP) and provide a seed IP address. |\n| `RANGE` | Specify a range of IP addresses. (A maximum range of 4096 devices is supported.) |\n| `LLDP` | Use Link Layer Discovery Protocol (LLDP) and provide a seed IP address. |\n| `CIDR` | Use Classless Inter-Domain Routing (CIDR) address. |\n",
+                              "enum": [
+                                "SINGLE",
+                                "RANGE",
+                                "LLDP",
+                                "CDP",
+                                "CIDR"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "description": "IP address of the device to be discovered.",
+                          "properties": {
+                            "ipAddress": {
+                              "allOf": [
+                                {
+                                  "oneOf": [
+                                    {
+                                      "example": "250.162.252.170",
+                                      "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                      "title": "IPv4 Address",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                      "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                      "title": "IPv6 Address",
+                                      "type": "string"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": "IPv4 or IPv6 address of the device."
+                            }
+                          },
+                          "required": [
+                            "ipAddress"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "description": "To discover a single device or host using an IP address."
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "description": "Schema for parent discovery.",
+                          "properties": {
+                            "type": {
+                              "description": "| Type | Description |\n|------|-------------|\n| `SINGLE` | Discovers devices and hosts using a single IP address. |\n| `CDP` | Use Cisco Discovery Protocol (CDP) and provide a seed IP address. |\n| `RANGE` | Specify a range of IP addresses. (A maximum range of 4096 devices is supported.) |\n| `LLDP` | Use Link Layer Discovery Protocol (LLDP) and provide a seed IP address. |\n| `CIDR` | Use Classless Inter-Domain Routing (CIDR) address. |\n",
+                              "enum": [
+                                "SINGLE",
+                                "RANGE",
+                                "LLDP",
+                                "CDP",
+                                "CIDR"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "properties": {
+                            "range": {
+                              "description": "List of IP address ranges to be discovered. Each range must contain a start and end IP address.\n",
+                              "items": {
+                                "description": "Range discovery details",
+                                "properties": {
+                                  "ipAddressEnd": {
+                                    "allOf": [
+                                      {
+                                        "oneOf": [
+                                          {
+                                            "example": "250.162.252.170",
+                                            "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                            "title": "IPv4 Address",
+                                            "type": "string"
+                                          },
+                                          {
+                                            "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                            "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                            "title": "IPv6 Address",
+                                            "type": "string"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "description": "End IP address of devices to be discovered."
+                                  },
+                                  "ipAddressStart": {
+                                    "allOf": [
+                                      {
+                                        "oneOf": [
+                                          {
+                                            "example": "250.162.252.170",
+                                            "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                            "title": "IPv4 Address",
+                                            "type": "string"
+                                          },
+                                          {
+                                            "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                            "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                            "title": "IPv6 Address",
+                                            "type": "string"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "description": "Start IP address of the devices to be discovered."
+                                  }
+                                },
+                                "required": [
+                                  "ipAddressEnd",
+                                  "ipAddressStart"
+                                ],
+                                "type": "object"
+                              },
+                              "maxItems": 8,
+                              "minItems": 1,
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "range"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "description": "To discover devices and hosts using an IP address range, the users can specify one or more ranges of IP addresses. (A maximum range of 4096 devices is supported.)"
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "description": "Schema for parent discovery.",
+                          "properties": {
+                            "type": {
+                              "description": "| Type | Description |\n|------|-------------|\n| `SINGLE` | Discovers devices and hosts using a single IP address. |\n| `CDP` | Use Cisco Discovery Protocol (CDP) and provide a seed IP address. |\n| `RANGE` | Specify a range of IP addresses. (A maximum range of 4096 devices is supported.) |\n| `LLDP` | Use Link Layer Discovery Protocol (LLDP) and provide a seed IP address. |\n| `CIDR` | Use Classless Inter-Domain Routing (CIDR) address. |\n",
+                              "enum": [
+                                "SINGLE",
+                                "RANGE",
+                                "LLDP",
+                                "CDP",
+                                "CIDR"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "properties": {
+                            "cidrAddress": {
+                              "allOf": [
+                                {
+                                  "description": "Represents CIDR address with its corresponding prefix length.\n",
+                                  "properties": {
+                                    "cidrPrefix": {
+                                      "allOf": [
+                                        {
+                                          "oneOf": [
+                                            {
+                                              "example": "250.162.252.170",
+                                              "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                              "title": "IPv4 Address",
+                                              "type": "string"
+                                            },
+                                            {
+                                              "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                              "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                              "title": "IPv6 Address",
+                                              "type": "string"
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "description": "CIDR prefix for the IP address."
+                                    },
+                                    "cidrSuffix": {
+                                      "description": "The CIDR suffix length indicates the number of bits for host addresses, following the prefix. For IPv4, supported lengths range from 20 to 30, where default is 30. For IPv6, they range from 116 to 126, where default is 126.\n",
+                                      "example": 24,
+                                      "format": "int64",
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              ],
+                              "description": "IP Address of the seed device to be used as the starting point for the scan. From this device, CIDR scans other directly connected Cisco devices."
+                            },
+                            "subnetFilter": {
+                              "description": "IP addresses of the devices to be filtered out during discovery. In this field, user can enter an IP address or a subnet to exclude from the discovery scan. They can enter addresses either as an individual IP address (x.x.x.x) or as a classless inter-domain routing (CIDR) address which can be IPv4 (x.x.x.x/y) with a subnet mask from 20 to 30, or IPv6 (hhhh:hhhh:hhhh:hhhh:hhhh:hhhh:hhhh:hhhh/y) with a subnet mask ranging from 116 to 126.\n",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "description": "Represents an IPv4/IPv6 address of the device.\n",
+                                    "properties": {
+                                      "ipAddress": {
+                                        "allOf": [
+                                          {
+                                            "oneOf": [
+                                              {
+                                                "example": "250.162.252.170",
+                                                "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                                "title": "IPv4 Address",
+                                                "type": "string"
+                                              },
+                                              {
+                                                "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                                "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                                "title": "IPv6 Address",
+                                                "type": "string"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "description": "IPv4 or IPv6 address of the device."
+                                          }
+                                        ],
+                                        "description": "IPv4 or IPv6 address of the device."
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  {
+                                    "properties": {
+                                      "cidrAddress": {
+                                        "allOf": [
+                                          {
+                                            "description": "Represents CIDR address with its corresponding prefix length.\n",
+                                            "properties": {
+                                              "cidrPrefix": {
+                                                "allOf": [
+                                                  {
+                                                    "oneOf": [
+                                                      {
+                                                        "example": "250.162.252.170",
+                                                        "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                                        "title": "IPv4 Address",
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                                        "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                                        "title": "IPv6 Address",
+                                                        "type": "string"
+                                                      }
+                                                    ]
+                                                  }
+                                                ],
+                                                "description": "CIDR prefix for the IP address."
+                                              },
+                                              "cidrSuffix": {
+                                                "description": "The CIDR suffix length indicates the number of bits for host addresses, following the prefix. For IPv4, supported lengths range from 20 to 30, where default is 30. For IPv6, they range from 116 to 126, where default is 126.\n",
+                                                "example": 24,
+                                                "format": "int64",
+                                                "type": "integer"
+                                              }
+                                            },
+                                            "type": "object"
+                                          }
+                                        ],
+                                        "description": "IP Address of the seed device to be used as the starting point for the scan. From this device, CIDR scans other directly connected Cisco devices."
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                ],
+                                "description": "Filter for subnets to exclude during discovery."
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "cidrAddress"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "description": "To do CIDR discovery, one can use Classless Inter-Domain Routing (CIDR) and provide a seed IP address.\n"
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "description": "Schema for parent discovery.",
+                          "properties": {
+                            "type": {
+                              "description": "| Type | Description |\n|------|-------------|\n| `SINGLE` | Discovers devices and hosts using a single IP address. |\n| `CDP` | Use Cisco Discovery Protocol (CDP) and provide a seed IP address. |\n| `RANGE` | Specify a range of IP addresses. (A maximum range of 4096 devices is supported.) |\n| `LLDP` | Use Link Layer Discovery Protocol (LLDP) and provide a seed IP address. |\n| `CIDR` | Use Classless Inter-Domain Routing (CIDR) address. |\n",
+                              "enum": [
+                                "SINGLE",
+                                "RANGE",
+                                "LLDP",
+                                "CDP",
+                                "CIDR"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "properties": {
+                            "hopCount": {
+                              "default": 16,
+                              "description": "This field defines the CDP level, indicating the number of hops from the seed device to scan. Acceptable values range from 1 to 16, with a default of 16. For instance, a CDP level of 3 means scanning will include up to three hops from the seed device.    \n",
+                              "example": 16,
+                              "format": "int64",
+                              "maximum": 16,
+                              "minimum": 1,
+                              "type": "integer"
+                            },
+                            "ipAddress": {
+                              "allOf": [
+                                {
+                                  "oneOf": [
+                                    {
+                                      "example": "250.162.252.170",
+                                      "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                      "title": "IPv4 Address",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                      "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                      "title": "IPv6 Address",
+                                      "type": "string"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": "IP Address of the seed device to be used as the starting point for the scan. From this device, CDP scans other directly connected Cisco devices."
+                            },
+                            "subnetFilter": {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "description": "Represents an IPv4/IPv6 address of the device.\n",
+                                      "properties": {
+                                        "ipAddress": {
+                                          "allOf": [
+                                            {
+                                              "oneOf": [
+                                                {
+                                                  "example": "250.162.252.170",
+                                                  "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                                  "title": "IPv4 Address",
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                                  "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                                  "title": "IPv6 Address",
+                                                  "type": "string"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "description": "IPv4 or IPv6 address of the device."
+                                            }
+                                          ],
+                                          "description": "IPv4 or IPv6 address of the device."
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    {
+                                      "properties": {
+                                        "cidrAddress": {
+                                          "allOf": [
+                                            {
+                                              "description": "Represents CIDR address with its corresponding prefix length.\n",
+                                              "properties": {
+                                                "cidrPrefix": {
+                                                  "allOf": [
+                                                    {
+                                                      "oneOf": [
+                                                        {
+                                                          "example": "250.162.252.170",
+                                                          "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                                          "title": "IPv4 Address",
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                                          "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                                          "title": "IPv6 Address",
+                                                          "type": "string"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "description": "CIDR prefix for the IP address."
+                                                },
+                                                "cidrSuffix": {
+                                                  "description": "The CIDR suffix length indicates the number of bits for host addresses, following the prefix. For IPv4, supported lengths range from 20 to 30, where default is 30. For IPv6, they range from 116 to 126, where default is 126.\n",
+                                                  "example": 24,
+                                                  "format": "int64",
+                                                  "type": "integer"
+                                                }
+                                              },
+                                              "type": "object"
+                                            }
+                                          ],
+                                          "description": "IP Address of the seed device to be used as the starting point for the scan. From this device, CIDR scans other directly connected Cisco devices."
+                                        }
+                                      },
+                                      "type": "object"
+                                    }
+                                  ],
+                                  "description": "Filter for subnets to exclude during discovery."
+                                }
+                              ],
+                              "description": "IP Addresses of the devices to be filtered out during discovery.In this field, user can enter an IP address or subnet to exclude from the discovery scan.They can enter addresses either as an individual IP address (x.x.x.x ) or as a classless inter-domain routing (CIDR) address which can be IPv4 (x.x.x.x/y) with a subnet mask from 20 to 30, or IPv6 (hhhh:hhhh:hhhh:hhhh:hhhh:hhhh:hhhh:hhhh/y) with a subnet mask ranging from 116 to 126.\n"
+                            }
+                          },
+                          "required": [
+                            "hopCount",
+                            "ipAddress"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "description": "CDP (Cisco Discovery Protocol) is a network discovery protocol developed by Cisco Systems. It is used to share information about directly connected Cisco devices, such as routers and switches.\n"
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "description": "Schema for parent discovery.",
+                          "properties": {
+                            "type": {
+                              "description": "| Type | Description |\n|------|-------------|\n| `SINGLE` | Discovers devices and hosts using a single IP address. |\n| `CDP` | Use Cisco Discovery Protocol (CDP) and provide a seed IP address. |\n| `RANGE` | Specify a range of IP addresses. (A maximum range of 4096 devices is supported.) |\n| `LLDP` | Use Link Layer Discovery Protocol (LLDP) and provide a seed IP address. |\n| `CIDR` | Use Classless Inter-Domain Routing (CIDR) address. |\n",
+                              "enum": [
+                                "SINGLE",
+                                "RANGE",
+                                "LLDP",
+                                "CDP",
+                                "CIDR"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "properties": {
+                            "hopCount": {
+                              "default": 16,
+                              "description": "This field specifies the LLDP level which refers to the number of hops from the seed device that user wants to scan. Valid values are from 1 to 16. The default value is 16. For example, LLDP level 3 means that LLDP will scan up to three hops from the seed device.\n",
+                              "example": 16,
+                              "format": "int64",
+                              "maximum": 16,
+                              "minimum": 1,
+                              "type": "integer"
+                            },
+                            "ipAddress": {
+                              "allOf": [
+                                {
+                                  "oneOf": [
+                                    {
+                                      "example": "250.162.252.170",
+                                      "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                      "title": "IPv4 Address",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                      "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                      "title": "IPv6 Address",
+                                      "type": "string"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": "Start IP address of the devices to be discovered."
+                            },
+                            "subnetFilter": {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "description": "Represents an IPv4/IPv6 address of the device.\n",
+                                      "properties": {
+                                        "ipAddress": {
+                                          "allOf": [
+                                            {
+                                              "oneOf": [
+                                                {
+                                                  "example": "250.162.252.170",
+                                                  "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                                  "title": "IPv4 Address",
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                                  "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                                  "title": "IPv6 Address",
+                                                  "type": "string"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "description": "IPv4 or IPv6 address of the device."
+                                            }
+                                          ],
+                                          "description": "IPv4 or IPv6 address of the device."
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    {
+                                      "properties": {
+                                        "cidrAddress": {
+                                          "allOf": [
+                                            {
+                                              "description": "Represents CIDR address with its corresponding prefix length.\n",
+                                              "properties": {
+                                                "cidrPrefix": {
+                                                  "allOf": [
+                                                    {
+                                                      "oneOf": [
+                                                        {
+                                                          "example": "250.162.252.170",
+                                                          "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                                                          "title": "IPv4 Address",
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                                                          "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                                                          "title": "IPv6 Address",
+                                                          "type": "string"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "description": "CIDR prefix for the IP address."
+                                                },
+                                                "cidrSuffix": {
+                                                  "description": "The CIDR suffix length indicates the number of bits for host addresses, following the prefix. For IPv4, supported lengths range from 20 to 30, where default is 30. For IPv6, they range from 116 to 126, where default is 126.\n",
+                                                  "example": 24,
+                                                  "format": "int64",
+                                                  "type": "integer"
+                                                }
+                                              },
+                                              "type": "object"
+                                            }
+                                          ],
+                                          "description": "IP Address of the seed device to be used as the starting point for the scan. From this device, CIDR scans other directly connected Cisco devices."
+                                        }
+                                      },
+                                      "type": "object"
+                                    }
+                                  ],
+                                  "description": "Filter for subnets to exclude during discovery."
+                                }
+                              ],
+                              "description": "IP Addresses of the devices to be filtered out during discovery.In this field, user can enter an IP address or subnet to exclude from the discovery scan.They can enter addresses either as an individual IP address (x.x.x.x ) or as a classless inter-domain routing (CIDR) address which can be IPv4 (x.x.x.x/y) with a subnet mask from 20 to 30, or IPv6 (hhhh:hhhh:hhhh:hhhh:hhhh:hhhh:hhhh:hhhh/y) with a subnet mask ranging from 116 to 126.\n"
+                            }
+                          },
+                          "required": [
+                            "hopCount",
+                            "ipAddress"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "description": "Link Layer Discovery Protocol (LLDP) discovery refers to the process by which network devices use LLDP to identify and gather information about directly connected devices. This discovery mechanism helps network administrators understand the physical topology of their network.\n"
+                    }
+                  ]
+                },
+                "endTime": {
+                  "description": "End time of the discovery job in epoch milliseconds",
+                  "example": 1705348800000,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "Unique identifier of the discovery settings.",
+                  "example": "12",
+                  "readOnly": true,
+                  "type": "string"
+                },
+                "jobId": {
+                  "description": "Unique identifier of the discovery job",
+                  "example": "12",
+                  "readOnly": true,
+                  "type": "string"
+                },
+                "name": {
+                  "description": "The name of the discovery.",
+                  "example": "Test discovery created on Feb 10, 2025 02:30 PM",
+                  "type": "string"
+                },
+                "startTime": {
+                  "description": "Start time of the discovery job in epoch milliseconds",
+                  "example": 1705348800000,
+                  "format": "int64",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "Status of the discovery job.\n| Status             | Description                     |\n|--------------------|---------------------------------|\n| `RUNNING`          | Job is currently running.       |\n| `COMPLETED`        | Job completed successfully.     |\n| `QUEUED`           | Job is in queued state and yet to start. |\n| `SCHEDULED`        | Discovery is scheduled but job is yet to start |\n| `TERMINATED`       | Job was terminated.             |\n",
+                  "enum": [
+                    "RUNNING",
+                    "COMPLETED",
+                    "QUEUED",
+                    "SCHEDULED",
+                    "TERMINATED"
+                  ],
+                  "example": "COMPLETED",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "discoveryTypeDetails",
+                "id",
+                "jobId",
+                "name",
+                "startTime",
+                "status"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "version": {
+          "description": "Version number of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "required": [
+        "response",
+        "version"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

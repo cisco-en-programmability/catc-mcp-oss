@@ -1,0 +1,63 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "smart_account_id": "path"
+      },
+      "uri": "/dna/intent/api/v1/licenses/smartAccount/{smart_account_id}/virtualAccounts",
+      "version": "2.3.7.9"
+    },
+    "description": "**Licensing Virtual Account Details** (Tool Dependency: CRITICAL). Retrieve Virtual Account details for a specific Licensing Smart Account.\\n\\n**Execution Policy (MANDATORY):**\\n- Use this tool directly for licensing virtual-account queries.\\n- Do NOT ask users whether they mean Licensing or PnP Smart Accounts.\\n- Treat this tool as Licensing context only.\\n\\n**REQUIRED PRE-REQUISITE:**\\nYou MUST call `api_smartAccountDetails` BEFORE calling `api_virtualAccountDetails`.\\n\\n**Step-by-step process:**\\n1. Invoke `api_smartAccountDetails` to retrieve smart accounts.\\n2. Extract the `id` from the matched smart account.\\n3. Invoke `api_virtualAccountDetails` with `smart_account_id` set to the resolved ID.\\n4. If searching for a specific virtual account name and not found, repeat for other Smart Account IDs as needed.\\n\\n**Do NOT:**\\n- Use this tool to list Smart Accounts (use `api_smartAccountDetails`)\\n- Call this tool without a valid Smart Account ID",
+    "name": "api_virtualAccountDetails",
+    "parameters": {
+      "properties": {
+        "smart_account_id": {
+          "description": "The ID of the Smart Account.\\n\\n**REQUIRED:**\\nThis ID MUST be fetched from the response of `api_smartAccountDetails`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "smart_account_id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "smart_account_id": {
+          "description": "Id of smart account",
+          "type": "string"
+        },
+        "smart_account_name": {
+          "description": "Name of smart account",
+          "type": "string"
+        },
+        "virtual_account_details": {
+          "description": "Detail of virtual accounts",
+          "items": {
+            "properties": {
+              "virtual_account_id": {
+                "description": "Id of virtual account",
+                "type": "string"
+              },
+              "virtual_account_name": {
+                "description": "Name of virtual account",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

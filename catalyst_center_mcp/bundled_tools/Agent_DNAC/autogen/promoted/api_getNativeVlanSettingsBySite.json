@@ -1,0 +1,51 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{siteId}/wirelessSettings/flexConnectNativeVlan",
+      "version": "2.3.7.9"
+    },
+    "description": "WIRELESS / FLEXCONNECT ONLY. Retrieve the FlexConnect AP native VLAN ID configured for a wireless site. This is a wireless-only setting (URI: /sites/{siteId}/wirelessSettings/flexConnectNativeVlan) and applies to FlexConnect access points. The default value is 1 when nothing is explicitly set. Do NOT use this tool to inspect wired switchport trunk native VLANs configured on switch interfaces via 'switchport trunk native vlan' (CLI) \u2014 for wired-trunk native VLANs use get_device_switchport_inventory or cli_command_runner('show interfaces trunk', ...).",
+    "name": "api_getNativeVlanSettingsBySite",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "description": "Site Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "siteId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "inheritedSiteNameHierarchy": {
+          "description": "The Inherited Site Name Hierarchy specifies the name hierarchy of a parent site from which Native Vlan Id is inherited.",
+          "type": "string"
+        },
+        "inheritedSiteUUID": {
+          "description": "The Inherited Site UUID specifies the unique identifier of a parent site from which Native Vlan Id is inherited.",
+          "type": "string"
+        },
+        "nativeVlanId": {
+          "description": " Native VLAN ID is used for any untagged frames.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

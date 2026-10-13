@@ -1,0 +1,72 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "platform": "DNAC",
+      "release_status": "Assurance_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "clientMacAddress": "query",
+        "id": "path"
+      },
+      "uri": "/dna/data/api/v1/thousandEyesTestResults/{id}/pathTraces/count",
+      "version": "3.2.1"
+    },
+    "description": "Retrieves the count of path traces for the given ThousandEyes test result.\n For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-thousandEyesPathViz-1.0.0-resolved.yaml.\n\nCount display rule: If rendering a KeyValueSet, include at least Test result id and Path trace count (#). A one-item KeyValueSet is not sufficient for count-only answers.",
+    "name": "api_countThousandEyesTestPathTraces",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "default": "intent",
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "clientMacAddress": {
+          "description": "Optional client MAC address. If this is provided the the path trace would start from the given client, otherwise the path trace starts from the switch where ThousanEyes agent is running.\n\nUse this only for a client MAC address. Do not pass hostnames, FQDNs, test names, agent names, networkDeviceName values, or site names as clientMacAddress.",
+          "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$|^[0-9A-Fa-f]{4}\\.[0-9A-Fa-f]{4}\\.[0-9A-Fa-f]{4}$",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier of the test result.\nThis must be one ThousandEyes test result/sample id returned by the test-results lookup. It must be a single 24-character hexadecimal value. Do not pass testName, testId, a hostname, or a comma-separated list here; if the lookup returns multiple comma-separated ids, split the value and pass one id.",
+          "pattern": "^[0-9a-fA-F]{24}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Count of the results for the given filter",
+      "properties": {
+        "response": {
+          "properties": {
+            "count": {
+              "description": "The total number of records related to the resource",
+              "example": 1000,
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "title": "AppxCountIntegerResponse_response",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "AppxCountIntegerResponse",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

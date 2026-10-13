@@ -1,0 +1,51 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "executionId": "path"
+      },
+      "uri": "/dna/intent/api/v1/event/api-status/{executionId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the Status of events API calls with provided executionId as mandatory path parameter",
+    "name": "api_getStatusAPIForEvents",
+    "parameters": {
+      "properties": {
+        "executionId": {
+          "description": "Execution ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "executionId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "apiStatus": {
+          "description": "",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "",
+          "properties": {},
+          "type": "object"
+        },
+        "statusMessage": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

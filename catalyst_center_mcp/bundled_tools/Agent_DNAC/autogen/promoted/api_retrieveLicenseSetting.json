@@ -1,0 +1,47 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/licenseSetting",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves licensing settings, including Default/Active Licensing Smart Account ID.\\n\\n**Execution Policy (MANDATORY):**\\n- Use this tool directly for licensing requests about active/default smart account settings.\\n- Do NOT ask users whether they mean Licensing or PnP Smart Accounts.\\n- Treat this tool as Licensing context only.\\n\\n**Dependency Guidance:**\\n- If response returns only Smart Account ID, resolve the display name/domain using `api_smartAccountDetails` before final response when needed.",
+    "name": "api_retrieveLicenseSetting",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "API Response",
+          "properties": {
+            "autoRegistrationVirtualAccountId": {
+              "description": "Virtual account id",
+              "type": "string"
+            },
+            "defaultSmartAccountId": {
+              "description": "Default smart account id",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "API version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,172 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/license/status",
+      "version": "3.2.1"
+    },
+    "description": "CRITICAL: USE THIS API FIRST FOR ALL QUESTIONS ABOUT 'MY SYSTEM', 'THE SYSTEM', OR 'CATC'\n\nMANDATORY - COMPLIANCE QUESTIONS - USE THIS API ALWAYS:\n  - \"Is my system out of compliance?\" -> api_systemLicensingStatus (NOT api_getComplianceStatus, NOT api_getComplianceStatusCount)\n  - \"Is my system compliant?\" -> api_systemLicensingStatus (NOT api_getComplianceStatus, NOT api_getComplianceStatusCount)\n  - \"Check compliance status of my CatC\" -> api_systemLicensingStatus (NOT api_getComplianceStatus)\n  - \"Is my CatC out-of-compliance?\" -> api_systemLicensingStatus (NOT api_getComplianceStatus)\n\nMANDATORY - LICENSE USAGE/CONSUMPTION QUESTIONS - USE THIS API ALWAYS:\n  - \"License usage of my system\" -> api_systemLicensingStatus (NOT api_getLicenseUsage)\n  - \"How many licenses are consumed by my system?\" -> api_systemLicensingStatus\n  - \"How many licenses have I consumed?\" -> api_systemLicensingStatus (if no device type specified)\n\nMANDATORY - REGISTRATION DATE QUESTIONS - USE THIS API ALWAYS:\n  - \"Show system registration date\" -> api_systemLicensingStatus (NOT api_systemHealthAPI, NOT knowledge base)\n  - \"When was my system registered?\" -> api_systemLicensingStatus (NOT knowledge base)\n\nMANDATORY - CSSM REGISTRATION/VERIFICATION QUESTIONS - USE THIS API ALWAYS:\n  - \"Verify system registration with CSSM\" -> api_systemLicensingStatus (NOT api_retrievesCSSMConnectionMode)\n  - \"Is this system already registered with CSSM?\" -> api_systemLicensingStatus (NOT api_retrievesCSSMConnectionMode)\n  - \"Check if system is registered with CSSM\" -> api_systemLicensingStatus (NOT api_retrievesCSSMConnectionMode)\n  - \"Is my CatC registered with CSSM?\" -> api_systemLicensingStatus (NOT api_retrievesCSSMConnectionMode)\n  - \"Verify CSSM registration status\" -> api_systemLicensingStatus (NOT api_retrievesCSSMConnectionMode)\n\n**ABSOLUTE PRIORITY API FOR CATALYST CENTER SYSTEM-LEVEL LICENSING AND COMPLIANCE**\n\nCRITICAL SELECTION RULE: If the user asks about \"my system\", \"the system\", \"this system\", \"CatC\", or \"Catalyst Center\" compliance/licensing/consumption/registration (without mentioning specific device names/IPs), YOU MUST USE THIS API FIRST. This is NOT for individual network devices.\n\nMANDATORY FOR LICENSE CONSUMPTION QUESTIONS: \"How many licenses are consumed by my system?\" and similar system license consumption questions MUST ALWAYS call this API. The entitlements field contains the system-level consumed/available/purchased counts.\n\nMANDATORY FOR REGISTRATION DATE QUESTIONS: \"Show system registration date\" and similar system registration date questions MUST ALWAYS call this API. The registrationStatus.registrationDate field contains the registration timestamp in milliseconds since epoch.\n\n**WHAT THIS API DOES:**\nReturns the CSSM licensing and compliance status of the Catalyst Center platform itself (NOT network devices managed by CatC). Provides:\n- System registration status with CSSM\n- Authorization/compliance state (AUTHORIZED = compliant, USAGE_OUT_OF_COMPLIANCE = non-compliant)\n- Smart Account and Virtual Account IDs the system is registered to\n- System-wide license entitlement and consumption counts\n- Registration and renewal timestamps\n\n**SYSTEM vs DEVICE - READ THIS CAREFULLY:**\n- \"SYSTEM\" = Catalyst Center platform/controller itself (use THIS API)\n- \"DEVICE\" = Individual switches, routers, APs managed by Catalyst Center (use api_getComplianceStatus or api_deviceComplianceStatus)\n- If question contains \"my system\", \"the system\", \"this system\", \"CatC\" \u2192 THIS API\n- If question contains specific device names, IPs, or \"devices\" \u2192 device APIs\n- \"How many licenses are consumed by my system?\" \u2192 THIS API ALWAYS\n- \"Show system registration date\" \u2192 THIS API ALWAYS (NOT knowledge base)\n- \"When was my system registered?\" \u2192 THIS API ALWAYS (NOT knowledge base)\n\n**MANDATORY - MUST USE THIS API FOR:**\n\n1. **SYSTEM COMPLIANCE/AUTHORIZATION QUESTIONS** (when question contains \"system\" or \"CatC\" without device specifics):\n   - \"Is my system out of compliance?\"\n   - \"Is my system compliant?\"\n   - \"Is the system in compliance?\"\n   - \"Is this system compliant?\"\n   - \"Is CatC compliant?\"\n   - \"Show compliance status of my system\"\n   - \"What is the authorization status?\"\n   \n    NEVER use api_getComplianceStatus, api_getComplianceStatusCount, or api_deviceComplianceStatus for these - those are ONLY for network devices\n    Check authorizationStatus.status: 'AUTHORIZED' = compliant, 'USAGE_OUT_OF_COMPLIANCE' = non-compliant\n\n2. **SMART ACCOUNT / VIRTUAL ACCOUNT QUESTIONS** (for the system):\n   - \"Show smart account of my system\"\n   - \"What is the smart account for my system?\"\n   - \"What smart account is CatC registered to?\"\n   - \"Which smart account is my CatC registered to?\"\n   - \"Find smart account linked to my CatC\"\n   - \"Tell me the virtual account for my system\"\n   - \"Show virtual account of my system\"\n   - \"Get smart/virtual account for CatC\"\n   - \"Which virtual account is my CatC registered to?\"\n   - \"Find virtual account linked to my CatC\"\n   \n    NEVER go directly to api_smartAccountDetails, api_virtualAccountDetails, or knowledge base\n    Call THIS API first to get smartAccountId and virtualAccountId, then resolve IDs to names\n\n3. **SYSTEM LICENSE CONSUMPTION QUESTIONS:**\n   - \"How many licenses are consumed by my system?\"\n   - \"How many licenses does my CatC use?\"\n   - \"Check license consumption for my CatC\"\n   - \"Show license usage of my system\"\n   - \"License usage of my system\"\n   - \"License consumption details for my system\"\n   - \"How many licenses is CatC using?\"\n   - \"What licenses does my system consume?\"\n   - \"How many licenses have I consumed?\" (when no device type specified)\n   - \"Show license consumption details\" (when no device type specified)\n   \n    NEVER use api_retrievesSummaryOfNetworkDeviceLicenses (devices only) or api_getLicenseUsage (product family breakdown)\n    Check entitlements field for consumed/available/purchased counts at system level\n\n4. **SYSTEM REGISTRATION DATE QUESTIONS - DO NOT USE KNOWLEDGE BASE:**\n   - \"When was my system registered?\" -> THIS API (registrationStatus.registrationDate field)\n   - \"Show system registration date\" -> THIS API (registrationStatus.registrationDate field, NOT api_systemHealthAPI)\n   - \"Registration date of my CatC\" -> THIS API (registrationStatus.registrationDate field)\n   - \"When was my system onboarded to CSSM?\" -> THIS API (registrationStatus.registrationDate field)\n   - \"Show registration timestamp\" -> THIS API (registrationStatus.registrationDate field)\n   - \"What is the registration date?\" -> THIS API (registrationStatus.registrationDate field)\n   - \"When was this system onboarded?\" -> THIS API (registrationStatus.registrationDate field)\n   \n    CRITICAL: NEVER use answer_question_via_knowledge_base for registration date questions\n    The knowledge base has outdated/incorrect documentation about disaster recovery - IGNORE IT\n    This API returns registrationStatus.registrationDate in milliseconds since epoch - use convert_epoch_to_timestamp_tool to format it\n\n5. **CSSM REGISTRATION/VERIFICATION QUESTIONS - DO NOT USE api_retrievesCSSMConnectionMode:**\n   - \"Verify system registration with CSSM\" -> THIS API (check registrationStatus.status field, NOT api_retrievesCSSMConnectionMode)\n   - \"Is this system already registered with CSSM?\" -> THIS API (check registrationStatus.status field, NOT api_retrievesCSSMConnectionMode)\n   - \"Check if system is registered with CSSM\" -> THIS API (check registrationStatus.status field)\n   - \"Is my CatC registered with CSSM?\" -> THIS API (check registrationStatus.status field)\n   - \"Verify CSSM registration status\" -> THIS API (check registrationStatus.status field)\n   - \"Is the system registered?\" -> THIS API (check registrationStatus.status field)\n   \n    CRITICAL: NEVER use api_retrievesCSSMConnectionMode for registration verification - that API only shows connection mode (direct/on-prem), NOT registration status\n    This API returns registrationStatus.status: REGISTERED or UNREGISTERED\n    Registration status comes from THIS API ONLY\n\n**API RESPONSE FIELDS:**\n- registrationStatus.status: REGISTERED or UNREGISTERED\n- registrationStatus.registrationDate: When system was registered with CSSM (milliseconds since epoch)\n- registrationStatus.renewalDate: License renewal date\n- authorizationStatus.status: AUTHORIZED (compliant), USAGE_OUT_OF_COMPLIANCE (non-compliant), UNAUTHORIZED, IN_EVALUATION_PERIOD, EVALUATION_PERIOD_EXPIRED\n- smartAccountId: ID to resolve via api_smartAccountDetails\n- virtualAccountId: ID to resolve via api_virtualAccountDetails (requires smartAccountId)\n- entitlements: Purchased/consumed/available license counts for the system\n\n**REQUIRED WORKFLOW:**\n1. Call api_systemLicensingStatus FIRST\n2. Check registrationStatus.status:\n   - If UNREGISTERED \u2192 inform user system not registered, STOP\n   - If REGISTERED \u2192 proceed to step 3\n3. Extract smartAccountId and virtualAccountId\n4. Call api_smartAccountDetails(smartAccountId) to get smart account name\n5. Call api_virtualAccountDetails(smartAccountId) to get virtual account name from ID\n6. Present human-readable names (not raw IDs) in response\n\n**ABSOLUTE PROHIBITIONS:**\nNEVER use api_getComplianceStatus when question asks about \"my system\", \"the system\", or \"CatC\" compliance\nNEVER use api_getComplianceStatusCount when question asks about \"my system\", \"the system\", or \"CatC\" compliance\nNEVER use api_deviceComplianceStatus for system-level questions\nNEVER use api_retrievesCSSMConnectionMode for CSSM registration verification - THIS API HAS THE REGISTRATION STATUS\nNEVER use api_systemHealthAPI for system registration date - THIS API HAS THE REGISTRATION DATE\nNEVER use answer_question_via_knowledge_base for system registration date - THIS API HAS THE LIVE DATA\nNEVER fall back to knowledge base for live system status - this API has the real-time data\nNEVER show raw smartAccountId or virtualAccountId to users - always resolve to names first\nNEVER confuse system licensing (this API) with device licensing (other APIs)\n\nIf user asks \"Is this system compliant?\", the answer comes from authorizationStatus.status in THIS API's response, NOT from device compliance APIs.\nIf user asks \"Show system registration date\", call THIS API and get registrationStatus.registrationDate, NOT api_systemHealthAPI or knowledge base.\nIf user asks \"Verify system registration with CSSM\", call THIS API and check registrationStatus.status, NOT api_retrievesCSSMConnectionMode.\n\n\nDEVICE LICENSE USAGE ROUTING GUARDRAIL:\n- This API is for CatC/system-level licensing only, not for device/product-family license usage totals.\n- Do NOT use this API for switch/router/WLC/wireless/AP/ISE purchased/used/available license totals.\n- Use api_getLicenseUsage for device/product-family license usage totals.\n- For WLC/wireless license usage totals, use api_getLicenseUsage with productFamily: UNIFIED_AP.\n",
+    "name": "api_systemLicensingStatus",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Fetches registration status, authorization status, and system-level entitlements for Cisco Catalyst Center with CSSM. Use for CatC/system registration/compliance/authorization only. Do NOT use for device-related license usage totals by product family (switch/router/WLC/wireless/AP/ISE); use api_getLicenseUsage for those queries.",
+          "properties": {
+            "authorizationStatus": {
+              "description": "System license authorization status",
+              "properties": {
+                "evaluationRemainderTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "expiryTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "lastAttemptFailReason": {
+                  "description": "The reason for last authorization request failure",
+                  "type": "string"
+                },
+                "lastAttemptStatus": {
+                  "description": "The last authorization request's status",
+                  "enum": [
+                    "SUCCESS",
+                    "FAILURE",
+                    "IN_PROGRESS",
+                    "PENDING"
+                  ],
+                  "type": "string"
+                },
+                "lastAttemptTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "nextAttemptTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "status": {
+                  "description": "This denotes the authorization status of the Catalyst Center system. 'USAGE_OUT_OF_COMPLIANCE' indicates the system IS out of compliance. 'AUTHORIZED' means the system is properly licensed and in compliance. 'UNAUTHORIZED' means the system lacks proper authorization. 'IN_EVALUATION_PERIOD' means the system is operating under an evaluation license. 'EVALUATION_PERIOD_EXPIRED' means the evaluation period has ended.",
+                  "enum": [
+                    "AUTHORIZED",
+                    "UNAUTHORIZED",
+                    "USAGE_OUT_OF_COMPLIANCE",
+                    "IN_EVALUATION_PERIOD",
+                    "EVALUATION_PERIOD_EXPIRED"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "entitlements": {
+              "description": "System-level available entitlements for Cisco Catalyst Center platform licensing. This is NOT a device/product-family license usage breakdown (NOT switch/router/WLC/AP/ISE totals). For device/product-family purchased/used/available license totals, use api_getLicenseUsage.",
+              "properties": {
+                "description": {
+                  "description": "Name or description of the license entitlement",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "This denotes the authorization status of the available licenses.",
+                  "enum": [
+                    "AUTHORIZED",
+                    "UNAUTHORIZED",
+                    "USAGE_OUT_OF_COMPLIANCE",
+                    "IN_EVALUATION_PERIOD",
+                    "EVALUATION_PERIOD_EXPIRED"
+                  ],
+                  "type": "string"
+                },
+                "tag": {
+                  "description": "Entitlement tag associated with the available licenses",
+                  "type": "string"
+                },
+                "usageCount": {
+                  "description": "Available license count",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "exportControl": {
+              "description": "Export-Controlled setting of Smart Account",
+              "enum": [
+                "ALLOWED",
+                "NOT_ALLOWED"
+              ],
+              "type": "string"
+            },
+            "registrationStatus": {
+              "description": "System license registration status",
+              "properties": {
+                "expiryTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "lastAttemptFailReason": {
+                  "description": "The reason for last registration request failure",
+                  "type": "string"
+                },
+                "lastAttemptStatus": {
+                  "description": "The last registration request's status",
+                  "enum": [
+                    "SUCCESS",
+                    "FAILURE",
+                    "IN_PROGRESS",
+                    "PENDING"
+                  ],
+                  "type": "string"
+                },
+                "lastAttemptTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "nextAttemptTimestamp": {
+                  "description": "A date and time represented as milliseconds since the Unix epoch.",
+                  "type": "number"
+                },
+                "status": {
+                  "description": "REGISTERED if the system is registered with CSSM, otherwise UNREGISTERED. CRITICAL: Check this field first before accessing smartAccountId or virtualAccountId. If UNREGISTERED, inform the user that the system is not registered to any smart account or virtual account, and they need to register the system with CSSM first.",
+                  "enum": [
+                    "REGISTERED",
+                    "UNREGISTERED"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "smartAccountId": {
+              "description": "Smart Account id to which the system is registered. This field will be empty or null if registrationStatus.status is UNREGISTERED. To get the smart account name from this ID, use the api_smartAccountDetails function and match the ID.",
+              "type": "string"
+            },
+            "virtualAccountId": {
+              "description": "Virtual Account id to which the system is registered. This field will be empty or null if registrationStatus.status is UNREGISTERED. To get the virtual account name from this ID, first obtain the smartAccountId, then use the api_virtualAccountDetails function with the smartAccountId to retrieve virtual account details and match the ID.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "API version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

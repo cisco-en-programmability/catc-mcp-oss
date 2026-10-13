@@ -1,0 +1,279 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "platform": "DNAC",
+      "release_status": "Assurance_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "endTime": "query",
+        "exporterNetworkDeviceId": "query",
+        "id": "path",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "siteId": "query",
+        "sortBy": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/data/api/v1/networkApplications/{id}/clients",
+      "version": "3.2.1"
+    },
+    "description": "Retrieves the list of clients metrics for the given application. If startTime and endTime are not provided, the API defaults to the last 24 hours. `siteId` is mandatory. `siteId` must be a site UUID of a building. For the given time range and filters, the API will get the list of unique clients which matched the filter criteria. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-NetworkApplications-1.0.2-resolved.yaml. Routing precedence: if the user asks to show/list impacted clients, affected users, or who is affected for an application, use this tool after api_countNetworkApplicationClientsById; do not substitute Issues or site-health data. Use the exact applicationName returned by discovery and keep siteId, startTime, and endTime identical to the count call.",
+    "name": "api_readNetworkApplicationClientsById",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "default": "intent",
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "default": [
+            "name",
+            "macAddress",
+            "ipv4Address",
+            "type",
+            "appHealthScore",
+            "clientHealthScore",
+            "connectedNetworkDeviceName"
+          ],
+          "description": "Attributes to return as a JSON array. Default to [\"name\",\"macAddress\",\"ipv4Address\",\"type\",\"appHealthScore\",\"clientHealthScore\",\"connectedNetworkDeviceName\"] for impacted-client tables. Use ipv4Address, not ipAddress. Display only returned fields.",
+          "items": {
+            "enum": [
+              "name",
+              "macAddress",
+              "ipv4Address",
+              "type",
+              "appHealthScore",
+              "clientHealthScore",
+              "connectedNetworkDeviceName"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "exporterNetworkDeviceId": {
+          "description": "Unique ID of the netflow exporter device.\n\nExamples:\n\n`exporterNetworkDeviceId=5b234dbc-583e-491b-bf1a-318bba6c017f` (single exporterNetworkDeviceId requested)\n\n`exporterNetworkDeviceId=5b234dbc-583e-491b-bf1a-318bba6c017f&exporterNetworkDeviceId=8b234dbc-583e-491b-bf1a-318bba6c017f` (multiple exporterNetworkDeviceId requested)\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "id is the network application name.\n Use the same concrete network applicationName used for the preceding count call. Never pass broad labels such as Webex, Microsoft Teams, MSTeams, Teams, or M365 unless the user explicitly asked for all matching concrete components.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default Default to 10 for impacted-client list answers and disclose the limit in the final response.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The site UUID without the top level hierarchy.`siteId` is mandatory. `siteId` must be a site UUID of a building. (Ex.\"buildingUuid\") Examples:\n`siteId=buildingUuid` (single siteId requested)\n`siteId=buildingUuid1&siteId=buildingUuid2` (multiple siteId requested) If the user provides a 36-character site UUID or explicitly says siteId, use that value directly. Do not call site lookup to resolve an already provided siteId.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A field within the response to sort by. Supported sort fields are macAddress and exporterNetworkDeviceId. Do not pass appHealthScore, clientHealthScore, name, ipv4Address, or type as sortBy; request those as attributes and omit sortBy unless the user explicitly asks for sorting.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "siteId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Collection of client records",
+      "properties": {
+        "page": {
+          "properties": {
+            "count": {
+              "description": "Total number of records related to the resource after applying applicable filtering. Field is ignored for request and updated by API in the response",
+              "example": 100,
+              "type": "integer"
+            },
+            "limit": {
+              "default": 100,
+              "description": "Number of records to fetch in a page",
+              "example": 100,
+              "maximum": 500,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "offset": {
+              "default": 1,
+              "description": "Starting offset of data to fetch and returned",
+              "example": 5,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "sortBy": {
+              "example": [
+                {
+                  "name": "macAddress",
+                  "order": "asc"
+                }
+              ],
+              "items": {
+                "description": "This is a unified sortBy model for attributes and aggregate attributes request. If function is specified then API will sort the colllection on  aggregated attribute. If function is not specified API will sort the collection on attribute.\n",
+                "properties": {
+                  "name": {
+                    "description": "Attributes related to clients resource that can be used to sort the response.",
+                    "enum": [
+                      "macAddress",
+                      "exporterNetworkDeviceId"
+                    ],
+                    "type": "string"
+                  },
+                  "order": {
+                    "description": "Sort order. 'asc' for ascending and 'desc' for descending",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "title": "NetworkApplicationClientSortByObj",
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "title": "NetworkApplicationClientPaginationWithAggregate",
+          "type": "object"
+        },
+        "response": {
+          "items": {
+            "description": "Application experience information for the client",
+            "properties": {
+              "appHealthScore": {
+                "description": "The latest health score for the client application experience in the given duration.",
+                "maximum": 10,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "clientHealthScore": {
+                "description": "The latest health score of the client in the given duration.",
+                "maximum": 10,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "connectedNetworkDeviceId": {
+                "description": "Connected network device UUID of the client.",
+                "type": "string"
+              },
+              "connectedNetworkDeviceName": {
+                "description": "Connected network device name of the client.",
+                "type": "string"
+              },
+              "exporterNetworkDeviceId": {
+                "description": "Unique ID of the netflow exporter device.",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique ID of the client. It is same as the MAC address of the client.",
+                "example": "AA:BB:CC:DD:EE:FF",
+                "type": "string"
+              },
+              "ipv4Address": {
+                "example": "250.162.252.170",
+                "title": "IPv4Address",
+                "type": "string"
+              },
+              "ipv6Addresses": {
+                "description": "IPv6 addresses of the client.",
+                "items": {
+                  "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                  "title": "IPv6Address",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "macAddress": {
+                "description": "Mac Address of the Client",
+                "example": "AA:BB:CC:DD:EE:FF",
+                "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$|^[0-9A-Fa-f]{4}\\.[0-9A-Fa-f]{4}\\.[0-9A-Fa-f]{4}$",
+                "readOnly": true,
+                "title": "MacAddress",
+                "type": "string"
+              },
+              "name": {
+                "description": "Host name of the client device.",
+                "type": "string"
+              },
+              "osType": {
+                "description": "Client operating system type.",
+                "example": "iOS",
+                "type": "string"
+              },
+              "siteId": {
+                "description": "UUID of the building.",
+                "type": "string"
+              },
+              "siteName": {
+                "description": "The name of the building.",
+                "type": "string"
+              },
+              "type": {
+                "description": "The client connectivity type, whether it is connected to network through wired or wireless medium.",
+                "enum": [
+                  "Wired",
+                  "Wireless"
+                ],
+                "example": "Wireless",
+                "type": "string"
+              },
+              "usage": {
+                "description": "Client application data utilization in bytes for the given duration.",
+                "format": "int64",
+                "type": "integer"
+              },
+              "vlanId": {
+                "description": "VLAN identifier assigned to wired or wireless client",
+                "example": "596",
+                "title": "vlanId",
+                "type": "string"
+              }
+            },
+            "title": "NetworkApplicationClient",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "NetworkApplicationClientsResponseModel",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

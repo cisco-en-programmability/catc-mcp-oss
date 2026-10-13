@@ -1,0 +1,67 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "networkDeviceId": "query",
+        "scanMode": "query",
+        "scanStatus": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/advisories/{id}/networkDevices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the count of network devices affected by a specific security advisory, PSIRT, or vulnerability. Use this API to answer questions like 'Count of devices that are affected by the security advisory cisco-sa-20160525-ipv6' or 'How many devices are impacted by advisory CVE-2024-1234?'. The response provides the total number of devices associated with the given advisory ID, enabling quick assessment of advisory impact across the network.",
+    "name": "api_getCountOfSecurityAdvisoryNetworkDevicesForTheSecur_ffbe1ab0",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "ID of the security advisory (e.g., CVE or Cisco advisory ID such as cisco-sa-20160525-ipv6). Use this to filter results for a specific advisory.",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "scanMode": {
+          "description": "Mode or the criteria using which the network device was scanned. Available values : ESSENTIALS, ADVANTAGE, CX_CLOUD, NOT_AVAILABLE",
+          "type": "string"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED, FALL_BACK.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

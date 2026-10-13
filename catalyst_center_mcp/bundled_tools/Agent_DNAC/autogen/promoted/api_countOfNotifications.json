@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "domain": "query",
+        "endTime": "query",
+        "eventIds": "query",
+        "severity": "query",
+        "source": "query",
+        "startTime": "query",
+        "subDomain": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/event-series/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the Count of Published Notifications based on the various inputs from the user. It can answer questions like How many notifications are there for event X? or Give me the count of all notifications and many more combinations",
+    "name": "api_countOfNotifications",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "Category",
+          "type": "string"
+        },
+        "domain": {
+          "description": "Domain",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End Time in milliseconds",
+          "type": "number"
+        },
+        "eventIds": {
+          "description": "The registered EventId should be provided",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start Time in milliseconds",
+          "type": "number"
+        },
+        "subDomain": {
+          "description": "Sub Domain",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

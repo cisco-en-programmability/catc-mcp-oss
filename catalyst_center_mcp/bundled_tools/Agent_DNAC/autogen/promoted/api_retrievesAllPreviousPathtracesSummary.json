@@ -1,0 +1,181 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "destIP": "query",
+        "destPort": "query",
+        "gtCreateTime": "query",
+        "lastUpdateTime": "query",
+        "limit": "query",
+        "ltCreateTime": "query",
+        "offset": "query",
+        "order": "query",
+        "periodicRefresh": "query",
+        "protocol": "query",
+        "sortBy": "query",
+        "sourceIP": "query",
+        "sourcePort": "query",
+        "status": "query",
+        "taskId": "query"
+      },
+      "uri": "/dna/intent/api/v1/flow-analysis",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns a summary of all flow analyses stored. Results can be filtered by specified parameters.",
+    "name": "api_retrievesAllPreviousPathtracesSummary",
+    "parameters": {
+      "properties": {
+        "destIP": {
+          "description": "Destination IP address",
+          "type": "string"
+        },
+        "destPort": {
+          "description": "Destination port",
+          "type": "number"
+        },
+        "gtCreateTime": {
+          "description": "Analyses requested after this time",
+          "type": "number"
+        },
+        "lastUpdateTime": {
+          "description": "Last update time",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "ltCreateTime": {
+          "description": "Analyses requested before this time",
+          "type": "number"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Order by this field",
+          "type": "string"
+        },
+        "periodicRefresh": {
+          "description": "Is analysis periodically refreshed?",
+          "type": "boolean"
+        },
+        "protocol": {
+          "description": "Protocol",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Sort by this field",
+          "type": "string"
+        },
+        "sourceIP": {
+          "description": "Source IP address",
+          "type": "string"
+        },
+        "sourcePort": {
+          "description": "Source port",
+          "type": "number"
+        },
+        "status": {
+          "description": "Status",
+          "type": "string"
+        },
+        "taskId": {
+          "description": "Task ID",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "controlPath": {
+                "description": "Control path tracing",
+                "type": "boolean"
+              },
+              "createTime": {
+                "description": "Timestamp when the Path Trace request was first received",
+                "type": "integer"
+              },
+              "destIP": {
+                "description": "IP Address of the destination device",
+                "type": "string"
+              },
+              "destPort": {
+                "description": "Port on the destination device",
+                "type": "string"
+              },
+              "failureReason": {
+                "description": "Reason for failure",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique ID for the Path Trace request",
+                "type": "string"
+              },
+              "inclusions": {
+                "description": "Subset of {INTERFACE-STATS, QOS-STATS, DEVICE-STATS, PERFORMANCE-STATS, ACL-TRACE}",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "lastUpdateTime": {
+                "description": "Last timestamp when the path trace response was updated",
+                "type": "integer"
+              },
+              "periodicRefresh": {
+                "description": "Re-run the Path Trace every 30 seconds",
+                "type": "boolean"
+              },
+              "previousFlowAnalysisId": {
+                "description": "When periodicRefresh is true, this field holds the original Path Trace request ID",
+                "type": "string"
+              },
+              "protocol": {
+                "description": "One of TCP/UDP or either (null)",
+                "type": "string"
+              },
+              "sourceIP": {
+                "description": "IP Address of the source device",
+                "type": "string"
+              },
+              "sourcePort": {
+                "description": "Port on the source device",
+                "type": "string"
+              },
+              "status": {
+                "description": "One of {SUCCESS, INPROGRESS, FAILED, SCHEDULED, PENDING, COMPLETED}",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

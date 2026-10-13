@@ -1,0 +1,90 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "hostName": "query",
+        "id": "query",
+        "imageName": "query",
+        "managementAddress": "query",
+        "networkDeviceId": "query",
+        "parentId": "query",
+        "startTime": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceImageUpdates/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the count of network device image updates based on the given filter criteria",
+    "name": "api_countOfNetworkDeviceImageUpdates",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": "Image update started before the given time (as milliseconds since UNIX epoch).",
+          "type": "number"
+        },
+        "hostName": {
+          "description": "Host name of the network device for the image update. Supports case-insensitive partial search.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Update id which is unique for each network device under the parentId",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "Software image name for the update",
+          "type": "string"
+        },
+        "managementAddress": {
+          "description": "Management address of the network device",
+          "type": "string"
+        },
+        "networkDeviceId": {
+          "description": "Network device id",
+          "type": "string"
+        },
+        "parentId": {
+          "description": "Updates that have this parent id",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Image update started after the given time (as milliseconds since UNIX epoch).",
+          "type": "number"
+        },
+        "status": {
+          "description": "Status of the image update. Available values: FAILURE, SUCCESS, IN_PROGRESS, PENDING",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "properties": {
+            "count": {
+              "description": "Reports a count, for example, a total count of records in a given resource.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,226 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "reportId": "path"
+      },
+      "uri": "/dna/intent/api/v1/data/reports/{reportId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get scheduled report configuration by reportId",
+    "name": "api_getAScheduledReport",
+    "parameters": {
+      "properties": {
+        "reportId": {
+          "description": "reportId of report",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reportId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "dataCategory": {
+          "description": "data category of the report",
+          "type": "string"
+        },
+        "deliveries": {
+          "description": "Array of available delivery channels",
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "executionCount": {
+          "description": "Total number of report executions",
+          "type": "integer"
+        },
+        "executions": {
+          "description": "Array with last report execution details only",
+          "items": {
+            "properties": {
+              "endTime": {
+                "description": "Report execution pipeline end time",
+                "type": "integer"
+              },
+              "errors": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "executionId": {
+                "description": "Report execution Id.",
+                "type": "string"
+              },
+              "processStatus": {
+                "description": "Report execution status",
+                "type": "string"
+              },
+              "requestStatus": {
+                "description": "Report execution acceptance status from scheduler",
+                "type": "string"
+              },
+              "startTime": {
+                "description": "Report execution pipeline start time",
+                "type": "integer"
+              },
+              "warnings": {
+                "description": "",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "report name",
+          "type": "string"
+        },
+        "reportId": {
+          "description": "report Id",
+          "type": "string"
+        },
+        "reportWasExecuted": {
+          "description": "true if atleast one execution has started",
+          "type": "boolean"
+        },
+        "schedule": {
+          "description": "",
+          "type": "object"
+        },
+        "tags": {
+          "description": "array of tags for report",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "view": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "view description",
+              "type": "string"
+            },
+            "fieldGroups": {
+              "description": "Fields selected for specific type of reports(CSV, TDE, JSON)",
+              "items": {
+                "properties": {
+                  "fieldGroupDisplayName": {
+                    "description": "Field group label/displayname for user",
+                    "type": "string"
+                  },
+                  "fieldGroupName": {
+                    "description": "Field group name",
+                    "type": "string"
+                  },
+                  "fields": {
+                    "description": "fields selected in the fieldgroup",
+                    "items": {
+                      "properties": {
+                        "displayName": {
+                          "description": "field label/displayname",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "field name",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "filters": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "displayName": {
+                    "description": "filter label/displayname",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "filter name",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "filter type",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "value of filter. data type is based on the filter type.",
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "format": {
+              "description": "Details of selected format for the report",
+              "properties": {
+                "default": {
+                  "description": "true, if the format type is considered default",
+                  "type": "boolean"
+                },
+                "formatType": {
+                  "description": "format type of report",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "format name of report",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "description": "view name",
+              "type": "string"
+            },
+            "viewId": {
+              "description": "view Id",
+              "type": "string"
+            },
+            "viewInfo": {
+              "description": "view filters info",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "viewGroupId": {
+          "description": "viewGroupId of the viewgroup for the report",
+          "type": "string"
+        },
+        "viewGroupVersion": {
+          "description": "version of viewgroup for the report",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

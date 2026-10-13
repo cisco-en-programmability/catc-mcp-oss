@@ -1,0 +1,62 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/snmp-property",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns SNMP properties",
+    "name": "api_getSNMPProperties",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Id of the SNMP Property",
+                "type": "string"
+              },
+              "instanceTenantId": {
+                "description": "[Deprecated] InstanceTenantId of the SNMP Property",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "Instance Uuid of the SNMP Property. It is the same as the id. It will be deprecated in future version.",
+                "type": "string"
+              },
+              "intValue": {
+                "description": "Integer Value of the SNMP 'Retry' or 'Timeout' property",
+                "type": "integer"
+              },
+              "systemPropertyName": {
+                "description": "Name of the SNMP Property as 'Retry' or 'Timeout'",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

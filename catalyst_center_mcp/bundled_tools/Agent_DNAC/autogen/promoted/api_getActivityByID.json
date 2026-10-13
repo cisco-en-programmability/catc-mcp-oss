@@ -1,0 +1,93 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/intent/api/v1/activities/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the activity with the given ID",
+    "name": "api_getActivityByID",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The id of the activity to retrieve",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "description": {
+              "description": "The description provided when creating the activity",
+              "type": "string"
+            },
+            "endTime": {
+              "description": "The time at which the activity ended",
+              "type": "number"
+            },
+            "id": {
+              "description": "The id of the activity",
+              "type": "string"
+            },
+            "originatingWorkItemActivityId": {
+              "description": "The id of the activity of type WORK_ITEM whose deployment created this TASK activity. a preview activity is of type WORK_ITEM. if the preview is deployed then a new activity of type TASK is created for deploying the preview and the originatingWorkItemActivityId is set to the preview activity id.",
+              "type": "string"
+            },
+            "recurring": {
+              "description": "Denotes whether an activity is recurring or not",
+              "type": "boolean"
+            },
+            "startTime": {
+              "description": "The time at which the activity started",
+              "type": "number"
+            },
+            "status": {
+              "description": "The status of the activity",
+              "enum": [
+                "PENDING",
+                "RUNNING",
+                "SUCCESS",
+                "FAILED",
+                "READY",
+                "DISCARD_FAILED",
+                "DISCARD_SUCCESS"
+              ],
+              "type": "string"
+            },
+            "type": {
+              "description": "Type of activity:\n  * 'WORK_ITEM' - activity that requires user action when the status is READY or FAILED\n  * 'TASK' - activity that is not of type WORK_ITEM\n",
+              "enum": [
+                "WORK_ITEM",
+                "TASK"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

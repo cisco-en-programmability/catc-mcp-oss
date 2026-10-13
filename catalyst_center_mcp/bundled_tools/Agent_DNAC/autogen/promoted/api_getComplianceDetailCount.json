@@ -1,0 +1,51 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "complianceStatus": "query",
+        "complianceType": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliance/detail/count",
+      "version": "2.3.7.9"
+    },
+    "description": "\"Count NON_COMPLIANT devices for RUNNING_CONFIG\" \"How many non-compliant for RUNNING_CONFIG?\" \"How many non-compliant for IMAGE?\" \"Count NON_COMPLIANT for NETWORK_PROFILE\" \"Count non-compliant devices for PSIRT\" \"How many devices are failing critical security advisory compliance?\" \"Count EOX non-compliant\" \u2014 USE THIS API for all compliance-TYPE-specific count questions.\n\nThis API returns the TRUE TOTAL count of devices for a specific compliance TYPE and status. It is the ONLY correct API for compliance-type-specific count questions because it has no pagination limit. `api_getComplianceDetail` MUST NOT be used for counting \u2014 it caps at 500 records and produces WRONG results at scale.\n\n**NATURAL LANGUAGE \u2192 ENUM MAPPING (critical for correct routing):**\n\"critical security advisory\" / \"security advisory compliance\" / \"PSIRT\" \u2192 complianceType=PSIRT (NOTE: this is about PSIRT *compliance type*, NOT the separate `api_getSecurityAdvisories*` or `api_getCountOfSecurityAdvisories*` tools which deal with advisory details, CVEs, and remediation versions)\n\"running config\" / \"startup vs running\" / \"RUNNING_CONFIG\" \u2192 complianceType=RUNNING_CONFIG\n\"image\" / \"software image\" / \"IMAGE\" \u2192 complianceType=IMAGE\n\"end of life\" / \"end of support\" / \"EOX\" \u2192 complianceType=EOX\n\"network profile\" / \"NETWORK_PROFILE\" \u2192 complianceType=NETWORK_PROFILE\n\"network settings\" / \"NETWORK_SETTINGS\" \u2192 complianceType=NETWORK_SETTINGS\n\"fabric\" / \"FABRIC\" \u2192 complianceType=FABRIC\n\"application visibility\" / \"APPLICATION_VISIBILITY\" \u2192 complianceType=APPLICATION_VISIBILITY\n\n**MANDATORY \u2014 USE THIS API FOR:**\n- \"Count NON_COMPLIANT devices for RUNNING_CONFIG\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=RUNNING_CONFIG\n- \"How many devices are non-compliant for RUNNING_CONFIG?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=RUNNING_CONFIG\n- \"How many devices are non-compliant for running config?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=RUNNING_CONFIG\n- \"How many non-compliant devices for IMAGE?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=IMAGE\n- \"How many devices are non-compliant due to PSIRT?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=PSIRT\n- \"How many devices are failing critical security advisory compliance?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=PSIRT\n- \"How many non-compliant for NETWORK_SETTINGS?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=NETWORK_SETTINGS\n- \"How many non-compliant for NETWORK_PROFILE?\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=NETWORK_PROFILE\n- \"Count NON_COMPLIANT for EOX\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=EOX\n- \"Give me the RUNNING_CONFIG non-compliant count\" \u2192 complianceStatus=NON_COMPLIANT, complianceType=RUNNING_CONFIG\n- Any question asking for the count, total, or number of devices by a specific compliance TYPE (RUNNING_CONFIG, IMAGE, PSIRT, EOX, NETWORK_PROFILE, NETWORK_SETTINGS, FABRIC, APPLICATION_VISIBILITY, WORKFLOW)\n- Any question with underscore-formatted enum values like NON_COMPLIANT, RUNNING_CONFIG, NETWORK_PROFILE, NETWORK_SETTINGS, etc. that asks for a count\n\n**STOP \u2014 Do NOT use this API if the question does NOT mention a specific compliance TYPE.** Questions like \"How many devices are compliant?\", \"How many devices are non-compliant?\", \"Count compliant devices\", or \"Total non-compliant devices\" that do NOT mention RUNNING_CONFIG, IMAGE, PSIRT, EOX, NETWORK_PROFILE, NETWORK_SETTINGS, FABRIC, or APPLICATION_VISIBILITY MUST use `api_getComplianceStatusCount` instead. This API requires a complianceType \u2014 without one, use `api_getComplianceStatusCount`.\n\nDo not use this API when the user asks to list, show, or identify which devices match a compliance status or compliance type. For list/show/which-device questions such as \"List devices non-compliant for IMAGE\" or \"Show devices failing IMAGE compliance\", use `api_getComplianceDetail` with `complianceStatus`, `complianceType`, and `limit=500` so the response is grounded in device-level detail records.\n\n**NATURAL LANGUAGE (config drift) -> complianceType=RUNNING_CONFIG:** \"startup vs running config mismatch\", \"startup versus running config\", \"running config mismatch\", \"running config drift\", \"config drift\", and \"config mismatch\" all map to complianceType=RUNNING_CONFIG for count questions. Route these count questions HERE (with complianceStatus=NON_COMPLIANT) - NOT to any device-configuration, Layer2/Layer3 feature-configuration, or intended-configuration API.\n\n**FILTER LIMITATION - SITE/TAG SCOPING NOT SUPPORTED:** This API returns a GLOBAL total for a complianceType/complianceStatus. It has NO site, siteHierarchy, building, floor, area, or tag parameter and cannot restrict the count to a location or tag. If the user asks for a count of a compliance TYPE scoped to a specific site/building/floor/area/tag (e.g., \"how many devices have running config mismatch under BGL 16\"), do NOT return the global count as if it were the site count, and do NOT build a get_device_details + api_getComplianceDetail workaround to compute a type count for the site. Instead respond that the count cannot be computed for that scope due to API limitations (for example: \"I can't calculate a per-site count for RUNNING_CONFIG compliance because the compliance count API doesn't support site-level filtering.\"). You may offer the global count or offer to list the non-compliant devices under that site instead.",
+    "name": "api_getComplianceDetailCount",
+    "parameters": {
+      "properties": {
+        "complianceStatus": {
+          "description": "Specify compliance status(es) as a comma-separated string. Possible values are COMPLIANT, NON_COMPLIANT, IN_PROGRESS, NOT_AVAILABLE, NOT_APPLICABLE, and ERROR. When the user does not provide a compliance status, use exactly this default value: COMPLIANT,NON_COMPLIANT,IN_PROGRESS,NOT_AVAILABLE,ERROR.",
+          "type": "string"
+        },
+        "complianceType": {
+          "description": "Specify \"Compliance type(s)\" separated by commas. The Compliance type can be 'APPLICATION_VISIBILITY', 'EOX', 'FABRIC', 'IMAGE', 'NETWORK_PROFILE', 'NETWORK_SETTINGS', 'PSIRT', 'RUNNING_CONFIG', 'WORKFLOW'. ",
+          "type": "string"
+        }
+      },
+      "required": [
+        "complianceStatus"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Count of all devices or devices that match the query parameters.",
+          "type": "number"
+        },
+        "version": {
+          "description": "Version of API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

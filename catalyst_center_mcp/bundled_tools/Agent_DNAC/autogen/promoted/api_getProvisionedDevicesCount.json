@@ -1,0 +1,50 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/sda/provisionDevices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the count of provisioned devices based on query parameters. For PnP devices, use api_getPnPDeviceCount(state=Provisioned) instead.",
+    "name": "api_getProvisionedDevicesCount",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "description": "ID of the site hierarchy.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Provision Devices count response.",
+      "properties": {
+        "response": {
+          "description": "Count response body",
+          "properties": {
+            "count": {
+              "description": "Number of provisioned devices.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version number.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

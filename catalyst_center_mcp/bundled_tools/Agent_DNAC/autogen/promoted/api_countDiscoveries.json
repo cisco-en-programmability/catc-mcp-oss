@@ -1,0 +1,66 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "query",
+        "name": "query"
+      },
+      "uri": "/dna/intent/api/v1/discoverys/count",
+      "version": "3.2.1"
+    },
+    "description": "API to fetch the count of discoveries using basic filters.\n\n**How the filtering behavior works**\n\nEach filter item provided in the query parameters will be applied simultaneously such that the result is the `AND` of all the filter items.\n",
+    "name": "api_countDiscoveries",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Optional list of the port channel ids to filter by.",
+          "example": [
+            "beee4fe6-cbc3-4b39-946c-4b719cd110e7",
+            "aaaa4fe6-cbc3-4b39-946c-4b719cd110b8"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 25,
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of the discovery job. This will be a unique value.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "example": 15,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "Count Response",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

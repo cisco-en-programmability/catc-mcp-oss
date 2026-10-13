@@ -1,0 +1,340 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "2.3.7.10"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "entity_type": "header",
+        "entity_value": "header"
+      },
+      "uri": "/dna/intent/api/v2/device-enrichment-details",
+      "version": "2.3.7.10"
+    },
+    "description": "Retrieve /dna/intent/api/v2/device-enrichment-details for network infrastructure device enrichment identified by device ID, device MAC address, or device management IP address. Select this tool when the primary subject is a network device and the user needs inventory fields, reachability, platform details, AP/WLC device attributes, or neighborTopology. Do not use this for client endpoint enrichment, user identity enrichment, or issue remediation enrichment. Always send both required parameters: set entity_type to device_id, mac_address, or ip_address, and put the actual identifier only in entity_value.",
+    "name": "api_getDeviceEnrichmentDetailsV2",
+    "parameters": {
+      "properties": {
+        "entity_type": {
+          "description": "Identifier type for device enrichment. Use device_id for a device UUID or ID, mac_address for a device MAC address, and ip_address for a device management IP address.",
+          "type": "string"
+        },
+        "entity_value": {
+          "description": "Required identifier value matching entity_type. Put the device ID, device MAC address, or management IP address in this parameter; do not use id, macAddress, managementIpAddress, ip_address, or any alternate key for the identifier value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_type",
+        "entity_value"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "deviceDetails": {
+            "description": "",
+            "properties": {
+              "apManagerInterfaceIp": {
+                "description": " IP address of WLC on AP manager interface",
+                "type": "string"
+              },
+              "associatedWlcIp": {
+                "description": "Associated WLC IP address of the AP device",
+                "type": "string"
+              },
+              "bootDateTime": {
+                "description": "Device's last boot UTC timestamp",
+                "type": "string"
+              },
+              "collectionInterval": {
+                "description": "Re sync Interval of the device",
+                "type": "string"
+              },
+              "collectionStatus": {
+                "description": "Device's telemetry data collection status for DNAC",
+                "type": "string"
+              },
+              "errorCode": {
+                "description": " Inventory status error code",
+                "type": "string"
+              },
+              "errorDescription": {
+                "description": "Inventory status description",
+                "type": "string"
+              },
+              "family": {
+                "description": "Device Family",
+                "type": "string"
+              },
+              "hostname": {
+                "description": "Device Hostname",
+                "type": "string"
+              },
+              "id": {
+                "description": "Device's UUID",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "Instance Uuid of the device",
+                "type": "string"
+              },
+              "interfaceCount": {
+                "description": "Number of interfaces on the device",
+                "type": "string"
+              },
+              "inventoryStatusDetail": {
+                "description": "Status detail of inventory sync",
+                "type": "string"
+              },
+              "lastUpdateTime": {
+                "description": "Time in epoch when the network device info last got updated",
+                "type": "integer"
+              },
+              "lastUpdated": {
+                "description": "Time when the network device info last got updated",
+                "type": "string"
+              },
+              "lineCardCount": {
+                "description": "Number of linecards on the device",
+                "type": "string"
+              },
+              "lineCardId": {
+                "description": " IDs of linecards of the device",
+                "type": "string"
+              },
+              "location": {
+                "description": "Device location - Site hierarchy",
+                "properties": {},
+                "type": "object"
+              },
+              "locationName": {
+                "description": "[Deprecated] Name of the associated location",
+                "properties": {},
+                "type": "object"
+              },
+              "macAddress": {
+                "description": "Device MAC address",
+                "type": "string"
+              },
+              "managementIpAddress": {
+                "description": "Device Management Ip Address",
+                "type": "string"
+              },
+              "memorySize": {
+                "description": "Processor memory size",
+                "type": "string"
+              },
+              "neighborTopology": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "links": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "description": "Id of the node",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "label": {
+                            "description": "The details of the edge",
+                            "items": {
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "linkStatus": {
+                            "description": "The status of the link (up/down)",
+                            "type": "string"
+                          },
+                          "portUtilization": {
+                            "description": "Number of clients",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "source": {
+                            "description": "Edge line starting node",
+                            "type": "string"
+                          },
+                          "target": {
+                            "description": "End node of the edge line",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "nodes": {
+                      "description": "",
+                      "items": {
+                        "properties": {
+                          "clients": {
+                            "description": "Number of clients",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "connectedDevice": {
+                            "description": "The connected device to show the connected switch to wlc",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "count": {
+                            "description": "The number of group nodes (for ap sepecifically)",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "description": {
+                            "description": "Description of the Node",
+                            "type": "string"
+                          },
+                          "deviceType": {
+                            "description": "Device type of the node, like switch, AP, WCL,GateWay",
+                            "type": "string"
+                          },
+                          "fabricGroup": {
+                            "description": "Fabric device group name",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "family": {
+                            "description": "Device Family of the Node",
+                            "type": "string"
+                          },
+                          "healthScore": {
+                            "description": "The total health score of the node",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "Id of the Node",
+                            "type": "string"
+                          },
+                          "ip": {
+                            "description": "IP Address of the Node",
+                            "type": "string"
+                          },
+                          "level": {
+                            "description": "The level index to be used by UI widget (starts from 0)",
+                            "type": "number"
+                          },
+                          "name": {
+                            "description": "Hostname of the Node",
+                            "type": "string"
+                          },
+                          "nodeType": {
+                            "description": "Type of the Node",
+                            "type": "string"
+                          },
+                          "platformId": {
+                            "description": "Type of platform",
+                            "type": "string"
+                          },
+                          "radioFrequency": {
+                            "description": "Frequency of wireless radio channel",
+                            "properties": {},
+                            "type": "object"
+                          },
+                          "role": {
+                            "description": "Role of the Node",
+                            "type": "string"
+                          },
+                          "softwareVersion": {
+                            "description": "Software Version of the Node",
+                            "type": "string"
+                          },
+                          "userId": {
+                            "description": "User Id of the Node",
+                            "properties": {},
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "platformId": {
+                "description": "Device's platform ID",
+                "type": "string"
+              },
+              "reachabilityFailureReason": {
+                "description": "Failure reason for unreachable devices",
+                "type": "string"
+              },
+              "reachabilityStatus": {
+                "description": "Reachability Status of the Device(Reachable/Unreachable)",
+                "type": "string"
+              },
+              "role": {
+                "description": "Device role",
+                "type": "string"
+              },
+              "roleSource": {
+                "description": "Role source as manual / auto",
+                "type": "string"
+              },
+              "serialNumber": {
+                "description": "Device Serial Number",
+                "type": "string"
+              },
+              "series": {
+                "description": "Device Series",
+                "type": "string"
+              },
+              "snmpContact": {
+                "description": "SNMP contact on device",
+                "type": "string"
+              },
+              "snmpLocation": {
+                "description": "SNMP location on device",
+                "type": "string"
+              },
+              "softwareVersion": {
+                "description": "Device Software Version",
+                "type": "string"
+              },
+              "tagCount": {
+                "description": "Number of tags associated with the device",
+                "type": "string"
+              },
+              "tunnelUdpPort": {
+                "description": "Mobility protocol port is stored as tunneludpport for WLC",
+                "properties": {},
+                "type": "object"
+              },
+              "type": {
+                "description": "Device Type",
+                "type": "string"
+              },
+              "upTime": {
+                "description": "Device's uptime",
+                "type": "string"
+              },
+              "waasDeviceMode": {
+                "description": "WAAS device mode",
+                "properties": {},
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,334 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.1.6",
+      "release_status": "Automation-India_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "policyId": "path",
+        "ruleId": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliancePolicys/{policyId}/rules/{ruleId}/conditions/{id}",
+      "version": "3.1.6"
+    },
+    "description": "Retrieves a specific condition within the specified compliance policy and rule. \n\nUse this to review a single condition that is applied to ensure device compliance.\n",
+    "name": "api_getComplianceConditionById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The `id` of the condition.",
+          "example": "1d78e50b-acd7-423b-bc5e-5f4c106eaa8f",
+          "format": "uuid",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "The `id` of the compliance policy.",
+          "example": "c9eef5e2-1eab-426c-be77-97ee81dcba05",
+          "format": "uuid",
+          "type": "string"
+        },
+        "ruleId": {
+          "description": "The `id` of the rule within the compliance policy.",
+          "example": "e8eef5e2-1eab-426c-be77-97ee81dcba06",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policyId",
+        "ruleId",
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "properties": {
+        "response": {
+          "description": "The structure of a condition specifying the operational logic.",
+          "properties": {
+            "action": {
+              "description": "Specifies actions based on condition outcomes, guiding subsequent operational steps.",
+              "properties": {
+                "doesNotMatchAction": {
+                  "description": "Action to take when the condition does not match. \n\nThe choice of action influences whether a violation is logged and whether further conditions are evaluated.\n\nOptions include:\n  - `DO_NOT_RAISE_VIOLATION_AND_CONTINUE`: No violation is raised, and processing continues.\n  - `DO_NOT_RAISE_VIOLATION_AND_STOP`: No violation is raised, and processing stops.\n  - `RAISE_VIOLATION_AND_CONTINUE`: A violation is raised, but processing continues.\n  - `RAISE_VIOLATION_AND_STOP`: A violation is raised, and processing stops.\n\nAdditionally, depending on `matchAction`, value must satisfy following criteria:\n  - `doesNotMatchAction` cannot be same as `matchAction`.\n  - Both `doesNotMatchAction` and `matchAction` cannot raise violation in a single condition.\n",
+                  "enum": [
+                    "DO_NOT_RAISE_VIOLATION_AND_CONTINUE",
+                    "DO_NOT_RAISE_VIOLATION_AND_STOP",
+                    "RAISE_VIOLATION_AND_CONTINUE",
+                    "RAISE_VIOLATION_AND_STOP"
+                  ],
+                  "example": "RAISE_VIOLATION_AND_STOP",
+                  "type": "string"
+                },
+                "doesNotMatchRemediationCommands": {
+                  "description": "The commands to remediate the violation.\n\nThis field is applicable only when `doesNotMatchAction` is `RAISE_VIOLATION_AND_CONTINUE` or `RAISE_VIOLATION_AND_STOP`.\n\nThe command content, including all variable references, must follow the syntax of the selected `doesNotMatchRemediationCommandsLanguage`.\n\nNamed variables must use the syntax of the selected language. For example, use `{{ _myVar }}` for Jinja or `$_myVar` for Velocity instead of `<_myVar>`.\n\nImplicit group variables must also use the selected language syntax. For example, use `{{ _1_1 }}` for Jinja or `$_1_1` for Velocity instead of `<1.1>`.\n",
+                  "example": "snmp-server community {{ _snmp_community_name }} RO",
+                  "type": "string"
+                },
+                "doesNotMatchRemediationCommandsLanguage": {
+                  "allOf": [
+                    {
+                      "description": "The template language used to render fix commands.",
+                      "enum": [
+                        "JINJA",
+                        "VELOCITY"
+                      ],
+                      "example": "JINJA",
+                      "title": "FixCliLanguage",
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The templating language used to define the remediation commands.\n\nThis field is applicable only when the `doesNotMatchAction` is `RAISE_VIOLATION_AND_CONTINUE` or `RAISE_VIOLATION_AND_STOP`.\n",
+                  "example": "JINJA"
+                },
+                "doesNotMatchViolationMessage": {
+                  "description": "Specify the custom violation message to be used to report violations when the condition does not match and raises violation. \n\nThis field is applicable and required when `doesNotMatchViolationMessageType` is `CUSTOM_MESSAGE`.\n\nCustom variables and automatically generated regular expression group variables can both be used in this field, similar to how they are used in the `value` field.\n",
+                  "example": "SNMP community contains unsecure value '<_unsecure_snmp>'",
+                  "maxLength": 100,
+                  "pattern": ".*\\S.*",
+                  "type": "string"
+                },
+                "doesNotMatchViolationMessageType": {
+                  "description": "The type of message to display when the condition does not match and results in a violation. This provides context about the violation.\n\nThis field is applicable and required when `doesNotMatchAction` is either `RAISE_VIOLATION_AND_CONTINUE` or ` RAISE_VIOLATION_AND_STOP`.\n\nOptions include:\n  - `DEFAULT_MESSAGE`: Use the automatic violation message generated by the system based on condition scope, operator, and value. \n  - `CUSTOM_MESSAGE`: Use the violation message specified by the user in `doesNotMatchViolationMessage` field. \n",
+                  "enum": [
+                    "DEFAULT_MESSAGE",
+                    "CUSTOM_MESSAGE"
+                  ],
+                  "example": "DEFAULT_MESSAGE",
+                  "type": "string"
+                },
+                "doesNotMatchViolationSeverity": {
+                  "allOf": [
+                    {
+                      "description": "The severity level of the violation.",
+                      "enum": [
+                        "CRITICAL",
+                        "MAJOR",
+                        "MINOR",
+                        "WARNING",
+                        "INFO"
+                      ],
+                      "example": "MAJOR",
+                      "title": "ViolationSeverity",
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The severity level of the violation when the condition does not match.\n\nThis field is applicable and required when `doesNotMatchAction` is either `RAISE_VIOLATION_AND_CONTINUE` or ` RAISE_VIOLATION_AND_STOP`.\n",
+                  "example": "MINOR"
+                },
+                "matchAction": {
+                  "description": "Action to take when the condition matches. \n\nThe choice of action influences whether a violation is logged and whether further conditions are evaluated.\n\nOptions include:\n  - `DO_NOT_RAISE_VIOLATION_AND_CONTINUE`: No violation is raised, and processing continues.\n  - `DO_NOT_RAISE_VIOLATION_AND_STOP`: No violation is raised, and processing stops.\n  - `RAISE_VIOLATION_AND_CONTINUE`: A violation is raised, but processing continues.\n  - `RAISE_VIOLATION_AND_STOP`: A violation is raised, and processing stops.\n",
+                  "enum": [
+                    "DO_NOT_RAISE_VIOLATION_AND_CONTINUE",
+                    "DO_NOT_RAISE_VIOLATION_AND_STOP",
+                    "RAISE_VIOLATION_AND_CONTINUE",
+                    "RAISE_VIOLATION_AND_STOP"
+                  ],
+                  "example": "DO_NOT_RAISE_VIOLATION_AND_CONTINUE",
+                  "type": "string"
+                },
+                "matchRemediationCommands": {
+                  "description": "The commands to remediate the violation.\n\nThis field is applicable only when `matchAction` is `RAISE_VIOLATION_AND_CONTINUE` or `RAISE_VIOLATION_AND_STOP`.\n\nThe command content, including all variable references, must follow the syntax of the selected `matchRemediationCommandsLanguage`.\n\nNamed variables must use the syntax of the selected language. For example, use `{{ _myVar }}` for Jinja or `$_myVar` for Velocity instead of `<_myVar>`.\n\nImplicit group variables must also use the selected language syntax. For example, use `{{ _1_1 }}` for Jinja or `$_1_1` for Velocity instead of `<1.1>`.\n",
+                  "example": "interface $_1_1\nshutdown",
+                  "type": "string"
+                },
+                "matchRemediationCommandsLanguage": {
+                  "allOf": [
+                    {
+                      "description": "The template language used to render fix commands.",
+                      "enum": [
+                        "JINJA",
+                        "VELOCITY"
+                      ],
+                      "example": "JINJA",
+                      "title": "FixCliLanguage",
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The templating language used to define the remediation commands.\n\nThis field is applicable only when the `matchAction` is `RAISE_VIOLATION_AND_CONTINUE` or `RAISE_VIOLATION_AND_STOP`.\n",
+                  "example": "VELOCITY"
+                },
+                "matchViolationMessage": {
+                  "description": "Specify the custom violation message to be used to report violations when the condition matches and raises violation. \n\nThis field is applicable and required when `matchViolationMessageType` is `CUSTOM_MESSAGE`.\n\nCustom variables and automatically generated regular expression group variables can both be used in this field, similar to how they are used in the `value` field.\n",
+                  "example": "IP address is not matching the required value.",
+                  "maxLength": 100,
+                  "pattern": ".*\\S.*",
+                  "type": "string"
+                },
+                "matchViolationMessageType": {
+                  "description": "The type of message to display when the condition matches and results in a violation. This provides context about the violation.\n\nThis field is applicable and required when `matchAction` is either `RAISE_VIOLATION_AND_CONTINUE` or ` RAISE_VIOLATION_AND_STOP`.\n\nOptions include:\n  - `DEFAULT_MESSAGE`: Use the automatic violation message generated by the system based on condition scope, operator, and value. \n  - `CUSTOM_MESSAGE`: Use the violation message specified by the user in `matchViolationMessage` field. \n",
+                  "enum": [
+                    "DEFAULT_MESSAGE",
+                    "CUSTOM_MESSAGE"
+                  ],
+                  "example": "DEFAULT_MESSAGE",
+                  "type": "string"
+                },
+                "matchViolationSeverity": {
+                  "allOf": [
+                    {
+                      "description": "The severity level of the violation.",
+                      "enum": [
+                        "CRITICAL",
+                        "MAJOR",
+                        "MINOR",
+                        "WARNING",
+                        "INFO"
+                      ],
+                      "example": "MAJOR",
+                      "title": "ViolationSeverity",
+                      "type": "string"
+                    }
+                  ],
+                  "description": "The severity level of the violation when the condition matches.\n\nThis field is applicable and required when `matchAction` is either `RAISE_VIOLATION_AND_CONTINUE` or ` RAISE_VIOLATION_AND_STOP`. \n",
+                  "example": "MAJOR"
+                }
+              },
+              "required": [
+                "doesNotMatchAction",
+                "matchAction"
+              ],
+              "title": "Condition_action",
+              "type": "object"
+            },
+            "blockEndExpression": {
+              "description": "The regular expression defining the end of a block. If not specified, block parsing will continue until new section starts in the configuration. \n\nThis is applicable only when `parseAsBlocks` is set. This is an optional field.\n\nThe value, when provided, must be a valid regular expression.\n",
+              "example": "^!.*",
+              "maxLength": 255,
+              "type": "string"
+            },
+            "blockStartExpression": {
+              "description": "The regular expression defining the start of a block. This is used to identify the beginning of relevant configuration sections. \n\nThis is applicable and required only when `parseAsBlocks` is set.\n\nThe value must be a valid regular expression.\n",
+              "example": "^interface\\s+.*",
+              "maxLength": 255,
+              "type": "string"
+            },
+            "blockViolationCriteria": {
+              "default": "RAISE_FOR_EACH_VIOLATION",
+              "description": "Criteria determining when a violation is raised based on block evaluation results. This allows for flexible compliance checks depending on whether a single failure or all failures should trigger a violation. \n\nOptions are:\n  - `RAISE_FOR_EACH_VIOLATION`: Violations are raised for each block that fails the evaluation criteria.\n  - `RAISE_SINGLE_FOR_ANY_VIOLATION`: A single violation is raised if any one of the blocks fails the evaluation criteria. Further processing of blocks is stopped as soon as a violation is detected and raised.\n  - `RAISE_IF_ALL_VIOLATED`: A single violation is raised only if all the blocks fail the evaluation criteria.\n",
+              "enum": [
+                "RAISE_FOR_EACH_VIOLATION",
+                "RAISE_SINGLE_FOR_ANY_VIOLATION",
+                "RAISE_IF_ALL_VIOLATED"
+              ],
+              "example": "RAISE_FOR_EACH_VIOLATION",
+              "type": "string"
+            },
+            "deviceProperty": {
+              "description": "The specific device property to consider as source for the condition. \n\nThis is applicable and required when scope is `DEVICE_PROPERTIES`.\n\nPossible values include:\n- `DEVICE_NAME`: Hostname of the device.\n- `IP_ADDRESS`: IP address of the device. \n- `OS_NAME`: Name of the operating system of the device.\n- `OS_VERSION`: Version of the operating system running on the device.\n",
+              "enum": [
+                "DEVICE_NAME",
+                "IP_ADDRESS",
+                "OS_NAME",
+                "OS_VERSION"
+              ],
+              "example": "DEVICE_NAME",
+              "type": "string"
+            },
+            "id": {
+              "description": "The `id` of the compliance condition, used for identifying specific conditions.",
+              "example": "be7e04db-588f-48b7-bf99-95d877fde7e8",
+              "readOnly": true,
+              "type": "string"
+            },
+            "name": {
+              "description": "The auto-generated name of the condition, summarizing its scope, operator, and value.",
+              "example": "Output of 'show ip interface brief' must contain the string 'GigabitEthernet1/0/8'",
+              "readOnly": true,
+              "type": "string"
+            },
+            "operator": {
+              "description": "The operation used to evaluate the condition. String, regular expression, and expressions required for the operator to work are provided in `value` attribute.\n\nOptions include:\n  - `CONTAINS_STRING`: Checks if the specified string is present within the source of the condition.\n  - `DOES_NOT_CONTAIN_STRING`: Ensures the string is absent from the source of the condition.\n  - `MATCHES_EXPRESSION`: Evaluates whether there is a match for the regular expression within the source of the condition.\n  - `DOES_NOT_MATCH_EXPRESSION`: Ensures there is no match for the regular expression within the source of the condition.\n  - `EVALUATE_EXPRESSION`: Performs custom expression evaluation. \n  \n    When this is selected, the `value` field must contain three parts separated by a space: `<left-hand-operand> <evaluate-operator> <right-hand-operand>`\n  \n    Available evaluation operators are: `>`, `>=`, `<`, `<=`, `==`, and `matches`. Use `matches` to find case-sensitive exact match for string and IP address values. \n    \n    Example: \n      - To check if the custom variable `_STRING` is    matching `TestString` use `<_STRING> matches TestString` in the `value` field.\n      - Similarly, `<_IP_ADDR> matches 3.3.3.3` will check if the custom variable `_IP_ADDR` has the value `3.3.3.3`.\n",
+              "enum": [
+                "CONTAINS_STRING",
+                "DOES_NOT_CONTAIN_STRING",
+                "MATCHES_EXPRESSION",
+                "DOES_NOT_MATCH_EXPRESSION",
+                "EVALUATE_EXPRESSION"
+              ],
+              "example": "CONTAINS_STRING",
+              "type": "string"
+            },
+            "parseAsBlocks": {
+              "default": false,
+              "description": "An optional param that indicates whether to parse the configuration as discrete blocks for evaluation. Useful for conditions that apply to specific sections of a configuration file.\n\nThis is applicable for all condition scopes except `DEVICE_PROPERTIES`. When scope is `PREVIOUSLY_MATCHED_BLOCKS`, this helps extract sub-blocks or portion of the blocks. \n\nWhen this is set, `blockStartExpression` must be provided. Optionally, `blockEndExpression` can be provided to customise blocks further.\n",
+              "example": true,
+              "type": "boolean"
+            },
+            "regexViolationCriteria": {
+              "default": "RAISE_FOR_EACH_VIOLATION",
+              "description": "Criteria determining when a violation is raised based on regular expression evaluation results. This allows for flexible compliance checks depending on whether a single failure or all failures should trigger a violation. \n\nOptions are:\n  - `RAISE_FOR_EACH_VIOLATION`: Violations are raised for each regular expression match instance that fails the evaluation criteria.\n  - `RAISE_SINGLE_FOR_ANY_VIOLATION`: A single violation is raised if any one of the regular expression match instances fails the evaluation criteria. Further processing of match instances is stopped as soon as a violation is detected and raised.\n  - `RAISE_IF_ALL_VIOLATED`: A single violation is raised only if all the regular expression match instances fail the evaluation criteria.\n",
+              "enum": [
+                "RAISE_FOR_EACH_VIOLATION",
+                "RAISE_SINGLE_FOR_ANY_VIOLATION",
+                "RAISE_IF_ALL_VIOLATED"
+              ],
+              "example": "RAISE_FOR_EACH_VIOLATION",
+              "type": "string"
+            },
+            "scope": {
+              "description": "The source of data for the evaluation of the condition.\n\nPossible values include:\n  - `CONFIGURATION`: Evaluates conditions against the running configuration of the device.\n  - `DEVICE_PROPERTIES`: Checks the condition based on specific properties of the device. Device property is specified using the `deviceProperty` attribute.\n  - `DEVICE_COMMAND_OUTPUT`: Evaluates based on custom command output. Custom command is specified using the `showCommand` attribute.\n  - `PREVIOUSLY_MATCHED_BLOCKS`: Evaluates the current condition only on passed configuration blocks from previous condition. First condition within the rule cannot have this as scope. The condition previous to the one being created must either have `parseAsBlocks` set or must use `PREVIOUSLY_MATCHED_BLOCKS` as scope.\n",
+              "enum": [
+                "CONFIGURATION",
+                "DEVICE_PROPERTIES",
+                "DEVICE_COMMAND_OUTPUT",
+                "PREVIOUSLY_MATCHED_BLOCKS"
+              ],
+              "example": "CONFIGURATION",
+              "type": "string"
+            },
+            "sequenceNumber": {
+              "description": "The sequence number of the condition, indicating its order in the evaluation process.",
+              "example": 1,
+              "readOnly": true,
+              "type": "integer"
+            },
+            "showCommand": {
+              "description": "The command executed on the device to retrieve output for evaluation. \n\nThis is applicable and required when the scope is `DEVICE_COMMAND_OUTPUT`.\n",
+              "example": "show logging",
+              "externalDocs": {
+                "description": "Validate the CLI - Cisco DevNet",
+                "url": "https://developer.cisco.com/docs/dna-center/2-3-7/run-read-only-commands-on-devices-to-get-their-real-time-configuration/"
+              },
+              "maxLength": 255,
+              "pattern": "^((S|s)(H|h)(O|o)(W|w))\\s+.+$",
+              "type": "string"
+            },
+            "value": {
+              "description": "The value or pattern used in the condition evaluation.\n\nCustom variables and automatically generated regular expression group variables can both be used in this field. To use variables, enclose the variable identifiers within `<` and `>`. During compliance check, these will be replaced with their corresponding values. If an invalid variable is specified, it will not be replaced and considered as a string.\n\nExample: \n  - To use custom variable with identifier _snmp_community_name, input `<_snmp_community_name>` in the value field.\n  - To use the value of fourth matching group from second condition, input `<2.4>` in the value field.\n\nThe value must satisfy the following requirements:\n  - When the `operator` is `MATCHES_EXPRESSION` or `DOES_NOT_MATCH_EXPRESSION`, the value must be a valid regular expression.\n  - When the `operator` is `EVALUATE_EXPRESSION`, the value must contain a valid expression as mentioned in `EVALUATE_EXPRESSION` description. \n",
+              "example": "^interface\\s+(.*)",
+              "maxLength": 400,
+              "pattern": ".*\\S.*",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action",
+            "id",
+            "name",
+            "operator",
+            "scope",
+            "sequenceNumber",
+            "value"
+          ],
+          "title": "Condition",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "inline_response_200_5",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

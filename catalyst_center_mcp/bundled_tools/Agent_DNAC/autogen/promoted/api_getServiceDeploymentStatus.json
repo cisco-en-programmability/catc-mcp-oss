@@ -1,0 +1,106 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/wired/networkDevices/{networkDeviceId}/configFeatures/intended/serviceDeployments",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns service deployment status based on filter criteria.",
+    "name": "api_getServiceDeploymentStatus",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Network device ID of the wired device to provision. The API /intent/api/v1/network-device can be used to get the network device ID.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "activityId": {
+                "description": "Activity id from intent/api/v1/activity.example: 7f422eeb-effe-4938-9371-ccf6dc2fe15e",
+                "type": "string"
+              },
+              "configGroupName": {
+                "description": "Name of the config group that has been provisioned. example: application.telemetry",
+                "type": "string"
+              },
+              "configGroupVersion": {
+                "description": "Version of the config group that has been provisioned. The version increments everytime for a provisioning operation.",
+                "type": "integer"
+              },
+              "createTime": {
+                "description": "Create time of the service deployment status record; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "endTime": {
+                "description": "Service provisioning task end time; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "errorCode": {
+                "description": "If the provisioning operation. example: NCND80300 fails, this is the error code to indicate the cause of failure.",
+                "type": "string"
+              },
+              "failureReason": {
+                "description": "If the provisioning operation fails, this is the textual description to indicate the cause of failure.",
+                "type": "string"
+              },
+              "lastUpdateTime": {
+                "description": "Last update time of the service deployment status record; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "provisioningCompleted": {
+                "description": "Indicates if the service provisioning operation has completed or it is still ongoing.",
+                "type": "boolean"
+              },
+              "provisioningDescription": {
+                "description": "Description of the provisioning operation. example: Update device config",
+                "type": "string"
+              },
+              "startTime": {
+                "description": "Service provisioning task start time; as measured in Unix epoch time in milliseconds.",
+                "type": "integer"
+              },
+              "status": {
+                "description": "Provisioning status.",
+                "enum": [
+                  "DEPLOYED",
+                  "DEFINED",
+                  "DEPLOYING",
+                  "FAILED",
+                  "UNKNOWN"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

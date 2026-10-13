@@ -1,0 +1,36 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "fileId": "path"
+      },
+      "uri": "/dna/intent/api/v1/file/{fileId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Downloads a file specified by fileId",
+    "name": "api_downloadAFileByFileId",
+    "parameters": {
+      "properties": {
+        "fileId": {
+          "description": "File Identification number",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fileId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,97 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/multicastConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific Multicast configuration feature template by ID.",
+    "name": "api_getMulticastConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Multicast Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Multicast Configuration Response",
+          "properties": {
+            "designName": {
+              "description": "The feature template design name",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "Multicast Configuration Feature Template",
+              "properties": {
+                "globalMulticastEnabled": {
+                  "description": "Global Multicast Enabled.",
+                  "type": "boolean"
+                },
+                "multicastAddress": {
+                  "description": "Multicast address must be between 224.0.0.0 - 239.255.255.255. `Note:` multicastAddress is only supported for `MULTICAST` multicastMode.",
+                  "type": "string"
+                },
+                "multicastIpv6Address": {
+                  "description": "Multicast Ipv6 Address must start with FF[0 or 1][1,2,3,4,5,8, or E]. `Note:` multicastIpv6Address is only supported for `MULTICAST` multicastIpv6Mode.",
+                  "type": "string"
+                },
+                "multicastIpv6Mode": {
+                  "description": "multicast Ipv6 Mode.",
+                  "enum": [
+                    "UNICAST",
+                    "MULTICAST"
+                  ],
+                  "type": "string"
+                },
+                "multicastMode": {
+                  "description": "Multicast Mode .",
+                  "enum": [
+                    "UNICAST",
+                    "MULTICAST"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "ID of the Multicast configuration feature template",
+              "type": "string"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

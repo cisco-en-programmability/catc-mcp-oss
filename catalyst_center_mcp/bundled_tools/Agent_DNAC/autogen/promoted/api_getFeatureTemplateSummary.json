@@ -1,0 +1,101 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "designName": "query",
+        "limit": "query",
+        "offset": "query",
+        "systemTemplate": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/summary",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve the feature template summary.",
+    "name": "api_getFeatureTemplateSummary",
+    "parameters": {
+      "properties": {
+        "designName": {
+          "description": "Feature template design name.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "systemTemplate": {
+          "description": "If 'True', it signifies a system-generated template; if 'False', it denotes a user-modifiable template.",
+          "type": "boolean"
+        },
+        "type": {
+          "description": "Feature template name. Allowed values : EVENT_DRIVEN_RRM_CONFIGURATION, DOT11AX_CONFIGURATION, AAA_RADIUS_ATTRIBUTES_CONFIGURATION, ADVANCED_SSID_CONFIGURATION, RRM_FRA_CONFIGURATION, CLEANAIR_CONFIGURATION, DOT11BE_STATUS_CONFIGURATION, FLEX_CONFIGURATION, MULTICAST_CONFIGURATION, RRM_GENERAL_CONFIGURATION",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Feature Template Summary Response",
+          "items": {
+            "properties": {
+              "count": {
+                "description": "The number of feature templates for the specific Feature Template Name",
+                "type": "integer"
+              },
+              "instances": {
+                "description": "List of Feature Template instances",
+                "items": {
+                  "properties": {
+                    "designName": {
+                      "description": "Feature Template Design Name",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Feature Template Id",
+                      "type": "string"
+                    },
+                    "systemTemplate": {
+                      "description": "systemTemplate is set to true if the template is provided by default, meaning it cannot be modified or deleted. If the template is user-modifiable, systemTemplate is set to false.",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "Feature Template Name",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

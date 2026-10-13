@@ -1,0 +1,56 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/maps/supported-access-points",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the list of supported access point types as well as valid antenna pattern names that can be used for each.",
+    "name": "api_mapsSupportedAccessPoints",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "antennaPatterns": {
+            "description": "",
+            "items": {
+              "properties": {
+                "band": {
+                  "description": "",
+                  "type": "string"
+                },
+                "names": {
+                  "description": "",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "apType": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

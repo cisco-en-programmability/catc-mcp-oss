@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/lan-automation/log/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Invoke this API to get the LAN Automation session logs based on the given LAN Automation session id.",
+    "name": "api_lANAutomationLogById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "LAN Automation session identifier.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "entry": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "deviceId": {
+                      "description": "Device serial number for which the log message is associated.",
+                      "type": "string"
+                    },
+                    "logLevel": {
+                      "description": "Supported levels are ERROR, INFO, WARNING, TRACE and CONFIG. ",
+                      "type": "string"
+                    },
+                    "record": {
+                      "description": "Detailed log message.",
+                      "type": "string"
+                    },
+                    "timeStamp": {
+                      "description": "Time at which the log message is created.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "nwOrchId": {
+                "description": "LAN Automation session identifier.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

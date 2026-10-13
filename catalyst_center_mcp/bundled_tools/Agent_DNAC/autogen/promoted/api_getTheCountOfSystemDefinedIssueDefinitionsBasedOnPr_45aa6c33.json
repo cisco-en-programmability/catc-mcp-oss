@@ -1,0 +1,80 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "deviceType": "query",
+        "id": "query",
+        "issueEnabled": "query",
+        "name": "query",
+        "priority": "query",
+        "profileId": "query"
+      },
+      "uri": "/dna/intent/api/v1/systemIssueDefinitions/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of system defined issue definitions based on provided filters. Supported filters are id, name, profileId and definition enable status. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-issueAndHealthDefinitions-1.0.0-resolved.yaml",
+    "name": "api_getTheCountOfSystemDefinedIssueDefinitionsBasedOnPr_45aa6c33",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "These are the device families/types supported for system issue definitions. If no input is made on device type, all device types are considered.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The definition identifier.\n\nExamples:\n\nid=015d9cba-4f53-4087-8317-7e49e5ffef46 (single entity id request)\n\nid=015d9cba-4f53-4087-8317-7e49e5ffef46&id=015d9cba-4f53-4087-8317-7e49e5ffef47 (multiple ids in the query param)\n",
+          "type": "string"
+        },
+        "issueEnabled": {
+          "description": "The enablement status of the issue definition, either true or false.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "The list of system defined issue names. (Ex.\"BGP_Down\")\n\nExamples:\n\nname=BGP_Down (single entity uuid requested)\n\nname=BGP_Down&name=BGP_Flap (multiple issue names separated by & operator)\n",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Issue priority, possible values are P1, P2, P3, P4.\n\n`P1`: A critical issue that needs immediate attention and can have a wide impact on network operations.\n\n`P2`: A major issue that can potentially impact multiple devices or clients.\n\n`P3`: A minor issue that has a localized or minimal impact.\n\n`P4`: A warning issue that may not be an immediate problem but addressing it can optimize the network performance.\n",
+          "type": "string"
+        },
+        "profileId": {
+          "description": "The profile identier to fetch the profile associated issue defintions. The default is `global`. Please refer Network design profiles documentation for more details.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,78 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/tags/interfaces/membersAssociations",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG PHRASE EXCLUSION:**\n- If the user starts from a named tag using `tag`, `tagged`, `with <value> tag`, `under tag`, or `in tag` and asks which/list/show/get ports or interfaces, or how many ports/interfaces belong to that value, do not use this inverse interface-to-tags tool.\n- The value remains a tag name even if it looks like a port, interface, device, site, or operational label. Use `api_getTag` followed by `api_getTagMembersById` for lists, or `api_getTagMemberCount` for counts.\n\n\"What tags are assigned to interfaces?\" \"Show interface-to-tag mappings\" \"List tags associated with ports\" \u2014 USE THIS API only for INTERFACE/PORT -> TAGS direction.\n\nThis API returns which tags each interface or port has. It answers interface-to-tag mapping questions, not tag-to-interface membership questions.\n\n**USE THIS API FOR:**\n- showing tags assigned to interfaces or ports\n- listing interface-to-tag associations\n- asking what tags an interface or port has\n\n**DO NOT USE THIS API FOR:**\n- \"What ports are tagged with <tag name>?\"\n- \"Give me the list of ports tagged with <tag name>\"\n- \"Show interfaces in tag <tag name>\"\n- \"How many ports are tagged with <tag name>?\"\n- \"How many interfaces are tagged with <tag name>?\"\n- \"How many ports/interfaces are tagged with <tag name>?\"\n- Any request that starts from one named tag and asks for its interface or port members\n\n**NEGATIVE FEW-SHOT EXAMPLES:**\n- User: \"What ports are tagged with <tag name>?\" -> do NOT use this API; use `api_getTag` -> `api_getTagMembersById`\n- User: \"How many ports are tagged with <tag name>?\" -> do NOT use this API; use `api_getTag` -> `api_getTagMemberCount`\n\nFor named-tag interface membership questions, the correct route is:\n1. `api_getTag(name=<tag_name>)`\n2. extract UUID\n3. `api_getTagMembersById(id=<UUID>, memberType='interface')`\n\nFor named-tag interface member-count questions, the correct route is:\n1. `api_getTag(name=<tag_name>)`\n2. extract UUID\n3. `api_getTagMemberCount(id=<UUID>, memberType='interface')`\n\n**WRONG ROUTING TO AVOID:**\n- STOP if the user names one specific tag and asks for ports or interfaces in that tag.\n- Do not substitute this API for `api_getTag` -> `api_getTagMembersById`.\n- Do not use this API to answer counts of interfaces or ports in one named tag.",
+    "name": "api_retrieveTagsAssociatedWithTheInterfaces",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Response body",
+      "properties": {
+        "response": {
+          "description": "List of members with associated tags",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Id of the member (network device or interface)",
+                "type": "string"
+              },
+              "tags": {
+                "description": "List of associated tags",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "description": "Tag id",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Tag name",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

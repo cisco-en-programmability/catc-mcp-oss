@@ -1,0 +1,122 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "configId": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/dna-event/snmp-config",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves configured SNMP event destination instances. Use configId for a specific destination. Omit pagination for the first page; the API defaults to 10 records. Use this tool for trap receiver settings such as name, address, port, version, mode, and authentication or privacy types, not network-device credentials or event subscriptions. Never display community strings, passwords, or other secret values; state only that the corresponding credential is configured.",
+    "name": "api_getSNMPDestination",
+    "parameters": {
+      "properties": {
+        "configId": {
+          "description": "List of SNMP configurations",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum records to return. Defaults to 10.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Number of matching records to skip. Omit or use 0 for the first page.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "authPassword": {
+            "description": "",
+            "type": "string"
+          },
+          "community": {
+            "description": "",
+            "type": "string"
+          },
+          "configId": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "ipAddress": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "port": {
+            "description": "",
+            "type": "integer"
+          },
+          "privacyPassword": {
+            "description": "",
+            "type": "string"
+          },
+          "snmpAuthType": {
+            "description": "",
+            "type": "string"
+          },
+          "snmpMode": {
+            "description": "",
+            "type": "string"
+          },
+          "snmpPrivacyType": {
+            "description": "",
+            "type": "string"
+          },
+          "snmpVersion": {
+            "description": "",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "",
+            "type": "string"
+          },
+          "userName": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,230 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "templateId": "path",
+        "versionId": "path"
+      },
+      "uri": "/dna/intent/api/v1/templates/{templateId}/versions/{versionId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get a template's version by the version ID.",
+    "name": "api_getTemplateVersion",
+    "parameters": {
+      "properties": {
+        "templateId": {
+          "description": "The id of the template to get versions of, retrieveable from `GET /dna/intent/api/v1/templates`",
+          "type": "string"
+        },
+        "versionId": {
+          "description": "The id of the versioned template to get versions of, retrieveable from `GET /dna/intent/api/v1/templates/{id}/versions`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "templateId",
+        "versionId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "CompositeTemplate": {
+              "description": "",
+              "properties": {
+                "author": {
+                  "description": "Author of the template",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of the template",
+                  "type": "string"
+                },
+                "failurePolicy": {
+                  "description": "Policy to handle failure only applicable for composite templates  CONTINUE_ON_ERROR: If a composed template fails while deploying a device, continue deploying the next composed template  ABORT_TARGET_ON_ERROR: If a composed template fails while deploying to a device, abort the subsequent composed templates to that device if there any remaining",
+                  "enum": [
+                    "CONTINUE_ON_ERROR",
+                    "ABORT_TARGET_ON_ERROR"
+                  ],
+                  "type": "string"
+                },
+                "lastUpdateTime": {
+                  "description": "Timestamp of when the template was updated or modified",
+                  "type": "number"
+                },
+                "name": {
+                  "description": "Name of the template",
+                  "type": "string"
+                },
+                "products": {
+                  "description": "Set of applicable product types that this template can be deployed to  Valid values retrievable from GET /intent/api/v1/products. Hierarchy is used when defining the object             1. productFamily must be defined if productSeries is set             2. productFamily AND productSeries must be defined if setting a productType",
+                  "items": {
+                    "properties": {
+                      "productFamily": {
+                        "description": "Family name of the product",
+                        "type": "string"
+                      },
+                      "productName": {
+                        "description": "Name of the product",
+                        "type": "string"
+                      },
+                      "productSeries": {
+                        "description": "Series name of the product",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "projectId": {
+                  "description": "Id of the project",
+                  "type": "string"
+                },
+                "softwareFamily": {
+                  "description": "",
+                  "enum": [
+                    "IOS",
+                    "IOS_XE",
+                    "IOS_XR",
+                    "NX_OS",
+                    "CISCO_CONTROLLER",
+                    "WIDE_AREA_APPLICATION_SERVICES",
+                    "NFV_OS",
+                    "OTHER"
+                  ],
+                  "type": "string"
+                },
+                "templateId": {
+                  "description": "The id of the template",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of the template",
+                  "enum": [
+                    "COMPOSITE"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "RegularTemplate": {
+              "description": "",
+              "properties": {
+                "author": {
+                  "description": "Author of the template",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of the template",
+                  "type": "string"
+                },
+                "language": {
+                  "description": "Language of the template",
+                  "enum": [
+                    "JINJA",
+                    "VELOCITY"
+                  ],
+                  "type": "string"
+                },
+                "lastUpdateTime": {
+                  "description": "Timestamp of when the template was updated or modified",
+                  "type": "number"
+                },
+                "name": {
+                  "description": "Name of the template",
+                  "type": "string"
+                },
+                "products": {
+                  "description": "Set of applicable product types that this template can be deployed to  Valid values retrievable from GET /intent/api/v1/products. Hierarchy is used when defining the object             1. productFamily must be defined if productSeries is set             2. productFamily AND productSeries must be defined if setting a productType",
+                  "items": {
+                    "properties": {
+                      "productFamily": {
+                        "description": "Family name of the product",
+                        "type": "string"
+                      },
+                      "productName": {
+                        "description": "Name of the product",
+                        "type": "string"
+                      },
+                      "productSeries": {
+                        "description": "Series name of the product",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "projectId": {
+                  "description": "Id of the project",
+                  "type": "string"
+                },
+                "softwareFamily": {
+                  "description": "",
+                  "enum": [
+                    "IOS",
+                    "IOS_XE",
+                    "IOS_XR",
+                    "NX_OS",
+                    "CISCO_CONTROLLER",
+                    "WIDE_AREA_APPLICATION_SERVICES",
+                    "NFV_OS",
+                    "OTHER"
+                  ],
+                  "type": "string"
+                },
+                "templateContent": {
+                  "description": "Template content (uses LF styling for line-breaks)",
+                  "type": "string"
+                },
+                "templateId": {
+                  "description": "The id of the template",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of the template",
+                  "enum": [
+                    "REGULAR"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "version": {
+              "description": "The version number of this version",
+              "type": "integer"
+            },
+            "versionId": {
+              "description": "The id of this version",
+              "type": "string"
+            },
+            "versionTime": {
+              "description": "Time at which this version was committed",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response Version e.g. : 1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

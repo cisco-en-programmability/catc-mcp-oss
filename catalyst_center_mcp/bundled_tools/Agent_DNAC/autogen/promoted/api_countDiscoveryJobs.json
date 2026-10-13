@@ -1,0 +1,68 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "jobId": "query"
+      },
+      "uri": "/dna/intent/api/v1/discoverys/{id}/jobs/count",
+      "version": "3.2.1"
+    },
+    "description": "API to fetch the count of discovery jobs for given discovery  id. A discovery can have multiple discovery jobs, created against the same discovery id.",
+    "name": "api_countDiscoveryJobs",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The id of the discovery.",
+          "type": "string"
+        },
+        "jobId": {
+          "description": "Optional list of the discovery job ids to filter by.",
+          "example": [
+            "1739936077107",
+            "17399360774307"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 25,
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "example": 15,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "Count Response",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

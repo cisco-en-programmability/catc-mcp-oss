@@ -1,0 +1,61 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceCount": "query",
+        "id": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/fieldNotices/results/notices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the count of confirmed field notices. Use this tool for questions like 'how many field notices do I have?' or 'how many total field notices are detected?'. For unqualified in-my-network or detected field notice count questions, call this tool with deviceCount: 0 so the count includes only field notices with at least one confirmed affected device. For type-specific questions such as hardware or software field notice counts, call this tool with both deviceCount: 0 and the requested type, then answer with the count returned by that exact latest tool call. If the latest count is 0, answer 0. Do not reuse a count from a previous turn or from a different type. Return only the confirmed field notice count and label it as confirmed field notices detected. Do not include or add potential field notices unless the user explicitly asks for potential field notices.",
+    "name": "api_getCountOfFieldNotices",
+    "parameters": {
+      "properties": {
+        "deviceCount": {
+          "default": 0,
+          "description": "Return field notices with confirmed affected deviceCount greater than this deviceCount.",
+          "type": "number"
+        },
+        "id": {
+          "description": "Id of the field notice",
+          "type": "string"
+        },
+        "type": {
+          "description": "Return field notices with this type. Available values : SOFTWARE, HARDWARE",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "Count of confirmed field notices.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

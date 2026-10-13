@@ -1,0 +1,276 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "response_guide": {
+        "comparison_directive": "When multiple switches or devices are returned for the requested VLAN, state that multiple matches exist and list them. Do not collapse the answer to a single switch unless exactly one matching switch is present."
+      }
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "vlanID": "path"
+      },
+      "uri": "/dna/intent/api/v1/topology/l2/{vlanID}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns Layer 2 network topology for a specified VLAN ID. Use this for network-wide questions about which switches or devices participate in, have configured, or have enabled a given VLAN. If multiple switches match the VLAN, return all matching switches rather than collapsing the answer to a single switch.",
+    "name": "api_getTopologyDetails",
+    "parameters": {
+      "properties": {
+        "vlanID": {
+          "description": "Vlan Name for e.g Vlan1, Vlan23 etc",
+          "type": "string"
+        }
+      },
+      "required": [
+        "vlanID"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "id": {
+              "description": "[Deprecated]",
+              "type": "string"
+            },
+            "links": {
+              "description": "List of links between the nodes",
+              "items": {
+                "properties": {
+                  "additionalInfo": {
+                    "description": "Additional information about the link ",
+                    "properties": {},
+                    "type": "object"
+                  },
+                  "endPortID": {
+                    "description": "Device port ID corresponding to the end device",
+                    "type": "string"
+                  },
+                  "endPortIpv4Address": {
+                    "description": "Interface port IPv4 address corresponding to the end device",
+                    "type": "string"
+                  },
+                  "endPortIpv4Mask": {
+                    "description": "Interface port IPv4 mask corresponding to the end device",
+                    "type": "string"
+                  },
+                  "endPortName": {
+                    "description": "Interface port name corresponding to the end device",
+                    "type": "string"
+                  },
+                  "endPortSpeed": {
+                    "description": "Interface port speed corresponding to end device",
+                    "type": "string"
+                  },
+                  "greyOut": {
+                    "description": "Indicates if the link is greyed out",
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "description": "Id of the link",
+                    "type": "string"
+                  },
+                  "linkStatus": {
+                    "description": "Indicates whether link is up or down",
+                    "type": "string"
+                  },
+                  "source": {
+                    "description": "Device ID corresponding to the source device",
+                    "type": "string"
+                  },
+                  "startPortID": {
+                    "description": "Device port ID corresponding to start device",
+                    "type": "string"
+                  },
+                  "startPortIpv4Address": {
+                    "description": "Interface port IPv4 address corresponding to start device",
+                    "type": "string"
+                  },
+                  "startPortIpv4Mask": {
+                    "description": "Interface port IPv4 mask corresponding to start device",
+                    "type": "string"
+                  },
+                  "startPortName": {
+                    "description": "Interface port name corresponding to start device",
+                    "type": "string"
+                  },
+                  "startPortSpeed": {
+                    "description": "Interface port speed corresponding to start device",
+                    "type": "string"
+                  },
+                  "tag": {
+                    "description": "[Deprecated]",
+                    "type": "string"
+                  },
+                  "target": {
+                    "description": "Device ID corresponding to the target device",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "nodes": {
+              "description": "List of nodes in the topology view",
+              "items": {
+                "properties": {
+                  "aclApplied": {
+                    "description": "Indicates if the Access Control List (ACL) is applied on the device",
+                    "type": "boolean"
+                  },
+                  "additionalInfo": {
+                    "description": "Additional information about the node",
+                    "properties": {},
+                    "type": "object"
+                  },
+                  "connectedDeviceId": {
+                    "description": "ID of the connected device when the nodeType is HOST",
+                    "type": "string"
+                  },
+                  "customParam": {
+                    "description": "Device custom parameters",
+                    "properties": {
+                      "id": {
+                        "description": "[Deprecated] Please refer to nodes.id",
+                        "type": "string"
+                      },
+                      "label": {
+                        "description": "Label of the node",
+                        "type": "string"
+                      },
+                      "parentNodeId": {
+                        "description": "Id of the parent node",
+                        "type": "string"
+                      },
+                      "x": {
+                        "description": "X coordinate for this node in the topology view",
+                        "type": "integer"
+                      },
+                      "y": {
+                        "description": "Y coordinate for this node in the topology view",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "dataPathId": {
+                    "description": "ID of the path between devices",
+                    "type": "string"
+                  },
+                  "deviceSeries": {
+                    "description": "The series of the device",
+                    "type": "string"
+                  },
+                  "deviceType": {
+                    "description": "Type of the device.",
+                    "type": "string"
+                  },
+                  "family": {
+                    "description": "The product family of the device",
+                    "type": "string"
+                  },
+                  "fixed": {
+                    "description": "Boolean value indicating whether the position is fixed or will use auto layout",
+                    "type": "boolean"
+                  },
+                  "greyOut": {
+                    "description": "Boolean value indicating whether the node is active for the topology view.",
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "description": "Unique identifier for the device",
+                    "type": "string"
+                  },
+                  "ip": {
+                    "description": "IP address of the device",
+                    "type": "string"
+                  },
+                  "label": {
+                    "description": "Label of the node, typically the hostname of the device",
+                    "type": "string"
+                  },
+                  "networkType": {
+                    "description": "Type of the network",
+                    "type": "string"
+                  },
+                  "nodeType": {
+                    "description": "Type of the node can be 'device' or 'HOST'",
+                    "type": "string"
+                  },
+                  "order": {
+                    "description": "Device order by link number",
+                    "type": "integer"
+                  },
+                  "osType": {
+                    "description": "OS type of the device",
+                    "type": "string"
+                  },
+                  "platformId": {
+                    "description": "Platform description of the device",
+                    "type": "string"
+                  },
+                  "role": {
+                    "description": "Role of the device",
+                    "type": "string"
+                  },
+                  "roleSource": {
+                    "description": "Indicates whether the role is assigned manually or automatically",
+                    "type": "string"
+                  },
+                  "softwareVersion": {
+                    "description": "Device OS version",
+                    "type": "string"
+                  },
+                  "tags": {
+                    "description": "[Deprecated]",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "upperNode": {
+                    "description": "ID of the start node",
+                    "type": "string"
+                  },
+                  "userId": {
+                    "description": "ID of the host",
+                    "type": "string"
+                  },
+                  "vlanId": {
+                    "description": "VLAN ID",
+                    "type": "string"
+                  },
+                  "x": {
+                    "description": "[Deprecated] Please refer to customParam.x",
+                    "type": "integer"
+                  },
+                  "y": {
+                    "description": "[Deprecated] Please refer to customerParam.y",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,118 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/sensor",
+      "version": "2.3.7.9"
+    },
+    "description": "Intent API to get a list of SENSOR devices",
+    "name": "api_sensors",
+    "parameters": {
+      "properties": {
+        "siteId": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response object",
+          "items": {
+            "properties": {
+              "backhaulType": {
+                "description": "Backhall type: WIRED, WIRELESS",
+                "type": "string"
+              },
+              "ethernetMacAddress": {
+                "description": "Sensor device's ethernet MAC address",
+                "type": "string"
+              },
+              "ipAddress": {
+                "description": "IP Address",
+                "type": "string"
+              },
+              "lastSeen": {
+                "description": "Last seen timestamp",
+                "type": "integer"
+              },
+              "led": {
+                "description": "Is LED Enabled",
+                "type": "boolean"
+              },
+              "location": {
+                "description": "Site name in hierarchy form",
+                "type": "string"
+              },
+              "name": {
+                "description": "The sensor device name",
+                "type": "string"
+              },
+              "radioMacAddress": {
+                "description": "Sensor device's radio MAC address",
+                "type": "string"
+              },
+              "serialNumber": {
+                "description": "Serial number",
+                "type": "string"
+              },
+              "ssh": {
+                "description": "",
+                "properties": {
+                  "enablePassword": {
+                    "description": "Enable password",
+                    "type": "string"
+                  },
+                  "sshPassword": {
+                    "description": "SSH password",
+                    "type": "string"
+                  },
+                  "sshState": {
+                    "description": "SSH state",
+                    "type": "string"
+                  },
+                  "sshUserName": {
+                    "description": "SSH user name",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "status": {
+                "description": "Status of sensor device (REACHABLE, UNREACHABLE, DELETED, RUNNING, IDLE, UCLAIMED)",
+                "type": "string"
+              },
+              "type": {
+                "description": "Type",
+                "type": "string"
+              },
+              "version": {
+                "description": "Sensor version",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version string of this API",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

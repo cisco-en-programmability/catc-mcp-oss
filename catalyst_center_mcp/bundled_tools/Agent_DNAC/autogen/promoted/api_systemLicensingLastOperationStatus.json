@@ -1,0 +1,68 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/license/lastOperationStatus",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: NONE**\n\nRetrieves the task completion status of the last/most recent licensing operation or task executed for Cisco Catalyst Center system. This is a standalone API with no prerequisites.\n\n**Use Cases:**\nUse when checking, verifying, or getting the status of completed or in-progress smart licensing operations, tasks, or jobs such as:\n- System registration operations/tasks (whether system registration completed, succeeded, failed)\n- System authorization operations/tasks (whether authorization renewal completed)\n- Any smart licensing related task execution status\n\n**What This API Does:**\nReturns task execution details:\n- status: PENDING (task in progress), SUCCESS (task completed successfully), FAILURE (task failed)\n- isError: true (failed), false (succeeded)\n- failureReason: explanation of why task failed\n- errorCode: error identifier if applicable\n- taskId: unique task identifier\n- lastUpdate: timestamp of last status update\n\n**IMPORTANT DISTINCTION:**\nThis API provides TASK/OPERATION completion status (whether an operation finished), NOT the current authorization/compliance status of the system. For current system authorization/compliance/registration state (AUTHORIZED, OUT_OF_COMPLIANCE, REGISTERED, etc.), use `api_systemLicensingStatus` instead.\n\n**When to Use:**\n- After initiating a licensing operation to check if it completed\n- Troubleshooting failed licensing tasks\n- Monitoring in-progress licensing operations\n- Getting the most recent task execution results\n\n**Do NOT:**\n- Use this API to check current system authorization status (use `api_systemLicensingStatus`)\n- Use this API to check current compliance status (use `api_systemLicensingStatus`)\n- Use this API to get registration status (use `api_systemLicensingStatus`)\n- Confuse task completion status with system operational status\n",
+    "name": "api_systemLicensingLastOperationStatus",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response of the system licensing task status",
+          "properties": {
+            "errorCode": {
+              "description": "An error code if in case this task has failed in its execution",
+              "type": "string"
+            },
+            "failureReason": {
+              "description": "A textual description indicating the reason why a task has failed",
+              "type": "string"
+            },
+            "id": {
+              "description": "The ID of this task",
+              "type": "string"
+            },
+            "isError": {
+              "description": " A boolean indicating if this task has ended with or without error. true indicates a failure, whereas false indicates a success.",
+              "type": "boolean"
+            },
+            "lastUpdate": {
+              "description": "A timestamp of when this task was last updated; as measured in Unix epoch time in milliseconds",
+              "type": "number"
+            },
+            "status": {
+              "description": "Summarizes the status of a task",
+              "enum": [
+                "PENDING",
+                "FAILURE",
+                "SUCCESS"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "API version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

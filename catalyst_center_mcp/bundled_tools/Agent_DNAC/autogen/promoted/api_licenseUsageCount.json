@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "smartAccountId": "query",
+        "virtualAccountId": "query"
+      },
+      "uri": "/dna/intent/api/v1/licenseUsage/count",
+      "version": "3.2.1"
+    },
+    "description": "**Tool Dependency: CRITICAL**\n\nReturns the number of virtual-account records that the detailed License Usage API can process for the supplied smart account and/or virtual account filters. Use this COUNT-ONLY operation to determine whether matching records exist or to plan pagination before calling `api_getLicenseUsage`. The response is an object containing `count` and `version`; it is not a purchased, used, available, or consumed license total.\n\n**REQUIRED PRE-REQUISITES:**\n\n1. If the user provides a **smart account NAME** instead of an ID, call `api_smartAccountDetails` first and resolve it to `smartAccountId`.\n2. If the user provides a **virtual account NAME** instead of an ID, resolve the smart account first, then call `api_virtualAccountDetails` with the smartAccountId and resolve it to `virtualAccountId`.\n\n**Exception:**\nIf the user explicitly provides valid smartAccountId or virtualAccountId values, use them directly.\n\n**Do NOT:**\n- Pass account names as parameters.\n- Assume or guess account IDs.\n- Use this API for purchased, used, available, or consumed license totals; use `api_getLicenseUsage` instead.\n- Pass productFamily, limit, or offset; this count endpoint does not implement those filters.\n\n**Supported Filters:**\n- smartAccountId (ID of a smart account)\n- virtualAccountId (ID of a virtual account)\n\n**Returns:**\nAn object containing `count`, the number of matching virtual-account records, and response `version`.\n",
+    "name": "api_licenseUsageCount",
+    "parameters": {
+      "properties": {
+        "smartAccountId": {
+          "description": "Id of the smart account. Use `GET /dna/intent/api/v1/licenses/smartAccounts` intent API to find the smart account Id.",
+          "example": "1034567",
+          "type": "string"
+        },
+        "virtualAccountId": {
+          "description": "Id of the virtual account. Use `GET /dna/intent/api/v1/licenses/smartAccount/${id}/virtualAccounts` intent API to find the virtual account Id.",
+          "example": "1267",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Response containing the matching virtual-account record count.",
+      "properties": {
+        "count": {
+          "description": "Number of matching virtual-account records.",
+          "example": 2,
+          "format": "int32",
+          "type": "integer"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

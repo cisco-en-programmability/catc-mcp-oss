@@ -1,0 +1,84 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path",
+        "level": "query",
+        "limit": "query",
+        "memberAssociationType": "query",
+        "memberType": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/tag/{id}/member",
+      "version": "2.3.7.9"
+    },
+    "description": "**TAG MEMBER LISTING TOOL:**\n- Select this tool together with `api_getTag` when the user provides a human-readable tag name and asks to list, show, get, find, identify, or ask what/which members are inside that tag.\n- Execute this tool after `api_getTag` returns the tag UUID. This tool requires a UUID in `id`; never pass the tag name as `id`.\n- Use this for tag-to-device and tag-to-interface/tag-to-port listing workflows.\n- Use `memberType=\"networkdevice\"` when the requested members are devices.\n- Use `memberType=\"interface\"` when the requested members are ports or interfaces.\n**TAG NAME DISAMBIGUATION:**\n- If the request uses `tag`, `tagged`, `with <value> tag`, `under tag`, or `in tag` and asks which/list/show/get devices, network devices, ports, or interfaces belong to that value, select this tool with `api_getTag`.\n- The value introduced by the tag phrase remains a tag name even if it contains words like switch, device, site, port, interface, up, or down. Do not route it to site, device, interface, or inventory lookup tools.\n- For devices or network devices inside the tag, use `memberType=\"networkdevice\"`. For ports or interfaces inside the tag, use `memberType=\"interface\"`.\n\n**REQUIRED WORKFLOW:**\n1. `api_getTag(name=<tag_name>)`\n2. Extract the returned tag UUID.\n3. `api_getTagMemberCount(id=<UUID>, memberType=<networkdevice_or_interface>)` to get the total member count Z (REQUIRED before listing).\n4. `api_getTagMembersById(id=<UUID>, memberType=<networkdevice_or_interface>, offset=1, limit=10)` for the first page.\n\n**DO NOT SUBSTITUTE:**\n- Do not use this tool for count/how-many/total/number questions; use `api_getTagMemberCount` after `api_getTag` instead.\n- Do not leave the workflow at `api_getTag`; once the UUID is known, this tool performs the member lookup.\n- Do not keep calling `api_getTag` repeatedly after the UUID has already been resolved.\n- Do not use `api_getInterfaces`, generic device inventory, site lookup, resource-type discovery, or inverse tag-association tools when the user wants members of one named tag.\n- Do not fall back to generic KB guidance for live named-tag membership.\n\n**TAG + SITE OR COMPLIANCE NOTE:**\n- This API returns tag-scoped members. If the user also names a site or asks for compliance, intersect these tag members with the requested site or compliance filter before forming the final answer.\n\n**TAG MEMBER PAGINATION RULE (count-first, 10 per page):**\n- Tag membership can be large. ALWAYS paginate and NEVER auto-fetch or list all members at once.\n- Step 1 - GET THE TOTAL FIRST: before listing members, call `api_getTagMemberCount` with the same `id` and `memberType` (and `memberAssociationType` if used) to obtain the total member count Z. Communicate Z in your answer.\n- Step 2 - FIRST PAGE: call this tool with `offset=1` and `limit=10`, keeping the same `id`/`memberType`. Do NOT omit `limit`; omitting it fetches up to 500.\n- Step 3 - PRESENT + COMMUNICATE: show exactly the (up to) 10 returned members, then state the range and total verbatim in the form \"Only tag members 1-Y of Z are shown\", where the end index Y = min(10, Z) and NEVER exceeds Z (if Z <= 10, say \"Only tag members 1-Z of Z are shown\").\n- NEXT PAGE: when the user asks for more (e.g., \"next 10\", \"show more\"), increment `offset` by the current `limit` (page 2 = offset 11), keep `limit` and every other parameter identical, and report \"Only tag members <offset>-Y of Z are shown\" where the end index Y = min(offset + limit - 1, Z) and NEVER exceeds Z (e.g., with Z=15 and limit=10, page 2 is \"Only tag members 11-15 of 15 are shown\"). If `offset` is greater than Z or no further members exist, say there are no more members to show instead of fabricating rows.\n- EXPLICIT N / LAST N: if the user asks for a specific number, set `limit` to min(that number, Z) (max 500) so the effective page size never exceeds the total. For \"last N\", set `offset = max(1, Z - N + 1)` (never below 1) and `limit = min(N, Z)`, then report \"Only tag members <offset>-Z of Z are shown\"; when N >= Z this yields \"Only tag members 1-Z of Z are shown\".\n- Keep every non-pagination parameter identical across pages; change only `offset` (and `limit` when the user explicitly requests a different page size).",
+    "name": "api_getTagMembersById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "The tag UUID \u2014 must match the pattern [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} (e.g., '178a3ae2-7e1c-4813-8745-dfcd4cb34b6b'). Do NOT pass a tag name or any other non-UUID string \u2014 it will fail. You must first call api_getTag with the tag name to retrieve its UUID, then pass that UUID here.",
+          "type": "string"
+        },
+        "level": {
+          "description": "level",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of members to fetch for this page. Default to 10 for the first page and keep it constant while paging. ALWAYS pass it explicitly - omitting it fetches up to 500. Only change it when the user requests a specific page size (e.g., 'last 50' -> limit=50), and cap the effective value at the total member count Z so it never exceeds the total. Minimum 1, maximum 500.",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "memberAssociationType": {
+          "description": "Indicates how the member is associated with the tag. Possible values and description. 1) DYNAMIC : The member is associated to the tag through rules. 2) STATIC \u2013 The member is associated to the tag manually. 3) MIXED \u2013 The member is associated manually and also satisfies the rule defined for the tag",
+          "type": "string"
+        },
+        "memberType": {
+          "description": "Member type: use 'networkdevice' when the user asks about devices, or 'interface' when the user asks about interfaces or ports.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "1-based index of the first member to show on this page. Use 1 for the first page. For each subsequent page the user asks for, increment by the current limit (with limit=10: page 2 = 11, page 3 = 21). For a 'last N' request, set offset = max(1, totalMemberCount - N + 1) (get the total from api_getTagMemberCount); never go below 1. Minimum value is 1.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "memberType"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "instanceUuid": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

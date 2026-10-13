@@ -1,0 +1,630 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "band": "query",
+        "endTime": "query",
+        "failureCategory": "query",
+        "failureReason": "query",
+        "id": "path",
+        "ssid": "query",
+        "startTime": "query",
+        "taskId": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/siteKpiSummaries/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns site analytics for the given site. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-SiteKpiSummaries-1.0.0-resolved.yaml",
+    "name": "api_getSiteAnalyticsForOneSite",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "List of attributes related to site analytics. If these are provided, then only those attributes will be part of response along with the default attributes.\nExamples: `attribute=coverageAverage` (single attribute requested) `attribute=coverageFailureMetrics&attribute=coverageTotalCount` (multiple attributes requested)\n",
+          "type": "string"
+        },
+        "band": {
+          "description": "WiFi frequency band that client or Access Point operates. Band value is represented in Giga Hertz - GHz\nExamples:\n`band=5` (single band requested)\n`band=2.4&band=6` (multiple band requested)\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "failureCategory": {
+          "description": "Category of failure when a client fails to meet the threshold.\nExamples:\n`failureCategory=AUTH` (single failure category requested)\n`failureCategory=AUTH&failureCategory=DHCP` (multiple failure categories requested)\n",
+          "type": "string"
+        },
+        "failureReason": {
+          "description": "Reason for failure when a client fails to meet the threshold.\nExamples:\n`failureReason=MOBILITY_FAILURE` (single ssid requested)\n`failureReason=REASON_IPLEARN_CONNECT_TIMEOUT&failureReason=ST_EAP_TIMEOUT`   (multiple ssid requested)\n",
+          "type": "string"
+        },
+        "id": {
+          "description": "The Site UUID",
+          "type": "string"
+        },
+        "ssid": {
+          "description": "SSID is the name of wireless network to which client connects to. It is also referred to as WLAN ID - Wireless Local Area Network Identifier.\nExamples:\n`ssid=Alpha` (single ssid requested)\n`ssid=Alpha&ssid=Guest` (multiple ssid requested)\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "taskId": {
+          "description": "used to retrieve asynchronously processed & stored data. When this parameter is used, the rest of the request params will be ignored.\n",
+          "type": "string"
+        },
+        "view": {
+          "description": "<p>The name of the View. Each view represents a specific data set. Please refer to the <code>SiteAnalyticsView</code> Model for supported views. View is predefined set of attributes supported by the API. Only the attributes related to the given view will be part of the API response along with default attributes. If multiple views are provided, then response will contain attributes from all those views. If no views are specified, all attributes will be returned.</p><table><thead><tr><th>View Name</th><th>Included Attributes</th></tr></thead><tbody><tr><td><code>coverage</code></td><td>coverageAverage, coverageSuccessPercentage, coverageSuccessCount, coverageTotalCount, coverageFailureCount, coverageClientCount, coverageImpactedEntities, coverageFailureImpactedEntities, coverageFailureMetrics</td></tr><tr><td><code>onboardingAttempts</code></td><td>onboardingAttemptsSuccessPercentage, onboardingAttemptsSuccessCount, onboardingAttemptsTotalCount, onboardingAttemptsFailureCount, onboardingAttemptsClientCount, onboardingAttemptsImpactedEntities, onboardingAttemptsFailureImpactedEntities, onboardingAttemptsFailureMetrics</td></tr><tr><td><code>onboardingDuration</code></td><td>onboardingDurationAverage, onboardingDurationSuccessPercentage, onboardingDurationSuccessCount, onboardingDurationTotalCount, onboardingDurationFailureCount, onboardingDurationClientCount, onboardingDurationImpactedEntities, onboardingDurationFailureImpactedEntities, onboardingDurationFailureMetrics</td></tr><tr><td><code>roamingAttempts</code></td><td>roamingAttemptsSuccessPercentage, roamingAttemptsSuccessCount, roamingAttemptsTotalCount, roamingAttemptsFailureCount, roamingAttemptsClientCount, roamingAttemptsImpactedEntities, roamingAttemptsFailureImpactedEntities, roamingAttemptsFailureMetrics</td></tr><tr><td><code>roamingDuration</code></td><td>roamingDurationAverage, roamingDurationSuccessPercentage, roamingDurationSuccessCount, roamingDurationTotalCount, roamingDurationFailureCount, roamingDurationClientCount, roamingDurationImpactedEntities, roamingDurationFailureImpactedEntities, roamingDurationFailureMetrics</td></tr><tr><td><code>connectionSpeed</code></td><td>connectionSpeedAverage, connectionSpeedSuccessPercentage, connectionSpeedSuccessCount, connectionSpeedTotalCount, connectionSpeedFailureCount, connectionSpeedClientCount, connectionSpeedImpactedEntities, connectionSpeedFailureImpactedEntities, connectionSpeedFailureMetrics</td></tr></tbody></table><p>Examples: <code>view=connectionSpeed</code> (single view requested) <code>view=roamingDuration&amp;view=roamingAttempts</code> (multiple views requested)       </p>",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "apCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectionSpeedAverage": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectionSpeedClientCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectionSpeedFailureCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectionSpeedFailureImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "connectionSpeedFailureMetrics": {
+              "description": "",
+              "properties": {
+                "failureApCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failureClientCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failurePercentage": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "connectionSpeedImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "connectionSpeedSuccessCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectionSpeedSuccessPercentage": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectionSpeedTotalCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "coverageAverage": {
+              "description": "",
+              "type": "integer"
+            },
+            "coverageClientCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "coverageFailureCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "coverageFailureImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "coverageFailureMetrics": {
+              "description": "",
+              "properties": {
+                "failureApCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failureClientCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failurePercentage": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "coverageImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "coverageSuccessCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "coverageSuccessPercentage": {
+              "description": "",
+              "type": "integer"
+            },
+            "coverageTotalCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "onboardingAttemptsClientCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingAttemptsFailureCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingAttemptsFailureImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingAttemptsFailureMetrics": {
+              "description": "",
+              "properties": {
+                "failureApCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failureClientCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failurePercentage": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingAttemptsImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingAttemptsSuccessCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingAttemptsSuccessPercentage": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingAttemptsTotalCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingDurationAverage": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingDurationClientCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingDurationFailureCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingDurationFailureImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingDurationFailureMetrics": {
+              "description": "",
+              "properties": {
+                "failureApCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failureClientCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failurePercentage": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingDurationImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "onboardingDurationSuccessCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingDurationSuccessPercentage": {
+              "description": "",
+              "type": "integer"
+            },
+            "onboardingDurationTotalCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingAttemptsClientCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingAttemptsFailureCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingAttemptsFailureImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "roamingAttemptsFailureMetrics": {
+              "description": "",
+              "properties": {
+                "failureApCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failureClientCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failurePercentage": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "roamingAttemptsImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "roamingAttemptsSuccessCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingAttemptsSuccessPercentage": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingAttemptsTotalCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingDurationAverage": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingDurationClientCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingDurationFailureCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingDurationFailureImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "roamingDurationFailureMetrics": {
+              "description": "",
+              "properties": {
+                "failureApCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failureClientCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "failurePercentage": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "roamingDurationImpactedEntities": {
+              "description": "",
+              "properties": {
+                "apCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "buildingCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "floorCount": {
+                  "description": "",
+                  "type": "integer"
+                },
+                "sitesCount": {
+                  "description": "",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "roamingDurationSuccessCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingDurationSuccessPercentage": {
+              "description": "",
+              "type": "integer"
+            },
+            "roamingDurationTotalCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "siteHierarchy": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchyId": {
+              "description": "",
+              "type": "string"
+            },
+            "siteId": {
+              "description": "",
+              "type": "string"
+            },
+            "siteType": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

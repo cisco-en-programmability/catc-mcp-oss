@@ -1,0 +1,130 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/customIssueDefinitions/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get the custom issue definition for the given custom issue definition Id. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AssuranceUserDefinedIssueAPIs-1.0.0-resolved.yaml\n",
+    "name": "api_getTheCustomIssueDefinitionForTheGivenCustomIssueDe_9bd4ac38",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID can be used to trace the caller for queries executed on database. The caller id is like a optional attribute which can be added to API invocation like ui, python, postman, test-automation etc",
+          "type": "string"
+        },
+        "id": {
+          "description": "Get the custom issue definition for the given custom issue definition Id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "createdTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "description": {
+              "description": "",
+              "type": "string"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "isDeletable": {
+              "description": "",
+              "type": "boolean"
+            },
+            "isEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "isNotificationEnabled": {
+              "description": "",
+              "type": "boolean"
+            },
+            "lastUpdatedTime": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "priority": {
+              "description": "",
+              "type": "string"
+            },
+            "profileId": {
+              "description": "",
+              "type": "string"
+            },
+            "rules": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "durationInMinutes": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "facility": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "mnemonic": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "occurrences": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "pattern": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "severity": {
+                    "description": "",
+                    "type": "integer"
+                  },
+                  "type": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "triggerId": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

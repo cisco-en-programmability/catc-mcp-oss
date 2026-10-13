@@ -1,0 +1,102 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "cli": "query",
+        "discoveryId": "path",
+        "http": "query",
+        "jobId": "path",
+        "managementIpAddress": "query",
+        "netconf": "query",
+        "ping": "query",
+        "reachabilityStatus": "query",
+        "snmp": "query"
+      },
+      "uri": "/dna/intent/api/v1/discoverys/{discoveryId}/jobs/{jobId}/discoveredNetworkDevices/count",
+      "version": "3.2.1"
+    },
+    "description": "Use for count-only questions about devices discovered by a specific named discovery, such as how many devices a discovery found or whether a named discovery discovered any devices. For named discoveries, first resolve the discovery settings id with api_getAllDiscoveryDetails, then get the latest jobId with api_getDiscoveryJobBySettingsId, then call this tool with discoveryId and jobId. Do not use api_getDiscoveryJobsSummarys as the jobId source for named discovery count questions.",
+    "name": "api_countDiscoveredNetworkDevices",
+    "parameters": {
+      "properties": {
+        "cli": {
+          "description": "CLI status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED\t",
+          "type": "string"
+        },
+        "discoveryId": {
+          "description": "Discovery id\t",
+          "type": "string"
+        },
+        "http": {
+          "description": "HTTP status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED\t",
+          "type": "string"
+        },
+        "jobId": {
+          "description": "The id of the discovery job.\n",
+          "type": "string"
+        },
+        "managementIpAddress": {
+          "description": "Management IP address of the network device \t",
+          "type": "string"
+        },
+        "netconf": {
+          "description": "Netconf status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED \t",
+          "type": "string"
+        },
+        "ping": {
+          "description": "Ping status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED\t",
+          "type": "string"
+        },
+        "reachabilityStatus": {
+          "description": "Reachability status of the network device.",
+          "enum": [
+            "REACHABLE",
+            "ONLY_PING_REACHABLE",
+            "UNREACHABLE",
+            "UNKNOWN"
+          ],
+          "type": "string"
+        },
+        "snmp": {
+          "description": "SNMP status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED \t",
+          "type": "string"
+        }
+      },
+      "required": [
+        "discoveryId",
+        "jobId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "example": 15,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "title": "Count Response",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

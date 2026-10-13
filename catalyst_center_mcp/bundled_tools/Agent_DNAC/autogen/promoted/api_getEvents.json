@@ -1,0 +1,128 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "eventId": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "tags": "query"
+      },
+      "uri": "/dna/intent/api/v1/events",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the list of registered Events with provided eventIds or tags as mandatory",
+    "name": "api_getEvents",
+    "parameters": {
+      "properties": {
+        "eventId": {
+          "description": "The registered EventId should be provided",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "order(asc/desc)",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "SortBy field name",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The registered Tags should be provided",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tags"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "category": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "details": {
+            "description": "",
+            "properties": {},
+            "type": "object"
+          },
+          "domain": {
+            "description": "",
+            "type": "string"
+          },
+          "eventId": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "nameSpace": {
+            "description": "",
+            "type": "string"
+          },
+          "severity": {
+            "description": "",
+            "type": "number"
+          },
+          "subDomain": {
+            "description": "",
+            "type": "string"
+          },
+          "subscriptionTypes": {
+            "description": "",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "tags": {
+            "description": "",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,119 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{deviceId}/chassis",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns chassis details for given device ID",
+    "name": "api_getChassisDetailsForDevice",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "Device ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "assemblyNumber": {
+                "description": "Assembly Number of the chassis",
+                "type": "string"
+              },
+              "assemblyRevision": {
+                "description": "Assembly Revision of the chassis",
+                "type": "string"
+              },
+              "containmentEntity": {
+                "description": "Containment Entity of the chassis",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the chassis",
+                "type": "string"
+              },
+              "entityPhysicalIndex": {
+                "description": "Entity Physical Index of the chassis",
+                "type": "string"
+              },
+              "hardwareVersion": {
+                "description": "Hardware Version of the chassis",
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "ID of the chassis",
+                "type": "string"
+              },
+              "isFieldReplaceable": {
+                "description": "To mention if field is replaceable",
+                "enum": [
+                  "UNKNOWN",
+                  "TRUE",
+                  "FALSE",
+                  "NOT_APPLICABLE"
+                ],
+                "type": "string"
+              },
+              "isReportingAlarmsAllowed": {
+                "description": "To mention if reporting alarms are allowed",
+                "enum": [
+                  "UNKNOWN",
+                  "TRUE",
+                  "FALSE",
+                  "NOT_APPLICABLE"
+                ],
+                "type": "string"
+              },
+              "manufacturer": {
+                "description": "Manufacturer of the chassis",
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the chassis",
+                "type": "string"
+              },
+              "partNumber": {
+                "description": "Part Number of the chassis",
+                "type": "string"
+              },
+              "serialNumber": {
+                "description": "Serial Number of the chassis",
+                "type": "string"
+              },
+              "vendorEquipmentType": {
+                "description": "Vendor Equipment Type of the chassis",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

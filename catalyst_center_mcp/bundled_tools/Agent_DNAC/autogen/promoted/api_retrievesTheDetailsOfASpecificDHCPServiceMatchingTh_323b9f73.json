@@ -1,0 +1,119 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "endTime": "query",
+        "id": "path",
+        "startTime": "query"
+      },
+      "uri": "/dna/data/api/v1/dhcpServices/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the details of the DHCP Service matching the given id. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-DHCPServices-1.0.0-resolved.yaml",
+    "name": "api_retrievesTheDetailsOfASpecificDHCPServiceMatchingTh_323b9f73",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "Unique id of the DHCP Service. It is the combination of DHCP Server IP (`serverIp`) and Device UUID (`deviceId`) separated by underscore (`_`).\nExample: If `serverIp` is `10.76.81.33` and `deviceId` is `6bef213c-19ca-4170-8375-b694e251101c`, then the `id` would be `10.76.81.33_6bef213c-19ca-4170-8375-b694e251101c`\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "deviceFamily": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceId": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceName": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceSiteHierarchy": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceSiteHierarchyId": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceSiteId": {
+              "description": "",
+              "type": "string"
+            },
+            "discoverOfferLatency": {
+              "description": "",
+              "type": "integer"
+            },
+            "failedTransactions": {
+              "description": "",
+              "type": "integer"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "latency": {
+              "description": "",
+              "type": "integer"
+            },
+            "requestAcknowledgeLatency": {
+              "description": "",
+              "type": "integer"
+            },
+            "serverIp": {
+              "description": "",
+              "type": "string"
+            },
+            "successfulTransactions": {
+              "description": "",
+              "type": "integer"
+            },
+            "transactions": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

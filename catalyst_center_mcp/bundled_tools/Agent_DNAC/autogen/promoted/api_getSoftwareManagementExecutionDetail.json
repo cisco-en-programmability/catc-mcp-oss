@@ -1,0 +1,225 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "release_status": "SMO_JUL_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/system/api/v1/softwareManagementExecutions/{id}",
+      "version": "3.2.1"
+    },
+    "description": "**Pick this read-only tool to MONITOR one existing Catalyst Center software-management execution.**\n\nIt returns status, completion percentage, timing, task details, failure information, and release metadata for a known execution ID. The ID normally comes from an already-started release download, upgrade, delete, or optional-package workflow.\n\nWhen an answer identifies the Catalyst Center release version associated with the execution, use `releaseDisplayVersion` only. Never expose `releaseVersion`, which is an internal/API value. If `releaseDisplayVersion` is absent, say that the controller did not return a display version; never fall back to `releaseVersion`.\n\nWhen interpreting execution progress, treat `status` as authoritative. **Mandatory normalization:** if `status` is `SUCCESS`, always report progress as `100%` complete, regardless of the raw `completedPercentage` value, including when it is 0, absent, null, or stale. Use numeric `100` in structured output and `100%` in user-facing text. Never expose a raw 0 for a successful execution, never say that progress was not reported, and never imply that a successful execution is incomplete. Apply this rule consistently in prose, tables, cards, key-value sets, and every other response format. For statuses other than `SUCCESS`, report `completedPercentage` only when it is present and clearly identify it as controller-reported progress.\n\nUse this tool for questions such as:\n- What is the status or progress of execution ID X?\n- Why did software-management execution X fail?\n- Which task is currently running or failed in execution X?\n- Has execution X completed?\n\nDo NOT use it to list potential upgrade targets, inspect release packages, or determine the installed version. It cannot start, retry, cancel, force-update, or otherwise modify an execution.",
+    "name": "api_getSoftwareManagementExecutionDetail",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Exact software-management execution ID returned by the workflow that was already started. Do not pass a release ID, release name, task name, or invented value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Release execution result",
+      "properties": {
+        "response": {
+          "description": "Release execution detail",
+          "properties": {
+            "completedPercentage": {
+              "description": "Workflow completion percentage. Treat `status` as authoritative. **Mandatory normalization:** when `status` is `SUCCESS`, ignore the raw value in this field and always report progress as numeric `100` in structured output and `100%` in user-facing text. This rule applies even when the raw value is 0, absent, null, or stale, and it overrides the controller-reported percentage. Never expose 0% or say progress was unavailable for a successful execution. For statuses other than `SUCCESS`, report this value only when present and clearly identify it as controller-reported progress.",
+              "example": 50.25,
+              "type": "number"
+            },
+            "createdBy": {
+              "description": "This field represents the user who triggered this execution.",
+              "example": "admin",
+              "type": "string"
+            },
+            "duration": {
+              "description": "Total time taken to complete this execution process.",
+              "example": 12345,
+              "type": "integer"
+            },
+            "endDate": {
+              "description": "The end data and time of the execution",
+              "example": "2022-04-30T09:45:22.000Z",
+              "type": "string"
+            },
+            "errorCode": {
+              "description": "Error code of the execution process",
+              "example": "EXECUTION_ERROR",
+              "type": "string"
+            },
+            "errorMessage": {
+              "description": "Error message of this execution process",
+              "example": "failed to proceed the execution.",
+              "type": "string"
+            },
+            "id": {
+              "description": "The UUID of the execution process",
+              "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+              "type": "string"
+            },
+            "isForceUpdate": {
+              "description": "This states whether the execution is forcefully updated or not",
+              "example": false,
+              "type": "boolean"
+            },
+            "jobType": {
+              "description": "The software management execution job type",
+              "enum": [
+                "DOWNLOAD_RELEASE",
+                "UPGRADE_RELEASE",
+                "UPDATE_DOWNLOADED_RELEASE",
+                "DELETE_RELEASE",
+                "INSTALL_OPTIONAL_PACKAGE",
+                "UNINSTALL_OPTIONAL_PACKAGE"
+              ],
+              "example": "DOWNLOAD_RELEASE",
+              "type": "string"
+            },
+            "localReleaseId": {
+              "description": "The UUID of the release installed",
+              "example": "670ca536-5dad-4e5a-85ce-647d12a3c893",
+              "type": "string"
+            },
+            "optionalPackages": {
+              "description": "The requested optional package details.",
+              "example": [
+                "package-1::1.2.3"
+              ],
+              "items": {
+                "description": "The optional package id",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "releaseDisplayName": {
+              "description": "The release display name of the release.",
+              "example": "dna-hybrid-1.1.0",
+              "type": "string"
+            },
+            "releaseDisplayVersion": {
+              "description": "User-facing release version associated with this execution. Use this field exclusively whenever naming the execution's Catalyst Center release version in an answer.",
+              "example": "1.1.0",
+              "type": "string"
+            },
+            "releaseName": {
+              "description": "The release name of the release.",
+              "example": "dna-hybrid",
+              "type": "string"
+            },
+            "releaseVersion": {
+              "description": "Internal/API release identifier associated with this execution. Never include it in a user-facing answer and never use it as a fallback for `releaseDisplayVersion`.",
+              "example": "1.1.0",
+              "type": "string"
+            },
+            "startDate": {
+              "description": "The start data and time of the execution",
+              "example": "2022-04-30T04:45:22.000Z",
+              "type": "string"
+            },
+            "status": {
+              "description": "Authoritative controller-reported execution state. When this terminal state is `SUCCESS`, state that the execution completed successfully and always report progress as numeric `100` in structured output and `100%` in user-facing text, regardless of the raw `completedPercentage` value. Never expose 0% or unavailable progress for a successful execution.",
+              "enum": [
+                "INPROGRESS",
+                "SUCCESS",
+                "FAILED",
+                "CANCELLED"
+              ],
+              "example": "SUCCESS",
+              "type": "string"
+            },
+            "systemErrorMessage": {
+              "description": "System error message of this backup execution process",
+              "example": "something went wrong",
+              "type": "string"
+            },
+            "tasks": {
+              "description": "Represents a task in the workflow",
+              "items": {
+                "description": "Contains task information.",
+                "properties": {
+                  "endDate": {
+                    "description": "The end date and time of the task process",
+                    "example": "2022-04-30T02:21:22.000Z",
+                    "type": "string"
+                  },
+                  "errorCode": {
+                    "description": "The error code of the task process",
+                    "example": "SMO#BAPI_INITIALIZATION",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "UUID of the task",
+                    "example": "d13a6a6a-4d23-4f8e-b080-bd6cdfe4920c",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "The error message of the task process",
+                    "example": "Not able to connect to mongo managed service",
+                    "type": "string"
+                  },
+                  "startDate": {
+                    "description": "The start date and time of the task process",
+                    "example": "2022-04-30T02:21:22.000Z",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "The task status",
+                    "enum": [
+                      "INPROGRESS",
+                      "SUCCESS",
+                      "FAILED",
+                      "CANCELLED"
+                    ],
+                    "example": "SUCCESS",
+                    "type": "string"
+                  },
+                  "systemErrorMessage": {
+                    "description": "The system error message of the task process",
+                    "example": "Not able to connect to mongo managed service",
+                    "type": "string"
+                  },
+                  "taskName": {
+                    "description": "The task name",
+                    "example": "Post Upgrade Hook",
+                    "type": "string"
+                  }
+                },
+                "title": "model.Task",
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "updateMessage": {
+              "description": "Force update message",
+              "example": "Force Update",
+              "type": "string"
+            }
+          },
+          "title": "model.ReleaseExecutionWitTask",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "title": "model.ReleaseExecutionWitTaskResult",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,169 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/eox-status/device/{deviceId}",
+      "version": "2.3.7.9"
+    },
+    "description": "**MANDATORY PREREQUISITE:** For site-scoped EOX queries, you MUST call `api_getSites` before `get_device_details`, and you MUST call `get_device_details` before `api_getEoXDetailsPerDevice`.\n\n**Steps:**\n1. Call `api_getSites` with the user-specified site name.\n2. Extract the `nameHierarchy` from the `api_getSites` response.\n3. Call `get_device_details` with `siteHierarchy` set to the extracted `nameHierarchy` to retrieve the devices in that site.\n4. Extract the `deviceId` or device UUID for each matching device from the `get_device_details` response.\n5. Call `api_getEoXDetailsPerDevice` with `deviceId` set to each resolved device UUID.\n6. Use the returned per-device EOX details or per-device `alertCount` values to answer the user's site-scoped EOX question.\n\n**Exception:** Skip step 1 if the user already provides an exact site hierarchy value that can be passed directly as `siteHierarchy` to `get_device_details`. Skip steps 1-3 if the user already provides a valid device UUID directly for a specific device.\n\n**Returns:** Detailed EOX information for a specific device, including per-device alert count, alert details, alert type, bulletin information, lifecycle dates, scan status, comments, and last scan time. For site-scoped questions, this tool should be executed after resolving the site to devices and then called once per device.",
+    "name": "api_getEoXDetailsPerDevice",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "Device instance UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Root",
+      "properties": {
+        "response": {
+          "description": "Response",
+          "properties": {
+            "alertCount": {
+              "description": "Number of EoX alerts on the network device",
+              "type": "integer"
+            },
+            "comments": {
+              "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "deviceId": {
+              "description": "Device instance UUID",
+              "type": "string"
+            },
+            "eoxDetails": {
+              "description": "Detail of EoX Alert. All dates in the detail are represented in unix time.",
+              "items": {
+                "properties": {
+                  "bulletinHeadline": {
+                    "description": "Title of the EoX bulletin",
+                    "type": "string"
+                  },
+                  "bulletinName": {
+                    "description": "Name of the EoX bulletin",
+                    "type": "string"
+                  },
+                  "bulletinNumber": {
+                    "description": "Identifier of the EoX bulletin. Usually the same as name.",
+                    "type": "string"
+                  },
+                  "bulletinPID": {
+                    "description": "The part number for the EoX alert. eg:- PWR-C1-1100WAC",
+                    "type": "string"
+                  },
+                  "bulletinURL": {
+                    "description": "URL where the EoX bulletin is posted",
+                    "type": "string"
+                  },
+                  "endOfHardwareNewServiceAttachmentDate": {
+                    "description": "For equipment and software that is not covered by a service-and-support contract, this is the last date to order a new service-and-support contract or add the equipment and/or software to an existing service-and-support contract",
+                    "type": "string"
+                  },
+                  "endOfHardwareServiceContractRenewalDate": {
+                    "description": "The last date to extend or renew a service contract for the product",
+                    "type": "string"
+                  },
+                  "endOfLastHardwareShipDate": {
+                    "description": "The last-possible ship date that can be requested of Cisco and/or its contract manufacturers",
+                    "type": "string"
+                  },
+                  "endOfLifeDate": {
+                    "description": "The last date to receive applicable service and support for the product as entitled by active service contracts or by warranty terms and conditions. This will be populated for software alerts only.",
+                    "type": "string"
+                  },
+                  "endOfLifeExternalAnnouncementDate": {
+                    "description": "The date the document that announces the end-of-sale and end-of-life of a product is distributed to the general public",
+                    "type": "string"
+                  },
+                  "endOfSaleDate": {
+                    "description": "The last date to order the product through Cisco point-of-sale mechanisms",
+                    "type": "string"
+                  },
+                  "endOfSignatureReleasesDate": {
+                    "description": "The date after which there will be no more signature update release for the product",
+                    "type": "string"
+                  },
+                  "endOfSoftwareMaintenanceReleasesDate": {
+                    "description": "The last date that Cisco Engineering may release any final software maintenance releases or bug fixes for the product",
+                    "type": "string"
+                  },
+                  "endOfSoftwareVulnerabilityOrSecuritySupportDate": {
+                    "description": "The last date that Cisco Engineering may release bug fixes for Vulnerability or Security issues for the product. This will be populated for software alerts only.",
+                    "type": "string"
+                  },
+                  "endOfSoftwareVulnerabilityOrSecuritySupportDateHw": {
+                    "description": "The last date that Cisco Engineering may release bug fixes for Vulnerability or Security issues for the product. This will be populated for hardware or module alerts only.",
+                    "type": "string"
+                  },
+                  "eoXPhysicalType": {
+                    "description": "The type of part for EoX alert. eg:- Power Supply, Chassis, Fan etc.",
+                    "type": "string"
+                  },
+                  "eoxAlertType": {
+                    "description": "Type of EoX alert",
+                    "enum": [
+                      "HARDWARE",
+                      "SOFTWARE",
+                      "MODULE",
+                      "NONE"
+                    ],
+                    "type": "string"
+                  },
+                  "lastDateOfSupport": {
+                    "description": "The last date to receive applicable service and support for the product as entitled by active service contracts or by warranty terms and conditions. This will be populated for hardware and module alerts only.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the EoX alert. Every EoX announcement has a unique name. ie:- EOL13873",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "lastScanTime": {
+              "description": "Time at which the network device was scanned. The representation is unix time.",
+              "type": "integer"
+            },
+            "scanStatus": {
+              "description": "Status of the scan performed on the network device",
+              "enum": [
+                "NOT_SCANNED",
+                "SUCCESS",
+                "FAILED",
+                "IN_PROGRESS",
+                "UNKNOWN"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

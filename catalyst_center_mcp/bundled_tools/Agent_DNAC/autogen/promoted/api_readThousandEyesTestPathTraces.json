@@ -1,0 +1,160 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "platform": "DNAC",
+      "release_status": "Assurance_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "clientMacAddress": "query",
+        "id": "path"
+      },
+      "uri": "/dna/data/api/v1/thousandEyesTestResults/{id}/pathTraces",
+      "version": "3.2.1"
+    },
+    "description": "Retrieves the list of path traces for the given ThousandEyes test result.\n\nNotes:\n* For each trace there would be a list of hops in the path.\n* The hop index starts from 1.\n* It is possible that some hop indexes are missing in the trace. This could happen when details of the hop could not be determined.\n* If `clientMacAddress` parameter is provided, then the trace would start from the given client. But if the given client is not connected to the switch where ThousandEyes agent is running, then the path trace will not be accurate. The path from agent onwards will be correct though.\n* The last hop for each trace would be the target server hop, but in case the trace did not complete (packet lost), then the penultimate hop would have attribute `traceTerminated: true`, and it means that the packet was not forwarded till the target.\n For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-thousandEyesPathViz-1.0.0-resolved.yaml.\n\nResolver continuation rule: If a path-trace request provides a site, test name, testId, agent name, hostname, or networkDeviceName and the ThousandEyes test-results lookup returns at least one id, continue to this path-trace tool in the same turn with one returned id. Do not stop after showing the test-results lookup unless the lookup returns no rows.",
+    "name": "api_readThousandEyesTestPathTraces",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "default": "intent",
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "clientMacAddress": {
+          "description": "Optional client MAC address. If this is provided the the path trace would start from the given client, otherwise the path trace starts from the switch where ThousanEyes agent is running.\n\nUse this only for a client MAC address. Do not pass hostnames, FQDNs, test names, agent names, networkDeviceName values, or site names as clientMacAddress.",
+          "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$|^[0-9A-Fa-f]{4}\\.[0-9A-Fa-f]{4}\\.[0-9A-Fa-f]{4}$",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier of the test result.\nThis must be one ThousandEyes test result/sample id returned by the test-results lookup. It must be a single 24-character hexadecimal value. Do not pass testName, testId, a hostname, or a comma-separated list here; if the lookup returns multiple comma-separated ids, split the value and pass one id.",
+          "pattern": "^[0-9a-fA-F]{24}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "List of ThousandEyes path traces.",
+      "properties": {
+        "appLink": {
+          "description": "Direct link to the page for the current path trace in ThousandEyes portal.",
+          "type": "string"
+        },
+        "response": {
+          "description": "List of ThousandEyes path traces.",
+          "items": {
+            "description": "A single ThousandEyes path trace.",
+            "properties": {
+              "hops": {
+                "description": "List of the hops in the given path trace",
+                "items": {
+                  "description": "Single hop within a path trace",
+                  "properties": {
+                    "healthScore": {
+                      "description": "Health score of the node. This is applicable only for internal nodes.",
+                      "format": "int32",
+                      "maximum": 10,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "identifier": {
+                      "description": "Identifier for the node.\n\n* For client nodes, it would be client MAC address.\n* For internal network device nodes, it would be the network device UUID as per inventory.\n* For external nodes, this attribute will be null.\n",
+                      "type": "string"
+                    },
+                    "index": {
+                      "description": "Hop number in the path. It is possible that some hop numbers are missing in the path. This can happen in case where hop details are not available.",
+                      "format": "int32",
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "ipAddress": {
+                      "description": "IP address of the node.",
+                      "type": "string"
+                    },
+                    "jitter": {
+                      "description": "Average jitter in milliseconds. This attribute is available only on the agent node, and it represents the jitter for complete path from the agent to the target.",
+                      "format": "double",
+                      "type": "number"
+                    },
+                    "location": {
+                      "description": "Location of the node as determined by ThousandEyes trace. This attribute is not applicable for agent node and the nodes before that.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of the node. For internal nodes, the name would be determined by data in inventory. For external nodes, the name would be RDNS lookup value from ThousandEyes trace.",
+                      "type": "string"
+                    },
+                    "network": {
+                      "description": "Name of the network as determined by ThousandEyes trace. This attribute is not applicable for agent node and the nodes before that.",
+                      "type": "string"
+                    },
+                    "responseTime": {
+                      "description": "Network response time in milliseconds from the agent till this node. This attribute is not applicable for agent node and the nodes before that.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "traceTerminated": {
+                      "description": "Flag to indicate whether path trace got terminated at this node without reaching the target server. This means that packet was lost at this node. Target server node would be after this node, but packet was not forwarded from this node to the same.",
+                      "type": "boolean"
+                    },
+                    "type": {
+                      "description": "Type of the hop.\n\n| Type       | Description  |\n|------------|--------------|\n| `CLIENT`   | Client node (typically first hop in the path). |\n| `AP`       | Access point, if client is wireless. |\n| `AGENT`    | Switch where ThousandEyes agent is running. |\n| `SWITCH`   | Any other switch within the path. |\n| `ROUTER`   | Router node. |\n| `WLC`      | Wireless controller node. |\n| `EXTERNAL` | Any node which is not managed within the system and is external. Typically, this would be WAN/internet hops. |\n| `TARGET`   | Target server node. |\n| `UNKNOWN`  | Any node which is in-between LAN nodes, but corresponding device was not found in inventory. e.g., a node was there in ThousandEyes path trace between a switch and a router, but system was not able to find any device that owned that IP address. |\n",
+                      "enum": [
+                        "CLIENT",
+                        "AP",
+                        "AGENT",
+                        "SWITCH",
+                        "ROUTER",
+                        "WLC",
+                        "EXTERNAL",
+                        "TARGET",
+                        "UNKNOWN"
+                      ],
+                      "type": "string"
+                    },
+                    "wlcId": {
+                      "description": "Unique id of the wireless controller. This is applicable only for access point node.",
+                      "format": "uuid",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "index",
+                    "type"
+                  ],
+                  "title": "ThousandEyesPathTraceHop",
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Unique identifier for the path trace",
+                "type": "string"
+              }
+            },
+            "title": "ThousandEyesPathTrace",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response.",
+          "type": "string"
+        }
+      },
+      "title": "ThousandEyesPathTracesResponse",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

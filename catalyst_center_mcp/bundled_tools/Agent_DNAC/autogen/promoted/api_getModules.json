@@ -1,0 +1,173 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceId": "query",
+        "limit": "query",
+        "nameList": "query",
+        "offset": "query",
+        "operationalStateCodeList": "query",
+        "partNumberList": "query",
+        "vendorEquipmentTypeList": "query"
+      },
+      "uri": "/dna/intent/api/v1/network-device/module",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns modules by specified device id. The API returns a paginated response based on 'limit' and 'offset' parameters, allowing up to 500 records per page. 'limit' specifies the number of records, and 'offset' sets the starting point using 1-based indexing. Use /dna/intent/api/v1/network-device/module/count API to get the total record count. For data sets over 500 records, make multiple calls, adjusting 'limit' and 'offset' to retrieve all records incrementally.",
+    "name": "api_getModules",
+    "parameters": {
+      "properties": {
+        "deviceId": {
+          "description": "deviceId",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "nameList": {
+          "description": "nameList",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "operationalStateCodeList": {
+          "description": "operationalStateCodeList",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "partNumberList": {
+          "description": "partNumberList",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "vendorEquipmentTypeList": {
+          "description": "vendorEquipmentTypeList",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "deviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "assemblyNumber": {
+                "description": "Assembly Number of the module",
+                "type": "string"
+              },
+              "assemblyRevision": {
+                "description": "Assembly Revision of the module",
+                "type": "string"
+              },
+              "attributeInfo": {
+                "description": "Deprecated",
+                "properties": {},
+                "type": "object"
+              },
+              "containmentEntity": {
+                "description": "Containment Entity of the module",
+                "type": "string"
+              },
+              "description": {
+                "description": "Description of the module",
+                "type": "string"
+              },
+              "entityPhysicalIndex": {
+                "description": "Entity Physical Index of the module",
+                "type": "string"
+              },
+              "id": {
+                "description": "ID of the module",
+                "type": "string"
+              },
+              "isFieldReplaceable": {
+                "description": "To mention if field is replaceable",
+                "enum": [
+                  "UNKNOWN",
+                  "TRUE",
+                  "FALSE",
+                  "NOT_APPLICABLE"
+                ],
+                "type": "string"
+              },
+              "isReportingAlarmsAllowed": {
+                "description": "To mention if reporting alarms are allowed",
+                "enum": [
+                  "UNKNOWN",
+                  "TRUE",
+                  "FALSE",
+                  "NOT_APPLICABLE"
+                ],
+                "type": "string"
+              },
+              "manufacturer": {
+                "description": "Manufacturer of the module",
+                "type": "string"
+              },
+              "moduleIndex": {
+                "description": "Index of the module",
+                "type": "integer"
+              },
+              "name": {
+                "description": "Name of the module",
+                "type": "string"
+              },
+              "operationalStateCode": {
+                "description": "Operational state of the module",
+                "type": "string"
+              },
+              "partNumber": {
+                "description": "Part number of the module",
+                "type": "string"
+              },
+              "serialNumber": {
+                "description": "Serial number of the module",
+                "type": "string"
+              },
+              "vendorEquipmentType": {
+                "description": "Vendor euipment type of the module",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

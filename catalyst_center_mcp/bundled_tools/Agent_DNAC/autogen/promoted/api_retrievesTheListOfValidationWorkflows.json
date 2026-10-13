@@ -1,0 +1,122 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "endTime": "query",
+        "limit": "query",
+        "offset": "query",
+        "runStatus": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/intent/api/v1/diagnosticValidationWorkflows",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the workflows that have been successfully submitted and are currently available. This is sorted by `submitTime`",
+    "name": "api_retrievesTheListOfValidationWorkflows",
+    "parameters": {
+      "properties": {
+        "endTime": {
+          "description": " Workflows started before the given time (as milliseconds since UNIX epoch).",
+          "type": "number"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "runStatus": {
+          "description": "Execution status of the workflow. If the workflow is successfully submitted, runStatus is `PENDING`. If the workflow execution has started, runStatus is `IN_PROGRESS`. If the workflow executed is completed with all validations executed, runStatus is `COMPLETED`. If the workflow execution fails while running validations, runStatus is `FAILED`.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Workflows started after the given time (as milliseconds since UNIX epoch).",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "List of validation workflow details",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "Workflow description",
+                "type": "string"
+              },
+              "endTime": {
+                "description": "Workflow finish time (as milliseconds since UNIX epoch).",
+                "type": "integer"
+              },
+              "id": {
+                "description": "Workflow id",
+                "type": "string"
+              },
+              "name": {
+                "description": "Workflow name",
+                "type": "string"
+              },
+              "runStatus": {
+                "description": "Execution status of the workflow. If the workflow is successfully submitted, runStatus will return `PENDING`. If the workflow execution has started, runStatus will return `IN_PROGRESS`. If the workflow executed is completed with all validations executed, runStatus will return `COMPLETED`. If the workflow execution fails while running validations, runStatus will return `FAILED`.",
+                "enum": [
+                  "IN_PROGRESS",
+                  "PENDING",
+                  "COMPLETED",
+                  "FAILED"
+                ],
+                "type": "string"
+              },
+              "startTime": {
+                "description": "Workflow start time (as milliseconds since UNIX epoch).",
+                "type": "integer"
+              },
+              "submitTime": {
+                "description": "Workflow submit time (as milliseconds since UNIX epoch).",
+                "type": "integer"
+              },
+              "validationSetIds": {
+                "description": "List of validation set ids",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "validationStatus": {
+                "description": "Overall result of execution of the validation workflow",
+                "enum": [
+                  "CRITICAL",
+                  "WARNING",
+                  "INFORMATION"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

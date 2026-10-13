@@ -1,0 +1,55 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceIds": "query",
+        "status": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceMaintenanceSchedules/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve the total count of all scheduled maintenance windows for network devices.",
+    "name": "api_retrieveTheTotalNumberOfScheduledMaintenanceWindows",
+    "parameters": {
+      "properties": {
+        "networkDeviceIds": {
+          "description": "List of network device ids.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the maintenance schedule. Possible values are: UPCOMING, IN_PROGRESS, COMPLETED, FAILED. Refer features for more details.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "a total count of records in a given resource.",
+          "properties": {
+            "count": {
+              "description": "Count of scheduled maintenance windows",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

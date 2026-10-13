@@ -1,0 +1,72 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/networkDevices/{networkDeviceId}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get security advisory network device by network device id",
+    "name": "api_getSecurityAdvisoryNetworkDeviceByNetworkDeviceId",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Security advisory network device details",
+          "properties": {
+            "advisoryCount": {
+              "description": "Number of advisories to which the network device is vulnerable",
+              "type": "integer"
+            },
+            "comments": {
+              "description": "More details about the scan status. ie:- if the scan status is failed, comments will give the reason for failure",
+              "type": "string"
+            },
+            "lastScanTime": {
+              "description": "Time at which the device was scanned",
+              "type": "integer"
+            },
+            "networkDeviceId": {
+              "description": "Id of the device",
+              "type": "string"
+            },
+            "scanMode": {
+              "description": "'ESSENTIALS' - the device was scanned using a version based match criteria. 'ADVANTAGE' - the device was scanned using a version based match and user provided config match criteria. 'CX_CLOUD' - the device was scanned using CX cloud engine which uses advanced matching criteria which eliminates false positives.  \u2018NOT_AVAILABLE\u2019 - scan mode is not available. e.g. when the device is not scanned",
+              "type": "string"
+            },
+            "scanStatus": {
+              "description": "'NOT_SCANNED' - the device was not scanned. 'IN_PROGRESS' - a scan is in progress for the device. 'SUCCESS' - device scan was successful. 'FAILED' - device scan failed. 'FALL_BACK' - the device was supposed to be scanned using CX_CLOUD but because of connectivity issues fell back to a ESSENTIALS or ADVANTAGE scan",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

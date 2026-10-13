@@ -1,0 +1,187 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "importContextUuid": "path"
+      },
+      "uri": "/dna/intent/api/v1/maps/import/{importContextUuid}/status",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the status of a map archive import operation. For a map archive import that has just been initiated, will provide the result of validation of the archive and a pre-import preview of what will be performed if the import is performed.  Once an import is requested to be performed, this API will give the status of the import and upon completion a post-import summary of what was performed by the operation.",
+    "name": "api_importMapArchive_ImportStatus",
+    "parameters": {
+      "properties": {
+        "importContextUuid": {
+          "description": "The unique import context UUID given by a previous and recent call to maps/import/start API",
+          "type": "string"
+        }
+      },
+      "required": [
+        "importContextUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "auditLog": {
+          "description": "",
+          "properties": {
+            "children": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "entitiesCount": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "entityName": {
+              "description": "",
+              "type": "string"
+            },
+            "entityType": {
+              "description": "",
+              "enum": [
+                "ROOT",
+                "SITE",
+                "BUILDING",
+                "FLOOR",
+                "ACCESS_POINT",
+                "PLANNED_ACCESS_POINT",
+                "CALIBRATION_MODEL",
+                "OUTDOOR_AREA",
+                "SENSOR",
+                "OBSTACLE_TYPES",
+                "OBSTACLE_TYPE",
+                "CSV"
+              ],
+              "type": "string"
+            },
+            "errorEntitiesCount": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "errors": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "message": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "infos": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "message": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "matchingEntitiesCount": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "subTasksRootTaskId": {
+              "description": "",
+              "type": "string"
+            },
+            "successfullyImportedFloors": {
+              "description": "",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "warnings": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "message": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "status": {
+          "description": "",
+          "enum": [
+            "UNKNOWN",
+            "DEFINED",
+            "UNDERWAY",
+            "COMPLETED",
+            "CANCELLED"
+          ],
+          "type": "string"
+        },
+        "uuid": {
+          "description": "",
+          "properties": {
+            "leastSignificantBits": {
+              "description": "",
+              "type": "integer"
+            },
+            "mostSignificantBits": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

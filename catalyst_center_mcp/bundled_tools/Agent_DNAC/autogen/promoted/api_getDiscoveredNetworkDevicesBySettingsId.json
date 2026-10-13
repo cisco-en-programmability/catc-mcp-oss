@@ -1,0 +1,304 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "cli": "query",
+        "discoveryId": "path",
+        "http": "query",
+        "jobId": "path",
+        "limit": "query",
+        "managementIpAddress": "query",
+        "netconf": "query",
+        "offset": "query",
+        "ping": "query",
+        "reachabilityStatus": "query",
+        "snmp": "query"
+      },
+      "uri": "/dna/intent/api/v1/discoverys/{discoveryId}/jobs/{jobId}/discoveredNetworkDevices",
+      "version": "3.2.1"
+    },
+    "description": "Final step for workflows that need discovered network-device rows or need to verify whether a management IP address was discovered. For named discovery workflows, use discoveryId from api_getAllDiscoveryDetails and jobId from api_getDiscoveryJobBySettingsId, then call this tool. For IP-only discovered-device checks with no discovery name, first call api_getDiscoveryJobsSummarys, then call this tool with discoveryId, jobId, and managementIpAddress. Do not answer discovered-device questions from api_getAllDiscoveryDetails or api_getDiscoveryJobsSummarys alone.",
+    "name": "api_getDiscoveredNetworkDevicesBySettingsId",
+    "parameters": {
+      "properties": {
+        "cli": {
+          "description": "CLI status for the IP during the job run.",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "NOT_PROVIDED",
+            "NOT_VALIDATED"
+          ],
+          "type": "string"
+        },
+        "discoveryId": {
+          "description": "The id of the discovery.\n",
+          "type": "string"
+        },
+        "http": {
+          "description": "HTTP status for the IP during the job run.",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "NOT_PROVIDED",
+            "NOT_VALIDATED"
+          ],
+          "type": "string"
+        },
+        "jobId": {
+          "description": "The id of the discovery job.\n",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "managementIpAddress": {
+          "description": "Management IP address of the network device \t",
+          "type": "string"
+        },
+        "netconf": {
+          "description": "Netconf status for the IP during the job run.",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "NOT_PROVIDED",
+            "NOT_VALIDATED"
+          ],
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "ping": {
+          "description": "Ping status for the IP during the job run.",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "NOT_PROVIDED",
+            "NOT_VALIDATED"
+          ],
+          "type": "string"
+        },
+        "reachabilityStatus": {
+          "description": "Reachability status of the network device.",
+          "enum": [
+            "REACHABLE",
+            "ONLY_PING_REACHABLE",
+            "UNREACHABLE",
+            "UNKNOWN"
+          ],
+          "type": "string"
+        },
+        "snmp": {
+          "description": "SNMP status for the IP during the job run.",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "NOT_PROVIDED",
+            "NOT_VALIDATED"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "discoveryId",
+        "jobId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Details of discovered network devices.",
+      "properties": {
+        "response": {
+          "description": "List of discovered network devices.",
+          "items": {
+            "description": "Details of the discovered devices",
+            "properties": {
+              "discoveryStatus": {
+                "description": "Discovery status of the network device. Possible values are:\n|  Status      |      Description                        |\n|--------------|-----------------------------------------|\n|`SUCCESS`     | The device was successfully discovered. |\n|`UNREACHABLE` | The device was not reachable.           |\n|`DISCARDED`   | The device was discarded.               |\n",
+                "enum": [
+                  "SUCCESS",
+                  "UNREACHABLE",
+                  "DISCARDED"
+                ],
+                "example": "SUCCESS",
+                "type": "string"
+              },
+              "hostname": {
+                "description": "The hostname assigned to the device.",
+                "example": "device-hostname",
+                "type": "string"
+              },
+              "id": {
+                "description": "Unique identifier of network device",
+                "example": "d27d5310-7cf6-4f7f-a5e8-a52a93383609",
+                "format": "uuid",
+                "type": "string"
+              },
+              "managementIpAddress": {
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "example": "250.162.252.170",
+                        "pattern": "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$",
+                        "title": "IPv4 Address",
+                        "type": "string"
+                      },
+                      {
+                        "example": "2001:db8:3c4d:15::1a2f:1a2b",
+                        "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$",
+                        "title": "IPv6 Address",
+                        "type": "string"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Management IP address of the network device",
+                "example": "192.168.1.1"
+              },
+              "reachabilityFailureReason": {
+                "description": "Reason for reachability failure. This message that provides more information about the reachability failure.",
+                "example": "SNMP Connectivity Failed",
+                "type": "string"
+              },
+              "reachabilityStatus": {
+                "description": "Reachability status of the network device. Possible values are:\n* `REACHABLE` - Device is reachable by SNMP (in case of network device) or HTTP (in case of compute device or Meraki device).\n* `ONLY_PING_REACHABLE` - Mandatory protocol (SNMP/HTTP/NETCONF) failed for the device. The device is reachable only by ICMP. \n* `UNREACHABLE` - Device is not reachable by either SNMP/HTTP or ICMP.\n* `UNKNOWN` - Device reachability status can't be determined. The product hasn't interacted with the device yet, or the parent device that controls the device is unreachable.\n",
+                "enum": [
+                  "REACHABLE",
+                  "ONLY_PING_REACHABLE",
+                  "UNREACHABLE",
+                  "UNKNOWN"
+                ],
+                "example": "REACHABLE",
+                "type": "string"
+              },
+              "status": {
+                "description": "Inventory related status of the network device.\n\n| status                 | Description                                                                                                                                                                                               |\n| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `MANAGED`              | The device is successfully managed.                                                                                                                                                                       |\n| `SYNC_NOT_STARTED`     | Sync request is queued and pending processing.                                                                                                                                                            |\n| `SYNC_INIT_FAILED`     | Sync initialization failed due to bootstrap issues.                                                                                                                                                       |\n| `SYNC_PRECHECK_FAILED` | Device failed to meet necessary preconditions for sync.                                                                                                                                                   |\n| `SYNC_IN_PROGRESS`     | Sync with the device is in progress.                                                                                                                                                                      |\n| `SYNC_INTERNAL_ERROR`  | Encountered an internal error during data collection, potentially leading to incomplete or outdated device information.                                                                                   |\n| `SYNC_DISABLED`        | Sync has been disabled on the device.                                                                                                                                                                     |\n| `DELETING_DEVICE`      | The device is being deleted from Catalyst Center.                                                                                                                                                         |\n| `UNDER_MAINTENANCE`    | The device is in maintenance mode. Assurance will not raise alerts when the network device is in maintenance mode.                                                                                        |\n| `QUARANTINED`          | The device is in quarantined state. Inventory sync and provisioning are disabled for the device.                                                                                                          |\n| `UNASSOCIATED`         | Access point is not associated with any WLC.                                                                                                                                                              |\n| `UNREACHABLE`          | The device is not reachable by either SNMP/HTTP/NETCONF or ICMP.                                                                                                                                          |\n| `UNKNOWN`              | All information from the device could not be collected, or inventory collection was not started. It may be a temporary issue. Attempt to resync the device, and if the error persists, contact Cisco TAC. |\n\n***Note***: This attribute reflects the current status of the device's data based on the sync process. It monitors the communications between \nthe management system and the device. A successful sync is indicated by \"MANAGED\" status, while any issues encountered \nare represented by specific error statuses. This attribute is updated to reflect the results of the most recent resync \nattempts. Please refer to the `errorDescription` attribute for more information about resync errors.\n",
+                "enum": [
+                  "MANAGED",
+                  "SYNC_NOT_STARTED",
+                  "SYNC_INIT_FAILED",
+                  "SYNC_PRECHECK_FAILED",
+                  "SYNC_IN_PROGRESS",
+                  "SYNC_INTERNAL_ERROR",
+                  "SYNC_DISABLED",
+                  "DELETING_DEVICE",
+                  "UNDER_MAINTENANCE",
+                  "QUARANTINED",
+                  "UNASSOCIATED",
+                  "UNREACHABLE",
+                  "UNKNOWN"
+                ],
+                "example": "MANAGED",
+                "type": "string"
+              },
+              "validationStatuses": {
+                "description": "Validation status of the credentials used to discover the devices. The validation status is returned as part of the discovery job response.\n",
+                "properties": {
+                  "cli": {
+                    "description": "CLI status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED",
+                    "enum": [
+                      "SUCCESS",
+                      "FAILURE",
+                      "NOT_PROVIDED",
+                      "NOT_VALIDATED"
+                    ],
+                    "example": "SUCCESS",
+                    "type": "string"
+                  },
+                  "http": {
+                    "description": "HTTP status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED",
+                    "enum": [
+                      "SUCCESS",
+                      "FAILURE",
+                      "NOT_PROVIDED",
+                      "NOT_VALIDATED"
+                    ],
+                    "example": "SUCCESS",
+                    "type": "string"
+                  },
+                  "netconf": {
+                    "description": "NETCONF status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED",
+                    "enum": [
+                      "SUCCESS",
+                      "FAILURE",
+                      "NOT_PROVIDED",
+                      "NOT_VALIDATED"
+                    ],
+                    "example": "SUCCESS",
+                    "type": "string"
+                  },
+                  "ping": {
+                    "description": "Ping status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED",
+                    "enum": [
+                      "SUCCESS",
+                      "FAILURE",
+                      "NOT_PROVIDED",
+                      "NOT_VALIDATED"
+                    ],
+                    "example": "SUCCESS",
+                    "type": "string"
+                  },
+                  "snmp": {
+                    "description": "SNMP status for the IP during the job run. Available values are 'SUCCESS', 'FAILURE', 'NOT_PROVIDED' and 'NOT_VALIDATED",
+                    "enum": [
+                      "SUCCESS",
+                      "FAILURE",
+                      "NOT_PROVIDED",
+                      "NOT_VALIDATED"
+                    ],
+                    "example": "SUCCESS",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "cli",
+                  "http",
+                  "netconf",
+                  "ping",
+                  "snmp"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "discoveryStatus",
+              "hostname",
+              "id",
+              "managementIpAddress",
+              "reachabilityStatus",
+              "status",
+              "validationStatuses"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version number of the response",
+          "example": "1.0",
+          "type": "string"
+        }
+      },
+      "required": [
+        "response",
+        "version"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

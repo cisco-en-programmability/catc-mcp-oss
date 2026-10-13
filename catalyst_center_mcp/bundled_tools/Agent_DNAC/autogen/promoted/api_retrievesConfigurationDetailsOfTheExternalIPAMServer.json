@@ -1,0 +1,63 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/ipam/serverSetting",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves configuration details of the external IPAM server. Use for integration/status and configuration questions such as \"Is Infoblox/BlueCat integrated?\", \"What external IPAM is configured?\", or \"Show external IPAM configuration\". This call returns provider/type, state, server details, username, and view (when configured). If no external IPAM server exists, this resource returns 404; in that case, respond that no external IPAM is configured. Tool Dependency: IMPORTANT. Call this tool directly and answer strictly from provider/view/state/config fields. Strong negative boundaries: DO NOT call pool/global/subpool retrieval tools for external-IPAM integration questions; DO NOT infer integration status without this tool response. Count vs detail boundary: this tool is detail/status-oriented, not a pool count source.",
+    "name": "api_retrievesConfigurationDetailsOfTheExternalIPAMServer",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "provider": {
+              "description": "Type of external IPAM. Can be either INFOBLOX, BLUECAT or GENERIC.",
+              "type": "string"
+            },
+            "serverName": {
+              "description": "A descriptive name of this external server, used for identification purposes",
+              "type": "string"
+            },
+            "serverUrl": {
+              "description": "The URL of this external server",
+              "type": "string"
+            },
+            "state": {
+              "description": "State of the the external IPAM.* OK indicates success of most recent periodic communication check with external IPAM.* CRITICAL indicates failure of most recent attempt to communicate with the external IPAM.* SYNCHRONIZING indicates that the process of synchronizing the external IPAM database with the local IPAM database is running and all other IPAM processes will be blocked until the completes.* DISCONNECTED indicates the external IPAM is no longer being used.",
+              "type": "string"
+            },
+            "userName": {
+              "description": "The external IPAM server login username",
+              "type": "string"
+            },
+            "view": {
+              "description": "The view under which pools are created in the external IPAM server.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

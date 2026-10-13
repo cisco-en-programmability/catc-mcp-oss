@@ -1,0 +1,64 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "deviceUuid": "path"
+      },
+      "uri": "/dna/intent/api/v1/compliance/{deviceUuid}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get detailed compliance breakdown by type (PSIRT, EOX, CONFIG, IMAGE) with source-level violations for a device.",
+    "name": "api_deviceComplianceStatus",
+    "parameters": {
+      "properties": {
+        "deviceUuid": {
+          "description": "Device UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceUuid"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "complianceStatus": {
+              "description": "Current compliance status of the device that will be one of COMPLIANT, NON_COMPLIANT, ERROR, IN_PROGRESS, NOT_APPLICABLE, NOT_AVAILABLE, COMPLIANT_WARNING, REMEDIATION_IN_PROGRESS, or ABORTED. ",
+              "type": "string"
+            },
+            "deviceUuid": {
+              "description": "UUID of the device.",
+              "type": "string"
+            },
+            "lastUpdateTime": {
+              "description": "Timestamp when the latest compliance checks ran.",
+              "type": "number"
+            },
+            "scheduleTime": {
+              "description": "Timestamp when the next compliance checks will run.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "profileId": "path"
+      },
+      "uri": "/dna/intent/api/v1/networkProfilesForSites/{profileId}/siteAssignments/count",
+      "version": "3.3.1"
+    },
+    "description": "Retrieves the count of sites that the given network profile for sites is assigned to.",
+    "name": "api_retrievesTheCountOfSitesThatTheGivenNetworkProfileF_40cb52b6",
+    "parameters": {
+      "properties": {
+        "profileId": {
+          "description": "The `id` of the network profile, retrievable from `GET /intent/api/v1/networkProfilesForSites`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "profileId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

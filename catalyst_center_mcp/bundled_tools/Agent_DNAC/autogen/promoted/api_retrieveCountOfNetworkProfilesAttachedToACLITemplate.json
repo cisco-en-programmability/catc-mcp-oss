@@ -1,0 +1,52 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "templateId": "path"
+      },
+      "uri": "/dna/intent/api/v1/templates/{templateId}/networkProfilesForSites/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the count of network profiles that a CLI template has been attached to by the template ID.",
+    "name": "api_retrieveCountOfNetworkProfilesAttachedToACLITemplate",
+    "parameters": {
+      "properties": {
+        "templateId": {
+          "description": "The `id` of the template, retrievable from `GET /intent/api/v1/templates`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "templateId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The reported count",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Response Version e.g. : 1.0",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

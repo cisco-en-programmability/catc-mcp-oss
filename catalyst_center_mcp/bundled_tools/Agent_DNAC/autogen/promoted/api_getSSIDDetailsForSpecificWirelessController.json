@@ -1,0 +1,112 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_JUN_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "adminStatus": "query",
+        "limit": "query",
+        "managed": "query",
+        "networkDeviceId": "path",
+        "offset": "query",
+        "ssidName": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/{networkDeviceId}/ssidDetails",
+      "version": "2.3.7.9"
+    },
+    "description": "Use this controller-specific SSID/WLAN collection API for list, show, detail, and filter questions about SSIDs or WLANs associated with one wireless controller. For example, \"List all WLANs on wireless controller <UUID>\" calls this API with that UUID as networkDeviceId. Pass a user-supplied controller UUID directly as networkDeviceId. If a controller hostname, management IP, or serial number is provided instead, resolve the controller first with get_device_details, take the canonical controller UUID from the result, and then continue to this API; never pass the hostname, IP, or serial number as networkDeviceId and do not stop after controller resolution. Controller-detail responses establish identity but do not return the controller-specific SSID/WLAN collection. Do not use api_getSSIDBySite for a controller-scoped request; that API is only for an explicit site-scoped SSID query. Do not use api_getPnP*. For out-of-band SSID/WLAN queries use managed=false. For provisioned or design-managed SSID/WLAN queries use managed=true. When the user asks for all results, page with limit=500 and offset=1, increase offset by 500, and continue until a page returns fewer than 500 records; merge every page before answering.",
+    "name": "api_getSSIDDetailsForSpecificWirelessController",
+    "parameters": {
+      "properties": {
+        "adminStatus": {
+          "description": "Utilize this query parameter to obtain the administrative status. A 'true' value signifies that the admin status of the SSID is enabled, while a 'false' value indicates that the admin status of the SSID is disabled.",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "managed": {
+          "description": "If value is 'true' means SSIDs are configured through design.If the value is 'false' means out of band configuration from the Wireless Controller.",
+          "type": "boolean"
+        },
+        "networkDeviceId": {
+          "description": "Required canonical wireless-controller UUID only. Pass a UUID supplied by the user directly. Do not pass a hostname, FQDN, management IP, or serial number in this slot. For those identifiers, first call get_device_details for the Wireless Controller, take the canonical device ID/UUID from its result, and continue to this SSID API with that UUID as networkDeviceId.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "ssidName": {
+          "description": "Exact SSID name only. Remove only the leading standalone query noun SSID or WLAN from the user's phrase while preserving the remaining name exactly: \"WLAN TWO\" becomes \"TWO\", and \"SSID Employee WiFi\" becomes \"Employee WiFi\". Do not include that syntactic SSID/WLAN noun in this value, but preserve it when it is part of a quoted configured name or part of the name itself.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "adminStatus": {
+                "description": "Utilize this query parameter to obtain the administrative status. A 'true' value signifies that the admin status of the SSID is enabled, while a 'false' value indicates that the admin status of the SSID is disabled.",
+                "type": "boolean"
+              },
+              "l2Security": {
+                "description": "This represents the identifier for the Layer 2 authentication type. The authentication types supported include wpa2_enterprise, wpa2_personal, open, wpa3_enterprise, wpa3_personal, wpa2_wpa3_personal, wpa2_wpa3_enterprise, and open-secured.",
+                "type": "string"
+              },
+              "l3Security": {
+                "description": "This represents the identifier for the Layer 3 authentication type. The authentication types supported are 'open' and 'webauth'.",
+                "type": "string"
+              },
+              "managed": {
+                "description": "If the value is 'true,' the SSID is configured through design; if 'false,' it indicates out-of-band configuration on the Wireless LAN Controller.",
+                "type": "boolean"
+              },
+              "radioPolicy": {
+                "description": "This represents the identifier for the radio policy. The policies supported include 2.4GHz, 5GHz, and 6GHz.",
+                "type": "string"
+              },
+              "ssidName": {
+                "description": "Name of the SSID.",
+                "type": "string"
+              },
+              "wlanId": {
+                "description": "WLAN ID.",
+                "type": "integer"
+              },
+              "wlanProfileName": {
+                "description": "WLAN Profile Name.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

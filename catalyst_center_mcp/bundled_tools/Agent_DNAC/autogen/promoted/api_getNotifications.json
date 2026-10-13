@@ -1,0 +1,191 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "category": "query",
+        "domain": "query",
+        "endTime": "query",
+        "eventIds": "query",
+        "limit": "query",
+        "namespace": "query",
+        "offset": "query",
+        "order": "query",
+        "severity": "query",
+        "siteId": "query",
+        "sortBy": "query",
+        "source": "query",
+        "startTime": "query",
+        "subDomain": "query",
+        "tags": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/event/event-series",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets the Published Notifications based on the various inputs from the user. It can answer questions like have there been any notifications for event X? or Give me a list of all notifications and many more combinations. Always use this API with a limit and if the user does not give it, only fetch 5 records and do not allow more than 10 records to be fetched at once",
+    "name": "api_getNotifications",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "Category",
+          "type": "string"
+        },
+        "domain": {
+          "description": "Domain",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End Time in milliseconds",
+          "type": "number"
+        },
+        "eventIds": {
+          "description": "The registered EventId should be provided",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "namespace": {
+          "description": "Namespace",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Ascending/Descending order [asc/desc]",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Site Id",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "Sort By column",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start Time in milliseconds",
+          "type": "number"
+        },
+        "subDomain": {
+          "description": "Sub Domain",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "category": {
+            "description": "",
+            "type": "string"
+          },
+          "description": {
+            "description": "",
+            "type": "string"
+          },
+          "details": {
+            "description": "",
+            "type": "string"
+          },
+          "domain": {
+            "description": "",
+            "type": "string"
+          },
+          "eventHierarchy": {
+            "description": "",
+            "type": "string"
+          },
+          "eventId": {
+            "description": "",
+            "type": "string"
+          },
+          "instanceId": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "",
+            "type": "string"
+          },
+          "network": {
+            "description": "",
+            "properties": {
+              "deviceId": {
+                "description": "",
+                "type": "string"
+              },
+              "siteId": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "severity": {
+            "description": "",
+            "type": "string"
+          },
+          "source": {
+            "description": "",
+            "type": "string"
+          },
+          "subDomain": {
+            "description": "",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "",
+            "type": "string"
+          },
+          "type": {
+            "description": "",
+            "type": "string"
+          },
+          "version": {
+            "description": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

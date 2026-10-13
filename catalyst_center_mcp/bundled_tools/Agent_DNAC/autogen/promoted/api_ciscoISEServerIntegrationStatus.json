@@ -1,0 +1,91 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v1/ise-integration-status",
+      "version": "2.3.7.9"
+    },
+    "description": "Checks Cisco ISE server integration workflow status. This reports integration progress, completion, failures, and integration step status only. It does not return the configured ISE server state; configured ISE server state belongs to Authentication and Policy Server inventory.",
+    "name": "api_ciscoISEServerIntegrationStatus",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "aaaServerSettingId": {
+          "description": "Cisco ISE Server setting identifier (E.g. 867e46c9-f8f5-40b1-8de2-62f7744f75f6)",
+          "type": "string"
+        },
+        "overallErrorMessage": {
+          "description": "Cisco ISE Server integration failure message",
+          "type": "string"
+        },
+        "overallStatus": {
+          "description": "Cisco ISE server integration workflow status. This is not the configured ISE server state.",
+          "enum": [
+            "INPROGRESS",
+            "FAILED",
+            "COMPLETE"
+          ],
+          "type": "string"
+        },
+        "steps": {
+          "description": "Steps",
+          "items": {
+            "properties": {
+              "certAcceptedByUser": {
+                "description": "If user accept Cisco ISE Server certificate, value will be true otherwise it will be false",
+                "type": "boolean"
+              },
+              "stepDescription": {
+                "description": "Cisco ISE Server step description",
+                "type": "string"
+              },
+              "stepId": {
+                "description": "Cisco ISE Server integration step identifier (E.g. 1)",
+                "type": "string"
+              },
+              "stepName": {
+                "description": "Cisco ISE Server integration step name",
+                "type": "string"
+              },
+              "stepOrder": {
+                "description": "Cisco ISE Server integration step order (E.g. 1)",
+                "type": "integer"
+              },
+              "stepStatus": {
+                "description": "Cisco ISE Server integration step status",
+                "enum": [
+                  "NOT_STARTED",
+                  "NOT_APPLICABLE",
+                  "FAILED",
+                  "COMPLETE",
+                  "IN_PROGRESS",
+                  "WAITING_USER_INPUT"
+                ],
+                "type": "string"
+              },
+              "stepTime": {
+                "description": "Last updated epoc time  by the step (E.g. 1677745739314)",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

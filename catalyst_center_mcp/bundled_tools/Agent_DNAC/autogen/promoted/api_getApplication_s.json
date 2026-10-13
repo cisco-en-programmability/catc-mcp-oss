@@ -1,0 +1,189 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "attributes": "query",
+        "limit": "query",
+        "name": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v2/applications",
+      "version": "2.3.7.9"
+    },
+    "description": "Get application/s by offset/limit or by name",
+    "name": "api_getApplication_s",
+    "parameters": {
+      "properties": {
+        "attributes": {
+          "description": "Attributes to retrieve, valid value application",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "The application name",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "attributes",
+        "offset",
+        "limit"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "items": {
+        "properties": {
+          "applicationSet": {
+            "description": "",
+            "properties": {
+              "idRef": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "",
+            "type": "string"
+          },
+          "name": {
+            "description": "",
+            "type": "string"
+          },
+          "networkApplications": {
+            "description": "",
+            "items": {
+              "properties": {
+                "appProtocol": {
+                  "description": "",
+                  "type": "string"
+                },
+                "applicationSubType": {
+                  "description": "",
+                  "type": "string"
+                },
+                "applicationType": {
+                  "description": "",
+                  "type": "string"
+                },
+                "categoryId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "displayName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "dscp": {
+                  "description": "",
+                  "type": "string"
+                },
+                "engineId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "helpString": {
+                  "description": "",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ignoreConflict": {
+                  "description": "",
+                  "type": "string"
+                },
+                "longDescription": {
+                  "description": "",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "",
+                  "type": "string"
+                },
+                "popularity": {
+                  "description": "",
+                  "type": "string"
+                },
+                "rank": {
+                  "description": "",
+                  "type": "string"
+                },
+                "serverName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "trafficClass": {
+                  "description": "",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "networkIdentity": {
+            "description": "",
+            "items": {
+              "properties": {
+                "displayName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "",
+                  "type": "string"
+                },
+                "lowerPort": {
+                  "description": "",
+                  "type": "string"
+                },
+                "ports": {
+                  "description": "",
+                  "type": "string"
+                },
+                "protocol": {
+                  "description": "",
+                  "type": "string"
+                },
+                "upperPort": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "function"
+}

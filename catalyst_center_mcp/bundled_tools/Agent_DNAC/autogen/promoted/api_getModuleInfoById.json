@@ -1,0 +1,125 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/module/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns Module info by 'module id'",
+    "name": "api_getModuleInfoById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Module id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "assemblyNumber": {
+              "description": "Assembly number of the module",
+              "type": "string"
+            },
+            "assemblyRevision": {
+              "description": "Assembly revision of the module",
+              "type": "string"
+            },
+            "attributeInfo": {
+              "description": "Deprecated",
+              "properties": {},
+              "type": "object"
+            },
+            "containmentEntity": {
+              "description": "Containment entity of the module",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the module",
+              "type": "string"
+            },
+            "entityPhysicalIndex": {
+              "description": "Entity physical index of the module",
+              "type": "string"
+            },
+            "id": {
+              "description": "Id of the module",
+              "type": "string"
+            },
+            "isFieldReplaceable": {
+              "description": "To mention if field is replaceable",
+              "enum": [
+                "UNKNOWN",
+                "TRUE",
+                "FALSE",
+                "NOT_APPLICABLE"
+              ],
+              "type": "string"
+            },
+            "isReportingAlarmsAllowed": {
+              "description": "To mention if reporting alarms are allowed",
+              "enum": [
+                "UNKNOWN",
+                "TRUE",
+                "FALSE",
+                "NOT_APPLICABLE"
+              ],
+              "type": "string"
+            },
+            "manufacturer": {
+              "description": "Manufacturer of the module",
+              "type": "string"
+            },
+            "moduleIndex": {
+              "description": "Index of the module",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Name of the module",
+              "type": "string"
+            },
+            "operationalStateCode": {
+              "description": "Operational state of the module",
+              "type": "string"
+            },
+            "partNumber": {
+              "description": "Part number of the module",
+              "type": "string"
+            },
+            "serialNumber": {
+              "description": "Serial number of the modules",
+              "type": "string"
+            },
+            "vendorEquipmentType": {
+              "description": "Vendor equipment type of the module",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

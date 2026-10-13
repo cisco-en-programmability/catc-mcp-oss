@@ -1,0 +1,247 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "isIseEnabled": "query",
+        "role": "query",
+        "state": "query"
+      },
+      "uri": "/dna/intent/api/v1/authentication-policy-servers",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves configured Authentication and Policy Servers, including AAA servers and ISE servers, with server attributes such as IP address, server state, role, authentication port, accounting port, and ISE enablement. This is the configured-server inventory for AAA server state and ISE server state. Generic ISE server state is the state field in this inventory, not the ISE integration workflow status. For a specific AAA or ISE server attribute, retrieve the server records with this API first, match the server by ipAddress when an IP address is provided, and answer from the matching returned record.",
+    "name": "api_getAuthenticationAndPolicyServers",
+    "parameters": {
+      "properties": {
+        "isIseEnabled": {
+          "description": "Strict server-type filter. Set isIseEnabled=false for AAA server requests. Set isIseEnabled=true for Cisco ISE server requests. Do not omit this parameter when the request identifies either AAA or ISE; omit it only when returning all Authentication and Policy Servers.",
+          "type": "boolean"
+        },
+        "role": {
+          "description": "Filter by Authentication and Policy Server role.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Filter by Authentication and Policy Server state for AAA or ISE server records.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Configured AAA and ISE server records. Read the ISE server state from the state field. For a named or specified server, match the relevant record from this response, including by ipAddress, and read the requested information such as accountingPort from that record.",
+          "items": {
+            "properties": {
+              "accountingPort": {
+                "description": "Accounting port of RADIUS server (readonly). The range is from 1 to 65535. Default is 1813. E.g. 1813",
+                "type": "integer"
+              },
+              "authenticationPort": {
+                "description": "Authentication port of RADIUS server (readonly). The range is from 1 to 65535. Default is 1812. E.g. 1812",
+                "type": "integer"
+              },
+              "ciscoIseDtos": {
+                "description": "ISE metadata",
+                "items": {
+                  "properties": {
+                    "description": {
+                      "description": "Description about the Cisco ISE server",
+                      "type": "string"
+                    },
+                    "externalCiscoIseIpAddrDtos": {
+                      "description": "For future use",
+                      "properties": {
+                        "externalCiscoIseIpAddresses": {
+                          "description": "",
+                          "items": {
+                            "properties": {
+                              "externalIpAddress": {
+                                "description": "",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "type": {
+                          "description": "",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "failureReason": {
+                      "description": "Reason for integration failure between Cisco Catalyst Center and the ISE server",
+                      "type": "string"
+                    },
+                    "fqdn": {
+                      "description": "Fully-qualified domain name of the Cisco ISE server (readonly). E.g. xi-62.my.com",
+                      "type": "string"
+                    },
+                    "instanceUuid": {
+                      "description": "Internal record identifier",
+                      "type": "string"
+                    },
+                    "ipAddress": {
+                      "description": "IP Address of the Cisco ISE Server (readonly)",
+                      "type": "string"
+                    },
+                    "password": {
+                      "description": "Password of the Cisco ISE server. For security reasons the value will always be empty",
+                      "type": "string"
+                    },
+                    "role": {
+                      "description": "Role of the Cisco ISE server",
+                      "enum": [
+                        "PRIMARY",
+                        "SECONDARY",
+                        "PXGRID"
+                      ],
+                      "type": "string"
+                    },
+                    "sshkey": {
+                      "description": "SSH key of the Cisco ISE server. For security reasons the value will always be empty",
+                      "type": "string"
+                    },
+                    "subscriberName": {
+                      "description": "Subscriber name of the Cisco ISE server (readonly). E.g. pxgrid_client_1662589467",
+                      "type": "string"
+                    },
+                    "trustState": {
+                      "description": "Trust State between Cisco Catalyst Center and the ISE server",
+                      "enum": [
+                        "TRUSTED",
+                        "UNTRUSTED",
+                        "INIT"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type (Example: ISE)",
+                      "type": "string"
+                    },
+                    "userName": {
+                      "description": "User name of the Cisco ISE server",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "encryptionKey": {
+                "description": "Encryption key used to encrypt shared secret",
+                "type": "string"
+              },
+              "encryptionScheme": {
+                "description": "Type of encryption scheme for additional security (readonly)",
+                "enum": [
+                  "KEYWRAP",
+                  "RADSEC"
+                ],
+                "type": "string"
+              },
+              "instanceUuid": {
+                "description": "Internal record identifier",
+                "type": "string"
+              },
+              "ipAddress": {
+                "description": "IP address of authentication and policy server (readonly)",
+                "type": "string"
+              },
+              "isIseEnabled": {
+                "description": "Value true for Cisco ISE Server (readonly). Default value is false",
+                "type": "boolean"
+              },
+              "iseEnabled": {
+                "description": "Value true for Cisco ISE Server (readonly). Default value is false",
+                "type": "boolean"
+              },
+              "messageKey": {
+                "description": "Encryption key used to encrypt shared secret (readonly)",
+                "type": "string"
+              },
+              "multiDnacEnabled": {
+                "description": "Internal use only",
+                "type": "boolean"
+              },
+              "port": {
+                "description": "Port of TACACS server (readonly). The range is from 1 to 65535. Default is 49.",
+                "type": "integer"
+              },
+              "protocol": {
+                "description": "Type of protocol for authentication and policy server. If already saved with RADIUS, can update to RADIUS_TACACS. If already saved with TACACS, can update to RADIUS_TACACS",
+                "enum": [
+                  "TACACS",
+                  "RADIUS",
+                  "RADIUS_TACACS"
+                ],
+                "type": "string"
+              },
+              "pxgridEnabled": {
+                "description": "Value true for enable, false for disable. Default value is true",
+                "type": "boolean"
+              },
+              "rbacUuid": {
+                "description": "Internal use only",
+                "type": "string"
+              },
+              "retries": {
+                "description": "Number of communication retries between devices and authentication and policy server. The range is from 1 to 3. Default is 3",
+                "type": "integer"
+              },
+              "role": {
+                "description": "Role of authentication and policy server (readonly). E.g. primary, secondary",
+                "type": "string"
+              },
+              "sharedSecret": {
+                "description": "Shared secret between devices and authentication and policy server (readonly)",
+                "type": "string"
+              },
+              "state": {
+                "description": "State of the configured AAA or ISE server.",
+                "enum": [
+                  "ACTIVE",
+                  "INACTIVE",
+                  "RBAC_SUCCESS",
+                  "RBAC_FAILURE",
+                  "DELETED",
+                  "FAILED",
+                  "INPROGRESS"
+                ],
+                "type": "string"
+              },
+              "timeoutSeconds": {
+                "description": "Number of seconds before timing out between devices and authentication and policy server. The range is from 2 to 20",
+                "type": "integer"
+              },
+              "useDnacCertForPxgrid": {
+                "description": "Value true to use Cisco Catalyst Center certificate for Pxgrid. Default value is false",
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

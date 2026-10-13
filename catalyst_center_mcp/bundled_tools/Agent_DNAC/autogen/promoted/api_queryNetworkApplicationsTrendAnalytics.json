@@ -1,0 +1,216 @@
+{
+  "additionalMetadata": null,
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "platform": "DNAC",
+      "release_status": "Assurance_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "POST",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "payload": "body"
+      },
+      "uri": "/dna/data/api/v1/networkApplications/trendAnalytics",
+      "version": "3.2.1"
+    },
+    "description": "Retrieves trend analytics for network application experience and health metrics across applications for a building site. Use this for application health trend questions when the user asks for application performance over time without naming a single application as the path id. The request body must include siteIds and trendInterval. For a specific named application trend, use api_queryNetworkApplicationTrendAnalyticsById instead. This tool is available for Catalyst Center 3.2.1 and later.\n\nSpec mapping: This tool follows NetworkApplications OpenAPI spec 1.0.2 for Catalyst Center 3.2.1 and later. For the default site-wide application health trend or hourly/history/chart request, use the custom get_network_application_health_trend tool so the time window and API-compatible trendInterval are selected together. That custom tool is a bounded single-page health-score request and must not send offset. Use this generated tool for explicitly requested non-healthScore metrics, grouped application trend rows, ranking queries, or cursor-based continuation pages.",
+    "name": "api_queryNetworkApplicationsTrendAnalytics",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "default": "unknown",
+          "description": "Caller ID used to trace the origin of API calls.",
+          "type": "string"
+        },
+        "payload": {
+          "description": "Request body for network application trend analytics. Required fields are siteIds and trendInterval. siteIds must contain building site UUIDs. trendInterval should be 5MIN or 10MIN for short windows, and 1HR or 3HR for longer windows. Use attributes or aggregateAttributes for metrics such as healthScore, usage, throughput, jitter, packetLossPercent, networkLatency, applicationServerLatency, clientNetworkLatency, and serverNetworkLatency. Use filters for applicationName, businessRelevance, ssid, trafficClass, healthScore, and related network application fields. Put startTime, endTime, siteIds, trendInterval, groupBy, aggregateAttributes, filters, and page inside this payload object. Do not pass these fields as top-level tool arguments.",
+          "properties": {
+            "aggregateAttributes": {
+              "description": "Aggregate fields and functions to apply over the time range. For default application health trend, include healthScore min. Add usage sum, throughput avg, jitter avg, packetLossPercent avg, or networkLatency avg only when the user asks for those KPIs.",
+              "items": {
+                "properties": {
+                  "function": {
+                    "description": "Aggregate function. Use min with healthScore for default application health trend.",
+                    "enum": [
+                      "latest",
+                      "min",
+                      "max",
+                      "avg",
+                      "sum",
+                      "count",
+                      "distinctCount"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Aggregate field name. Use healthScore for default application health trend.",
+                    "enum": [
+                      "applicationServerLatency",
+                      "businessRelevance",
+                      "clientNetworkLatency",
+                      "dscp",
+                      "exporterIpAddress",
+                      "exporterNetworkDeviceId",
+                      "jitter",
+                      "networkLatency",
+                      "packetLossPercent",
+                      "serverNetworkLatency",
+                      "throughput",
+                      "trafficClass",
+                      "usage",
+                      "healthScore"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "function"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "attributes": {
+              "description": "Trend attributes to return, such as applicationName, healthScore, usage, throughput, jitter, packetLossPercent, networkLatency, applicationServerLatency, clientNetworkLatency, serverNetworkLatency, trafficClass, ssid, and businessRelevance. Do not use payload.attributes for default application health trends. For site-wide trends over time, omit groupBy and use aggregateAttributes so the response contains timestamp buckets. Use groupBy plus aggregateAttributes only for per-application trend rows or rankings.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "endTime": {
+              "description": "Inclusive end time in UNIX epoch milliseconds.",
+              "format": "int64",
+              "type": "integer"
+            },
+            "filters": {
+              "description": "Complex filters for applicationName, businessRelevance, ssid, healthScore, trafficClass, and related metrics. Filter entries must use key/operator/value. Do not use field/operator/value. Do not send broad product-family aliases such as Webex, MS Teams, MSTeams, or Microsoft Teams as applicationName filter values. For those aliases, query grouped applicationName data without an applicationName filter, then choose matching concrete returned application names in the answer or ask the user to choose one.",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "Filter key. Use key, not field.",
+                    "enum": [
+                      "applicationName",
+                      "applicationServerLatency",
+                      "businessRelevance",
+                      "clientNetworkLatency",
+                      "dscp",
+                      "exporterIpAddress",
+                      "exporterNetworkDeviceId",
+                      "jitter",
+                      "networkLatency",
+                      "packetLossPercent",
+                      "serverNetworkLatency",
+                      "ssid",
+                      "throughput",
+                      "trafficClass",
+                      "usage",
+                      "healthScore"
+                    ],
+                    "type": "string"
+                  },
+                  "operator": {
+                    "description": "Filter operator supported by the API.",
+                    "enum": [
+                      "eq",
+                      "ne",
+                      "gt",
+                      "gte",
+                      "lt",
+                      "lte",
+                      "in",
+                      "like"
+                    ],
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "Filter value."
+                  }
+                },
+                "required": [
+                  "key",
+                  "operator",
+                  "value"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "groupBy": {
+              "description": "Fields used to group trend data. For site-wide health trend over time, omit groupBy. For per-application trend rows or rankings, group by applicationName and do not group by healthScore.",
+              "items": {
+                "enum": [
+                  "applicationName",
+                  "businessRelevance",
+                  "exporterIpAddress",
+                  "siteId",
+                  "trafficClass",
+                  "healthScore"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "page": {
+              "description": "Pagination and time sort options. For site-wide trend over time, set page.limit to the requested bucket count, for example 25 for last 24 hours at 1-hour intervals, capped at 100. For grouped per-application trend or ranking, use page.limit=10 unless the user asks for more. For a subsequent page, pass the opaque cursor returned by the previous response page. Do not send offset; this endpoint accepts it but does not use it. State the limit and shown series/bucket count in the final answer. Make exactly one tool call for each user request: never automatically follow a returned cursor and never repeat the same first-page request. If the response page contains a non-null cursor, return the current page and explicitly tell the user that more data is available; offer to fetch the next page on request or to apply a narrower filter. Only use the returned cursor unchanged after the user explicitly asks for the next page.",
+              "properties": {
+                "cursor": {
+                  "description": "Opaque cursor returned by the previous response page. Use it unchanged to fetch the next page; omit it on the first request.",
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 10,
+                  "description": "Maximum trend groups or buckets to return. For site-wide trends over time, use enough buckets for the requested interval, for example 25 for last 24 hours at hourly intervals, capped at 100. Use default limit=10 for grouped application trend rankings unless the user asks for more or fewer rows. The API supports up to 100.",
+                  "maximum": 100,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "siteIds": {
+              "description": "List of building site UUIDs. If the user provides a 36-character site UUID or explicitly says siteId, use that value directly in payload.siteIds. Do not call site lookup to resolve an already provided siteId.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "startTime": {
+              "description": "Inclusive start time in UNIX epoch milliseconds.",
+              "format": "int64",
+              "type": "integer"
+            },
+            "trendInterval": {
+              "description": "Time bucket for trend aggregation.The time window and interval must be compatible: use 5MIN or 10MIN for a window up to 3 hours; use 1HR or 3HR for a window over 3 hours. Do not send 1HR/3HR for a window up to 3 hours or 5MIN/10MIN for a window over 3 hours. If the user explicitly requests an incompatible combination, ask the user to choose a valid interval instead of retrying with a different interval.",
+              "enum": [
+                "5MIN",
+                "10MIN",
+                "1HR",
+                "3HR"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "siteIds",
+            "trendInterval"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "payload"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Network application trend analytics response.",
+      "type": "object"
+    }
+  }
+}

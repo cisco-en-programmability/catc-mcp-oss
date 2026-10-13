@@ -1,0 +1,397 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "endTime": "query",
+        "id": "path",
+        "startTime": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/fabricSiteHealthSummaries/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Get Fabric site health summary for a specific fabric site by providing the unique fabric site id in the url path.\n\nThis API provides the latest health data until the given `endTime`. If data is not ready for the provided endTime, the request will fail with error code `400 Bad Request`, and the error message will indicate the recommended endTime to use to retrieve a complete data set. This behavior may occur if the provided endTime=currentTime, since we are not a real time system. When `endTime` is not provided, the API returns the latest data.\n\nFor detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-fabricSiteHealthSummaries-1.0.1-resolved.yaml\n ",
+    "name": "api_readFabricSitesWithHealthSummaryFromId",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "The list of FabricSite health attributes. Please refer to ```fabricSiteAttributes``` section in the Open API specification document mentioned in the description.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "unique fabric site id",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n",
+          "type": "number"
+        },
+        "view": {
+          "description": "The specific summary view being requested. A maximum of 3 views can be queried at a time per request.  Please refer to ```fabricSiteViews``` section in the Open API specification document mentioned in the description.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "aaaStatusFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "aaaStatusGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "aaaStatusGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "aaaStatusPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "aaaStatusTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "associatedL2VnCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "associatedL3VnCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpBgpSiteFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpBgpSiteGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpBgpSiteGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "bgpBgpSitePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpBgpSiteTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpEvpnFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpEvpnGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpEvpnGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "bgpEvpnPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpEvpnTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerInfraVnFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerInfraVnGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerInfraVnPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPeerInfraVnScoreGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "bgpPeerInfraVnTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPubsubSiteFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPubsubSiteGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPubsubSiteGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "bgpPubsubSitePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "bgpPubsubSiteTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "borderToControlPlaneFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "borderToControlPlaneGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "borderToControlPlaneGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "borderToControlPlanePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "borderToControlPlaneTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectivityFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectivityGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectivityGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "connectivityPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "connectivityTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "controlPlaneFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "controlPlaneGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "controlPlaneGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "controlPlanePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "controlPlaneTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "ctsEnvDataDownloadFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "ctsEnvDataDownloadGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "ctsEnvDataDownloadGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "ctsEnvDataDownloadPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "ctsEnvDataDownloadTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "fairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "goodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "goodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "infraFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "infraGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "infraGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "infraPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "infraTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispSessionFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispSessionGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispSessionGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "lispSessionPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "lispSessionTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "name": {
+              "description": "",
+              "type": "string"
+            },
+            "networkProtocol": {
+              "description": "",
+              "type": "string"
+            },
+            "peerScoreFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "peerScoreGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "peerScoreGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "peerScorePoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "peerScoreTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "poorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "portChannelFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "portChannelGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "portChannelGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "portChannelPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "portChannelTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubInfraVnFairHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubInfraVnGoodHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubInfraVnGoodHealthPercentage": {
+              "description": "",
+              "type": "number"
+            },
+            "pubsubInfraVnPoorHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "pubsubInfraVnTotalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "totalDeviceCount": {
+              "description": "",
+              "type": "integer"
+            },
+            "totalHealthDeviceCount": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

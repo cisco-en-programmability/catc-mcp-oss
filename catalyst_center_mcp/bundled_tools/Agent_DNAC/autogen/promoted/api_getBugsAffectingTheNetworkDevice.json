@@ -1,0 +1,126 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "query",
+        "limit": "query",
+        "networkDeviceId": "path",
+        "offset": "query",
+        "order": "query",
+        "severity": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkBugs/results/networkDevices/{networkDeviceId}/bugs",
+      "version": "2.3.7.9"
+    },
+    "description": "Get bugs affecting the network device",
+    "name": "api_getBugsAffectingTheNetworkDevice",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Id of the network bug",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Return network bugs with this severity. Available values : CATASTROPHIC, SEVERE, MODERATE.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Network bug details",
+          "items": {
+            "properties": {
+              "affectedVersions": {
+                "description": "Versions that are affected by the network bug",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "deviceCount": {
+                "description": "Number of devices which are vulnerable to this network bug",
+                "type": "integer"
+              },
+              "hasWorkaround": {
+                "description": "Indicates if the network bug has a workaround",
+                "type": "boolean"
+              },
+              "headline": {
+                "description": "Title of the network bug",
+                "type": "string"
+              },
+              "id": {
+                "description": "Id of the network bug",
+                "type": "string"
+              },
+              "integratedReleases": {
+                "description": "Versions that have the fix for the network bug",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "publicationUrl": {
+                "description": "Url for getting network bug details on cisco website",
+                "type": "string"
+              },
+              "severity": {
+                "description": "'CATASTROPHIC' - Reasonably common circumstances cause the entire system to fail, or a major subsystem to stop working. 'SEVERE' - Important functions are unusable. 'MODERATE' - Failures occur in unusual circumstances, or minor features do not work at all.",
+                "type": "string"
+              },
+              "workaround": {
+                "description": "Workaround if any that exists for the network bug",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

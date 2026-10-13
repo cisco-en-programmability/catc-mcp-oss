@@ -1,0 +1,142 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "description": "query",
+        "endTime": "query",
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "recurring": "query",
+        "sortBy": "query",
+        "startTime": "query",
+        "status": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/activities",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns activity(s) based on filter criteria",
+    "name": "api_getActivities",
+    "parameters": {
+      "properties": {
+        "description": {
+          "description": "The description of the activity",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "This is the epoch millisecond end time upto which activities need to be fetched",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "string"
+        },
+        "recurring": {
+          "description": "If the activity is recurring",
+          "type": "boolean"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "This is the epoch millisecond start time from which activities need to be fetched",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the activity",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the activity",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "description": {
+                "description": "The description provided when creating the activity",
+                "type": "string"
+              },
+              "endTime": {
+                "description": "The time at which the activity ended",
+                "type": "number"
+              },
+              "id": {
+                "description": "The id of the activity",
+                "type": "string"
+              },
+              "originatingWorkItemActivityId": {
+                "description": "The id of the activity of type WORK_ITEM whose deployment created this TASK activity. a preview activity is of type WORK_ITEM. if the preview is deployed then a new activity of type TASK is created for deploying the preview and the originatingWorkItemActivityId is set to the preview activity id.",
+                "type": "string"
+              },
+              "recurring": {
+                "description": "Denotes whether an activity is recurring or not",
+                "type": "boolean"
+              },
+              "startTime": {
+                "description": "The time at which the activity started",
+                "type": "number"
+              },
+              "status": {
+                "description": "The status of the activity",
+                "enum": [
+                  "PENDING",
+                  "RUNNING",
+                  "SUCCESS",
+                  "FAILED",
+                  "READY",
+                  "DISCARD_FAILED",
+                  "DISCARD_SUCCESS"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of activity:\n  * 'WORK_ITEM' - activity that requires user action when the status is READY or FAILED\n  * 'TASK' - activity that is not of type WORK_ITEM\n",
+                "enum": [
+                  "WORK_ITEM",
+                  "TASK"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,89 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "offset": "query",
+        "order": "query",
+        "sortBy": "query",
+        "type": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkProfilesForSites",
+      "version": "3.3.1"
+    },
+    "description": "Retrieves the list of network profiles for sites.",
+    "name": "api_retrievesTheListOfNetworkProfilesForSites",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "Whether ascending or descending order should be used to sort the response.",
+          "type": "string"
+        },
+        "sortBy": {
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Filter responses to only include profiles of a given type",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "The ID of this network profile.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the network profile.",
+                "type": "string"
+              },
+              "type": {
+                "description": "",
+                "enum": [
+                  "Assurance",
+                  "Switching",
+                  "Wireless"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

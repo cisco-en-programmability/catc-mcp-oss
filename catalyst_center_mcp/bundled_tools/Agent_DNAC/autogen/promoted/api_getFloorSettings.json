@@ -1,0 +1,47 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/intent/api/v2/floors/settings",
+      "version": "2.3.7.9"
+    },
+    "description": "Gets UI user preference for floor unit system.",
+    "name": "api_getFloorSettings",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "unitsOfMeasure": {
+              "description": "Floor units of measure.",
+              "enum": [
+                "feet",
+                "meters"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

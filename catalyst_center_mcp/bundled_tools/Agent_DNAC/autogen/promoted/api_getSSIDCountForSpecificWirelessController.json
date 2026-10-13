@@ -1,0 +1,63 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_JUN_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "adminStatus": "query",
+        "managed": "query",
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/{networkDeviceId}/ssidDetails/count",
+      "version": "2.3.7.9"
+    },
+    "description": "For SSID/WLAN count runtime queries, if hostname/IP/serial is provided instead of networkDeviceId, resolve the controller first with get_device_details and pass the returned canonical networkDeviceId. For controller serial-number WLAN/SSID count-style queries, do not use api_getPnP*.",
+    "name": "api_getSSIDCountForSpecificWirelessController",
+    "parameters": {
+      "properties": {
+        "adminStatus": {
+          "description": "Utilize this query parameter to obtain the number of SSIDs according to their administrative status. A 'true' value signifies that the admin status of the SSID is enabled, while a 'false' value indicates that the admin status of the SSID is disabled.",
+          "type": "boolean"
+        },
+        "managed": {
+          "description": "If value is 'true' means SSIDs are configured through design.If the value is 'false' means out of band configuration from the Wireless Controller.",
+          "type": "boolean"
+        },
+        "networkDeviceId": {
+          "description": "Obtain the network device ID value by using the API call GET: /dna/intent/api/v1/network-device/ip-address/${ipAddress}.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "The count of the SSIDs.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,79 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_JUN_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "limit": "query",
+        "networkDeviceId": "path",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/{networkDeviceId}/primaryManagedApLocations",
+      "version": "2.3.7.9"
+    },
+    "description": "Use only for Primary Managed AP Location (`managedLocation`) WLC-to-site relationship records associated with one wireless controller. Resolve a controller hostname, management IP, or serial number to its canonical networkDeviceId and then call this API; controller resolution alone is not the result. For an unqualified request for all Managed AP locations, resolve the WLC once, call the Primary, Secondary, and Anchor detail APIs, and merge the labeled results. Page each category API independently with limit=500 and offset=1, increase offset by 500, and continue until a page returns fewer than 500 records. For managed-site relationship checks, return managed=true on the first match across Primary, Secondary, and Anchor records, and return managed=false only after all three categories have been checked with no match.",
+    "name": "api_getPrimaryManagedAPLocationsForSpecificWirelessController",
+    "parameters": {
+      "properties": {
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Required canonical wireless-controller UUID only. Do not pass the controller hostname, FQDN, management IP, or serial number here. For those identifiers, first call get_device_details for the Wireless Controller, take its canonical device ID/UUID, and continue to this Managed AP Location API with that UUID as networkDeviceId; controller resolution is not the final answer.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "managedApLocations": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "siteId": {
+                    "description": "The site id of the managed ap location.",
+                    "type": "string"
+                  },
+                  "siteNameHierarchy": {
+                    "description": "The site name hierarchy of the managed ap location.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

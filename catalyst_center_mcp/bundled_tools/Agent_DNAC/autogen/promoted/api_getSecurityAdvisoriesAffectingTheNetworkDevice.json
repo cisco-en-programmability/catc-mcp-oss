@@ -1,0 +1,142 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "cvssBaseScore": "query",
+        "id": "query",
+        "limit": "query",
+        "networkDeviceId": "path",
+        "offset": "query",
+        "order": "query",
+        "securityImpactRating": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/securityAdvisories/results/networkDevices/{networkDeviceId}/advisories",
+      "version": "2.3.7.9"
+    },
+    "description": "**Tool Dependency: CRITICAL**\n\nThis tool retrieves DETAILED information about each security advisory affecting a specific network device, including advisory IDs, CVEs, severity, remediation versions, and more. The response includes a comprehensive list of all advisories impacting the device with full details for each advisory.\n\n**REQUIRED PRE-REQUISITE:**\nYou MUST call `get_device_details` BEFORE calling `api_getSecurityAdvisoriesAffectingTheNetworkDevice`. This is non-negotiable.\n\n**Step-by-step process:**\n\n1. First, invoke `get_device_details` with the device name or IP address to resolve the device UUID\n2. Extract the UUID from the `get_device_details` response\n3. Then, invoke `api_getSecurityAdvisoriesAffectingTheNetworkDevice` with the `networkDeviceId` parameter set to the resolved UUID\n\n**Exception:**\nIf the user explicitly provides a valid device UUID in their request, you may skip step 1 and use the provided UUID directly in `api_getSecurityAdvisoriesAffectingTheNetworkDevice`.",
+    "name": "api_getSecurityAdvisoriesAffectingTheNetworkDevice",
+    "parameters": {
+      "properties": {
+        "cvssBaseScore": {
+          "description": "Return advisories with cvssBaseScore greater than this cvssBaseScore. E.g. : 8.5",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the security advisory",
+          "type": "string"
+        },
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of records to be fetched. If not provided, 10 records will be fetched by default",
+          "maximum": 10,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "networkDeviceId": {
+          "description": "Device UUID. This can be obtained using the get_device_details tool if you only have the device name or IP.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "default": "desc",
+          "description": "Whether ascending or descending order should be used to sort the response. Available values : asc, desc. Default value is asc.",
+          "type": "string"
+        },
+        "securityImpactRating": {
+          "description": "Return advisories with this securityImpactRating. Available values : CRITICAL, HIGH.",
+          "type": "string"
+        },
+        "sortBy": {
+          "default": "securityImpactRating",
+          "description": "A property within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId",
+        "limit",
+        "sortBy",
+        "order"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Security advisory details",
+          "items": {
+            "properties": {
+              "cveIds": {
+                "description": "CVE (Common Vulnerabilities and Exposures) ID of the advisory",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "cvssBaseScore": {
+                "description": "Common Vulnerability Scoring System(CVSS) base score",
+                "type": "number"
+              },
+              "deviceCount": {
+                "description": "Number of devices which are vulnerable to this advisory",
+                "type": "integer"
+              },
+              "firstFixedVersionsList": {
+                "description": "Vulnerable version and the first fixed versions for the vulnerable version",
+                "items": {
+                  "properties": {
+                    "fixedVersions": {
+                      "description": "First versions that have the fix for the advisory",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "vulnerableVersion": {
+                      "description": "Version that is vulnerable to the advisory",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "id": {
+                "description": "Id of the security advisory",
+                "type": "string"
+              },
+              "publicationUrl": {
+                "description": "Url for getting advisory details on cisco website",
+                "type": "string"
+              },
+              "securityImpactRating": {
+                "description": "'CRITICAL' - the advisory requires immediate mitigation. 'HIGH' - the advisory requires priority mitigation",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

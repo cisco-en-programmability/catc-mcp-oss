@@ -1,0 +1,93 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/network-device/{id}/wireless-info",
+      "version": "2.3.7.9"
+    },
+    "description": "Returns the wireless lan controller info with given device ID",
+    "name": "api_getWirelessLanControllerDetailsById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Device ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "adminEnabledPorts": {
+          "description": "Admin Enabled Ports of the Device",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "apGroupName": {
+          "description": "Name of the AP Group that Access point assigned",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Device Id",
+          "type": "string"
+        },
+        "ethMacAddress": {
+          "description": "Ethernet MacAddress of the Device",
+          "type": "string"
+        },
+        "flexGroupName": {
+          "description": "Name of the Flex Group that Access point assigned ",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the Device",
+          "type": "string"
+        },
+        "instanceTenantId": {
+          "description": "TenantId of the Device ",
+          "type": "string"
+        },
+        "instanceUuid": {
+          "description": "Instance UUID of the Device",
+          "type": "string"
+        },
+        "lagModeEnabled": {
+          "description": "LagMode status of the Device",
+          "type": "boolean"
+        },
+        "netconfEnabled": {
+          "description": "Netconf Status of the Device",
+          "type": "boolean"
+        },
+        "wirelessLicenseInfo": {
+          "description": "License type of Wireless Device",
+          "enum": [
+            "ADVANTAGE",
+            "ESSENTIALS"
+          ],
+          "type": "string"
+        },
+        "wirelessPackageInstalled": {
+          "description": "Status of the Wireless Package on the Device ",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

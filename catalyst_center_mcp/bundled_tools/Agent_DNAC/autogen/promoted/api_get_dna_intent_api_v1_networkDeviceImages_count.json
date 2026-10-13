@@ -1,0 +1,95 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "always_included": true,
+      "min_controller_version": "3.2.1"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "managementAddress": "query",
+        "networkDeviceImageStatus": "query",
+        "networkDeviceUpdateStatus": "query",
+        "productId": "query",
+        "productName": "query",
+        "role": "query",
+        "siteId": "query"
+      },
+      "uri": "/dna/intent/api/v1/networkDeviceImages/count",
+      "version": "3.2.1"
+    },
+    "description": "MANDATORY COUNT API FOR DEVICE-LEVEL SWIM GOLDEN/STANDARD IMAGE TOTALS:\n\nReturns the total number of NETWORK DEVICES matching SWIM golden/standard image filters. Use when the user asks ONLY for a count, total, or \"how many\" \u2014 not when they ask to show, list, or identify specific devices.\n\n**COUNTING UNIT (BINDING):** response.count is ALWAYS a number of network devices. It is never a number of software images, product names, or product families. If the user's \"how many\" is about images or product families, this is the WRONG API \u2014 see Out of Scope below.\n\n**USE THIS API WHEN the user asks (including paraphrases):**\n- How many / total count / number of devices with a given golden or standard image compliance status (OUTDATED, UP_TO_DATE, UNKNOWN, CONFLICTED, UNSUPPORTED) \u2014 globally or by management IP only (NOT site or product family + compliance status; see Unsupported Filter Combinations)\n- Count-only golden/standard image questions that describe devices as non-compliant, not on the assigned image, outdated versus the assigned image, or not running the approved bundle \u2014 map these to SWIM image compliance rather than generic compliance APIs\n- How many devices have a given image update lifecycle status (DISTRIBUTION_PENDING, DISTRIBUTION_IN_PROGRESS, ACTIVATION_PENDING, DEVICE_UP_TO_DATE, etc.) scoped by site, product family, or management IP (site-scoped totals hit a platform limitation; see Unsupported Filter Combinations)\n- Count of devices scoped by site, product family, or management IP when the answer should be a single numeric total\n\n**DO NOT USE THIS API WHEN the user asks to:**\n- Show, list, display, or name specific devices\n- Compare installed vs assigned golden/standard image details per device\n- Retrieve image names, versions, or per-device compliance records \u2014 use api_get_dna_intent_api_v1_networkDeviceImages (list API) instead\n- Determine whether a specific named device is golden/standard-image compliant, is running its assigned golden image, or report that device's current compliance status. These are named-device detail questions even when a yes/no answer is expected: use api_get_dna_intent_api_v1_networkDeviceImages with `managementAddress` and inspect `networkDeviceImageStatus`. Never infer that a named device is non-compliant merely because a count filtered by `networkDeviceImageStatus=UP_TO_DATE` returns 0; the device may be absent or have UNKNOWN, CONFLICTED, UNSUPPORTED, or another state.\n\n**SEMANTIC DISTINCTION (BINDING):**\n- **running with golden / on the assigned golden image / compliant with golden** = compliance semantics -> `networkDeviceImageStatus=UP_TO_DATE`\n- **marked golden / golden-tagged / has a golden image assigned** = assignment/tagging semantics -> inspect `goldenImages`; this is NOT the same as `UP_TO_DATE`\n- **MANDATORY FALLBACK:** For count-only wording about **marked golden** devices, if this count API returns `0` from `UP_TO_DATE` semantics or otherwise cannot directly prove assignment/tagging, your NEXT tool call MUST be `api_get_dna_intent_api_v1_networkDeviceImages` before you answer. Do not stop after explaining the ambiguity, and do not return the raw zero unless the list API confirms there are no matching golden assignments.\n\n**OUT OF SCOPE \u2014 IMAGE REPOSITORY / INVENTORY QUESTIONS (DO NOT CALL THIS API OR THE COUNT API):**\nWhen the user asks about the contents of the image repository rather than about devices, route to the repository APIs instead:\n- How many product names / product families exist or are listed in the image repository -> api_returnsTheImageSummaryForTheGivenSite -> response.productCount\n- How many product families do or do not have a golden/standard image -> api_returnsTheImageSummaryForTheGivenSite -> response.productsWithGoldenCount / response.productsWithoutGoldenCount\n- How many images are imported or held in the repository, and how many are golden/standard tagged -> api_returnsTheImageSummaryForTheGivenSite -> response.importedImageCount / response.goldenImageCount / response.nonGoldenImageCount\n- Per-product-family image breakdown, or which images exist for a product family -> api_returnsNetworkDeviceProductNamesForASite -> response[].imageSummary\nRepository-scoped signals: \"image repo\", \"image repository\", \"in the repository\", \"imported images\", \"how many product families\", \"how many product names\", \"products with/without a golden image\", \"Images view\", \"Image Repository page\".\nNever answer a repository question from a device count even when the number looks plausible \u2014 device count and productCount can coincide on small clusters.\n\n**UNSUPPORTED \u2014 siteId ON THIS COUNT API (PLATFORM LIMITATION \u2014 CALL THE API, THEN REPORT THE LIMITATION):**\nFor site-scoped count requests that do **not** also include `networkDeviceImageStatus`, this count API returns 0 whenever **siteId** is passed \u2014 even when devices are assigned to that site. The zero is a silently wrong number, not an error, so it must never be reported. Site-scoped requests that **do** include `networkDeviceImageStatus` are handled by the Unsupported Filter Combinations rule below and fail differently.\n**Response rule:** Resolve the site and issue the count call as normal, then inform the user that **site-scoped counts** are **not currently supported** by Catalyst Center SWIM APIs. Never report the returned zero as a valid count and do not invent totals. Do NOT stop at generic wording such as \"internal error\" or \"backend failure\" alone; translate the behavior into this concrete SWIM platform limitation. Offer at least one supported alternative after reporting the limitation, such as an unfiltered device-image list for that site, a single-device SWIM check by management IP/hostname, or a cluster-wide count in a supported scope.\n**Applies to:** siteId alone, and siteId paired with networkDeviceUpdateStatus, productName, role, productId, or other non-compliance filters. Requests that pair `siteId` with `networkDeviceImageStatus` are excluded from this zero-return rule and instead follow the Unsupported Filter Combinations rule below.\n**Still supported for counts:** global counts (no siteId), productName-scoped counts, managementAddress-scoped counts, and networkDeviceUpdateStatus filters that do not include siteId.\n\n**UNSUPPORTED FILTER COMBINATIONS (PLATFORM LIMITATION \u2014 CALL THE API, THEN REPORT THE LIMITATION):**\nWhen the user request requires **networkDeviceImageStatus** (golden/standard image compliance status) **together with** either **siteId** (site-scoped) **or** **productName** (product-family scoped) \u2014 including combinations that also include networkDeviceUpdateStatus \u2014 **invoke the SWIM API for the requested scope as normal, but treat its response as unusable.** The count API returns HTTP 500 and the list API returns empty/null for these filters.\n**Response rule:** After making the call, inform the user that site-scoped or product-family-scoped **compliance-status count** queries are **not currently supported** by Catalyst Center SWIM APIs because `networkDeviceImageStatus` cannot be combined with `siteId` or `productName` for a usable result. Never present the failed or zero response as a valid count and do not invent totals. Do NOT stop at generic wording such as \"internal error\" or \"backend failure\" alone; translate the failed result into this concrete SWIM platform limitation and offer at least one supported alternative, such as an unfiltered device-image list for the same site or product family, a single-device check by management IP/hostname, or a cluster-wide compliance count in a supported scope. For count-only questions in these unsupported combinations, this count API still remains the required first attempted SWIM tool; do not switch to the list API just because the result will be unusable, and do not let product-family or site wording override the numeric intent.\n**Still supported for counts:** networkDeviceImageStatus alone (global), networkDeviceImageStatus + managementAddress (0 or 1), productName + networkDeviceUpdateStatus, and other filters that do not pair networkDeviceImageStatus with siteId or productName.\n\n**Site Resolution (BLOCKING PREREQUISITE for site-scoped counts):**\nIf the user scopes by site name (including root/Global site labels) and you do not yet have siteId, call api_getSites first, then call this count API with the resolved siteId on the next tool-calling turn. Platform limitations depend on the filters: `siteId` without `networkDeviceImageStatus` returns an unreliable zero, while `siteId` combined with `networkDeviceImageStatus` returns HTTP 500. Make the call, then report the applicable limitation rather than treating either result as a valid count (see the limitation sections above).\n\n**ALLOWED PARAMETERS ONLY (count API schema \u2014 no pagination or sorting):**\nPass ONLY these filter fields: siteId, role, productName, productId, managementAddress, networkDeviceImageStatus, networkDeviceUpdateStatus.\nWhen the user scopes by site, pass the resolved `siteId`, but never report the result as a valid count: without `networkDeviceImageStatus` the result is an unreliable zero, and with `networkDeviceImageStatus` the request returns HTTP 500 (see the limitation sections).\nNEVER pass sortBy, order, offset, or limit to this count API \u2014 they are not supported and can cause backend failures.\n\n**FILTER SEMANTICS:**\n- siteId: site-scoped count (resolve via api_getSites when the user gives a site name). Without `networkDeviceImageStatus`, the platform returns an unreliable zero; with `networkDeviceImageStatus`, it returns HTTP 500. Make the call but never report either result as a valid count.\n- productName: product-family scoped count. Preserve the exact specific family or model-family string when the user names one, such as `Catalyst 9300-24S-E Switch`, `Catalyst 9300-24UB Switch`, or `Catalyst 9300 Series Switches`; pass that family name with the Cisco vendor prefix if Catalyst Center expects it. Only when the user uses broad 9300 wording with no more specific family or model qualifier (for example: `9300`, `9300 switch`, `Catalyst 9300`, `Cisco Catalyst 9300`) should you normalize to the generic family `Cisco Catalyst 9300 Switch` instead of the shortened `Cisco Catalyst 9300`.\n- managementAddress: single-device scope (count is 0 or 1)\n- networkDeviceImageStatus: compliance filter. IMPORTANT: `UP_TO_DATE` means devices currently running the assigned golden image; it does NOT mean devices merely marked/tagged/assigned golden.\n- networkDeviceUpdateStatus: update lifecycle filter\n\n**Response:** Returns response.count \u2014 report this integer to the user. Do not call the list API and manually count rows when this count API applies, except when **marked golden / assigned golden / golden-tagged** wording makes a zero from `UP_TO_DATE` semantics unreliable; in that case, the list API confirmation is mandatory before the final answer.\n\n**CRITICAL - DO NOT USE THESE TOOLS FOR GOLDEN/STANDARD IMAGE COUNT QUESTIONS:**\n- DO NOT use api_getComplianceStatus, api_getComplianceDetail, or api_getComplianceDetailCount for golden/standard image compliance totals, including requests phrased as non-compliant golden/standard image devices \u2014 those are generic compliance APIs, not SWIM golden-image compliance APIs\n- DO NOT use api_get_dna_intent_api_v1_networkDeviceImages (list API) for count-only questions when this count API is the right SWIM surface; even for unsupported combinations, this count API should be the first attempted SWIM tool before you report the platform limitation\n- DO NOT equate **marked golden** wording with `UP_TO_DATE`; that wording requires assignment/tagging confirmation from the list API when count semantics are ambiguous\n\n**TERMINOLOGY (BINDING):** golden and standard refer to the SAME tag. The UI may label it Standard while the APIs expose it as golden (isGoldenTagged, goldenImageCount). There is no separate \"standard\" designation and no \"standard\" field in any Catalyst Center image API. NEVER reconcile a mismatch between a value the user reports seeing and an API value by claiming that golden and standard are different concepts, or that one view reflects standard while another reflects golden. If the numbers disagree, re-check whether the question is device-scoped or repository-scoped and call the correct API. Do not invent a semantic distinction.",
+    "name": "api_get_dna_intent_api_v1_networkDeviceImages_count",
+    "parameters": {
+      "properties": {
+        "managementAddress": {
+          "default": "",
+          "description": "Management IP or DNS name for an explicitly count-only request. Do not use this count API to determine a named device's compliance status or whether it is running its assigned golden image. Use api_get_dna_intent_api_v1_networkDeviceImages instead.",
+          "type": "string"
+        },
+        "networkDeviceImageStatus": {
+          "default": "",
+          "description": "Filter count by golden/standard image compliance status: OUTDATED, UP_TO_DATE, UNKNOWN, CONFLICTED, UNSUPPORTED. IMPORTANT: UP_TO_DATE means devices currently running the assigned golden image; it does not mean devices merely marked/tagged/assigned golden. PLATFORM LIMITATION: pairing this with siteId or productName fails on the platform. Still make the call when the user asks for it, then report that the combination is not currently supported instead of the returned result (see main description).",
+          "type": "string"
+        },
+        "networkDeviceUpdateStatus": {
+          "default": "",
+          "description": "Filter count by golden/standard image update lifecycle status: DISTRIBUTION_PENDING, DISTRIBUTION_IN_PROGRESS, DISTRIBUTION_FAILED, ACTIVATION_PENDING, ACTIVATION_IN_PROGRESS, ACTIVATION_FAILED, DEVICE_UP_TO_DATE, UNKNOWN.",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Filter with product ID (PID)",
+          "type": "string"
+        },
+        "productName": {
+          "description": "Network device product name for product-family scoped counts (supports partial case-insensitive match). REQUIRED when user names a Catalyst switch family: preserve the exact specific family or model-family string when one is provided, and include the Cisco vendor prefix if Catalyst Center expects it. Examples: `Catalyst 9300-24S-E Switch`, `Catalyst 9300-24UB Switch`, `Catalyst 9300 Series Switches`, or `Cisco Catalyst 9300L`. Only when the user uses broad 9300 wording with no specific family/model qualifier should you normalize to `Cisco Catalyst 9300 Switch` (not `Cisco Catalyst 9300`). PLATFORM LIMITATION: pairing this with networkDeviceImageStatus fails on the platform. Still make the call when the user asks for it, then report that the combination is not currently supported instead of the returned result (see main description).",
+          "minLength": 3,
+          "type": "string"
+        },
+        "role": {
+          "description": "Role assigned to the network device.",
+          "enum": [
+            "BORDER_ROUTER",
+            "CORE",
+            "DISTRIBUTION",
+            "ACCESS",
+            "UNKNOWN"
+          ],
+          "example": "DISTRIBUTION",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "Site UUID for site-scoped counts. Resolve the site through api_getSites first. PLATFORM LIMITATIONS: siteId without networkDeviceImageStatus returns an unreliable zero; siteId combined with networkDeviceImageStatus returns HTTP 500. Make the requested count call, but do not report either result as a valid count. Explain that site-scoped SWIM counts are currently unsupported.",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Reports a count, for example, a total count of records in a given resource.",
+      "properties": {
+        "response": {
+          "description": "An object containing the response.",
+          "properties": {
+            "count": {
+              "description": "The reported count.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

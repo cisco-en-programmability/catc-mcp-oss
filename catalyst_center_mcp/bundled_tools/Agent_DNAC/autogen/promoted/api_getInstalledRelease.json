@@ -1,0 +1,191 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "release_status": "SMO_JUL_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/installedRelease",
+      "version": "3.2.1"
+    },
+    "description": "**Use this read-only tool only for the CURRENTLY INSTALLED Catalyst Center software release.**\n\nIt returns the current release metadata, user-facing `displayVersion`, top-level deployment `status`, release notes, `supportedDirectUpdates`, and installed package inventory. In every user-facing answer, identify the installed Catalyst Center release by `displayVersion` only. Never reveal the internal/API `version` value or an internal build identifier. Retain `version` only as a hidden value for an exact API lookup or compatibility comparison. If `displayVersion` is absent, say that the controller did not return a display version; never fall back to `version`.\n\nUse this tool for questions such as:\n- What Catalyst Center release is currently installed?\n- What is the installed release's deployment status?\n- Which optional packages are currently deployed?\n- Show the package inventory for the installed release.\n\nWhen asked for installed optional packages, use package records where `optional` is `true` and report their returned deployment `status`; treat a package as deployed only when its status is `DEPLOYED`. If a requested field is absent, say that the controller did not return it instead of inferring a value. Return `releaseNotesUrl` exactly as supplied by the controller, even when it is a generic release-notes page.\n\nNever use this tool as a fallback for a different release explicitly named by the user. For a named target release, use `api_getAllRelease` when needed to resolve its hidden API identifiers, call `api_getReleaseByNameAndVersion`, and report only that target's data using its `displayVersion`. Do NOT interpret this installed release's `supportedDirectUpdates` as releases that the current installation can upgrade to: they are internal source identifiers from which this installed target release can be reached. For strict direct-update compatibility, silently retain the installed internal `version` and test for it in the selected target's `supportedDirectUpdates`. If the target's internal version equals the installed internal version, say that the target `displayVersion` is already installed instead of describing it as an upgrade or as directly compatible. Do NOT expose either internal value or the raw `supportedDirectUpdates` entries. Do NOT use this tool to list upgrade targets or monitor workflow progress. This tool never downloads, installs, upgrades, or changes software.",
+    "name": "api_getInstalledRelease",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Package details",
+      "properties": {
+        "response": {
+          "description": "Package details",
+          "properties": {
+            "attributes": {
+              "description": "Special attributes of the release.",
+              "properties": {
+                "hidden": {
+                  "description": "This field states whether the version is hidden or active",
+                  "example": "true",
+                  "type": "string"
+                },
+                "replaces": {
+                  "description": "This field states the release version replaces the other release version.",
+                  "example": "1.1.0",
+                  "type": "string"
+                }
+              },
+              "title": "model.ReleaseAttributes",
+              "type": "object"
+            },
+            "description": {
+              "description": "The description of the release",
+              "example": "Provides underlying system infrastructure for Cisco DNA Center",
+              "type": "string"
+            },
+            "displayName": {
+              "description": "The display name of the release.",
+              "example": "Bristol release 1.1.1",
+              "type": "string"
+            },
+            "displayVersion": {
+              "description": "User-facing version of the currently installed release. Use this field exclusively whenever naming the installed release version in an answer.",
+              "example": "1.1.0",
+              "type": "string"
+            },
+            "id": {
+              "description": "The UUID of the release",
+              "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the release.",
+              "example": "bristol-release-1.1.1",
+              "type": "string"
+            },
+            "packages": {
+              "description": "The list of packages available in a release.",
+              "items": {
+                "description": "Package details",
+                "properties": {
+                  "category": {
+                    "description": "The category of the package.",
+                    "example": "CISCO DNA CENTER CORE",
+                    "type": "string"
+                  },
+                  "dependsOn": {
+                    "description": "Contains the list of dependent packages that needs to be installed before this package",
+                    "example": [
+                      "package-name1",
+                      "package-name1"
+                    ],
+                    "items": {
+                      "description": "Package name of the dependsOn",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "deployOptional": {
+                    "description": "This states whether the optional package to be deployed during installation process.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "description": {
+                    "description": "The description of the package",
+                    "example": "Provides APIs to publish and subscribe events",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "description": "The display name of the package",
+                    "example": "Cisco DNAC Platform Events",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "The id of the package which contains the name and the package version number.",
+                    "example": "package-name1::0.5.3",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the package.",
+                    "example": "dnacaap-events",
+                    "type": "string"
+                  },
+                  "optional": {
+                    "description": "This field states whether the package is optional ot not.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "status": {
+                    "description": "Status of the package deployment.",
+                    "enum": [
+                      "INSTALL_REQUESTED",
+                      "DEPLOYED",
+                      "PENDING_DEPLOYMENT",
+                      "WAITING"
+                    ],
+                    "example": "DEPLOYED",
+                    "type": "string"
+                  },
+                  "version": {
+                    "description": "The version of the package.",
+                    "example": "1.1.1",
+                    "type": "string"
+                  }
+                },
+                "title": "model.Package",
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "releaseNotesUrl": {
+              "description": "Release-notes URL exactly as returned by the controller. Return it unchanged, including when it points to a generic release-notes page; never rewrite, specialize, validate, or substitute it.",
+              "example": "https://www.cisco.com2-3-4/release_notes/b_cisco_dna_center_rn_2_3_4.html",
+              "type": "string"
+            },
+            "status": {
+              "description": "Status of the package deployment",
+              "enum": [
+                "INSTALL_REQUESTED",
+                "DEPLOYED",
+                "PENDING_DEPLOYMENT",
+                "WAITING",
+                "FAILED"
+              ],
+              "example": "DEPLOYED",
+              "type": "string"
+            },
+            "supportedDirectUpdates": {
+              "description": "Internal source-version identifiers from which this currently installed target release can be reached by a direct update. These values are for silent comparison only: never return them to the user, and never present them as upgrade targets from the current installation.",
+              "items": {
+                "description": "The version number of a release.",
+                "example": "1.1.0",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "version": {
+              "description": "Internal/API release identifier. Retain it only for hidden exact lookups and compatibility comparisons; never include it in a user-facing answer and never use it as a fallback for `displayVersion`.",
+              "example": "1.1.1",
+              "type": "string"
+            }
+          },
+          "title": "model.ReleasePackageResponse",
+          "type": "object"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "title": "model.ReleasePackageResponseResult",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

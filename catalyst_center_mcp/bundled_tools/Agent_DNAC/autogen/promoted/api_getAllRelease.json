@@ -1,0 +1,100 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "release_status": "SMO_JUL_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {},
+      "uri": "/dna/system/api/v1/releases",
+      "version": "3.2.1"
+    },
+    "description": "**Use this read-only tool to LIST OR DISCOVER POTENTIAL Catalyst Center Software Management UPGRADE TARGETS exposed by the controller.**\n\nThe returned releases are available or potential upgrade targets, not a raw release catalog. Presence in this list does not guarantee that a target is directly compatible with the installed release, newer, or recommended. This response also does not contain the target's `supportedDirectUpdates` relationship, so never claim strict direct-update compatibility from this list alone.\n\nUse this tool for questions such as:\n- Which Catalyst Center releases are potentially available as Software Management upgrade targets?\n- Is a user-named display version among the potential targets?\n- Resolve a target's hidden API `name` and internal `version` before inspecting that target with `api_getReleaseByNameAndVersion`.\n\nFor every user-facing list or answer, identify a release by its `displayVersion` only. Never expose the internal/API `version` value or an internal build identifier. Retain `name` and `version` silently only to call `api_getReleaseByNameAndVersion` or compare identities. Preserve distinct target entries internally, but do not reveal internal build strings to distinguish them; if duplicate `displayVersion` values make the user's choice ambiguous, ask the user to clarify using other user-facing metadata returned by the controller. If `displayVersion` is absent, say that the controller did not return a display version rather than falling back to `version`.\n\nFor strict compatibility with one selected target, obtain the installed release with `api_getInstalledRelease`, inspect the exact target with `api_getReleaseByNameAndVersion`, and silently test whether the installed internal `version` occurs in the target's `supportedDirectUpdates`. If the target's hidden internal version equals the installed hidden internal version, say that the target `displayVersion` is already installed; do not label it an upgrade target or a compatible direct upgrade. Never show either internal value or raw `supportedDirectUpdates` entries.\n\nAn empty response means that the controller returned no potential Software Management upgrade targets. State that result without making broader claims about unsupported, hidden, or future releases. Do NOT use this tool for target package details or strict compatibility. Do NOT use it to determine the currently installed release; use `api_getInstalledRelease`. This tool never downloads, installs, upgrades, or changes software.",
+    "name": "api_getAllRelease",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Release response details",
+      "properties": {
+        "response": {
+          "description": "Potential or available Software Management upgrade targets returned by the controller. Presence does not guarantee direct compatibility with the installed release. Render target versions with `displayVersion` only, keep internal identifiers hidden, and interpret an empty array as no potential targets returned by this endpoint.",
+          "items": {
+            "description": "Release information",
+            "properties": {
+              "attributes": {
+                "description": "Special attributes of the release.",
+                "properties": {
+                  "hidden": {
+                    "description": "This field states whether the version is hidden or active",
+                    "example": "true",
+                    "type": "string"
+                  },
+                  "replaces": {
+                    "description": "This field states the release version replaces the other release version.",
+                    "example": "1.1.0",
+                    "type": "string"
+                  }
+                },
+                "title": "model.ReleaseAttributes",
+                "type": "object"
+              },
+              "description": {
+                "description": "The description of the release.",
+                "example": "Provides underlying system infrastructure for Cisco DNA Center",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "The display name of the release.",
+                "example": "Bristol release 1.1.1",
+                "type": "string"
+              },
+              "displayVersion": {
+                "description": "User-facing release version. Use this field exclusively whenever naming a potential target version in an answer.",
+                "example": "2.5.146",
+                "type": "string"
+              },
+              "id": {
+                "description": "The UUID of the release",
+                "example": "6dbd446d-77b4-4cd4-8514-5dbe675a0ea4",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the release.",
+                "example": "bristol-release-1.1.1",
+                "type": "string"
+              },
+              "releaseNotesUrl": {
+                "description": "Release-notes URL exactly as returned by the controller. Return it unchanged, including when it points to a generic release-notes page; never rewrite, specialize, validate, or substitute it.",
+                "example": "https://www.cisco.com2-3-4/release_notes/b_cisco_dna_center_rn_2_3_4.html",
+                "type": "string"
+              },
+              "version": {
+                "description": "Internal/API release identifier used only for hidden target lookup and identity comparison. Never include it in a user-facing answer and never use it as a fallback for `displayVersion`.",
+                "example": "1.1.1",
+                "type": "string"
+              }
+            },
+            "title": "model.Release",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The version of the response",
+          "example": "1.1.0",
+          "type": "string"
+        }
+      },
+      "title": "model.ReleasesResult",
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

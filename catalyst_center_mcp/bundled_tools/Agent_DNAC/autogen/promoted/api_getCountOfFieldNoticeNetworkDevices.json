@@ -1,0 +1,62 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "beta"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "query",
+        "noticeCount": "query",
+        "scanStatus": "query"
+      },
+      "uri": "/dna/intent/api/v1/fieldNotices/results/networkDevices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Return only the COUNT of network devices matching field-notice scan criteria. Use this tool only when the user explicitly asks for a count, number, or 'how many' devices, such as 'How many devices have field notices?' or 'Count devices with noticeCount > 5'. For unqualified device count questions, call this tool with noticeCount: 0 so the count includes only devices with at least one confirmed field notice. noticeCount filters devices whose confirmed noticeCount is greater than the provided threshold. Do not use this tool when the user asks to give, list, show, display, or enumerate devices; use api_getFieldNoticeNetworkDevices instead for those requests.",
+    "name": "api_getCountOfFieldNoticeNetworkDevices",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Id of the network device",
+          "type": "string"
+        },
+        "noticeCount": {
+          "default": 0,
+          "description": "Return network devices with confirmed noticeCount greater than this noticeCount.",
+          "type": "number"
+        },
+        "scanStatus": {
+          "description": "Status of the scan on the network device. Available values : NOT_SCANNED, IN_PROGRESS, SUCCESS, FAILED.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "Count of network devices with confirmed field notices matching the filters.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,85 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "apName": "query",
+        "ethernetMacAddress": "query",
+        "wlcIpAddress": "query"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/meshApNeighbours",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves all Mesh accesspoint Neighbours details whether child, parent, etc. ",
+    "name": "api_getMeshApNeighbours",
+    "parameters": {
+      "properties": {
+        "apName": {
+          "description": "Employ this query parameter to obtain the details of the Access points corresponding to the provided ap name. ",
+          "type": "string"
+        },
+        "ethernetMacAddress": {
+          "description": "Employ this query parameter to obtain the details of the Access points corresponding to the provided EthernetMacAddress.",
+          "type": "string"
+        },
+        "wlcIpAddress": {
+          "description": "Employ this query parameter to obtain the details of the Access points corresponding to the provided WLC IP address.  ",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "MeshNeighbour",
+      "properties": {
+        "apName": {
+          "description": "Name of the Wireless Access point",
+          "type": "string"
+        },
+        "ethernetMacAddress": {
+          "description": "AP Ethernet MacAddress mac",
+          "type": "string"
+        },
+        "id": {
+          "description": "id",
+          "type": "string"
+        },
+        "meshRole": {
+          "description": "",
+          "enum": [
+            "MAP",
+            "RAP"
+          ],
+          "type": "string"
+        },
+        "neighbourMacAddress": {
+          "description": "AP Base Radio MacAddress mac.",
+          "type": "string"
+        },
+        "neighbourType": {
+          "description": "",
+          "enum": [
+            "Parent",
+            "Tentative Parent",
+            "Neigh",
+            "Blocklisted",
+            "Child"
+          ],
+          "type": "string"
+        },
+        "wlcIpAddress": {
+          "description": "Device wireless Management IP",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,95 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/featureTemplates/wireless/eventDrivenRRMConfigurations/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "This API allows users to retrieve a specific Event Driven RRM configuration feature template by ID.",
+    "name": "api_getEventDrivenRRMConfigurationFeatureTemplate",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Event Driven RRM Configuration Feature Template Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Event Driven RRM Configuration Response",
+          "properties": {
+            "designName": {
+              "description": "The feature template design name",
+              "type": "string"
+            },
+            "featureAttributes": {
+              "description": "Event Driven RRM Configuration Feature Attributes",
+              "properties": {
+                "eventDrivenRrmCustomThresholdVal": {
+                  "description": "Event Driven Radio Resource Management (RRM) Custom Threshold Val is only supported for `CUSTOM` Event Driven RRM Threshold Level.",
+                  "type": "integer"
+                },
+                "eventDrivenRrmEnable": {
+                  "description": "Event Driven Radio Resource Management (RRM) Enable, when set `true` Event Driven RRM is Enabled.",
+                  "type": "boolean"
+                },
+                "eventDrivenRrmThresholdLevel": {
+                  "description": "Event Driven Radio Resource Management (RRM) Threshold Level is only supported when Event Driven RRM is `Enabled`.",
+                  "enum": [
+                    "LOW",
+                    "MEDIUM",
+                    "HIGH",
+                    "CUSTOM"
+                  ],
+                  "type": "string"
+                },
+                "radioBand": {
+                  "description": "Radio Band",
+                  "enum": [
+                    "2_4GHZ",
+                    "5GHZ"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "id": {
+              "description": "ID of the Event Driven RRM configuration feature template",
+              "type": "string"
+            },
+            "unlockedAttributes": {
+              "description": "attributes unlocked in design can be changed at device provision time. `Note:` unlockedAttributes can only contain the attributes defined under featureAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,90 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "deviceCategory": "query",
+        "deviceSubCategory": "query",
+        "endTime": "query",
+        "id": "query",
+        "siteHierarchy": "query",
+        "siteHierarchyId": "query",
+        "siteId": "query",
+        "startTime": "query"
+      },
+      "uri": "/dna/data/api/v1/energy/networkDevices/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves the total count of network devices that provide energy data, filtered according to the specified query parameters. For detailed information about the usage of the API, please refer to the Open API specification document -\u00a0https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-deviceEnergy_1.0-1.0.1-resolved.yaml",
+    "name": "api_countDevicesEnergy",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "deviceCategory": {
+          "description": "The list of device deviceCategories. \n\nExamples:\n\n`deviceCategory=Switch` (single device family requested)\n\n`deviceCategory=Switch&deviceCategory=Router` (multiple device categories with comma separator)\n",
+          "type": "string"
+        },
+        "deviceSubCategory": {
+          "description": "The list of device sub categories.\n\nExamples:\n\n`deviceSubCategory=Cisco Catalyst 9300 Series Switches` (single device family requested)\n\n`deviceSubCategory=Cisco Catalyst 9300 Series Switches&deviceSubCategory=Cisco Catalyst 9400 Series Switches`\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `endTime` is not provided, API will default to one day after `startTime`. If `startTime` is not provided either, API will default to current time.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "The list of Device Uuids (e.g., `6bef213c-19ca-4170-8375-b694e251101c`).\n\nExamples:\n\n`id=6bef213c-19ca-4170-8375-b694e251101c` (single device requested)\n\n`id=6bef213c-19ca-4170-8375-b694e251101c&id=32219612-819e-4b5e-a96b-cf22aca13dd9`\n",
+          "type": "string"
+        },
+        "siteHierarchy": {
+          "description": "The full hierarchical breakdown of the site tree starting from Global site name and ending with the specific site name. The Root site is named \"Global\" (Ex. `Global/AreaName/BuildingName/FloorName`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*/San*, */San, /San*`\n\nExamples:\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName` (single siteHierarchy requested)\n\n`?siteHierarchy=Global/AreaName/BuildingName/FloorName&siteHierarchy=Global/AreaName2/BuildingName2/FloorName2` (multiple siteHierarchies requested)\n",
+          "type": "string"
+        },
+        "siteHierarchyId": {
+          "description": "The full hierarchy breakdown of the site tree in id form starting from Global site UUID and ending with the specific site UUID. (Ex. `globalUuid/areaUuid/buildingUuid/floorUuid`)\n\nThis field supports wildcard asterisk (`*`) character search support. E.g. `*uuid*, *uuid, uuid*`\n\nExamples:\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid `(single siteHierarchyId requested)\n\n`?siteHierarchyId=globalUuid/areaUuid/buildingUuid/floorUuid&siteHierarchyId=globalUuid/areaUuid2/buildingUuid2/floorUuid2` (multiple siteHierarchyIds requested)\n",
+          "type": "string"
+        },
+        "siteId": {
+          "description": "The UUID of the site. (Ex. `flooruuid`)\n\nExamples:\n\n`?siteId=id1` (single id requested)\n\n`?siteId=id1&siteId=id2&siteId=id3` (multiple ids requested)\n",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to one day before `endTime`.\n",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,228 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "facility": "query",
+        "id": "query",
+        "isEnabled": "query",
+        "limit": "query",
+        "mnemonic": "query",
+        "name": "query",
+        "offset": "query",
+        "order": "query",
+        "priority": "query",
+        "profileId": "query",
+        "severity": "query",
+        "sortBy": "query"
+      },
+      "uri": "/dna/intent/api/v1/customIssueDefinitions",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieve the existing syslog-based custom issue definitions. The supported filters are id, name, profileId,  definition enable status, priority, severity, facility and mnemonic. The issue definition configurations may vary across profiles, hence specifying the profile Id in the query parameter is important and the default profile is global.\n\n  The assurance profile definitions can be obtain via the API endpoint: /api/v1/siteprofile?namespace=assurance. For detailed information about the usage of the API, please refer to the Open API specification document - https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-AssuranceUserDefinedIssueAPIs-1.0.0-resolved.yaml",
+    "name": "api_getAllTheCustomIssueDefinitionsBasedOnTheGivenFilters",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID can be used to trace the caller for queries executed on database. The caller id is like a optional attribute which can be added to API invocation like ui, python, postman, test-automation etc ",
+          "type": "string"
+        },
+        "facility": {
+          "description": "The syslog facility name",
+          "type": "string"
+        },
+        "id": {
+          "description": "The custom issue definition identifier and unique identifier across the profile.Examples: id=6bef213c-19ca-4170-8375-b694e251101c (single entity uuid requested) id=6bef213c-19ca-4170-8375-b694e251101c&id=19ca-4170-8375-b694e251101c-6bef213c (multiple Id request in the query param)\n",
+          "type": "string"
+        },
+        "isEnabled": {
+          "description": "The enable status of the custom issue definition, either true or false.",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mnemonic": {
+          "description": "The syslog mnemonic name",
+          "type": "string"
+        },
+        "name": {
+          "description": "The list of UDI issue names",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "order": {
+          "description": "The sort order of the field ascending or descending.",
+          "type": "string"
+        },
+        "priority": {
+          "description": "The Issue priority value, possible values are P1, P2, P3, P4. P1: A critical issue that needs immediate attention and can have a wide impact on network operations. P2: A major issue that can potentially impact multiple devices or clients. P3: A minor issue that has a localized or minimal impact. P4: A warning issue that may not be an immediate problem but addressing it can optimize the network performance",
+          "type": "string"
+        },
+        "profileId": {
+          "description": "The profile identifier to fetch the profile associated custom issue definitions. The default is global. For the custom profile, it is profile UUID. Example : 3fa85f64-5717-4562-b3fc-2c963f66afa6\n",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The syslog severity level. 0: Emergency 1: Alert, 2: Critical. 3: Error, 4: Warning, 5: Notice, 6: Info. Examples:severity=1&severity=2 (multi value support with & separator)\n",
+          "type": "number"
+        },
+        "sortBy": {
+          "description": "A field within the response to sort by.",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "page": {
+          "description": "",
+          "properties": {
+            "count": {
+              "description": "",
+              "type": "integer"
+            },
+            "limit": {
+              "description": "",
+              "type": "integer"
+            },
+            "offset": {
+              "description": "",
+              "type": "integer"
+            },
+            "sortBy": {
+              "description": "",
+              "items": {
+                "properties": {
+                  "name": {
+                    "description": "",
+                    "type": "string"
+                  },
+                  "order": {
+                    "description": "",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "response": {
+          "description": "",
+          "items": {
+            "properties": {
+              "createdTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "description": {
+                "description": "",
+                "type": "string"
+              },
+              "id": {
+                "description": "",
+                "type": "string"
+              },
+              "isDeletable": {
+                "description": "",
+                "type": "boolean"
+              },
+              "isEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "isNotificationEnabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "lastUpdatedTime": {
+                "description": "",
+                "type": "integer"
+              },
+              "name": {
+                "description": "",
+                "type": "string"
+              },
+              "priority": {
+                "description": "",
+                "type": "string"
+              },
+              "profileId": {
+                "description": "",
+                "type": "string"
+              },
+              "rules": {
+                "description": "",
+                "items": {
+                  "properties": {
+                    "durationInMinutes": {
+                      "description": "",
+                      "type": "integer"
+                    },
+                    "facility": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "mnemonic": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "occurrences": {
+                      "description": "",
+                      "type": "integer"
+                    },
+                    "pattern": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "severity": {
+                      "description": "",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "triggerId": {
+                "description": "",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

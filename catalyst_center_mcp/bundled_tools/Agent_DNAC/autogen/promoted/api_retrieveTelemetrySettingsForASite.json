@@ -1,0 +1,182 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "_inherited": "query",
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/sites/{id}/telemetrySettings",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves effective site telemetry settings for a site: application visibility, application telemetry, wired endpoint data collection, wireless telemetry, SNMP traps, syslog servers, and collectors. Use this tool for site-level telemetry questions, including application visibility on wired access devices, collector type/address/port, whether wired endpoint data collection or wireless telemetry is enabled, whether built-in SNMP/syslog is used, and which external SNMP/syslog servers are set. Call with `_inherited=true` unless the user explicitly asks for only settings configured locally on the site. `_inherited` is only a retrieval option for effective values; it is not a visible answer requirement. Treat phrases like \"configured at site\", \"configured for site\", \"settings at site\", or \"site settings\" as asking for current effective settings, not local-only settings. For normal all-settings questions, show every returned top-level telemetry setting's effective value. Keep the card compact: use one key-value item per returned top-level telemetry setting, and fold nested details into that setting's value. For `applicationVisibility`, the enabled/disabled status is controlled by `enableOnWiredAccessDevices`; `collector.collectorType` only tells which collector is selected and must not be treated as an enabled flag. If `enableOnWiredAccessDevices` is false, application visibility/application telemetry on wired access devices is disabled even when `collectorType` is `Builtin`. Show the collector as a detail in the same application visibility value. Do not create separate all-settings items for collector type, collector address, collector port, built-in server status, external server address, or enabled flags when those details belong under a parent telemetry setting. For example, keep collector details under application visibility, and keep built-in plus external server details under their SNMP or syslog setting. Do not answer with only local settings, do not omit inherited effective settings, do not say that only syslog is configured, and do not say that all other settings are inherited. For any normal settings question, including all-settings, yes/no, collector, SNMP, or syslog questions, the visible answer must not mention inheritance, inherited from, parent site, source site, local, or locally configured unless the user explicitly asks about inheritance/source or local-only/overridden settings. Do not append parent details in parentheses to values. Omit time range summaries and follow-up offers. For yes/no questions, answer yes or no and include only directly related values such as enabled/disabled status or configured values. When a setting value is a list, show the list entries rather than only the count. For focused questions, answer from the matching field in the returned `response` object and report the concrete setting value first. Only when the user explicitly asks which settings are inherited or where values come from, use inheritance metadata. For those inheritance/source questions, use one consistent table with one row per top-level telemetry setting that has `inheritedSiteName`; columns should be Setting and Inherited from. Use each setting object's own `inheritedSiteName` value. Do not combine parent names into a single value such as Global/San Jose, do not copy inheritance between telemetry objects, do not use `inheritedSiteId`, and do not list local settings as inherited. If a top-level setting has no `inheritedSiteName`, treat it as local.",
+    "name": "api_retrieveTelemetrySettingsForASite",
+    "parameters": {
+      "properties": {
+        "_inherited": {
+          "description": "Set to true to request effective telemetry settings. This is for retrieval only; do not show inheritance metadata in visible answers unless the user explicitly asks which settings are inherited or where values come from.",
+          "enum": [
+            true
+          ],
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Site Id, retrievable from the `id` attribute in `/dna/intent/api/v1/sites`",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "applicationVisibility": {
+              "description": "",
+              "properties": {
+                "collector": {
+                  "description": "",
+                  "properties": {
+                    "address": {
+                      "description": "IP Address. If collection type is 'TelemetryBrokerOrUDPDirector', this field value is mandatory otherwise it is optional. Examples: \"250.162.252.170\", \"2001:db8:3c4d:15::1a2f:1a2b\"",
+                      "type": "string"
+                    },
+                    "collectorType": {
+                      "description": "",
+                      "enum": [
+                        "Builtin",
+                        "TelemetryBrokerOrUDPDirector"
+                      ],
+                      "type": "string"
+                    },
+                    "port": {
+                      "description": "Min:1; Max: 65535. If collection type is 'TelemetryBrokerOrUDPDirector', this field value is mandatory otherwise it is optional.",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "enableOnWiredAccessDevices": {
+                  "description": "Enable Netflow Application Telemetry and Controller Based Application Recognition (CBAR) by default upon network device site assignment for wired access devices.",
+                  "type": "boolean"
+                },
+                "inheritedSiteId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "snmpTraps": {
+              "description": "",
+              "properties": {
+                "externalTrapServers": {
+                  "description": "External SNMP trap servers. Example: [\"250.162.252.170\",\"2001:db8:3c4d:15::1a2f:1a2b\"]",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "inheritedSiteId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "useBuiltinTrapServer": {
+                  "description": "Enable this server as a destination server for SNMP traps and messages from your network",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "syslogs": {
+              "description": "",
+              "properties": {
+                "externalSyslogServers": {
+                  "description": "External syslog servers. Example: [\"250.162.252.170\", \"2001:db8:3c4d:15::1a2f:1a2b\"]",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "inheritedSiteId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "",
+                  "type": "string"
+                },
+                "useBuiltinSyslogServer": {
+                  "description": "Enable this server as a destination server for syslog messages.",
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "wiredDataCollection": {
+              "description": "",
+              "properties": {
+                "enableWiredDataCollection": {
+                  "description": "Track the presence, location, and movement of wired endpoints in the network. Traffic received from endpoints is used to extract and store their identity information (MAC address and IP address). Other features, such as IEEE 802.1X, web authentication, Cisco Security Groups (formerly TrustSec), SD-Access, and Assurance, depend on this identity information to operate properly. Wired Endpoint Data Collection enables Device Tracking policies on devices assigned to the Access role in Inventory.",
+                  "type": "boolean"
+                },
+                "inheritedSiteId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "wirelessTelemetry": {
+              "description": "",
+              "properties": {
+                "enableWirelessTelemetry": {
+                  "description": "Enables Streaming Telemetry on your wireless controllers in order to determine the health of your wireless controller, access points and wireless clients.",
+                  "type": "boolean"
+                },
+                "inheritedSiteId": {
+                  "description": "",
+                  "type": "string"
+                },
+                "inheritedSiteName": {
+                  "description": "",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

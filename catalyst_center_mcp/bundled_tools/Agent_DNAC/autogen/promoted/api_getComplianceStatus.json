@@ -1,0 +1,91 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "complianceStatus": "query",
+        "deviceUuid": "query",
+        "limit": "query",
+        "offset": "query"
+      },
+      "uri": "/dna/intent/api/v1/compliance",
+      "version": "2.3.7.9"
+    },
+    "description": "This tool retrieves high-level device-level compliance status records for all devices or specific device(s). Use this tool when the user asks for the compliance status/state of a device, or asks to list actual device compliance status records.\n\nDo not answer requests such as \"list all device compliance statuses\" from static knowledge unless the user explicitly asks for possible status values or a glossary of status meanings. For actual device compliance status records, call this API.\n\nDo not use this tool for questions that ask to list, show, or identify which devices are compliant/non-compliant, especially site-scoped, tag-scoped, or compliance-type-specific lists. Use `api_getComplianceDetail` with `limit=500` for those device-listing questions.\n\n**MANDATORY PREREQUISITE:** You MUST call `get_device_details` before `api_getComplianceStatus` when the user provides device name(s) or IP address(es).\n\n**Steps:**\n1. If the user provides device name(s) or IP address(es), call `get_device_details` and extract the device UUID(s).\n2. If the user provides valid device UUID(s) directly, skip step 1.\n3. Call `api_getComplianceStatus` with `deviceUuid` set to the device UUID(s). Use a comma-separated list for multiple devices.\n4. If the user does not provide any device identifier and asks for actual device status records, call `api_getComplianceStatus` without `deviceUuid`.\n5. For user-facing output, do not show raw `deviceUuid`. Call `get_device_details` with `device_id` set to each returned UUID and include the `managementIpAddress` in the response. The management IP address is mandatory in user-facing output.\n\n**Returns:** Compliance status records for all devices or specified devices. User-facing output MUST include `managementIpAddress`, `complianceStatus`, and `lastUpdateTime`, and MUST NOT show raw `deviceUuid` unless the user explicitly asks for internal device identifiers.\n\nExact-query examples that MUST use this API, not documentation search: \"List all device compliance statuses\", \"Show all device compliance statuses\", \"List device compliance status records\", and \"Get all device compliance states\". These ask for live device records, not definitions of possible status values.\n\nDo not use this tool for count/total/\"how many\" questions. For global count questions like \"How many devices are compliant?\" or \"How many devices are non-compliant?\", use `api_getComplianceStatusCount`. For compliance-type-specific counts like \"How many non-compliant for RUNNING_CONFIG?\", use `api_getComplianceDetailCount`. For site-scoped counts like \"How many compliant in BGL 17?\", resolve site devices with `get_device_details`, then use `api_getComplianceDetail` with the scoped `deviceUuid` list.",
+    "name": "api_getComplianceStatus",
+    "parameters": {
+      "properties": {
+        "complianceStatus": {
+          "description": "Specify compliance status(es) as a comma-separated string. Possible values are COMPLIANT, NON_COMPLIANT, IN_PROGRESS, NOT_AVAILABLE, NOT_APPLICABLE, and ERROR. When the user does not provide a compliance status, use exactly this default value: COMPLIANT,NON_COMPLIANT,IN_PROGRESS,NOT_AVAILABLE,ERROR.",
+          "type": "string"
+        },
+        "deviceUuid": {
+          "description": "Comma-separated device UUIDs only. If the user provides device names or IP addresses, first resolve them with `get_device_details`.",
+          "type": "string"
+        },
+        "limit": {
+          "default": 10,
+          "description": "Maximum number of records to be fetched. If not provided, 500 records will be fetched by default",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "The first record to show for this page. Minimum value is 1",
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "limit",
+        "complianceStatus"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Response object.",
+          "items": {
+            "properties": {
+              "complianceStatus": {
+                "description": "Current compliance status for the compliance type that will be one of COMPLIANT, NON_COMPLIANT, ERROR, IN_PROGRESS, NOT_APPLICABLE, NOT_AVAILABLE, COMPLIANT_WARNING, REMEDIATION_IN_PROGRESS, or ABORTED.",
+                "type": "string"
+              },
+              "deviceUuid": {
+                "description": "UUID of the device.",
+                "type": "string"
+              },
+              "lastUpdateTime": {
+                "description": "Timestamp when the latest compliance checks ran.",
+                "type": "number"
+              },
+              "message": {
+                "description": "Additional message of compliance status for the compliance type.",
+                "type": "string"
+              },
+              "scheduleTime": {
+                "description": "Timestamp when compliance is scheduled to run.",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "Version of the API.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

@@ -1,0 +1,189 @@
+{
+  "additionalMetadata": null,
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "min_controller_version": "3.2.1",
+      "platform": "DNAC",
+      "release_status": "Assurance_SEP_2026"
+    },
+    "additionalMetadata": {
+      "method": "POST",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "payload": "body"
+      },
+      "uri": "/dna/data/api/v1/networkApplications/summaryAnalytics",
+      "version": "3.2.1"
+    },
+    "description": "Retrieves summary analytics for network applications along with application health metrics using complex filtering, grouping, and aggregation. Use this for application health summary questions at a site when the user asks for summarized or aggregated application health, health score, usage, throughput, latency, jitter, or packet loss rather than a plain list of applications. The request body should include siteIds with building site UUIDs. For a plain application list at a site, use api_retrievesTheListOfNetworkApplicationsAlongWithExper_23fa3c77. This tool is available for Catalyst Center 3.2.1 and later.\n\nSpec mapping: This tool follows NetworkApplications OpenAPI spec 1.0.2 for Catalyst Center 3.2.1 and later.Use this tool for current NetworkApplications summary analytics, including application-health summaries and NetFlow site or exporter usage. Do not use it for trend/history/over-time/chart, ThousandEyes, path-trace, or impacted-client requests. For NetFlow site/all-sites requests, first call api_getSites with nameHierarchy=Global/.* and type=building, wait for its returned building UUIDs, and pass them in payload.siteIds; for exporter/device requests without a concrete site, ask the user for a site and do not call this tool. Use groupBy=[\"siteId\"] for site results or [\"siteId\",\"exporterIpAddress\"] for exporter results, sum usage as totalBits, and report the actual time range and returned row limit. This tool follows spec 1.0.2 for CatC 3.2.1+.",
+    "name": "api_queryNetworkApplicationsSummaryAnalytics",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "default": "unknown",
+          "description": "Caller ID used to trace the origin of API calls.",
+          "type": "string"
+        },
+        "payload": {
+          "description": "Request body for network application summary analytics. Include siteIds for building site UUIDs. Use groupBy, attributes, aggregateAttributes, filters, and page to shape the summary.",
+          "properties": {
+            "aggregateAttributes": {
+              "description": "Aggregate fields and functions to apply over the time range. For application health summary, application health-score list, or health-score ranking, include healthScore min. Add usage sum only when the user asks for usage or traffic volume. For NetFlow site discovery, include usage sum. For NetFlow exporter/device discovery, include usage sum and exporterNetworkDeviceId latest.",
+              "items": {
+                "properties": {
+                  "function": {
+                    "description": "Aggregate function. Use min with healthScore, sum with usage, and latest with exporterNetworkDeviceId.",
+                    "enum": [
+                      "latest",
+                      "min",
+                      "max",
+                      "avg",
+                      "sum",
+                      "count",
+                      "distinctCount"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Aggregate field name. Use healthScore min for default application health summaries. Add usage sum only when the user asks for usage or traffic volume. Use usage sum for NetFlow usage and exporterNetworkDeviceId latest when exporter/device identity is needed.",
+                    "enum": [
+                      "applicationName",
+                      "applicationServerLatency",
+                      "businessRelevance",
+                      "clientNetworkLatency",
+                      "dscp",
+                      "exporterIpAddress",
+                      "exporterNetworkDeviceId",
+                      "jitter",
+                      "networkLatency",
+                      "packetLossPercent",
+                      "serverNetworkLatency",
+                      "throughput",
+                      "trafficClass",
+                      "usage",
+                      "healthScore"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "function"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "attributes": {
+              "description": "Summary attributes to return, such as applicationName, healthScore, usage, throughput, jitter, packetLossPercent, networkLatency, applicationServerLatency, clientNetworkLatency, serverNetworkLatency, trafficClass, ssid, and businessRelevance. Do not use payload.attributes for default grouped application health summaries or NetFlow discovery. Use groupBy plus aggregateAttributes.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "endTime": {
+              "description": "Inclusive end time in UNIX epoch milliseconds.",
+              "format": "int64",
+              "type": "integer"
+            },
+            "filters": {
+              "description": "Complex filters for applicationName, businessRelevance, ssid, healthScore, trafficClass, and related metrics.",
+              "items": {
+                "properties": {
+                  "key": {
+                    "enum": [
+                      "applicationName",
+                      "applicationServerLatency",
+                      "businessRelevance",
+                      "clientNetworkLatency",
+                      "dscp",
+                      "exporterIpAddress",
+                      "exporterNetworkDeviceId",
+                      "jitter",
+                      "networkLatency",
+                      "packetLossPercent",
+                      "serverNetworkLatency",
+                      "ssid",
+                      "throughput",
+                      "trafficClass",
+                      "usage",
+                      "healthScore"
+                    ],
+                    "type": "string"
+                  },
+                  "operator": {
+                    "type": "string"
+                  },
+                  "value": {}
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "groupBy": {
+              "description": "Fields used to group summary data. For application health summaries group by applicationName and siteId; do not group by healthScore. For NetFlow sites group by siteId. For NetFlow exporters/devices group by siteId and exporterIpAddress.",
+              "items": {
+                "enum": [
+                  "applicationName",
+                  "businessRelevance",
+                  "exporterIpAddress",
+                  "siteId",
+                  "trafficClass",
+                  "healthScore"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "page": {
+              "description": "Pagination and sort options. Use page.limit=10 by default unless the user asks for more or fewer rows. Include the literal limit and shown-row count in the final answer.",
+              "properties": {
+                "cursor": {
+                  "description": "Opaque cursor returned by the previous response page. Use it unchanged to fetch the next page; omit it on the first request.",
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 10,
+                  "description": "Maximum rows to return. Use default limit=10 unless the user asks for more or fewer rows. The API supports up to 100.",
+                  "maximum": 100,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "siteIds": {
+              "description": "Use only building site UUIDs returned by the current api_getSites call. For all-sites site discovery, resolve Global descendants and pass their IDs. For exporter/device discovery without a concrete site, do not call this tool; ask the user for the site. Never pass Global, a site name, a hierarchy string, an empty list, or a fabricated UUID.",
+              "items": {
+                "pattern": "^[0-9a-fA-F-]{36}$",
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "startTime": {
+              "description": "Inclusive start time in UNIX epoch milliseconds.",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "siteIds"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "payload"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "Network application summary analytics response.",
+      "type": "object"
+    }
+  }
+}

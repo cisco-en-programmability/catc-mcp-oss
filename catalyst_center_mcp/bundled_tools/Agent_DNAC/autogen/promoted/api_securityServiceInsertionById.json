@@ -1,0 +1,111 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "id": "path"
+      },
+      "uri": "/dna/intent/api/v1/securityServiceInsertions/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Return the details of one specific configured Security Service Insertion (SSI) record when the request targets a single SSI-enabled site record by SSI id. The required `id` for this API must be the SSI record id returned by `api_securityServiceInsertions`; it is not the global site id or fabric site id. Use this API for questions asking for the full details, information, configuration, associated fabric site, site id, virtual networks, selected border devices, or layer-3 firewall IP handoff data of one particular SSI record. If the user gives a fabric site name or fabric site id instead of the SSI record id and wants full SSI record details rather than a summary, you must first call `api_securityServiceInsertions`, inspect the returned SSI entries, find the matching entry by `fabricSiteName` or `siteId`, extract that SSI record `id`, and only then call this API. If a bad-request error says the service insertion domain with the provided id does not exist, that usually means the provided id is not a valid SSI id or is the wrong identifier type. This API returns the same detailed configured SSI payload shape as `api_securityServiceInsertions`, but only for one specific SSI record. Treat SSI and Security Service Insertion as the same feature name. Prefer this intent when the request is about one named or identified SSI record, not about all SSIs, not about summaries, not about counts, and not about readiness.",
+    "name": "api_securityServiceInsertionById",
+    "parameters": {
+      "properties": {
+        "id": {
+          "description": "Required SSI record id. This must be the Security Service Insertion record `id` returned by `api_securityServiceInsertions` for the matching SSI entry. Do not pass the fabric `siteId` here, and do not pass the summary `id` from `api_securityServiceInsertionSummary`. If the user only knows the fabric site name or siteId, first call `api_securityServiceInsertions`, find the matching SSI record, extract that SSI record `id`, and then call this API.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "Detailed configured SSI record for one specific SSI id, including the associated fabric site, virtual networks, selected border devices, and firewall handoff details.",
+          "properties": {
+            "fabricSiteName": {
+              "description": "Name of the fabric site.",
+              "type": "string"
+            },
+            "id": {
+              "description": "SSI record id for this configured Security Service Insertion.",
+              "type": "string"
+            },
+            "siteId": {
+              "description": "The ID of the fabric site where the service insertion is configured.",
+              "type": "string"
+            },
+            "virtualNetworks": {
+              "description": "The list of virtual networks which are selected for steering traffic towards the firewall.",
+              "items": {
+                "properties": {
+                  "devices": {
+                    "description": "The list of border devices selected per VN for firewall",
+                    "items": {
+                      "properties": {
+                        "hostName": {
+                          "description": "The hostname of the device.",
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "The unique identifier of the network device.",
+                          "type": "string"
+                        },
+                        "layer3Handoffs": {
+                          "description": "",
+                          "items": {
+                            "properties": {
+                              "firewallIpV4AddressWithMask": {
+                                "description": "The IPv4 address and subnet mask of the firewall.",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "The unique identifier of the layer3 handoff.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "id": {
+                    "description": "The unique identifier of the virtual network associated with the service insertion.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the virtual network associated with the fabric site.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version number of the response.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

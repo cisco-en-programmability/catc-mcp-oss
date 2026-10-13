@@ -1,0 +1,61 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ],
+      "release_status": "Wireless_JUN_2026"
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "networkDeviceId": "path"
+      },
+      "uri": "/dna/intent/api/v1/wirelessControllers/{networkDeviceId}/managedApLocations/count",
+      "version": "2.3.7.9"
+    },
+    "description": "Use only for an explicit count, how-many, or total request over Primary, Secondary, or Anchor Managed AP Location (`managedLocation`) WLC-to-site relationship categories associated with one wireless controller. Resolve a controller hostname, management IP, or serial number to its canonical networkDeviceId and then call this API; controller resolution alone is not the result. Always return the requested category counts and an explicit combined total. For primary-and-secondary queries return Primary count, Secondary count, and Total (Primary + Secondary); include Anchor only when explicitly requested or when all managed-location categories are requested.",
+    "name": "api_getManagedAPLocationsCountForSpecificWirelessController",
+    "parameters": {
+      "properties": {
+        "networkDeviceId": {
+          "description": "Required canonical wireless-controller UUID only. Do not pass the controller hostname, FQDN, management IP, or serial number here. For those identifiers, first call get_device_details for the Wireless Controller, take its canonical device ID/UUID, and continue to this Managed AP Location API with that UUID as networkDeviceId; controller resolution is not the final answer.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkDeviceId"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "anchorManagedApLocationsCount": {
+              "description": "The count of the Anchor managed ap  locations.",
+              "type": "integer"
+            },
+            "primaryManagedApLocationsCount": {
+              "description": "The count of the Primary managed ap locations.",
+              "type": "integer"
+            },
+            "secondaryManagedApLocationsCount": {
+              "description": "The count of the Secondary managed ap locations.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}

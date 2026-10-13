@@ -1,0 +1,125 @@
+{
+  "function": {
+    "_meta": {
+      "agents": [
+        "catalyst_network_engineer_agent"
+      ]
+    },
+    "additionalMetadata": {
+      "method": "GET",
+      "parameterLocation": {
+        "X-CALLER-ID": "header",
+        "attribute": "query",
+        "endTime": "query",
+        "id": "path",
+        "startTime": "query",
+        "view": "query"
+      },
+      "uri": "/dna/data/api/v1/energy/clients/{id}",
+      "version": "2.3.7.9"
+    },
+    "description": "Retrieves client device energy data for a specified time range based on the client ID. For detailed information about the usage of the API, please refer to the Open API specification document -\u00a0https://github.com/cisco-en-programmability/catalyst-center-api-specs/blob/main/Assurance/CE_Cat_Center_Org-deviceEnergy_1.0-1.0.1-resolved.yaml",
+    "name": "api_getClientEnergyByID",
+    "parameters": {
+      "properties": {
+        "X-CALLER-ID": {
+          "description": "Caller ID is used to trace the origin of API calls and their associated queries executed on the database. It's an optional header parameter that can be added to an API request.\n",
+          "type": "string"
+        },
+        "attribute": {
+          "description": "List of attributes. Please refer to `ClientDeviceEnergyAttribute` for supported list of attributes    \n\nExamples:\n`attribute=id&attribute=energyConsumed`\n",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time to which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `endTime` is not provided, API will default to one day after `startTime`. If `startTime` is not provided either, API will default to current time.\n",
+          "type": "number"
+        },
+        "id": {
+          "description": "Mac address of a client device (e.g., 54:9F:C6:43:FF:80). It can be specified is any notational conventions \n  01:23:45:67:89:AB or 01-23-45-67-89-AB or 0123.4567.89AB and is case insensitive.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time from which API queries the data set related to the resource. It must be specified in UNIX epochtime in milliseconds. Value is inclusive.\n\nIf `startTime` is not provided, API will default to one day before `endTime`.\n",
+          "type": "number"
+        },
+        "view": {
+          "description": "List of views. View and attribute work in union. Each view will include its attributes. For example, view device includes all the attributes related to device. Please refer to `ClientDeviceEnergyView` model for supported list of views\n\nExamples:\n`view=device&view=energy`\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "responses": {
+      "description": "",
+      "properties": {
+        "response": {
+          "description": "",
+          "properties": {
+            "carbonIntensity": {
+              "description": "",
+              "type": "number"
+            },
+            "connectedDeviceName": {
+              "description": "",
+              "type": "string"
+            },
+            "connectedInterfaceName": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceCategory": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceName": {
+              "description": "",
+              "type": "string"
+            },
+            "deviceSubCategory": {
+              "description": "",
+              "type": "string"
+            },
+            "energyConsumed": {
+              "description": "",
+              "type": "number"
+            },
+            "estimatedCost": {
+              "description": "",
+              "type": "number"
+            },
+            "estimatedEmission": {
+              "description": "",
+              "type": "number"
+            },
+            "id": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchy": {
+              "description": "",
+              "type": "string"
+            },
+            "siteHierarchyId": {
+              "description": "",
+              "type": "string"
+            },
+            "siteId": {
+              "description": "",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "version": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "function"
+}
